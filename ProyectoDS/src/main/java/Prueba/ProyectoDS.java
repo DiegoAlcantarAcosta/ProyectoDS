@@ -5,6 +5,8 @@
 
 package Prueba;
 
+import Interfaces.AñadirTarjeta;
+import Interfaces.ConfirmacionAñadirTarjeta;
 import Interfaces.MenuPrincipal;
 
 /**
@@ -14,7 +16,7 @@ import Interfaces.MenuPrincipal;
 public class ProyectoDS {
 
     public static void main(String[] args) {
-        MenuPrincipal m = new MenuPrincipal();
+        ConfirmacionAñadirTarjeta m = new ConfirmacionAñadirTarjeta();
         m.show();
     }
 }
