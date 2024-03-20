@@ -52,6 +52,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         transferirButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        tarjetasTextField = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -131,7 +134,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+            .addComponent(nombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
         jLabel3.setText("Perfil");
@@ -155,6 +158,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel9.setText("Añadir Tarjeta");
 
         jLabel10.setText("Transferir");
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 153));
+
+        tarjetasTextField.setEditable(false);
+        tarjetasTextField.setBackground(new java.awt.Color(0, 102, 153));
+        tarjetasTextField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tarjetasTextField.setForeground(new java.awt.Color(0, 0, 0));
+        tarjetasTextField.setText("Tarjetas");
+        tarjetasTextField.setBorder(null);
+        tarjetasTextField.setCaretColor(new java.awt.Color(0, 102, 153));
+        tarjetasTextField.setDisabledTextColor(new java.awt.Color(0, 102, 153));
+        tarjetasTextField.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        tarjetasTextField.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(tarjetasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tarjetasTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+        );
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1563 3879 1762 2899" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,6 +242,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(transferirButton)
                     .addComponent(jLabel10))
                 .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +292,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
 
         pack();
@@ -283,6 +326,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton añadirContactoButton;
     private javax.swing.JButton añadirTarjetaButton;
     private javax.swing.JButton crearGrupoButton;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -295,9 +339,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton movimientosButton;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JButton perfilButton;
+    private javax.swing.JTextField tarjetasTextField;
     private javax.swing.JButton transferirButton;
     // End of variables declaration//GEN-END:variables
 }
