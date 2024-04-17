@@ -18,23 +18,23 @@ public class TransferenciaForm extends javax.swing.JFrame {
     ITransferenciaSS transferenciaSS;
     ITarjetaSS tarjetaSS;
     TarjetaDTO tarjetaDTO;
-    ContactoDTO contactoDTO;
+    TarjetaDTO tarjetaDestino;
     
 
     /**
      * Creates new form MenuPrincipal
      */
-    public TransferenciaForm(ContactoDTO contacto, TarjetaDTO tarjeta) {
+    public TransferenciaForm(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta) {
         initComponents();
         transferenciaSS = new TransferenciaSS();
         tarjetaSS = new TarjetaSS();
-        contactoDTO = contacto;
+        tarjetaDestino = tarjetaDesti;
         tarjetaDTO = tarjeta;
 
         SaldoDisponibleTexxField.setText(""+tarjetaDTO.getSaldo());
-        txtBancoDestinatario.setText(contactoDTO.getBanco().toString());
-        txtNombreDestinatario.setText(contactoDTO.getNombre());
-        txtNumCuentaDest.setText(contactoDTO.getNumeroCuenta());
+        txtBancoDestinatario.setText(tarjetaDestino.getBanco().toString());
+        txtNombreDestinatario.setText(tarjetaDestino.getPersona().getNombre());
+        txtNumCuentaDest.setText(tarjetaDestino.getNumeroCuenta());
 
     }
 
@@ -241,7 +241,7 @@ public class TransferenciaForm extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // Obtener los datos de la transferencia
 
-        String numeroCuentaDestinatario = contactoDTO.getNumeroCuenta();
+        String numeroCuentaDestinatario = tarjetaDestino.getNumeroCuenta();
         String numeroCuentaPropietario = tarjetaDTO.getNumeroCuenta();
         Double importe = Double.parseDouble(txtImporte.getText());
         String motivo = txtMotivo.getText();
@@ -254,7 +254,7 @@ public class TransferenciaForm extends javax.swing.JFrame {
         transferenciaa.setMotivo(motivo);
 
         // Realizar la transferencia
-        TransferenciaConfirmacion si = new TransferenciaConfirmacion(contactoDTO, tarjetaDTO, transferenciaa);
+        TransferenciaConfirmacion si = new TransferenciaConfirmacion(tarjetaDestino, tarjetaDTO, transferenciaa);
         si.show();
         dispose();
 

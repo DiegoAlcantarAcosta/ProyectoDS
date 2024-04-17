@@ -141,8 +141,9 @@ public class AgregarContacto extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // Capturar el número de cuenta ingresado
-        tarjetaContacto = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaContacto);
-        if (tarjetaContacto!= null){
+        tarjetaContacto = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(txtAgregarNumCuenta.getText()));
+         
+        if (tarjetaContacto != null){
              // Crear una instancia del formulario AgregarContactoInf y pasar el número de cuenta
         AgregarContactoInf agregarConInf = new AgregarContactoInf( tarjetaDTO, tarjetaContacto);
 

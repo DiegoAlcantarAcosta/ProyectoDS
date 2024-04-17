@@ -6,7 +6,9 @@ import DTOs.tipoBancoDTO;
 import Funcionalidad.AnadirContactoSS;
 import Funcionalidad.IAnadirContactoSS;
 import Funcionalidad.IMostrarContactoSS;
+import Funcionalidad.ITarjetaSS;
 import Funcionalidad.MostrarContactoSS;
+import Funcionalidad.TarjetaSS;
 import Interfaces.TransferenciaForm;
 import entidades.Consultas;
 
@@ -17,6 +19,7 @@ import entidades.Consultas;
 public class AgregarContactoInf extends javax.swing.JFrame {
 
     IAnadirContactoSS ss;
+    ITarjetaSS tarjetass;
     TarjetaDTO tarjetaOri;
     TarjetaDTO tarjetaDesti;
     IMostrarContactoSS mostrarContactoSS;
@@ -28,6 +31,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         initComponents();
         ss = new AnadirContactoSS();
         mostrarContactoSS = new MostrarContactoSS();
+        tarjetass = new TarjetaSS();
         tarjetaDesti = tarjetaDestinatario;
         tarjetaOri = tarjetaOrigen;
         
@@ -35,8 +39,6 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         txtAP.setText(tarjetaDestinatario.getPersona().getApellidoP());
         txtAM.setText(tarjetaDestinatario.getPersona().getApellidoM());
         txtBanco.setText(tarjetaDestinatario.getBanco().toString());
-
-        txtAlias.setVisible(false);
     }
 
     /**
@@ -127,6 +129,11 @@ public class AgregarContactoInf extends javax.swing.JFrame {
             }
         });
 
+        checkBxGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkBxGuardarMouseClicked(evt);
+            }
+        });
         checkBxGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkBxGuardarActionPerformed(evt);
@@ -245,17 +252,20 @@ public class AgregarContactoInf extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (checkBxGuardar.isSelected()) {
-
-            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(),tarjetaDesti.getBanco() , tarjetaOri.getPersona());
+            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
+            
+            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(), tarjeBusc.getBanco(), tarjetaOri.getPersona());
             ss.agregar(cont);
-            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
-            TransferenciaForm transferencia = new TransferenciaForm(contactoBuscado, tarjetaOri);
+            //ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
+            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
             transferencia.show();
             this.dispose();
         } else {
-            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), tarjetaDesti.getPersona());
-            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
-            TransferenciaForm transferencia = new TransferenciaForm(contactoBuscado, tarjetaOri);
+            ContactoDTO cont = new ContactoDTO();
+            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
+            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
+            transferencia.show();
+            dispose();
         }
 
 
@@ -263,9 +273,9 @@ public class AgregarContactoInf extends javax.swing.JFrame {
 
     private void checkBxGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBxGuardarActionPerformed
         if (checkBxGuardar.isSelected()) {
-            txtAlias.setVisible(true);
-        } else {
-            txtAlias.setVisible(false);
+            txtAlias.setEnabled(true);
+        } else if(!checkBxGuardar.isSelected()){
+            txtAlias.setEnabled(false);
         }
     }//GEN-LAST:event_checkBxGuardarActionPerformed
 
@@ -295,6 +305,10 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private void txtAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAMActionPerformed
+
+    private void checkBxGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBxGuardarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkBxGuardarMouseClicked
 
     /**
      * @param args the command line arguments

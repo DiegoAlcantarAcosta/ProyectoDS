@@ -29,24 +29,24 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
      ITransferenciaSS transferenciaSS;
     ITarjetaSS tarjetaSS;
     TarjetaDTO tarjetaDTO;
-    ContactoDTO contactoDTO;
+    TarjetaDTO tarjetaDestino;
     TransferenciaDTO transferenciaDTO;
     /**
      * Creates new form MenuPrincipal
      */
-    public TransferenciaConfirmacion(ContactoDTO contacto, TarjetaDTO tarjeta, TransferenciaDTO transferencia) {
+    public TransferenciaConfirmacion(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta, TransferenciaDTO transferencia) {
         
         initComponents();
         
         transferenciaSS = new TransferenciaSS();
         tarjetaSS = new TarjetaSS();
-        contactoDTO = contacto;
+        tarjetaDestino = tarjetaDesti;
         tarjetaDTO = tarjeta;
         transferenciaDTO = transferencia;
         
         txtImporte.setText("" + transferencia.getImporte());
-        txtNumTarjeta.setText(contacto.getNumeroCuenta());
-        txtTitular.setText(contacto.getNombre());
+        txtNumTarjeta.setText(tarjetaDestino.getNumeroCuenta());
+        txtTitular.setText(tarjetaDestino.getPersona().getNombre());
         
     }
 

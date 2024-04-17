@@ -9,7 +9,9 @@ import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
 import Funcionalidad.IMostrarContactoSS;
+import Funcionalidad.ITarjetaSS;
 import Funcionalidad.MostrarContactoSS;
+import Funcionalidad.TarjetaSS;
 import entidades.Contacto;
 import interfaces.daos.IContactoDAO;
 import java.util.List;
@@ -23,13 +25,16 @@ import javax.swing.table.DefaultTableModel;
 public class FrmSeleccionarContacto extends javax.swing.JFrame {
 
     private IMostrarContactoSS mostrarContactoSS;
+    private ITarjetaSS tarjetaSS;
     TarjetaDTO tarjeta;
+    TarjetaDTO tarjeDesti;
     PersonaDTO persona;
     /**
      * Creates new form FrmSeleccionarContacto
      */
     public FrmSeleccionarContacto(TarjetaDTO tarjetaDTO) {
         initComponents();
+        tarjetaSS = new TarjetaSS();
         tarjeta = tarjetaDTO;
         persona = tarjeta.getPersona();
         mostrarContactoSS = new MostrarContactoSS();
@@ -223,7 +228,8 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         if (selectedRow != -1) {
             String alias = (String) tableContactos.getValueAt(selectedRow, 0);
             ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
-            TransferenciaForm trans = new TransferenciaForm(contactoBuscado, tarjeta);
+            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
+            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
             trans.setVisible(true);
             this.setVisible(false);
         } else {

@@ -40,11 +40,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerUltimaTarjetaDTOPersona(personaDTO);
         
         tarjetaDTO = tarjetaBuscada;
-//        SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
+        //SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
         
-        lblSaldo.setText(tarjetaBuscada.getSaldo().toString());
-        TarjetaDTO t = (TarjetaDTO) numeroCuentaComboBox.getSelectedItem();
-        SaldoDisponibleTexxField.setText(""+t.getSaldo());
+//        lblSaldo.setText(tarjetaBuscada.getSaldo().toString());
+//        TarjetaDTO t = (TarjetaDTO) numeroCuentaComboBox.getSelectedItem();
+//        SaldoDisponibleTexxField.setText(""+t.getSaldo());
     }
 
     /**
