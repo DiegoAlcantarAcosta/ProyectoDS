@@ -6,7 +6,6 @@ package interfaces.daos;
 
 import entidades.Contacto;
 import entidades.Persona;
-import guardado.TransferenciaDatos;
 import java.util.List;
 
 /**
@@ -17,7 +16,6 @@ public interface IContactoDAO {
     public Boolean agregar(Contacto contacto);
     public Boolean eliminar(Contacto contacto);
     public List<Contacto> obtenerContactosPersona(Persona persona);
-    public TransferenciaDatos getDatos();
     public Contacto obtenerContactoPersona(Contacto contacto, Persona persona);
     
 }

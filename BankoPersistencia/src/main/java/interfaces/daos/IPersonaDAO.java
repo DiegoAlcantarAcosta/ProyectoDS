@@ -5,7 +5,6 @@
 package interfaces.daos;
 
 import entidades.Persona;
-import guardado.TransferenciaDatos;
 
 /**
  *

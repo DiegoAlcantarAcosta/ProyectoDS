@@ -9,8 +9,6 @@ import Conexion.IConexion;
 import entidades.Contacto;
 import entidades.Persona;
 import entidades.Tarjeta;
-import guardado.General;
-import guardado.TransferenciaDatos;
 import interfaces.daos.IContactoDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,13 +21,11 @@ import javax.persistence.TypedQuery;
 public class ContactoDAO implements IContactoDAO {
 
     private final IConexion conexion;
-    private TransferenciaDatos datos;
     private PersonaDAO pd = new PersonaDAO();
     private TarjetaDAO td = new TarjetaDAO();
 
     public ContactoDAO() {
         conexion = new Conexion();
-        datos = General.transferencia;
     }
 
     @Override
@@ -133,7 +129,4 @@ public class ContactoDAO implements IContactoDAO {
         }
     }
 
-    public TransferenciaDatos getDatos() {
-        return datos;
-    }
 }

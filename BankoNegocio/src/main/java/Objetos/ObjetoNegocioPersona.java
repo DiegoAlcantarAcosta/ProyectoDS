@@ -25,6 +25,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         Persona persona = new Persona();
         persona.setNombre(personaDTO.getNombre());
+        persona.setId(personaDTO.getId());
         persona.setApellidoP(personaDTO.getApellidoP());
         persona.setApellidoM(personaDTO.getApellidoM());
         persona.setFechaNac(personaDTO.getFechaNac());
@@ -38,6 +39,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     public PersonaDTO convertirEntidadADTO(Persona persona) {
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setNombre(persona.getNombre());
+        personaDTO.setId(persona.getId());
         personaDTO.setApellidoP(persona.getApellidoP());
         personaDTO.setApellidoM(persona.getApellidoM());
         personaDTO.setFechaNac(persona.getFechaNac());

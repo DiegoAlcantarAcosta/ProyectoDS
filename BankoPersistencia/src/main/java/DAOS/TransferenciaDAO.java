@@ -8,8 +8,6 @@ import Conexion.Conexion;
 import Conexion.IConexion;
 import entidades.Tarjeta;
 import entidades.Transferencia;
-import guardado.General;
-import guardado.TransferenciaDatos;
 import interfaces.daos.ITransferenciaDAO;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -21,13 +19,11 @@ import javax.persistence.EntityManager;
 public class TransferenciaDAO implements ITransferenciaDAO{
     
     private final IConexion conexion;
-    private TransferenciaDatos datos;
     private Transferencia transferenciaa;
     private TarjetaDAO tarjeta;
 
     public TransferenciaDAO() {
         conexion = new Conexion();
-        datos = General.transferencia;
         transferenciaa = new Transferencia();
         tarjeta = new TarjetaDAO();
     }
@@ -72,10 +68,5 @@ public class TransferenciaDAO implements ITransferenciaDAO{
     
     }
     
-    
-    @Override
-    public TransferenciaDatos getDatos() {
-        return datos;
-    }
     
 }

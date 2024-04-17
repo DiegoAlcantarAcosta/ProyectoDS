@@ -187,6 +187,8 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         
         return tarjetaConvert;
     }
+
+
     
     
     

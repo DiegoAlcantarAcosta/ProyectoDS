@@ -4,8 +4,8 @@
  */
 package Interfaces;
 
-import DAOS.TransferenciaDAO;
-import interfaces.daos.ITransferenciaDAO;
+import DTOs.TarjetaDTO;
+import DTOs.TransferenciaDTO;
 import java.text.SimpleDateFormat;
 
 /**
@@ -14,21 +14,21 @@ import java.text.SimpleDateFormat;
  */
 public class TransferenciaExitosa extends javax.swing.JFrame {
 
-    
-    ITransferenciaDAO tr;
+        TransferenciaDTO transferenciaDTO;
+        TarjetaDTO tarjetaDTO;
     /**
      * Creates new form MenuPrincipal
      */
-    public TransferenciaExitosa() {
+    public TransferenciaExitosa(TransferenciaDTO transferencia, TarjetaDTO tarjeta) {
         initComponents();
-        tr = new TransferenciaDAO();
-     
+        transferenciaDTO = transferencia;
+        tarjetaDTO = tarjeta;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato de la fecha
-        String fechaString = sdf.format(tr.getDatos().getTranferencia().getFechaMovimiento()); // Convierte la fecha a String
+        String fechaString = sdf.format(transferenciaDTO.getFechaMovimiento()); // Convierte la fecha a String
         
         lblFecha.setText(fechaString);
-        lblImporte.setText("" + tr.getDatos().getTranferencia().getImporte());
-        lblMotivo.setText(tr.getDatos().getTranferencia().getMotivo());
+        lblImporte.setText("" + transferenciaDTO.getImporte());
+        lblMotivo.setText(transferenciaDTO.getMotivo());
     }
     
          
@@ -172,7 +172,7 @@ public class TransferenciaExitosa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuPrincipal menu = new MenuPrincipal(tarjetaDTO.getPersona());
         menu.show();
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed

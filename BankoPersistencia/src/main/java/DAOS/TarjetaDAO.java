@@ -9,8 +9,6 @@ import Conexion.IConexion;
 import entidades.Persona;
 import entidades.Tarjeta;
 import entidades.Transferencia;
-import guardado.General; 
-import guardado.TransferenciaDatos;
 import interfaces.daos.ITarjetaDAO;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,12 +23,10 @@ import javax.persistence.TypedQuery;
 public class TarjetaDAO implements ITarjetaDAO {
 
     private final IConexion conexion;
-    private TransferenciaDatos datos;
     private Transferencia transferenciaa;
 
     public TarjetaDAO() {
         conexion = new Conexion();
-        datos = General.transferencia;
         transferenciaa = new Transferencia();
     }
 
@@ -140,12 +136,5 @@ public class TarjetaDAO implements ITarjetaDAO {
 //    }
 //    
 //    }
-    
-    
-    
 
-    @Override
-    public TransferenciaDatos getDatos() {
-        return datos;
-    }
 }

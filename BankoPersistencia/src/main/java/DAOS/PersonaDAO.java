@@ -8,8 +8,6 @@ import Conexion.Conexion;
 import Conexion.IConexion;
 import entidades.Contacto;
 import entidades.Persona;
-import guardado.General;
-import guardado.TransferenciaDatos;
 import interfaces.daos.IPersonaDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +21,12 @@ import javax.persistence.TypedQuery;
 public class PersonaDAO implements IPersonaDAO {
 
     private final IConexion conexion;
-    private TransferenciaDatos datos;
 
     public PersonaDAO() {
         conexion = new Conexion();
-        datos = General.transferencia;
     }
 
-    public TransferenciaDatos getDatos() {
-        return datos;
-    }
+  
 
     @Override
     public Boolean registrar(Persona persona) {

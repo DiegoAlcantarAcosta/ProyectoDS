@@ -16,6 +16,7 @@ public class PersonaDTO {
   private String curp;
   private Calendar fechaNac;
   private String telefono;
+  private Long id;
 
    public PersonaDTO() {
     }
@@ -40,6 +41,24 @@ public class PersonaDTO {
         this.fechaNac = fechaNac;
         this.telefono = telefono;
         this.curp = curp;
+    }
+
+    public PersonaDTO(String nombre, String apellidoP, String apellidoM, String curp, Calendar fechaNac, String telefono, Long id) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.curp = curp;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -92,8 +111,10 @@ public class PersonaDTO {
 
     @Override
     public String toString() {
-        return "PersonaDTO{" + "nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", fechaNac=" + fechaNac + ", telefono=" + telefono + '}';
+        return "PersonaDTO{" + "nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", id=" + id + '}';
     }
+
+    
 
   
 

@@ -1,6 +1,15 @@
 package Interfaces;
 
-import Interfaces.Transferencia;
+import DTOs.ContactoDTO;
+import DTOs.TarjetaDTO;
+import DTOs.tipoBancoDTO;
+import Funcionalidad.AnadirContactoSS;
+import Funcionalidad.IAnadirContactoSS;
+import Funcionalidad.IMostrarContactoSS;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.MostrarContactoSS;
+import Funcionalidad.TarjetaSS;
+import Interfaces.TransferenciaForm;
 import entidades.Consultas;
 
 /**
@@ -9,26 +18,29 @@ import entidades.Consultas;
  */
 public class AgregarContactoInf extends javax.swing.JFrame {
 
-    private String numeroCuenta;
-    private String nombreAsociado;
-    private String bancoAsociado;
+    IAnadirContactoSS ss;
+    ITarjetaSS tarjetass;
+    TarjetaDTO tarjetaOri;
+    TarjetaDTO tarjetaDesti;
+    IMostrarContactoSS mostrarContactoSS;
 
     /**
      * Creates new form MenuPrincipal
      */
-    public AgregarContactoInf(String numeroCuenta) {
+    public AgregarContactoInf(TarjetaDTO tarjetaOrigen, TarjetaDTO tarjetaDestinatario) {
         initComponents();
-        this.numeroCuenta = numeroCuenta;
+        ss = new AnadirContactoSS();
+        mostrarContactoSS = new MostrarContactoSS();
+        tarjetass = new TarjetaSS();
+        tarjetaDesti = tarjetaDestinatario;
+        tarjetaOri = tarjetaOrigen;
         
-        // Obtener el nombre y el banco asociados a la cuenta
-        Consultas consultas = new Consultas();
-        String nombreAsociado = consultas.obtenerNombre(numeroCuenta);
-        String bancoAsociado = consultas.obtenerBanco(numeroCuenta);
-
-        // Configurar el nombre y el banco asociado en los campos correspondientes
-        txtNombre.setText(nombreAsociado != null ? nombreAsociado : "Nombre asociado no encontrado");
-        txtBanco.setText(bancoAsociado != null ? bancoAsociado : "Banco asociado no encontrado");
+        txtNombre.setText(tarjetaDestinatario.getPersona().getNombre());
+        txtAP.setText(tarjetaDestinatario.getPersona().getApellidoP());
+        txtAM.setText(tarjetaDestinatario.getPersona().getApellidoM());
+        txtBanco.setText(tarjetaDestinatario.getBanco().toString());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,6 +129,11 @@ public class AgregarContactoInf extends javax.swing.JFrame {
             }
         });
 
+        checkBxGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkBxGuardarMouseClicked(evt);
+            }
+        });
         checkBxGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkBxGuardarActionPerformed(evt);
@@ -234,14 +251,32 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        Transferencia transferencia = new Transferencia();
-        transferencia.show();
-        this.dispose();
+        if (checkBxGuardar.isSelected()) {
+            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
+            
+            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(), tarjeBusc.getBanco(), tarjetaOri.getPersona());
+            ss.agregar(cont);
+            //ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
+            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
+            transferencia.show();
+            this.dispose();
+        } else {
+            ContactoDTO cont = new ContactoDTO();
+            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
+            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
+            transferencia.show();
+            dispose();
+        }
+
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void checkBxGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBxGuardarActionPerformed
-        // TODO add your handling code here:
+        if (checkBxGuardar.isSelected()) {
+            txtAlias.setEnabled(true);
+        } else if(!checkBxGuardar.isSelected()){
+            txtAlias.setEnabled(false);
+        }
     }//GEN-LAST:event_checkBxGuardarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -253,7 +288,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBancoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        AgregarContacto agregarContacto = new AgregarContacto();
+        AgregarContacto agregarContacto = new AgregarContacto(tarjetaOri);
         agregarContacto.show();
         this.dispose();
 
@@ -270,6 +305,10 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private void txtAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAMActionPerformed
+
+    private void checkBxGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBxGuardarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkBxGuardarMouseClicked
 
     /**
      * @param args the command line arguments

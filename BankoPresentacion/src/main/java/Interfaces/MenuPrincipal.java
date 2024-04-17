@@ -6,9 +6,12 @@ package Interfaces;
 
 import DAOS.PersonaDAO;
 import DAOS.TarjetaDAO;
-import entidades.Persona;
-import entidades.Tarjeta;
-import java.util.ArrayList;
+import DTOs.PersonaDTO;
+import DTOs.TarjetaDTO;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.TarjetaSS;
+import Funucionalidad.IPersonaSS;
+import Funucionalidad.PersonaSS;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -19,24 +22,29 @@ import javax.swing.JComboBox;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    PersonaDAO persona = new PersonaDAO();
-    TarjetaDAO tarjetas = new TarjetaDAO();
-
+    IPersonaSS personaSS;
+    ITarjetaSS tarjetaSS;
+    PersonaDTO personaDTO;
+    TarjetaDTO tarjetaDTO;
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(PersonaDTO persona) {
         initComponents();
+        personaSS = new PersonaSS();
+        tarjetaSS = new TarjetaSS();
+        personaDTO = persona;
+        
         cargarBox(numeroCuentaComboBox);
-        Tarjeta t = new Tarjeta(numeroCuentaComboBox.getSelectedItem().toString());
-        Tarjeta tarjetaBuscada = tarjetas.obtenerTarjetaPorNumero(t);
-        persona.getDatos().setTarjeta(tarjetaBuscada);
 //        
-//        SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
-//        
+        TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerUltimaTarjetaDTOPersona(personaDTO);
+        
+        tarjetaDTO = tarjetaBuscada;
+        //SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
+        
 //        lblSaldo.setText(tarjetaBuscada.getSaldo().toString());
-        //Tarjeta t = (Tarjeta) numeroCuentaComboBox.getSelectedItem();
-        //SaldoDisponibleTexxField.setText(""+t.getSaldo());
+//        TarjetaDTO t = (TarjetaDTO) numeroCuentaComboBox.getSelectedItem();
+//        SaldoDisponibleTexxField.setText(""+t.getSaldo());
     }
 
     /**
@@ -362,7 +370,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      public void cargarBox(JComboBox<String> cB) {
     DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
     cB.setModel(modelo);
-    List<Tarjeta> lista = tarjetas.obtenerTarjetasPersona(persona.getDatos().getPersona());
+    
+    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personaDTO);
     
     for (int i = 0; i < lista.size(); i++) {
         modelo.addElement(lista.get(i).getNumeroCuenta());
@@ -394,7 +403,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void transferirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirButtonActionPerformed
         
 
-        FrmSeleccionarContacto contacto = new FrmSeleccionarContacto();
+        FrmSeleccionarContacto contacto = new FrmSeleccionarContacto(tarjetaDTO);
         contacto.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_transferirButtonActionPerformed
@@ -408,9 +417,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void numeroCuentaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroCuentaComboBoxActionPerformed
         // TODO add your handling code here:
         String numC = numeroCuentaComboBox.getSelectedItem().toString();
-        Tarjeta tarjeta = tarjetas.obtenerTarjetaPorNumero(new Tarjeta(numC));
-        SaldoDisponibleTexxField.setText(tarjeta.getSaldo().toString());
-        lblSaldo.setText(tarjeta.getSaldo().toString());
+        
+        tarjetaDTO = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numC));
+//        Tarjeta tarjeta = tarjetas.obtenerTarjetaPorNumero(new Tarjeta(numC));
+        SaldoDisponibleTexxField.setText(tarjetaDTO.getSaldo().toString());
+        lblSaldo.setText(tarjetaDTO.getSaldo().toString());
         
         
     }//GEN-LAST:event_numeroCuentaComboBoxActionPerformed

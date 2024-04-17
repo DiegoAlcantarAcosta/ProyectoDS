@@ -1,8 +1,9 @@
 package Interfaces;
 
 import DAOS.PersonaDAO;
-import Interfaces.AgregarContactoInf;
-import entidades.Persona;
+import DTOs.PersonaDTO;
+import Funucionalidad.IPersonaSS;
+import Funucionalidad.PersonaSS;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,15 +12,14 @@ import javax.swing.JOptionPane;
  */
 public class InicioSesionForm extends javax.swing.JFrame {
 
-  
-    PersonaDAO persona = new PersonaDAO();
+  IPersonaSS persona;
 
     /**
      * Creates new form MenuPrincipal
      */
     public InicioSesionForm() {
         initComponents();
-
+        persona = new PersonaSS();
 //       txtAgregarNumCuenta.setText("0006407926304483");
     }
 
@@ -34,7 +34,6 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnAtras = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         curpTextField = new javax.swing.JTextField();
@@ -67,13 +66,6 @@ public class InicioSesionForm extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        btnAtras.setText("Atrás");
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
-            }
-        });
-
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,9 +88,7 @@ public class InicioSesionForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addGap(113, 302, Short.MAX_VALUE)
                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -120,9 +110,7 @@ public class InicioSesionForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(curpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
-                    .addComponent(btnAtras))
+                .addComponent(btnAceptar)
                 .addGap(43, 43, 43))
         );
 
@@ -131,18 +119,19 @@ public class InicioSesionForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        Persona p = new Persona(curpTextField.getText());
+        PersonaDTO p = new PersonaDTO(curpTextField.getText());
+        
         if (persona.personaRegistrada(p)){
+            PersonaDTO personaBuscada = persona.obtenerPersonaDTOPorCurp(p);
             
-            Persona personaBuscada = persona.obtenerPersonaPorCurp(p);
-            persona.getDatos().setPersona(personaBuscada);
             
-            MenuPrincipal m = new MenuPrincipal();
+            
+            MenuPrincipal m = new MenuPrincipal(personaBuscada);
             m.setVisible(true);
              this.dispose();
 
         } else {
-//            JOptionPane.showConfirmDialog(this, "Persona no registrada", "AVISO", , JOptionPane.ERROR);
+            JOptionPane.showConfirmDialog(null, "Persona no valida");
         }
    
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -153,20 +142,12 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_curpTextFieldActionPerformed
 
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        // TODO add your handling code here:
-        FrmSeleccionarContacto sc = new FrmSeleccionarContacto();
-        sc.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnAtrasActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnAtras;
     private javax.swing.JTextField curpTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

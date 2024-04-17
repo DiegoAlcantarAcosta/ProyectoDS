@@ -5,7 +5,6 @@
 package interfaces.daos;
 
 import entidades.Transferencia;
-import guardado.TransferenciaDatos;
 
 /**
  *
@@ -15,7 +14,6 @@ public interface ITransferenciaDAO {
     
     
         public boolean realizarTransferencia(Transferencia transferenciaa);
-            public TransferenciaDatos getDatos();
 
 
 }

@@ -5,9 +5,17 @@
 package Interfaces;
 
 import DAOS.ContactoDAO;
+import DTOs.ContactoDTO;
+import DTOs.PersonaDTO;
+import DTOs.TarjetaDTO;
+import Funcionalidad.IMostrarContactoSS;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.MostrarContactoSS;
+import Funcionalidad.TarjetaSS;
 import entidades.Contacto;
 import interfaces.daos.IContactoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,24 +23,31 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class FrmSeleccionarContacto extends javax.swing.JFrame {
-    private IContactoDAO cd;
 
+    private IMostrarContactoSS mostrarContactoSS;
+    private ITarjetaSS tarjetaSS;
+    TarjetaDTO tarjeta;
+    TarjetaDTO tarjeDesti;
+    PersonaDTO persona;
     /**
      * Creates new form FrmSeleccionarContacto
      */
-    public FrmSeleccionarContacto() {
+    public FrmSeleccionarContacto(TarjetaDTO tarjetaDTO) {
         initComponents();
-        cd = new ContactoDAO();
-        
-        List<Contacto> listaContactos = cd.obtenerContactosPersona(cd.getDatos().getPersona());
+        tarjetaSS = new TarjetaSS();
+        tarjeta = tarjetaDTO;
+        persona = tarjeta.getPersona();
+        mostrarContactoSS = new MostrarContactoSS();
+
+        List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(persona);
         this.llenarTablaContactos(listaContactos);
     }
-    
-    private void llenarTablaContactos(List<Contacto> contactos) {
+
+    private void llenarTablaContactos(List<ContactoDTO> contactos) {
         DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
         model.setRowCount(0);
 
-        for (Contacto contacto : contactos) {
+        for (ContactoDTO contacto : contactos) {
             Object[] row = {
                 contacto.getAlias()
             };
@@ -187,7 +202,7 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-        AgregarContacto ac = new AgregarContacto();
+        AgregarContacto ac = new AgregarContacto(tarjeta);
         ac.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -202,7 +217,7 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal m = new MenuPrincipal();
+        MenuPrincipal m = new MenuPrincipal(persona);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -212,15 +227,17 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         int selectedRow = tableContactos.getSelectedRow();
         if (selectedRow != -1) {
             String alias = (String) tableContactos.getValueAt(selectedRow, 0);
-            Contacto contactoBuscado = cd.obtenerContactoPersona(new Contacto(alias), cd.getDatos().getPersona());
-            cd.getDatos().setContacto(contactoBuscado);
-            }
-        
-//        String seleccionado = listContactos.getSelectedValue();
-//        if(seleccionado.equals(seleccionado)){
-            Transferencia trans = new Transferencia();
+            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
+            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
+            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
             trans.setVisible(true);
             this.setVisible(false);
+        } else {
+            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
+        }
+
+//        String seleccionado = listContactos.getSelectedValue();
+//        if(seleccionado.equals(seleccionado)){
 //        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 

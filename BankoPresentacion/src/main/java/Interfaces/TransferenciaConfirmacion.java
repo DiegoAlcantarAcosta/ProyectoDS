@@ -5,30 +5,48 @@
 package Interfaces;
 
 import DAOS.TarjetaDAO;
-import DAOS.TransferenciaDAO;
+import DTOs.ContactoDTO;
+import DTOs.TarjetaDTO;
+import DTOs.TransferenciaDTO;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.ITransferenciaSS;
+import Funcionalidad.TarjetaSS;
+import Funcionalidad.TransferenciaSS;
 import Interfaces.ConfirmacionAñadirTarjeta;
 import Interfaces.MenuPrincipal;
 import interfaces.daos.ITarjetaDAO;
-import interfaces.daos.ITransferenciaDAO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
  * @author Diego
  */
 public class TransferenciaConfirmacion extends javax.swing.JFrame {
-ITransferenciaDAO tr;
     
+     ITransferenciaSS transferenciaSS;
+    ITarjetaSS tarjetaSS;
+    TarjetaDTO tarjetaDTO;
+    TarjetaDTO tarjetaDestino;
+    TransferenciaDTO transferenciaDTO;
     /**
      * Creates new form MenuPrincipal
      */
-    public TransferenciaConfirmacion() {
+    public TransferenciaConfirmacion(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta, TransferenciaDTO transferencia) {
         
-        tr = new TransferenciaDAO();
         initComponents();
-        txtImporte.setText("" + tr.getDatos().getTranferencia().getImporte());
-        txtNumTarjeta.setText(tr.getDatos().getTranferencia().getNumeroCuentaDestinatario());
-        txtTitular.setText(tr.getDatos().getContacto().getNombre());
+        
+        transferenciaSS = new TransferenciaSS();
+        tarjetaSS = new TarjetaSS();
+        tarjetaDestino = tarjetaDesti;
+        tarjetaDTO = tarjeta;
+        transferenciaDTO = transferencia;
+        
+        txtImporte.setText("" + transferencia.getImporte());
+        txtNumTarjeta.setText(tarjetaDestino.getNumeroCuenta());
+        txtTitular.setText(tarjetaDestino.getPersona().getNombre());
         
     }
 
@@ -45,8 +63,8 @@ ITransferenciaDAO tr;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNumTarjeta = new javax.swing.JTextField();
@@ -82,17 +100,17 @@ ITransferenciaDAO tr;
 
         jLabel2.setText("Numero de tarjeta:");
 
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Regresar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Aceptar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
 
@@ -131,9 +149,9 @@ ITransferenciaDAO tr;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
@@ -154,8 +172,8 @@ ITransferenciaDAO tr;
                     .addComponent(txtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
 
@@ -163,16 +181,26 @@ ITransferenciaDAO tr;
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        TransferenciaExitosa añadir = new TransferenciaExitosa(); // Instancia el formulario principal
-        añadir.setVisible(true); // Muestra el formulario principal
-        this.dispose(); // Cierra el formulario actual    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+       if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
+            // Transferencia exitosa
+
+            TransferenciaExitosa t = new TransferenciaExitosa(transferenciaDTO, tarjetaDTO);
+            t.show();
+            dispose();
+        } else {
+            // Saldo insuficiente
+            JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        this.dispose(); // Cierra el formulario actual    }//GEN-LAST:event_btnAceptarActionPerformed
+
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   MenuPrincipal menuPrincipal = new MenuPrincipal(); // Instancia el formulario principal
+    
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+   MenuPrincipal menuPrincipal = new MenuPrincipal(tarjetaDTO.getPersona()); // Instancia el formulario principal
         menuPrincipal.setVisible(true); // Muestra el formulario principal
         this.dispose(); // Cierra el formulario actual
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtNumTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumTarjetaActionPerformed
         // TODO add your handling code here:
@@ -184,8 +212,8 @@ ITransferenciaDAO tr;
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

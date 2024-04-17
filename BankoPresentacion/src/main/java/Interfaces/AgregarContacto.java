@@ -1,6 +1,13 @@
 package Interfaces;
 
+import DTOs.ContactoDTO;
+import DTOs.TarjetaDTO;
+import Funcionalidad.AnadirContactoSS;
+import Funcionalidad.IAnadirContactoSS;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.TarjetaSS;
 import Interfaces.AgregarContactoInf;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,14 +15,19 @@ import Interfaces.AgregarContactoInf;
  */
 public class AgregarContacto extends javax.swing.JFrame {
 
-    private String numeroCuenta;
-
+    IAnadirContactoSS contacto;
+    ITarjetaSS tarjetaSS;
+    TarjetaDTO tarjetaDTO;
+    TarjetaDTO tarjetaContacto;
     /**
      * Creates new form MenuPrincipal
      */
-    public AgregarContacto() {
+    public AgregarContacto(TarjetaDTO tarjeta) {
         initComponents();
-        this.numeroCuenta = numeroCuenta;
+        tarjetaDTO = tarjeta;
+        tarjetaSS = new TarjetaSS();
+        contacto = new AnadirContactoSS();
+        tarjetaContacto = new  TarjetaDTO(txtAgregarNumCuenta.getText());
 
 //       txtAgregarNumCuenta.setText("0006407926304483");
     }
@@ -129,16 +141,22 @@ public class AgregarContacto extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // Capturar el número de cuenta ingresado
-        String numeroCuenta = txtAgregarNumCuenta.getText();
-
-        // Crear una instancia del formulario AgregarContactoInf y pasar el número de cuenta
-        AgregarContactoInf agregarConInf = new AgregarContactoInf(numeroCuenta);
+        tarjetaContacto = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(txtAgregarNumCuenta.getText()));
+         
+        if (tarjetaContacto != null){
+             // Crear una instancia del formulario AgregarContactoInf y pasar el número de cuenta
+        AgregarContactoInf agregarConInf = new AgregarContactoInf( tarjetaDTO, tarjetaContacto);
 
         // Mostrar el formulario AgregarContactoInf
         agregarConInf.setVisible(true);
 
         // Cerrar el formulario actual
         this.dispose();
+        } else {
+            JOptionPane.showConfirmDialog(null, "Numero de cuenta no existente");
+        }
+
+       
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtAgregarNumCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgregarNumCuentaActionPerformed
@@ -149,7 +167,7 @@ public class AgregarContacto extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        FrmSeleccionarContacto sc = new FrmSeleccionarContacto();
+        FrmSeleccionarContacto sc = new FrmSeleccionarContacto(tarjetaDTO);
         sc.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed

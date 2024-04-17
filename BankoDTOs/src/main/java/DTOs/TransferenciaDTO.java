@@ -2,6 +2,7 @@
 package DTOs;
 
 import entidades.Transferencia;
+import java.time.Instant;
 import java.util.Date;
 /**
  *
@@ -18,14 +19,15 @@ public class TransferenciaDTO {
   private TarjetaDTO tarjeta;
 
      public TransferenciaDTO() {
+         fechaMovimiento = Date.from(Instant.now());
     }
 
-    public TransferenciaDTO(String numeroCuentaDestinatario, String numeroCuentaPropietario, Double  importe, String motivo, Date fechaMovimiento) {
+    public TransferenciaDTO(String numeroCuentaDestinatario, String numeroCuentaPropietario, Double  importe, String motivo) {
         this.numeroCuentaDestinatario = numeroCuentaDestinatario;
         this.numeroCuentaPropietario = numeroCuentaPropietario;
         this.importe = importe;
         this.motivo = motivo;
-        this.fechaMovimiento = fechaMovimiento;
+        fechaMovimiento = Date.from(Instant.now());
     }
     
      public TransferenciaDTO(Transferencia transferencia) {
