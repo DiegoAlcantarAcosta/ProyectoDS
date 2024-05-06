@@ -1,4 +1,3 @@
-
 package entidades;
 
 import java.io.Serializable;
@@ -35,14 +34,17 @@ public class Persona implements Serializable {
 
     @Column(name = "apellido_materno", nullable = true, length = 255)
     private String apellidoM;
-    
+
     @Column(name = "CURP", nullable = true, length = 255)
     private String curp;
+
+    @Column(name = "Contrasena", nullable = false, length = 255)
+    private String contrasena;
 
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fechaNac;
-    
+
     @Column(name = "telefono", nullable = false)
     private String telefono;
 
@@ -72,6 +74,25 @@ public class Persona implements Serializable {
         this.fechaNac = fechaNac;
         this.telefono = telefono;
         this.curp = curp;
+        this.contrasena = contrasena;
+    }
+
+    public Persona(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono, String curp, String contrasena) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.curp = curp;
+        this.contrasena = contrasena;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getCurp() {
@@ -81,7 +102,7 @@ public class Persona implements Serializable {
     public void setCurp(String curp) {
         this.curp = curp;
     }
- 
+
     public Long getId() {
         return id;
     }
@@ -134,9 +155,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", fechaNac=" + fechaNac + ", telefono=" + telefono + '}';
     }
-    
-    
-
-    
 
 }

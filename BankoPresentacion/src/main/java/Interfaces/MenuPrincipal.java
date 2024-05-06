@@ -392,7 +392,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_GastosTexxFieldActionPerformed
 
     private void añadirTarjetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirTarjetaButtonActionPerformed
-        AñadirTarjeta a = new AñadirTarjeta();
+        ContraseñaTarjetas a = new ContraseñaTarjetas(tarjetaDTO);
         a.show();
     }//GEN-LAST:event_añadirTarjetaButtonActionPerformed
 
