@@ -13,7 +13,7 @@ import org.bson.types.ObjectId;
  *
  * @author Wilber
  */
-public class PruebasPersistencia {
+public class Inserts {
 
     /**
      * @param args the command line arguments
@@ -122,7 +122,7 @@ public class PruebasPersistencia {
             entidades.add(persona9);
             entidades.add(persona10);
 
-            MongoCollection<Persona> coleccionPersonas = Conexion.getDatabase().getCollection("Usuarios", Persona.class);
+            MongoCollection<Persona> coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
 
             coleccionPersonas.insertMany(entidades);
 

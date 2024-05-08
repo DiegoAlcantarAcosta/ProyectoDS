@@ -136,7 +136,9 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", fechaNac=" + fechaNac + ", telefono=" + telefono + '}';
+        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", contrasena=" + contrasena + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", listaTarjetas=" + listaTarjetas + '}';
     }
+
+
 
 }

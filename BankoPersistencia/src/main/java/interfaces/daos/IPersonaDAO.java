@@ -5,6 +5,7 @@
 package interfaces.daos;
 
 import entidades.Persona;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,6 @@ public interface IPersonaDAO {
     public boolean personaRegistrada(Persona persona);
 
     public Persona obtenerPersonaPorCurp(Persona persona);
+    
+    public List<Persona> obtenerTodasLasPersonas();
 }

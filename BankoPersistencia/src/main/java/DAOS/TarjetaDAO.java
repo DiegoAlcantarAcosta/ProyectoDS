@@ -5,14 +5,16 @@
 package DAOS;
 
 import Conexion.Conexion;
-import Excepciones.PersistenciaException;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import entidades.Persona;
 import entidades.Tarjeta;
 import interfaces.daos.ITarjetaDAO;
+import java.util.ArrayList;
 import java.util.List;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 
 /**
@@ -21,19 +23,19 @@ import org.bson.conversions.Bson;
  */
 public class TarjetaDAO implements ITarjetaDAO {
 
+    PersonaDAO pd = new PersonaDAO();
     private final MongoCollection<Tarjeta> coleccionTarjetas;
+    private final MongoCollection<Persona> coleccionPersonas;
 
     public TarjetaDAO() {
-        this.coleccionTarjetas = Conexion.getDatabase().getCollection("Tarjetas", Tarjeta.class);
+        this.coleccionTarjetas = Conexion.getDatabase().getCollection("Personas", Tarjeta.class);
+        this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
     }
 
     @Override
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona) {
-        if (persona.getListaTarjetas().isEmpty()) {
-            return null; // Si la persona no tiene tarjetas, devuelve null
-        } else {
-            return persona.getListaTarjetas();
-        }
+        List<Tarjeta> lista = persona.getListaTarjetas();
+        return lista;
     }
 
     @Override
@@ -47,47 +49,19 @@ public class TarjetaDAO implements ITarjetaDAO {
 
     @Override
     public Tarjeta obtenerTarjetaPorNumero(Tarjeta tarjeta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            List<Tarjeta> listaTarjetas = obtenerTodasLasTarjetasDeClientes();
+            for (int i = 0; i < listaTarjetas.size(); i++) {
+                if (tarjeta.getNumeroCuenta().equalsIgnoreCase(listaTarjetas.get(i).getNumeroCuenta())){
+                    return listaTarjetas.get(i);
+                }
+            }
+        } catch (MongoException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
-//   public boolean realizarTransferencia(Transferencia transferenciaa) {
-//    EntityManager em = conexion.abrir();
-//    try {
-//        em.getTransaction().begin();
-//
-//        // Obtener la tarjeta del propietario
-//        Tarjeta tarjetaPropietario = obtenerTarjetaPorNumero(new Tarjeta(transferenciaa.getNumeroCuentaPropietario()));
-//
-//        // Validar que el saldo sea suficiente
-//        if (tarjetaPropietario.getSaldo() >= transferenciaa.getImporte()) {
-//            // Realizar la transferencia
-//            tarjetaPropietario.setSaldo(tarjetaPropietario.getSaldo() - transferenciaa.getImporte());
-//            em.merge(tarjetaPropietario);
-//
-//            // Obtener la tarjeta del destinatario
-//            Tarjeta tarjetaDestinatario = obtenerTarjetaPorNumero(new Tarjeta(transferenciaa.getNumeroCuentaDestinatario()));
-//            tarjetaDestinatario.setSaldo(tarjetaDestinatario.getSaldo() + transferenciaa.getImporte());
-//            em.merge(tarjetaDestinatario);
-//
-//            // Guardar la transferencia
-//            transferenciaa.setFechaMovimiento(new Date());
-//            transferenciaa.setTarjeta(tarjetaPropietario);
-//            transferenciaa.setPersona(tarjetaPropietario.getPersona());
-//            em.persist(transferenciaa);
-//
-//            em.getTransaction().commit();
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    } catch (Exception e) {
-//        em.getTransaction().rollback();
-//        throw e;
-//    } finally {
-//        em.close();
-//    }
-//    
-//    }
     @Override
     public void guardar(Tarjeta tarjeta) {
         try {
@@ -116,4 +90,30 @@ public class TarjetaDAO implements ITarjetaDAO {
         }
     }
 
+    @Override
+    public List<Tarjeta> obtenerTodasLasTarjetasDeClientes() {
+        List<Tarjeta> todasLasTarjetas = new ArrayList<>();
+
+        try {
+            // Obtén un cursor que contenga todos los documentos de personas
+            MongoCursor<Persona> cursor = coleccionPersonas.find().iterator();
+
+            // Itera sobre todos los documentos de personas
+            while (cursor.hasNext()) {
+                Persona persona = cursor.next();
+
+                // Accede a la lista de tarjetas de cada persona
+                List<Tarjeta> tarjetas = persona.getListaTarjetas();
+
+                // Agrega todas las tarjetas de la persona a la lista de tarjetas
+                todasLasTarjetas.addAll(tarjetas);
+            } 
+        }catch (MongoException e) {
+            System.out.println(e);
+
+            return null;
+        }
+        return todasLasTarjetas;
+
+    }
 }

@@ -9,12 +9,16 @@ import entidades.Persona;
 import entidades.Tarjeta;
 //import entidades.Transferencia;
 import java.util.List;
+import org.bson.Document;
 
 /**
  *
  * @author Diego
  */
 public interface ITarjetaDAO {
+    
+    
+    public List<Tarjeta> obtenerTodasLasTarjetasDeClientes();
 
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona);
     
