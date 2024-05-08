@@ -1,62 +1,41 @@
 
 package entidades;
 
-import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Wilber
  */
-@Entity
-@Table (name = "Tarjetas")
-public class Tarjeta implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Tarjeta {
 
-    @Column (name = "numero_tarjeta", nullable = false)
+    private ObjectId id;
     private String numeroCuenta;
-    
-    @Column (name = "tipo_tarjeta", nullable = false)
-    @Enumerated (EnumType.STRING)
     private tipoTarjeta tipo;
-    
-    @Column (name = "banco", nullable = false)
-    @Enumerated (EnumType.STRING)
     private tipoBanco banco;
-    
-    @Column (name = "saldo", nullable = true)
     private Double saldo;
-    
-    @Column (name = "fecha_vencimiento", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar fechaVencimiento;
-    
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_persona", nullable = false)
-    private Persona persona;
+    private Date fechaVencimiento;
 
-    public Tarjeta(String numeroCuenta, tipoTarjeta tipo, tipoBanco banco, Double saldo, Calendar fechaVencimiento, Persona persona) {
+    public Tarjeta(ObjectId id, String numeroCuenta, tipoTarjeta tipo, tipoBanco banco, Double saldo, Date fechaVencimiento) {
+        this.id = id;
         this.numeroCuenta = numeroCuenta;
         this.tipo = tipo;
         this.banco = banco;
         this.saldo = saldo;
         this.fechaVencimiento = fechaVencimiento;
-        this.persona = persona;
+    }
+
+    
+    
+    public Tarjeta(String numeroCuenta, tipoTarjeta tipo, tipoBanco banco, Double saldo, Date fechaVencimiento) {
+        this.numeroCuenta = numeroCuenta;
+        this.tipo = tipo;
+        this.banco = banco;
+        this.saldo = saldo;
+        this.fechaVencimiento = fechaVencimiento;
     }   
     
     public Tarjeta() {
@@ -66,11 +45,11 @@ public class Tarjeta implements Serializable {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -106,27 +85,16 @@ public class Tarjeta implements Serializable {
         this.saldo = saldo;
     }
 
-    public Calendar getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Calendar fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     @Override
     public String toString() {
-        return "Tarjeta{" + "id=" + id + ", numeroCuenta=" + numeroCuenta + ", tipo=" + tipo + ", banco=" + banco + ", saldo=" + saldo + ", fechaVencimiento=" + fechaVencimiento + ", persona=" + persona + '}';
+        return "Tarjeta{" + "id=" + id + ", numeroCuenta=" + numeroCuenta + ", tipo=" + tipo + ", banco=" + banco + ", saldo=" + saldo + ", fechaVencimiento=" + fechaVencimiento  + '}';
     }
-
-    
-    
 }

@@ -2,6 +2,7 @@ package DTOs;
 
 import entidades.Persona;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -13,11 +14,11 @@ public class TarjetaDTO {
     private tipoTarjetaDTO tipo;
     private tipoBancoDTO banco;
     private Double saldo;
-    private Calendar fechaVencimiento;
+    private Date fechaVencimiento;
     private PersonaDTO persona;
 
     
-    public TarjetaDTO(String numeroCuenta, tipoTarjetaDTO tipo, tipoBancoDTO banco, Double saldo, Calendar fechaVencimiento, PersonaDTO persona) {
+    public TarjetaDTO(String numeroCuenta, tipoTarjetaDTO tipo, tipoBancoDTO banco, Double saldo, Date fechaVencimiento, PersonaDTO persona) {
         this.numeroCuenta = numeroCuenta;
         this.tipo = tipo;
         this.banco = banco;
@@ -65,11 +66,11 @@ public class TarjetaDTO {
         this.saldo = saldo;
     }
 
-    public Calendar getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Calendar fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 

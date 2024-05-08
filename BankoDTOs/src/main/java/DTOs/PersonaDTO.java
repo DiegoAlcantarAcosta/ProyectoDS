@@ -1,8 +1,9 @@
 
 package DTOs;
 
-import entidades.Persona;
 import java.util.Calendar;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -14,9 +15,9 @@ public class PersonaDTO {
   private String apellidoP;
   private String apellidoM;
   private String curp;
-  private Calendar fechaNac;
+  private Date fechaNac;
   private String telefono;
-  private Long id;
+  private ObjectId id;
 
    public PersonaDTO() {
     }
@@ -26,7 +27,7 @@ public class PersonaDTO {
         this.curp = curp;
     }
 
-    public PersonaDTO(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono) {
+    public PersonaDTO(String nombre, String apellidoP, String apellidoM, Date fechaNac, String telefono) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -34,7 +35,7 @@ public class PersonaDTO {
         this.telefono = telefono;
     }
 
-    public PersonaDTO(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono, String curp) {
+    public PersonaDTO(String nombre, String apellidoP, String apellidoM, Date fechaNac, String telefono, String curp) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -43,7 +44,7 @@ public class PersonaDTO {
         this.curp = curp;
     }
 
-    public PersonaDTO(String nombre, String apellidoP, String apellidoM, String curp, Calendar fechaNac, String telefono, Long id) {
+    public PersonaDTO(String nombre, String apellidoP, String apellidoM, String curp, Date fechaNac, String telefono, ObjectId id) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -53,11 +54,11 @@ public class PersonaDTO {
         this.id = id;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -93,11 +94,11 @@ public class PersonaDTO {
         this.curp = curp;
     }
 
-    public Calendar getFechaNac() {
+    public Date getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Calendar fechaNac) {
+    public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
 

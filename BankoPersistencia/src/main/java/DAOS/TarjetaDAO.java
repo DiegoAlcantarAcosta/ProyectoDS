@@ -5,16 +5,15 @@
 package DAOS;
 
 import Conexion.Conexion;
-import Conexion.IConexion;
+import Excepciones.PersistenciaException;
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import entidades.Persona;
 import entidades.Tarjeta;
-import entidades.Transferencia;
 import interfaces.daos.ITarjetaDAO;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -22,81 +21,34 @@ import javax.persistence.TypedQuery;
  */
 public class TarjetaDAO implements ITarjetaDAO {
 
-    private final IConexion conexion;
-    private Transferencia transferenciaa;
+    private final MongoCollection<Tarjeta> coleccionTarjetas;
 
     public TarjetaDAO() {
-        conexion = new Conexion();
-        transferenciaa = new Transferencia();
+        this.coleccionTarjetas = Conexion.getDatabase().getCollection("Tarjetas", Tarjeta.class);
     }
 
     @Override
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona) {
-        EntityManager em = conexion.abrir();
-        PersonaDAO personaDAO = new PersonaDAO();
-        Persona personaBuscada = personaDAO.obtenerPersonaPorCurp(persona);
-        
-        try {
-            em.getTransaction().begin();
-            // Crear la consulta JPA
-            String query = "SELECT t FROM Tarjeta t WHERE t.persona = :persona";
-            TypedQuery<Tarjeta> q = em.createQuery(query, Tarjeta.class);
-            q.setParameter("persona", personaBuscada);
-            em.getTransaction().commit();
-
-            // Ejecutar la consulta y obtener los resultados
-            List<Tarjeta> tarjetas = q.getResultList();
-            return tarjetas;
-        } finally {
-            em.close();
+        if (persona.getListaTarjetas().isEmpty()) {
+            return null; // Si la persona no tiene tarjetas, devuelve null
+        } else {
+            return persona.getListaTarjetas();
         }
     }
-    
+
     @Override
     public Tarjeta obtenerUltimaTarjetaPersona(Persona persona) {
-        EntityManager em = conexion.abrir();
-        PersonaDAO personaDAO = new PersonaDAO();
-        Persona personaBuscada = personaDAO.obtenerPersonaPorCurp(persona);
-        em.getTransaction().begin();
-        try {
-            // Crear la consulta JPA
-            String query = "SELECT t FROM Tarjeta t WHERE t.persona = :persona order by t.id desc";
-            TypedQuery<Tarjeta> q = em.createQuery(query, Tarjeta.class);
-            q.setParameter("persona", personaBuscada);
-            q.setMaxResults(1);
-
-            // Ejecutar la consulta y obtener los resultados
-            Tarjeta ultimaTarjeta = q.getSingleResult();
-            em.getTransaction().commit();
-            return ultimaTarjeta;
-        } finally {
-            em.close();
+        List<Tarjeta> tarjetas = persona.getListaTarjetas();
+        if (tarjetas.isEmpty()) {
+            return null; // Si la persona no tiene tarjetas, devuelve null
         }
+        return tarjetas.get(tarjetas.size() - 1); // Devuelve la última tarjeta de la lista
     }
-    
+
     @Override
     public Tarjeta obtenerTarjetaPorNumero(Tarjeta tarjeta) {
-        EntityManager em = conexion.abrir();
-        em.getTransaction().begin();
-        try {
-            // Crear la consulta JPA
-            String query = "SELECT t FROM Tarjeta t WHERE t.numeroCuenta = :numeroCuenta";
-            TypedQuery<Tarjeta> q = em.createQuery(query, Tarjeta.class);
-            q.setParameter("numeroCuenta", tarjeta.getNumeroCuenta());
-
-            // Ejecutar la consulta y obtener los resultados
-            Tarjeta tarjetaBuscada = q.getSingleResult();
-            em.getTransaction().commit();
-            
-            return tarjetaBuscada;
-        } finally {
-            em.close();
-        }
-        
-        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
 
 //   public boolean realizarTransferencia(Transferencia transferenciaa) {
 //    EntityManager em = conexion.abrir();
@@ -136,5 +88,32 @@ public class TarjetaDAO implements ITarjetaDAO {
 //    }
 //    
 //    }
+    @Override
+    public void guardar(Tarjeta tarjeta) {
+        try {
+            this.coleccionTarjetas.insertOne(tarjeta);
+        } catch (MongoException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void actualizar(Tarjeta tarjeta) {
+        Bson filtroID = Filters.eq("_id", tarjeta.getId());
+        try {
+            coleccionTarjetas.replaceOne(filtroID, tarjeta);
+        } catch (MongoException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void eliminar(Tarjeta tarjeta) {
+        try {
+            coleccionTarjetas.deleteOne(Filters.eq("_id", tarjeta.getId()));
+        } catch (MongoException e) {
+            System.out.println(e);
+        }
+    }
 
 }

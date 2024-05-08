@@ -9,6 +9,7 @@ import DTOs.PersonaDTO;
 import Objetos.Interfaces.IObjetoNegocioPersona;
 import entidades.Persona;
 import interfaces.daos.IPersonaDAO;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         Persona persona = new Persona();
         persona.setNombre(personaDTO.getNombre());
-        persona.setId(personaDTO.getId());
+        persona.setId(new ObjectId(""+personaDTO.getId()));
         persona.setApellidoP(personaDTO.getApellidoP());
         persona.setApellidoM(personaDTO.getApellidoM());
         persona.setFechaNac(personaDTO.getFechaNac());
@@ -39,7 +40,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     public PersonaDTO convertirEntidadADTO(Persona persona) {
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setNombre(persona.getNombre());
-        personaDTO.setId(persona.getId());
+        personaDTO.setId(new ObjectId(""+persona.getId()));
         personaDTO.setApellidoP(persona.getApellidoP());
         personaDTO.setApellidoM(persona.getApellidoM());
         personaDTO.setFechaNac(persona.getFechaNac());

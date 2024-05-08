@@ -1,57 +1,31 @@
 package entidades;
 
-import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Wilber
  */
-@Entity
-@Table(name = "personas")
-public class Persona implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Persona {
 
-    @Column(name = "nombre", nullable = false, length = 255)
+    private ObjectId id;
     private String nombre;
-
-    @Column(name = "apellido_paterno", nullable = false, length = 255)
     private String apellidoP;
-
-    @Column(name = "apellido_materno", nullable = true, length = 255)
     private String apellidoM;
-
-    @Column(name = "CURP", nullable = true, length = 255)
     private String curp;
-
-    @Column(name = "Contrasena", nullable = false, length = 255)
     private String contrasena;
-
-    @Column(name = "fecha_nacimiento", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar fechaNac;
-
-    @Column(name = "telefono", nullable = false)
+    private Date fechaNac;
     private String telefono;
+    private List<Tarjeta> listaTarjetas;
 
     public Persona() {
     }
 
-    public Persona(Long id) {
+    public Persona(ObjectId id) {
         this.id = id;
     }
 
@@ -59,7 +33,7 @@ public class Persona implements Serializable {
         this.curp = curp;
     }
 
-    public Persona(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono) {
+    public Persona(String nombre, String apellidoP, String apellidoM, Date fechaNac, String telefono) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -67,7 +41,7 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    public Persona(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono, String curp) {
+    public Persona(String nombre, String apellidoP, String apellidoM, Date fechaNac, String telefono, String curp, String contrasena) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -75,16 +49,25 @@ public class Persona implements Serializable {
         this.telefono = telefono;
         this.curp = curp;
         this.contrasena = contrasena;
+    }   
+    
+    public Persona(String nombre, String apellidoP, String apellidoM, String curp, String contrasena, Date fechaNac, String telefono, List<Tarjeta> listaTarjetas) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.curp = curp;
+        this.contrasena = contrasena;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.listaTarjetas = listaTarjetas;
     }
 
-    public Persona(String nombre, String apellidoP, String apellidoM, Calendar fechaNac, String telefono, String curp, String contrasena) {
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.fechaNac = fechaNac;
-        this.telefono = telefono;
-        this.curp = curp;
-        this.contrasena = contrasena;
+    public List<Tarjeta> getListaTarjetas() {
+        return listaTarjetas;
+    }
+
+    public void setListaTarjetas(List<Tarjeta> listaTarjetas) {
+        this.listaTarjetas = listaTarjetas;
     }
 
     public String getContrasena() {
@@ -103,11 +86,11 @@ public class Persona implements Serializable {
         this.curp = curp;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -135,11 +118,11 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
     }
 
-    public Calendar getFechaNac() {
+    public Date getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Calendar fechaNac) {
+    public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
 

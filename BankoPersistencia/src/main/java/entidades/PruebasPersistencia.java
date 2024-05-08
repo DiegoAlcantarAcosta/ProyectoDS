@@ -1,15 +1,13 @@
 package entidades;
 
-import DAOS.ContactoDAO;
-import DAOS.PersonaDAO;
-import DAOS.TarjetaDAO;
+import Conexion.Conexion;
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -21,132 +19,116 @@ public class PruebasPersistencia {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        PersonaDAO pd = new PersonaDAO();
-        Persona persona = pd.obtenerPersonaPorCurp(new Persona("RASM920730HDFNXN09"));
-        Persona personaPrueba = pd.obtenerPersonaPorCurp(new Persona("VAQW900101HDFNLT02"));
-        TarjetaDAO td = new TarjetaDAO();
-        Tarjeta tarjeta = td.obtenerTarjetaPorNumero(new Tarjeta("1234567892"));
-        Tarjeta tarjetaPrueba = td.obtenerTarjetaPorNumero(new Tarjeta("1234567890"));
-        ContactoDAO cd = new ContactoDAO();
-        Contacto contacto = new Contacto("Joto", personaPrueba.getNombre(), personaPrueba.getApellidoP(), 
-                personaPrueba.getApellidoM(), tarjetaPrueba.getNumeroCuenta(), tarjetaPrueba.getBanco(), persona);
-        
-        Boolean si = cd.agregar(contacto);
-        
-        System.out.println(si);
-        
-        
-        
-        
-        
-        
-        
-       //PROBAMOS CREAR UNA PERSONA.
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ConexionPU");
-//        EntityManager em = entityManagerFactory.createEntityManager();
-//
-//        EntityTransaction transaction = null;
-//
-//        ArrayList<Object> entidades = new ArrayList<>();
-//
-//        try {
-//
-//            // Crear una nueva persona
-//            Calendar fechaNacimiento1 = Calendar.getInstance();
-//            fechaNacimiento1.set(1990, Calendar.JANUARY, 1);
-//            Persona persona1 = new Persona("Wilber", "Valdez", "Quintero", fechaNacimiento1, "6442116429", "VAQW900101HDFNLT02");
-//
-//            Calendar fechaNacimiento2 = Calendar.getInstance();
-//            fechaNacimiento2.set(1985, Calendar.MARCH, 15);
-//            Persona persona2 = new Persona("Camila", "Fernández", "Gómez", fechaNacimiento2, "6442116430", "FEGC850315HDFMOM02");
-//
-//            Calendar fechaNacimiento3 = Calendar.getInstance();
-//            fechaNacimiento3.set(1992, Calendar.JULY, 30);
-//            Persona persona3 = new Persona("Mateo", "Ramírez", "Sánchez", fechaNacimiento3, "6442116431", "RASM920730HDFNXN09");
-//
-//            Calendar fechaNacimiento4 = Calendar.getInstance();
-//            fechaNacimiento4.set(1978, Calendar.NOVEMBER, 5);
-//            Persona persona4 = new Persona("Sofía", "Aguilar", "Castillo", fechaNacimiento4, "6442116432", "AACS781105MDFSTF05");
-//
-//            Calendar fechaNacimiento5 = Calendar.getInstance();
-//            fechaNacimiento5.set(1995, Calendar.APRIL, 20);
-//            Persona persona5 = new Persona("Sebastián", "Ortiz", "Flores", fechaNacimiento5, "6442116433", "OEFS950420HDFRTB12");
-//
-//            Calendar fechaNacimiento6 = Calendar.getInstance();
-//            fechaNacimiento6.set(1988, Calendar.SEPTEMBER, 12);
-//            Persona persona6 = new Persona("Valeria", "Gutiérrez", "Reyes", fechaNacimiento6, "6442116434", "GRRV880912MDFYLY07");
-//
-//            Calendar fechaNacimiento7 = Calendar.getInstance();
-//            fechaNacimiento7.set(1982, Calendar.JUNE, 28);
-//            Persona persona7 = new Persona("Andrés", "Herrera", "Castañeda", fechaNacimiento7, "6442116435", "HECA820628HDFRRN04");
-//
-//            Calendar fechaNacimiento8 = Calendar.getInstance();
-//            fechaNacimiento8.set(1991, Calendar.FEBRUARY, 3);
-//            Persona persona8 = new Persona("Alejandra", "Morales", "Díaz", fechaNacimiento8, "6442116436", "MODA910203MDFRLJ01");
-//
-//            Calendar fechaNacimiento9 = Calendar.getInstance();
-//            fechaNacimiento9.set(1975, Calendar.AUGUST, 19);
-//            Persona persona9 = new Persona("Rodrigo", "Vargas", "Jiménez", fechaNacimiento9, "6442116437", "VAJR750819HDFMRN08");
-//
-//            Calendar fechaNacimiento10 = Calendar.getInstance();
-//            fechaNacimiento10.set(1987, Calendar.DECEMBER, 24);
-//            Persona persona10 = new Persona("Gabriela", "Soto", "Ramos", fechaNacimiento10, "6442116438", "SORG871224MDFMAB15");
-//
-//            entidades.add(persona1);
-//            entidades.add(persona2);
-//            entidades.add(persona3);
-//            entidades.add(persona4);
-//            entidades.add(persona5);
-//            entidades.add(persona6);
-//            entidades.add(persona7);
-//            entidades.add(persona8);
-//            entidades.add(persona9);
-//            entidades.add(persona10);
-//
-//            // PROBAMOS CREAR UNA TARJETA.
-//            Calendar fechaVencimiento = Calendar.getInstance();
-//            fechaVencimiento.add(Calendar.YEAR, 3); // Por ejemplo, vencimiento en 3 años
-//            Tarjeta tarjeta1 = new Tarjeta("1234567890", tipoTarjeta.CREDITO, tipoBanco.BANAMEX, 10000.0, fechaVencimiento, persona1);
-//            Tarjeta tarjeta2 = new Tarjeta("1234567891", tipoTarjeta.DEBITO, tipoBanco.BANCOPPEL, 10000.0, fechaVencimiento, persona2);
-//            Tarjeta tarjeta3 = new Tarjeta("1234567892", tipoTarjeta.CREDITO, tipoBanco.BANREGIO, 10000.0, fechaVencimiento, persona3);
-//            Tarjeta tarjeta4 = new Tarjeta("1234567893", tipoTarjeta.DEBITO, tipoBanco.BBVA, 10000.0, fechaVencimiento, persona4);
-//            Tarjeta tarjeta5 = new Tarjeta("1234567894", tipoTarjeta.CREDITO, tipoBanco.HSBC, 10000.0, fechaVencimiento, persona5);
-//            Tarjeta tarjeta6 = new Tarjeta("1234567895", tipoTarjeta.DEBITO, tipoBanco.SANTANDER, 10000.0, fechaVencimiento, persona6);
-//            Tarjeta tarjeta7 = new Tarjeta("1234567896", tipoTarjeta.CREDITO, tipoBanco.BANAMEX, 10000.0, fechaVencimiento, persona7);
-//            Tarjeta tarjeta8 = new Tarjeta("1234567897", tipoTarjeta.DEBITO, tipoBanco.BANCOPPEL, 10000.0, fechaVencimiento, persona8);
-//            Tarjeta tarjeta9 = new Tarjeta("1234567898", tipoTarjeta.CREDITO, tipoBanco.BBVA, 10000.0, fechaVencimiento, persona9);
-//            Tarjeta tarjeta10 = new Tarjeta("123456789", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento, persona10);
-//            Tarjeta tarjeta11 = new Tarjeta("111111111", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento, persona3);
-//
-//            entidades.add(tarjeta1);
-//            entidades.add(tarjeta2);
-//            entidades.add(tarjeta3);
-//            entidades.add(tarjeta4);
-//            entidades.add(tarjeta5);
-//            entidades.add(tarjeta6);
-//            entidades.add(tarjeta7);
-//            entidades.add(tarjeta8);
-//            entidades.add(tarjeta9);
-//            entidades.add(tarjeta10);
-//            entidades.add(tarjeta11);
-//
-//            em.getTransaction().begin();
-//
-//            for (Object entidad : entidades) {
-//                em.persist(entidad); //cada vuelta almacena la entidad correspondiente
-//            }
-//
-//            em.getTransaction().commit();
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            em.close();
-//            entityManagerFactory.close();
-//        }
+
+//        PersonaDAO pd = new PersonaDAO();
+//        Persona persona = pd.obtenerPersonaPorCurp(new Persona("RASM920730HDFNXN09"));
+//        Persona personaPrueba = pd.obtenerPersonaPorCurp(new Persona("VAQW900101HDFNLT02"));
+//        TarjetaDAO td = new TarjetaDAO();
+//        Tarjeta tarjeta = td.obtenerTarjetaPorNumero(new Tarjeta("1234567892"));
+//        Tarjeta tarjetaPrueba = td.obtenerTarjetaPorNumero(new Tarjeta("1234567890"));
+//        ContactoDAO cd = new ContactoDAO();
+//        Contacto contacto = new Contacto("Wilber", personaPrueba.getNombre(), personaPrueba.getApellidoP(), 
+//                personaPrueba.getApellidoM(), tarjetaPrueba.getNumeroCuenta(), tarjetaPrueba.getBanco(), persona);
+//        
+//        Boolean si = cd.agregar(contacto);
+//        
+//        System.out.println(si);
+        //PROBAMOS CREAR UNA PERSONA.
+        ArrayList<Persona> entidades = new ArrayList<>();
+
+        try {
+
+            // Crear una nueva persona
+            Date fechaNac1 = new Date(710256000000L); // 15 de junio de 1990
+            List<Tarjeta> tarjetas1 = new ArrayList<>();
+            Persona persona1 = new Persona("Juan", "Pérez", "Gómez", "PEGJ900615HDFRZN00", "contraseña123", fechaNac1, "5512345678", tarjetas1);
+
+            Date fechaNac2 = new Date(504489600000L); // 25 de diciembre de 1985
+            List<Tarjeta> tarjetas2 = new ArrayList<>();
+            Persona persona2 = new Persona("María", "Sánchez", "López", "SALM851225MDFRPR09", "123456789", fechaNac2, "5587654321", tarjetas2);
+
+            Date fechaNac3 = new Date(699654000000L); // 10 de marzo de 1992
+            List<Tarjeta> tarjetas3 = new ArrayList<>();
+            Persona persona3 = new Persona("Pedro", "Ramírez", "Hernández", "RAHP920310HDFLRR08", "qwerty123", fechaNac3, "5512349876", tarjetas3);
+
+            Date fechaNac4 = new Date(586771200000L); // 20 de agosto de 1988
+            List<Tarjeta> tarjetas4 = new ArrayList<>();
+            Persona persona4 = new Persona("Ana", "García", "Martínez", "GAMA880820MDFRNN05", "password123", fechaNac4, "5556781234", tarjetas4);
+
+            Date fechaNac5 = new Date(799766400000L); // 5 de mayo de 1995
+            List<Tarjeta> tarjetas5 = new ArrayList<>();
+            Persona persona5 = new Persona("Luis", "Torres", "Rodríguez", "TORL950505HDFRDS09", "123abc456", fechaNac5, "5512345679", tarjetas5);
+
+            Date fechaNac6 = new Date(403497600000L); // 15 de octubre de 1982
+            List<Tarjeta> tarjetas6 = new ArrayList<>();
+            Persona persona6 = new Persona("Sofía", "Morales", "Guzmán", "MOGS821015MDFRFN04", "password456", fechaNac6, "5587659876", tarjetas6);
+
+            Date fechaNac7 = new Date(259545600000L); // 25 de marzo de 1978
+            List<Tarjeta> tarjetas7 = new ArrayList<>();
+            Persona persona7 = new Persona("Carlos", "Jiménez", "Hernández", "JIHC780325HDFRRS06", "qwerty456", fechaNac7, "5512348765", tarjetas7);
+
+            Date fechaNac8 = new Date(691593600000L); // 10 de diciembre de 1991
+            List<Tarjeta> tarjetas8 = new ArrayList<>();
+            Persona persona8 = new Persona("Laura", "Fernández", "López", "FELL911210MDFRPR08", "123password", fechaNac8, "5556789012", tarjetas8);
+
+            Date fechaNac9 = new Date(554579200000L); // 30 de julio de 1987
+            List<Tarjeta> tarjetas9 = new ArrayList<>();
+            Persona persona9 = new Persona("Javier", "Martínez", "Sánchez", "MASJ870730HDFRNN01", "password987", fechaNac9, "5512347890", tarjetas9);
+
+            Date fechaNac10 = new Date(735900800000L); // 20 de abril de 1993
+            List<Tarjeta> tarjetas10 = new ArrayList<>();
+            Persona persona10 = new Persona("Isabela", "Ramírez", "García", "RAGI930420MDFRRS05", "abc123def", fechaNac10, "5587650987", tarjetas10);
+
+            // PROBAMOS CREAR UNA TARJETA.
+            Date fecha = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fecha);
+
+            // Sumar 3 años a la fecha
+            calendar.add(Calendar.YEAR, 3);
+            Date fechaVencimiento = calendar.getTime();
+            Tarjeta tarjeta1 = new Tarjeta(new ObjectId(),"1234567890", tipoTarjeta.CREDITO, tipoBanco.BANAMEX, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta2 = new Tarjeta(new ObjectId(),"1234567891", tipoTarjeta.DEBITO, tipoBanco.BANCOPPEL, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta3 = new Tarjeta(new ObjectId(),"1234567892", tipoTarjeta.CREDITO, tipoBanco.BANREGIO, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta4 = new Tarjeta(new ObjectId(),"1234567893", tipoTarjeta.DEBITO, tipoBanco.BBVA, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta5 = new Tarjeta(new ObjectId(),"1234567894", tipoTarjeta.CREDITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta6 = new Tarjeta(new ObjectId(),"1234567895", tipoTarjeta.DEBITO, tipoBanco.SANTANDER, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta7 = new Tarjeta(new ObjectId(),"1234567896", tipoTarjeta.CREDITO, tipoBanco.BANAMEX, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta8 = new Tarjeta(new ObjectId(),"1234567897", tipoTarjeta.DEBITO, tipoBanco.BANCOPPEL, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta9 = new Tarjeta(new ObjectId(),"1234567898", tipoTarjeta.CREDITO, tipoBanco.BBVA, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta10 = new Tarjeta(new ObjectId(),"123456789", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta11 = new Tarjeta(new ObjectId(),"111111111", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
+
+            tarjetas1.add(tarjeta1);
+            tarjetas2.add(tarjeta2);
+            tarjetas3.add(tarjeta3);
+            tarjetas4.add(tarjeta4);
+            tarjetas5.add(tarjeta5);
+            tarjetas6.add(tarjeta6);
+            tarjetas7.add(tarjeta7);
+            tarjetas8.add(tarjeta8);
+            tarjetas9.add(tarjeta9);
+            tarjetas10.add(tarjeta10);
+            tarjetas10.add(tarjeta11);
+
+            entidades.add(persona1);
+            entidades.add(persona2);
+            entidades.add(persona3);
+            entidades.add(persona4);
+            entidades.add(persona5);
+            entidades.add(persona6);
+            entidades.add(persona7);
+            entidades.add(persona8);
+            entidades.add(persona9);
+            entidades.add(persona10);
+
+            MongoCollection<Persona> coleccionPersonas = Conexion.getDatabase().getCollection("Usuarios", Persona.class);
+
+            coleccionPersonas.insertMany(entidades);
+
+        } catch (MongoException e) {
+            System.out.println(e);
+        }
     }
 
 }
