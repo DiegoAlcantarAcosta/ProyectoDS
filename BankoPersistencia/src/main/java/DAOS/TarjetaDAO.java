@@ -13,6 +13,7 @@ import entidades.Persona;
 import entidades.Tarjeta;
 import interfaces.daos.ITarjetaDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -52,7 +53,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         try {
             List<Tarjeta> listaTarjetas = obtenerTodasLasTarjetasDeClientes();
             for (int i = 0; i < listaTarjetas.size(); i++) {
-                if (tarjeta.getNumeroCuenta().equalsIgnoreCase(listaTarjetas.get(i).getNumeroCuenta())){
+                if (tarjeta.getNumeroCuenta().equalsIgnoreCase(listaTarjetas.get(i).getNumeroCuenta())) {
                     return listaTarjetas.get(i);
                 }
             }
@@ -107,13 +108,27 @@ public class TarjetaDAO implements ITarjetaDAO {
 
                 // Agrega todas las tarjetas de la persona a la lista de tarjetas
                 todasLasTarjetas.addAll(tarjetas);
-            } 
-        }catch (MongoException e) {
+            }
+        } catch (MongoException e) {
             System.out.println(e);
 
             return null;
         }
         return todasLasTarjetas;
+    }
 
+    @Override
+    public Persona obtenerPersonaDeTarjeta(Tarjeta tarjeta) {
+        try  {         
+            Persona persona = coleccionPersonas.find(Filters.elemMatch("listaTarjetas", Filters.eq("numeroCuenta", tarjeta.getNumeroCuenta()))).first();
+            if (persona != null) {
+                return persona;
+            } else {
+                System.out.println("No se encontró ninguna persona con esa tarjeta.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 }

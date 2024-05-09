@@ -134,8 +134,8 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAgregarNumCuentaActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        MenuPrincipal a = new MenuPrincipal(tarjetaDTO.getPersona());
-        a.show();
+//        MenuPrincipal a = new MenuPrincipal(tarjetaDTO.getPersona());
+//        a.show();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**

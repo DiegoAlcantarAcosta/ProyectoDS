@@ -6,9 +6,13 @@ package Objetos;
 
 import DAOS.PersonaDAO;
 import DTOs.PersonaDTO;
+import DTOs.TarjetaDTO;
 import Objetos.Interfaces.IObjetoNegocioPersona;
 import entidades.Persona;
+import entidades.Tarjeta;
 import interfaces.daos.IPersonaDAO;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -24,29 +28,69 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     }
 
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
+        ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
+        
         Persona persona = new Persona();
         persona.setNombre(personaDTO.getNombre());
-        persona.setId(new ObjectId(""+personaDTO.getId()));
+        ObjectId id = new ObjectId("" + personaDTO.getId());
+        persona.setId(id);
         persona.setApellidoP(personaDTO.getApellidoP());
         persona.setApellidoM(personaDTO.getApellidoM());
         persona.setFechaNac(personaDTO.getFechaNac());
         persona.setTelefono(personaDTO.getTelefono());
         persona.setCurp(personaDTO.getCurp());
+        persona.setContrasena(personaDTO.getContrasena());
+        
+        List<TarjetaDTO> tarjetas = personaDTO.getListaTarjetas();
+        List<Tarjeta> tarjetasResultado = new ArrayList<>();
+
+        for (TarjetaDTO tarjetaDTO : tarjetas) {
+            Tarjeta tarjeta = ont.convertirDTOAEntidad(tarjetaDTO);
+            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
+            tarjetasResultado.add(tarjeta);
+        }
+        
+        persona.setListaTarjetas(tarjetasResultado);
 
         return persona;
     }
 
-   
+    public Persona convertirDTOAEntidadCURP(PersonaDTO personaDTO) {
+        Persona persona = new Persona();
+        persona.setCurp(personaDTO.getCurp());
+        return persona;
+    }
+
+    public PersonaDTO convertirEntidadADTOCURP(Persona persona) {
+        PersonaDTO personaDTO = new PersonaDTO();
+        personaDTO.setCurp(persona.getCurp());
+        return personaDTO;
+    }
+
     public PersonaDTO convertirEntidadADTO(Persona persona) {
+        ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setNombre(persona.getNombre());
-        personaDTO.setId(new ObjectId(""+persona.getId()));
+        personaDTO.setId(new ObjectId("" + persona.getId()));
         personaDTO.setApellidoP(persona.getApellidoP());
         personaDTO.setApellidoM(persona.getApellidoM());
         personaDTO.setFechaNac(persona.getFechaNac());
         personaDTO.setTelefono(persona.getTelefono());
         personaDTO.setCurp(persona.getCurp());
+        personaDTO.setContrasena(persona.getContrasena());
 
+        List<Tarjeta> tarjetas = persona.getListaTarjetas();
+        List<TarjetaDTO> tarjetasResultado = new ArrayList<>();
+
+        for (Tarjeta tarjetaDTO : tarjetas) {
+            TarjetaDTO tarjeta = ont.convertirEntidadADTO(tarjetaDTO);
+            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
+            tarjetasResultado.add(tarjeta);
+        }
+        
+        personaDTO.setListaTarjetas(tarjetasResultado);
+
+        
         return personaDTO;
     }
 
@@ -66,10 +110,20 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
     @Override
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO) {
-        //Persona persona = this.convertirDTOAEntidad(personaDTO);
-        Persona persona = new Persona(personaDTO.getCurp());
-        Persona personaBuscada = pd.obtenerPersonaPorCurp(persona);
-        PersonaDTO personaConvert = this.convertirEntidadADTO(personaBuscada);
+        Persona p = pd.obtenerPersonaPorCurp(convertirDTOAEntidadCURP(personaDTO));
+        PersonaDTO personaConvert = this.convertirEntidadADTO(p);
         return personaConvert;
+    }
+
+    @Override
+    public Boolean procesarInicioSesion(String telefono, String contaseña) {
+        return pd.procesarInicioSesion(telefono, contaseña);
+    }
+
+    @Override
+    public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
+        Persona persona = pd.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);
+        PersonaDTO personaDTO = convertirEntidadADTO(persona);
+        return personaDTO;
     }
 }

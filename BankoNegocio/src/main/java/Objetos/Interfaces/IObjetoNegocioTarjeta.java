@@ -6,6 +6,8 @@ package Objetos.Interfaces;
 
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import Excepciones.PersistenciaException;
+import entidades.Tarjeta;
 import java.util.List;
 
 /**
@@ -20,4 +22,14 @@ public interface IObjetoNegocioTarjeta {
     
     public TarjetaDTO obtenerTarjetaDTOPorNumero(TarjetaDTO tarjetaDTO);
     
+        public List<TarjetaDTO> obtenerTodasLasTarjetasDeClientes();
+        
+        public void guardar(TarjetaDTO tarjeta) throws PersistenciaException;
+
+    public void actualizar(TarjetaDTO tarjeta) throws PersistenciaException;
+
+    public void eliminar(TarjetaDTO tarjeta) throws PersistenciaException;
+    
+    public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta);
+
 }

@@ -33,7 +33,7 @@ public class TransferenciaForm extends javax.swing.JFrame {
 
         SaldoDisponibleTexxField.setText(""+tarjetaDTO.getSaldo());
         txtBancoDestinatario.setText(tarjetaDestino.getBanco().toString());
-        txtNombreDestinatario.setText(tarjetaDestino.getPersona().getNombre());
+//        txtNombreDestinatario.setText(tarjetaDestino.getPersona().getNombre());
         txtNumCuentaDest.setText(tarjetaDestino.getNumeroCuenta());
 
     }

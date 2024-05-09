@@ -37,7 +37,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     public OpcionesTarjeta(TarjetaDTO tarjetaDTO) {
         initComponents();
         tarjeta = tarjetaDTO;
-        persona = tarjeta.getPersona();
+//        persona = tarjeta.getPersona();
         mostrarTarjetasSS = new MostrarTarjetasSS();
 
         List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(persona);

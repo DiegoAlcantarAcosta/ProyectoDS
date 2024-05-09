@@ -4,8 +4,6 @@
  */
 package Interfaces;
 
-import DAOS.PersonaDAO;
-import DAOS.TarjetaDAO;
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
 import Funcionalidad.ITarjetaSS;

@@ -16,7 +16,7 @@ import org.bson.Document;
  * @author Diego
  */
 public interface ITarjetaDAO {
-    
+    public Persona obtenerPersonaDeTarjeta(Tarjeta tarjeta);
     
     public List<Tarjeta> obtenerTodasLasTarjetasDeClientes();
 

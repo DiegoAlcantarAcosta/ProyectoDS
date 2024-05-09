@@ -46,7 +46,7 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
         
         txtImporte.setText("" + transferencia.getImporte());
         txtNumTarjeta.setText(tarjetaDestino.getNumeroCuenta());
-        txtTitular.setText(tarjetaDestino.getPersona().getNombre());
+//        txtTitular.setText(tarjetaDestino.getPersona().getNombre());
         
     }
 
@@ -197,8 +197,8 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
     }
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-   MenuPrincipal menuPrincipal = new MenuPrincipal(tarjetaDTO.getPersona()); // Instancia el formulario principal
-        menuPrincipal.setVisible(true); // Muestra el formulario principal
+//   MenuPrincipal menuPrincipal = new MenuPrincipal(tarjetaDTO.getPersona()); // Instancia el formulario principal
+//        menuPrincipal.setVisible(true); // Muestra el formulario principal
         this.dispose(); // Cierra el formulario actual
     }//GEN-LAST:event_btnCancelarActionPerformed
 

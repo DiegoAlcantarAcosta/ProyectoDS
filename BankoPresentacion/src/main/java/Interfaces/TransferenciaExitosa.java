@@ -172,8 +172,8 @@ public class TransferenciaExitosa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
-        MenuPrincipal menu = new MenuPrincipal(tarjetaDTO.getPersona());
-        menu.show();
+//        MenuPrincipal menu = new MenuPrincipal(tarjetaDTO.getPersona());
+//        menu.show();
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 

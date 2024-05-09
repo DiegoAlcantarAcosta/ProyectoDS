@@ -36,7 +36,7 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         initComponents();
         tarjetaSS = new TarjetaSS();
         tarjeta = tarjetaDTO;
-        persona = tarjeta.getPersona();
+//        persona = tarjeta.getPersona();
         mostrarContactoSS = new MostrarContactoSS();
 
         List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(persona);

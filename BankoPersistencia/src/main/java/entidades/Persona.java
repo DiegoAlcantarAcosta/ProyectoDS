@@ -62,6 +62,20 @@ public class Persona {
         this.listaTarjetas = listaTarjetas;
     }
 
+    public Persona(ObjectId id, String nombre, String apellidoP, String apellidoM, String curp, String contrasena, Date fechaNac, String telefono, List<Tarjeta> listaTarjetas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.curp = curp;
+        this.contrasena = contrasena;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.listaTarjetas = listaTarjetas;
+    }
+    
+    
+
     public List<Tarjeta> getListaTarjetas() {
         return listaTarjetas;
     }

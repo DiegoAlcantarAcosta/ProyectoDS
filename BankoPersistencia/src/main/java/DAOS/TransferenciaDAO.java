@@ -5,7 +5,6 @@
 package DAOS;
 
 import Conexion.Conexion;
-import Conexion.IConexion;
 import entidades.Tarjeta;
 import entidades.Transferencia;
 import interfaces.daos.ITransferenciaDAO;
@@ -18,53 +17,20 @@ import javax.persistence.EntityManager;
  */
 public class TransferenciaDAO implements ITransferenciaDAO{
     
-    private final IConexion conexion;
     private Transferencia transferenciaa;
     private TarjetaDAO tarjeta;
 
     public TransferenciaDAO() {
-        conexion = new Conexion();
         transferenciaa = new Transferencia();
         tarjeta = new TarjetaDAO();
     }
     
     @Override
     public boolean realizarTransferencia(Transferencia transferenciaa) {
-    EntityManager em = conexion.abrir();
-    try {
-        em.getTransaction().begin();
-
-        // Obtener la tarjeta del propietario
-        Tarjeta tarjetaPropietario = tarjeta.obtenerTarjetaPorNumero(new Tarjeta(transferenciaa.getNumeroCuentaPropietario()));
-
-        // Validar que el saldo sea suficiente
-        if (tarjetaPropietario.getSaldo() >= transferenciaa.getImporte()) {
-            // Realizar la transferencia
-            tarjetaPropietario.setSaldo(tarjetaPropietario.getSaldo() - transferenciaa.getImporte());
-            em.merge(tarjetaPropietario);
-
-            // Obtener la tarjeta del destinatario
-            Tarjeta tarjetaDestinatario = tarjeta.obtenerTarjetaPorNumero(new Tarjeta(transferenciaa.getNumeroCuentaDestinatario()));
-            tarjetaDestinatario.setSaldo(tarjetaDestinatario.getSaldo() + transferenciaa.getImporte());
-            em.merge(tarjetaDestinatario);
-
-            // Guardar la transferencia
-            transferenciaa.setFechaMovimiento(new Date());
-            transferenciaa.setTarjeta(tarjetaPropietario);
-            transferenciaa.setPersona(tarjetaPropietario.getPersona());
-            em.persist(transferenciaa);
-
-            em.getTransaction().commit();
-            return true;
-        } else {
-            return false;
-        }
-    } catch (Exception e) {
-        em.getTransaction().rollback();
-        throw e;
-    } finally {
-        em.close();
-    }
+ 
+    
+        return false;
+ 
     
     }
     

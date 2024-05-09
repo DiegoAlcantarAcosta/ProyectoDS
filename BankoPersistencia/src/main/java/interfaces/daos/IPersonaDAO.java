@@ -13,6 +13,10 @@ import java.util.List;
  */
 public interface IPersonaDAO {
 
+    public Boolean procesarInicioSesion(String telefono, String contaseña);
+    
+    public Persona obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena);
+    
     public Boolean registrar(Persona persona);
 
     public boolean personaRegistrada(Persona persona);

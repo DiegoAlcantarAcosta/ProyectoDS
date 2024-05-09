@@ -35,9 +35,9 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         tarjetaDesti = tarjetaDestinatario;
         tarjetaOri = tarjetaOrigen;
         
-        txtNombre.setText(tarjetaDestinatario.getPersona().getNombre());
-        txtAP.setText(tarjetaDestinatario.getPersona().getApellidoP());
-        txtAM.setText(tarjetaDestinatario.getPersona().getApellidoM());
+//        txtNombre.setText(tarjetaDestinatario.getPersona().getNombre());
+//        txtAP.setText(tarjetaDestinatario.getPersona().getApellidoP());
+//        txtAM.setText(tarjetaDestinatario.getPersona().getApellidoM());
         txtBanco.setText(tarjetaDestinatario.getBanco().toString());
     }
 
@@ -254,8 +254,8 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         if (checkBxGuardar.isSelected()) {
             TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
             
-            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(), tarjeBusc.getBanco(), tarjetaOri.getPersona());
-            ss.agregar(cont);
+//            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(), tarjeBusc.getBanco(), tarjetaOri.getPersona());
+//            ss.agregar(cont);
             //ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
             TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
             transferencia.show();

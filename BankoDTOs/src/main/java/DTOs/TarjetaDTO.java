@@ -3,6 +3,7 @@ package DTOs;
 import entidades.Persona;
 import java.util.Calendar;
 import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -10,26 +11,43 @@ import java.util.Date;
  */
 public class TarjetaDTO {
 
+    private ObjectId id;
     private String numeroCuenta;
     private tipoTarjetaDTO tipo;
     private tipoBancoDTO banco;
     private Double saldo;
     private Date fechaVencimiento;
-    private PersonaDTO persona;
 
-    
-    public TarjetaDTO(String numeroCuenta, tipoTarjetaDTO tipo, tipoBancoDTO banco, Double saldo, Date fechaVencimiento, PersonaDTO persona) {
+    public TarjetaDTO(ObjectId id, String numeroCuenta, tipoTarjetaDTO tipo, tipoBancoDTO banco, Double saldo, Date fechaVencimiento) {
+        this.id = id;
         this.numeroCuenta = numeroCuenta;
         this.tipo = tipo;
         this.banco = banco;
         this.saldo = saldo;
         this.fechaVencimiento = fechaVencimiento;
-        this.persona = persona;
+    }
+
+    public TarjetaDTO(String numeroCuenta, tipoTarjetaDTO tipo, tipoBancoDTO banco, Double saldo, Date fechaVencimiento) {
+        this.numeroCuenta = numeroCuenta;
+        this.tipo = tipo;
+        this.banco = banco;
+        this.saldo = saldo;
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public TarjetaDTO() {
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
+    
     public TarjetaDTO(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
@@ -74,17 +92,10 @@ public class TarjetaDTO {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public PersonaDTO getPersona() {
-        return persona;
-    }
-
-    public void setPersona(PersonaDTO persona) {
-        this.persona = persona;
-    }
 
     @Override
     public String toString() {
-        return "TarjetaDTO{" + "numeroCuenta=" + numeroCuenta + ", tipo=" + tipo + ", banco=" + banco + ", saldo=" + saldo + ", fechaVencimiento=" + fechaVencimiento + ", persona=" + persona + '}';
+        return "TarjetaDTO{" + "numeroCuenta=" + numeroCuenta + ", tipo=" + tipo + ", banco=" + banco + ", saldo=" + saldo + ", fechaVencimiento=" + fechaVencimiento + '}';
     }
 
     

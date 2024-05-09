@@ -5,6 +5,7 @@
 package Objetos.Interfaces;
 
 import DTOs.PersonaDTO;
+import entidades.Persona;
 
 /**
  *
@@ -18,4 +19,7 @@ public interface IObjetoNegocioPersona {
     
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO);
     
+    public Boolean procesarInicioSesion(String telefono, String contaseña);
+    
+    public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena);
 }
