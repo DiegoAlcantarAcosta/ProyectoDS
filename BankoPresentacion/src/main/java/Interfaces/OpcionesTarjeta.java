@@ -30,7 +30,6 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
 
     private IMostrarTarjetasSS mostrarTarjetasSS;
     private ITarjetaSS tarjetaSS;
-    TarjetaDTO tarjeta;
     TarjetaDTO tarjeDesti;
     PersonaDTO personaDTO;
     IEliminarTarjetaSS eliminarTarjetaSS;
@@ -225,7 +224,17 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-
+        int selectedRow = tablaTarjetas.getSelectedRow();
+        if (selectedRow != -1) {
+            String numero = (String) tablaTarjetas.getValueAt(selectedRow, 0);
+            TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
+            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(tarjetaBuscada.getNumeroCuenta()));
+            ActualizarTarjeta a = new ActualizarTarjeta(personaDTO, tarjeDesti);
+            a.show();
+            dispose();
+        } else {
+            JOptionPane.showConfirmDialog(null, "Seleccione una tarjeta");
+        }
     }//GEN-LAST:event_actualizarButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed

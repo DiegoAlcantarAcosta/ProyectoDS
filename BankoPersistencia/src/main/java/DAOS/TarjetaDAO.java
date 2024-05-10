@@ -64,23 +64,25 @@ public class TarjetaDAO implements ITarjetaDAO {
     }
 
     @Override
-    public void guardar(Persona persona ,Tarjeta tarjeta) {
-               coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaTarjetas", tarjeta));
+    public void guardar(Persona persona, Tarjeta tarjeta) {
+        coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaTarjetas", tarjeta));
     }
 
     @Override
-    public void actualizar(Tarjeta tarjeta) {
-        Bson filtroID = Filters.eq("_id", tarjeta.getId());
-        try {
-            coleccionTarjetas.replaceOne(filtroID, tarjeta);
-        } catch (MongoException e) {
-            System.out.println(e);
-        }
+    public void actualizarTarjeta(Persona persona, Tarjeta tarjeta) {
+       coleccionPersonas.updateOne(
+                Filters.and(
+                        Filters.eq("_id", persona.getId()),
+                        Filters.eq("listaTarjetas._id", tarjeta.getId())
+                ),
+                Updates.set("listaTarjetas.$", tarjeta)
+        );
+
     }
 
     @Override
     public void eliminar(Persona persona, Tarjeta tarjeta) {
-       if (persona != null) {
+        if (persona != null) {
             List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona);
             Iterator<Tarjeta> iterator = tarjetas.iterator();
             while (iterator.hasNext()) {
@@ -124,7 +126,7 @@ public class TarjetaDAO implements ITarjetaDAO {
 
     @Override
     public Persona obtenerPersonaDeTarjeta(Tarjeta tarjeta) {
-        try  {         
+        try {
             Persona persona = coleccionPersonas.find(Filters.elemMatch("listaTarjetas", Filters.eq("numeroCuenta", tarjeta.getNumeroCuenta()))).first();
             if (persona != null) {
                 return persona;

@@ -26,7 +26,7 @@ public interface IObjetoNegocioTarjeta {
         
         public void guardar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException;
 
-    public void actualizar(TarjetaDTO tarjeta) throws PersistenciaException;
+    public void actualizar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException;
 
     public void eliminar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException;
     

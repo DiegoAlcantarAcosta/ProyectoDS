@@ -131,6 +131,7 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
             if (contrasenaTextField.getText().equalsIgnoreCase(personaDTO.getContrasena())) {
                 OpcionesTarjeta a = new OpcionesTarjeta(personaDTO);
                 a.show();
+                dispose();
             } else {
                 JOptionPane.showConfirmDialog(this, "Contraseña incorrecta", "AVISO", JOptionPane.WARNING_MESSAGE);
             }

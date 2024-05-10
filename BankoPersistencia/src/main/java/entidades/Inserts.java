@@ -96,8 +96,8 @@ public class Inserts {
             Tarjeta tarjeta7 = new Tarjeta(new ObjectId(),"1234567896", tipoTarjeta.CREDITO, tipoBanco.BANAMEX, 10000.0, fechaVencimiento);
             Tarjeta tarjeta8 = new Tarjeta(new ObjectId(),"1234567897", tipoTarjeta.DEBITO, tipoBanco.BANCOPPEL, 10000.0, fechaVencimiento);
             Tarjeta tarjeta9 = new Tarjeta(new ObjectId(),"1234567898", tipoTarjeta.CREDITO, tipoBanco.BBVA, 10000.0, fechaVencimiento);
-            Tarjeta tarjeta10 = new Tarjeta(new ObjectId(),"123456789", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
-            Tarjeta tarjeta11 = new Tarjeta(new ObjectId(),"111111111", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta10 = new Tarjeta(new ObjectId(),"1234567899", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
+            Tarjeta tarjeta11 = new Tarjeta(new ObjectId(),"1111111111", tipoTarjeta.DEBITO, tipoBanco.HSBC, 10000.0, fechaVencimiento);
 
             tarjetas1.add(tarjeta1);
             tarjetas2.add(tarjeta2);

@@ -63,8 +63,8 @@
               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
               <Component id="btnRegresar" min="-2" pref="85" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnAceptar" min="-2" pref="94" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+              <Component id="AceptarButton" min="-2" pref="94" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,8 +94,8 @@
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAceptar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="btnRegresar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="AceptarButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
@@ -160,14 +160,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAceptar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Aceptar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo de tarjeta:"/>
@@ -209,6 +201,14 @@
       </AuxValues>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="fechaVencimientoJDateChooser">
+    </Component>
+    <Component class="javax.swing.JButton" name="AceptarButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Aceptar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AceptarButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

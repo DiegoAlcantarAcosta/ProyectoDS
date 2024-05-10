@@ -22,4 +22,5 @@ public interface ITarjetaSS {
 
     public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta);
 
+    public List<TarjetaDTO> obtenerTodasLasTarjetasDeClientes();
 }

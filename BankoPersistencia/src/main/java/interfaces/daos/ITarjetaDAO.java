@@ -28,7 +28,7 @@ public interface ITarjetaDAO {
     
       public void guardar(Persona persona ,Tarjeta tarjeta) throws PersistenciaException;
 
-    public void actualizar(Tarjeta tarjeta) throws PersistenciaException;
+    public void actualizarTarjeta(Persona persona, Tarjeta tarjeta);
 
     public void eliminar(Persona persona, Tarjeta tarjeta) throws PersistenciaException;
 //    public boolean realizarTransferencia(Transferencia transferenciaa);

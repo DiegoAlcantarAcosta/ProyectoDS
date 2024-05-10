@@ -6,10 +6,15 @@ package Interfaces;
 
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
-import Funcionalidad.ITarjetaSS;
+import DTOs.tipoBancoDTO;
+import DTOs.tipoTarjetaDTO;
+import Funcionalidad.ActualizarTarjetaSS;
+import Funcionalidad.AnadirTarjetaSS;
 import Funcionalidad.TarjetaSS;
-import javax.swing.JFrame;
-import org.eclipse.persistence.internal.libraries.asm.Opcodes;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -17,19 +22,29 @@ import org.eclipse.persistence.internal.libraries.asm.Opcodes;
  */
 public class ActualizarTarjeta extends javax.swing.JFrame {
 
-    ITarjetaSS tarjetaSS;
-    TarjetaDTO tarjeta;
     PersonaDTO persona;
+    TarjetaDTO tarjeta;
+    ActualizarTarjetaSS tarjetaSS;
+    TarjetaSS tarjetaSS2;
+    List<TarjetaDTO> tarjetasClientes;
 
     /**
      * Creates new form MenuPrincipal
      */
-    public ActualizarTarjeta(TarjetaDTO tarjetaDTO) {
+    public ActualizarTarjeta(PersonaDTO personaDTO, TarjetaDTO tarjetaDTO) {
         initComponents();
-        tarjetaSS = new TarjetaSS();
+        persona = personaDTO;
         tarjeta = tarjetaDTO;
-        persona = tarjetaSS.obtenerPersonaDeTarjeta(tarjeta);
-        numTarjetaTextField.setText(tarjeta.getNumeroCuenta());
+        tarjetaSS = new ActualizarTarjetaSS();
+        numTarjetaTextField.setText(tarjetaDTO.getNumeroCuenta());
+     
+        for (tipoTarjetaDTO value : tipoTarjetaDTO.values()) {
+            tipoTarjetaComboBox.addItem(value);
+        }
+
+        for (tipoBancoDTO value : tipoBancoDTO.values()) {
+            bancoComboBox.addItem(value);
+        }
     }
 
     /**
@@ -45,14 +60,14 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         numTarjetaTextField = new javax.swing.JTextField();
         tipoTarjetaComboBox = new javax.swing.JComboBox<>();
         bancoComboBox = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        fechaVencimientoJDateChooser = new com.toedter.calendar.JDateChooser();
+        AceptarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -90,13 +105,6 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
             }
         });
 
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Tipo de tarjeta:");
 
         jLabel4.setText("Banco:");
@@ -105,9 +113,18 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
 
         numTarjetaTextField.setEditable(false);
 
-        tipoTarjetaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tipoTarjetaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoTarjetaComboBoxActionPerformed(evt);
+            }
+        });
 
-        bancoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AceptarButton.setText("Aceptar");
+        AceptarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,32 +132,35 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(bancoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(11, 11, 11))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(numTarjetaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tipoTarjetaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(10, 10, 10)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bancoComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 300, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numTarjetaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tipoTarjetaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechaVencimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +181,11 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaVencimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -173,25 +193,59 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        OpcionesTarjeta a = new OpcionesTarjeta(persona);
-        this.dispose(); // Cierra el formulario actual    }//GEN-LAST:event_btnAceptarActionPerformed
+
+
+
+    public static boolean esFechaVencimientoValida(Date fechaVencimiento) {
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
+
+        // Comparar la fecha de vencimiento con la fecha actual
+        return fechaVencimiento == null || !fechaVencimiento.before(fechaActual);
     }
-    
+
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         OpcionesTarjeta a = new OpcionesTarjeta(persona);
+        a.show();
         dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void tipoTarjetaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoTarjetaComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoTarjetaComboBoxActionPerformed
+
+    private void AceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarButtonActionPerformed
+        try {
+            if (fechaVencimientoJDateChooser.getDate() != null) {
+                        if (esFechaVencimientoValida(fechaVencimientoJDateChooser.getDate())) {
+                            tipoTarjetaDTO tipoTarjeta = (tipoTarjetaDTO) tipoTarjetaComboBox.getSelectedItem();
+                            tipoBancoDTO tipoBanco = (tipoBancoDTO) bancoComboBox.getSelectedItem();
+                            TarjetaDTO tarjetaDTO = new TarjetaDTO(tarjeta.getId(), tarjeta.getNumeroCuenta(), tipoTarjeta, tipoBanco, tarjeta.getSaldo(), fechaVencimientoJDateChooser.getDate());
+                            tarjetaSS.actualizar(persona, tarjetaDTO);
+                            OpcionesTarjeta a = new OpcionesTarjeta(persona);
+                            a.show();
+                            this.dispose(); // Cierra el formulario actual
+                        } else {
+                            JOptionPane.showConfirmDialog(null, "No se puede poner una fecha caducada");
+                        }
+            } else {
+                JOptionPane.showConfirmDialog(null, "No deje espacios en blanco");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            JOptionPane.showConfirmDialog(null, "No se pudo actualizar la tarjeta");
+        }
+    }//GEN-LAST:event_AceptarButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> bancoComboBox;
-    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton AceptarButton;
+    private javax.swing.JComboBox<tipoBancoDTO> bancoComboBox;
     private javax.swing.JButton btnRegresar;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser fechaVencimientoJDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -199,6 +253,6 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField numTarjetaTextField;
-    private javax.swing.JComboBox<String> tipoTarjetaComboBox;
+    private javax.swing.JComboBox<tipoTarjetaDTO> tipoTarjetaComboBox;
     // End of variables declaration//GEN-END:variables
 }

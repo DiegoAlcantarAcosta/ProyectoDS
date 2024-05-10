@@ -39,7 +39,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
-        tarjeta.setId(new ObjectId(""+ tarjetaDTO.getId()));
+        tarjeta.setId(new ObjectId("" + tarjetaDTO.getId()));
         tarjeta.setNumeroCuenta(tarjetaDTO.getNumeroCuenta());
         tarjeta.setSaldo(tarjetaDTO.getSaldo());
 
@@ -199,25 +199,27 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     }
 
     @Override
-    public void guardar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException {
+    public void guardar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
         Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
         Persona personaEnt = onp.convertirDTOAEntidad(persona);
-        td.guardar( personaEnt,tarjetaEnt);
+        td.guardar(personaEnt, tarjetaEnt);
     }
 
     @Override
-    public void actualizar(TarjetaDTO tarjeta) throws PersistenciaException {
-        Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
-        td.actualizar(tarjetaEnt);
-    }
-
-    @Override
-    public void eliminar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException {
+    public void actualizar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
         Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
         Persona personaEnt = onp.convertirDTOAEntidad(persona);
-        td.eliminar(personaEnt ,tarjetaEnt);
+        td.actualizarTarjeta(personaEnt ,tarjetaEnt);
+    }
+
+    @Override
+    public void eliminar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
+        ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
+        Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
+        Persona personaEnt = onp.convertirDTOAEntidad(persona);
+        td.eliminar(personaEnt, tarjetaEnt);
     }
 
     @Override

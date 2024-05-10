@@ -9,10 +9,11 @@ import DTOs.TarjetaDTO;
 import DTOs.tipoBancoDTO;
 import DTOs.tipoTarjetaDTO;
 import Funcionalidad.AnadirTarjetaSS;
-import javax.swing.JFrame;
+import Funcionalidad.TarjetaSS;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.bson.types.ObjectId;
-import org.eclipse.persistence.internal.libraries.asm.Opcodes;
 
 /**
  *
@@ -22,6 +23,8 @@ public class AñadirTarjeta extends javax.swing.JFrame {
 
     PersonaDTO persona;
     AnadirTarjetaSS tarjetaSS;
+    TarjetaSS tarjetaSS2;
+    List<TarjetaDTO> tarjetasClientes;
 
     /**
      * Creates new form MenuPrincipal
@@ -30,6 +33,8 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         initComponents();
         persona = personaDTO;
         tarjetaSS = new AnadirTarjetaSS();
+        tarjetaSS2 = new TarjetaSS();
+        tarjetasClientes = tarjetaSS2.obtenerTodasLasTarjetasDeClientes();
 
         for (tipoTarjetaDTO value : tipoTarjetaDTO.values()) {
             tipoTarjetaComboBox.addItem(value);
@@ -53,7 +58,6 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -61,6 +65,7 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         tipoTarjetaComboBox = new javax.swing.JComboBox<>();
         bancoComboBox = new javax.swing.JComboBox<>();
         fechaVencimientoJDateChooser = new com.toedter.calendar.JDateChooser();
+        AceptarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -98,13 +103,6 @@ public class AñadirTarjeta extends javax.swing.JFrame {
             }
         });
 
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Tipo de tarjeta:");
 
         jLabel4.setText("Banco:");
@@ -114,6 +112,13 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         tipoTarjetaComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoTarjetaComboBoxActionPerformed(evt);
+            }
+        });
+
+        AceptarButton.setText("Aceptar");
+        AceptarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarButtonActionPerformed(evt);
             }
         });
 
@@ -150,8 +155,8 @@ public class AñadirTarjeta extends javax.swing.JFrame {
                 .addGap(104, 104, 104)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
+                .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,8 +180,8 @@ public class AñadirTarjeta extends javax.swing.JFrame {
                     .addComponent(fechaVencimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -184,20 +189,60 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+    public boolean validarNumeroNoRepetido(String numeroCuenta) {
+        for (int i = 0; i < tarjetasClientes.size(); i++) {
+            if (tarjetasClientes.get(i).getNumeroCuenta().equalsIgnoreCase(numTarjetaTextField.getText())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean validarNumeroCuenta(String numeroCuenta) {
+        // Expresión regular para validar que el número de cuenta tenga exactamente 9 dígitos
+        String regex = "\\d{10}";
+        return numeroCuenta.matches(regex);
+    }
+
+    public static boolean esFechaVencimientoValida(Date fechaVencimiento) {
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
+
+        // Comparar la fecha de vencimiento con la fecha actual
+        return fechaVencimiento == null || !fechaVencimiento.before(fechaActual);
+    }
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        OpcionesTarjeta a = new OpcionesTarjeta(persona);
+        a.show();
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void tipoTarjetaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoTarjetaComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoTarjetaComboBoxActionPerformed
+
+    private void AceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarButtonActionPerformed
         try {
             if (!numTarjetaTextField.getText().isBlank() || fechaVencimientoJDateChooser.getDate() != null) {
                 if (validarNumeroCuenta(numTarjetaTextField.getText())) {
-                    tipoTarjetaDTO tipoTarjeta = (tipoTarjetaDTO) tipoTarjetaComboBox.getSelectedItem();
-                    tipoBancoDTO tipoBanco = (tipoBancoDTO) bancoComboBox.getSelectedItem();
-                    TarjetaDTO tarjetaDTO = new TarjetaDTO(new ObjectId(), numTarjetaTextField.getText(), tipoTarjeta, tipoBanco, 1000d, fechaVencimientoJDateChooser.getDate());
-                    tarjetaSS.guardar(persona, tarjetaDTO);
-
-                    OpcionesTarjeta a = new OpcionesTarjeta(persona);
-                    a.show();
-                    this.dispose(); // Cierra el formulario actual
+                    if (validarNumeroNoRepetido(numTarjetaTextField.getText())) {
+                        if (esFechaVencimientoValida(fechaVencimientoJDateChooser.getDate())) {
+                            tipoTarjetaDTO tipoTarjeta = (tipoTarjetaDTO) tipoTarjetaComboBox.getSelectedItem();
+                            tipoBancoDTO tipoBanco = (tipoBancoDTO) bancoComboBox.getSelectedItem();
+                            TarjetaDTO tarjetaDTO = new TarjetaDTO(new ObjectId(), numTarjetaTextField.getText(), tipoTarjeta, tipoBanco, 1000d, fechaVencimientoJDateChooser.getDate());
+                            tarjetaSS.guardar(persona, tarjetaDTO);
+                            OpcionesTarjeta a = new OpcionesTarjeta(persona);
+                            a.show();
+                            this.dispose(); // Cierra el formulario actual
+                        } else {
+                            JOptionPane.showConfirmDialog(null, "No se puede agregar una tarjeta caducada");
+                        }
+                    } else {
+                        JOptionPane.showConfirmDialog(null, "Numero de cuenta ya existente");
+                    }
                 } else {
-                    JOptionPane.showConfirmDialog(null, "Ingrese un numero de tarjeta de 9 digitos");
+                    JOptionPane.showConfirmDialog(null, "Ingrese un numero de tarjeta de 10 digitos");
                 }
 
             } else {
@@ -207,33 +252,15 @@ public class AñadirTarjeta extends javax.swing.JFrame {
             System.out.println("Error: " + e);
             JOptionPane.showConfirmDialog(null, "No se pudo agregar la tarjeta");
         }
-
-        OpcionesTarjeta a = new OpcionesTarjeta(persona);
-        this.dispose(); // Cierra el formulario actual    }//GEN-LAST:event_btnAceptarActionPerformed
-    }
-
-    public static boolean validarNumeroCuenta(String numeroCuenta) {
-        // Expresión regular para validar que el número de cuenta tenga exactamente 9 dígitos
-        String regex = "\\d{9}";
-        return numeroCuenta.matches(regex);
-    }
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        OpcionesTarjeta a = new OpcionesTarjeta(persona);
-        dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void tipoTarjetaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoTarjetaComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoTarjetaComboBoxActionPerformed
+    }//GEN-LAST:event_AceptarButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AceptarButton;
     private javax.swing.JComboBox<tipoBancoDTO> bancoComboBox;
-    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnRegresar;
     private com.toedter.calendar.JDateChooser fechaVencimientoJDateChooser;
     private javax.swing.JLabel jLabel1;
