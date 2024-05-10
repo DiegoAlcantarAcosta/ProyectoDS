@@ -39,4 +39,9 @@ public class TarjetaSS implements ITarjetaSS {
         TarjetaDTO t = tarjeta.obtenerUltimaTarjetaDTOPersona(personaDTO);
         return t;
     }
+
+    @Override
+    public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta) {
+       return this.obtenerPersonaDeTarjeta(tarjeta);
+    }
 }

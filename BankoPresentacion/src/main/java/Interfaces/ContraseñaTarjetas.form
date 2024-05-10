@@ -42,7 +42,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnAceptar" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtAgregarNumCuenta" min="-2" pref="231" max="-2" attributes="0"/>
+                          <Component id="contrasenaTextField" min="-2" pref="231" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
@@ -57,7 +57,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="txtAgregarNumCuenta" min="-2" max="-2" attributes="0"/>
+              <Component id="contrasenaTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAtras" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -137,9 +137,9 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAgregarNumCuenta">
+    <Component class="javax.swing.JTextField" name="contrasenaTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAgregarNumCuentaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contrasenaTextFieldActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

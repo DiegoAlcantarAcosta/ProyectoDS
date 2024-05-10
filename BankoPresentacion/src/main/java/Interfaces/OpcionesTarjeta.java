@@ -7,6 +7,9 @@ package Interfaces;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import Excepciones.PersistenciaException;
+import Funcionalidad.EliminarTarjetaSS;
+import Funcionalidad.IEliminarTarjetaSS;
 import Funcionalidad.IMostrarTarjetasSS;
 import Funcionalidad.ITarjetaSS;
 import Funcionalidad.MostrarContactoSS;
@@ -29,22 +32,24 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     private ITarjetaSS tarjetaSS;
     TarjetaDTO tarjeta;
     TarjetaDTO tarjeDesti;
-    PersonaDTO persona;
+    PersonaDTO personaDTO;
+    IEliminarTarjetaSS eliminarTarjetaSS;
 
     /**
      * Creates new form FrmSeleccionarContacto
      */
-    public OpcionesTarjeta(TarjetaDTO tarjetaDTO) {
+    public OpcionesTarjeta(PersonaDTO persona) {
         initComponents();
-        tarjeta = tarjetaDTO;
-//        persona = tarjeta.getPersona();
+        personaDTO = persona;
         mostrarTarjetasSS = new MostrarTarjetasSS();
+        eliminarTarjetaSS = new EliminarTarjetaSS();
+        tarjetaSS = new TarjetaSS();
 
         List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(persona);
-        this.llenarTablaContactos(listaTarjetas);
+        this.llenarTablaTarjetas(listaTarjetas);
     }
 
-    private void llenarTablaContactos(List<TarjetaDTO> tarjetas) {
+    private void llenarTablaTarjetas(List<TarjetaDTO> tarjetas) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Numero");
         modelo.addColumn("Tipo");
@@ -55,7 +60,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
         SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(persona);
+            List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
             if (listaTarjetas.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontraron resultados", "AVISO", JOptionPane.WARNING_MESSAGE);
                 dispose();
@@ -214,30 +219,39 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
-        MenuPrincipal a = new MenuPrincipal(persona);
+        MenuPrincipal a = new MenuPrincipal(personaDTO);
         a.show();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        // TODO add your handling code here:
-        MenuPrincipal m = new MenuPrincipal(persona);
-        m.setVisible(true);
-        this.setVisible(false);
+
     }//GEN-LAST:event_actualizarButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-        // TODO add your handling code here:
-//        int selectedRow = tablaTarjetas.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String alias = (String) tablaTarjetas.getValueAt(selectedRow, 0);
-//            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
-//            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
-//            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
-//            trans.setVisible(true);
-//            this.setVisible(false);
-//        } else {
-//            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
-//        }
+        try {
+            int selectedRow = tablaTarjetas.getSelectedRow();
+            int countRows = tablaTarjetas.getRowCount();
+
+            if (selectedRow != -1) {
+                String numero = (String) tablaTarjetas.getValueAt(selectedRow, 0);
+                TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
+                tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(tarjetaBuscada.getNumeroCuenta()));
+                if (countRows - 1 != 0) {
+                    eliminarTarjetaSS.eliminar(personaDTO, tarjeDesti);
+                    List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
+                    this.llenarTablaTarjetas(listaTarjetas);
+                    JOptionPane.showConfirmDialog(null, "Tarjeta eliminada con exito");
+                } else {
+                    JOptionPane.showConfirmDialog(null, "No puede dejar la cuenta sin tarjetas");
+                }
+
+            } else {
+                JOptionPane.showConfirmDialog(null, "No se pudo eliminar la tarjeta");
+            }
+        } catch (PersistenciaException e) {
+            System.out.println("Error: " + e);
+        }
+
 
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
@@ -246,9 +260,9 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaTarjetasMouseClicked
 
     private void añadirButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirButton1ActionPerformed
-       AñadirTarjeta a = new AñadirTarjeta(tarjeta);
-       a.show();
-       dispose();
+        AñadirTarjeta a = new AñadirTarjeta(personaDTO);
+        a.show();
+        dispose();
     }//GEN-LAST:event_añadirButton1ActionPerformed
 
     /**

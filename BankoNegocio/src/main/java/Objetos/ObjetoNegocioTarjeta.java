@@ -211,9 +211,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     }
 
     @Override
-    public void eliminar(TarjetaDTO tarjeta) throws PersistenciaException {
+    public void eliminar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException {
+        ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
         Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
-        td.eliminar(tarjetaEnt);
+        Persona personaEnt = onp.convertirDTOAEntidad(persona);
+        td.eliminar(personaEnt ,tarjetaEnt);
     }
 
     @Override

@@ -13,9 +13,13 @@ import java.util.List;
  * @author Diego
  */
 public interface ITarjetaSS {
-    public TarjetaDTO obtenerTarjetaDTOPorNumero(TarjetaDTO tarjetaDTO);
-    
-        public List<TarjetaDTO> obtenerTarjetasDTOPersona(PersonaDTO personaDTO);
 
-        public TarjetaDTO obtenerUltimaTarjetaDTOPersona(PersonaDTO personaDTO);
+    public TarjetaDTO obtenerTarjetaDTOPorNumero(TarjetaDTO tarjetaDTO);
+
+    public List<TarjetaDTO> obtenerTarjetasDTOPersona(PersonaDTO personaDTO);
+
+    public TarjetaDTO obtenerUltimaTarjetaDTOPersona(PersonaDTO personaDTO);
+
+    public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta);
+
 }

@@ -31,14 +31,20 @@ public class BankoNegocio {
         ObjetoNegocioTarjeta ot = new ObjetoNegocioTarjeta();
         ObjetoNegocioTransferencia otr = new ObjetoNegocioTransferencia();
         TarjetaDAO td = new TarjetaDAO();
+        TarjetaDTO tarjeDesti;
+        
 
-        Tarjeta tarjeta = new Tarjeta("111111111");
-        Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(tarjeta);
-        TarjetaDTO tarjetaDTO = ot.convertirEntidadADTO(tarjetaBuscada);
-//        System.out.println(ot.obtenerPersonaDeTarjeta(tarjetaDTO));
+//        Tarjeta tarjeta = new Tarjeta("111111111");
+//        Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(tarjeta);
+//        TarjetaDTO tarjetaDTO = ot.convertirEntidadADTO(tarjetaBuscada);
+////        System.out.println(ot.obtenerPersonaDeTarjeta(tarjetaDTO));
+//
+//        PersonaDTO personaDTO = new PersonaDTO("PEGJ900615HDFRZN00");
+//        System.out.println(op.obtenerPersonaDTOPorCurp(personaDTO).toString());
 
-        PersonaDTO personaDTO = new PersonaDTO("PEGJ900615HDFRZN00");
-        System.out.println(op.obtenerPersonaDTOPorCurp(personaDTO).toString());
+//        TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
+//        tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(tarjetaBuscada.getNumeroCuenta()));
+//        ot.eliminar(tarjeta);
 
     }
 }

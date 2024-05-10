@@ -1,6 +1,8 @@
 package Interfaces;
 
+import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,13 +10,14 @@ import DTOs.TarjetaDTO;
  */
 public class ContraseñaTarjetas extends javax.swing.JFrame {
 
-    TarjetaDTO tarjetaDTO;
+    PersonaDTO personaDTO;
+
     /**
      * Creates new form MenuPrincipal
      */
-    public ContraseñaTarjetas(TarjetaDTO tarjeta) {
+    public ContraseñaTarjetas(PersonaDTO persona) {
         initComponents();
-        this.tarjetaDTO = tarjeta;
+        this.personaDTO = persona;
     }
 
     /**
@@ -31,7 +34,7 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtAgregarNumCuenta = new javax.swing.JTextField();
+        contrasenaTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar Contacto");
@@ -78,9 +81,9 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña:");
 
-        txtAgregarNumCuenta.addActionListener(new java.awt.event.ActionListener() {
+        contrasenaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAgregarNumCuentaActionPerformed(evt);
+                contrasenaTextFieldActionPerformed(evt);
             }
         });
 
@@ -101,7 +104,7 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
                                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtAgregarNumCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(contrasenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(120, 120, 120))))
         );
         layout.setVerticalGroup(
@@ -111,7 +114,7 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txtAgregarNumCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contrasenaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
@@ -124,18 +127,28 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        OpcionesTarjeta a = new OpcionesTarjeta(tarjetaDTO);
-        a.show();
+        if (!contrasenaTextField.getText().isBlank()) {
+            if (contrasenaTextField.getText().equalsIgnoreCase(personaDTO.getContrasena())) {
+                OpcionesTarjeta a = new OpcionesTarjeta(personaDTO);
+                a.show();
+            } else {
+                JOptionPane.showConfirmDialog(this, "Contraseña incorrecta", "AVISO", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showConfirmDialog(this, "No dejar espacio en blanco", "AVISO", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void txtAgregarNumCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgregarNumCuentaActionPerformed
+    private void contrasenaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaTextFieldActionPerformed
 
 
-    }//GEN-LAST:event_txtAgregarNumCuentaActionPerformed
+    }//GEN-LAST:event_contrasenaTextFieldActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-//        MenuPrincipal a = new MenuPrincipal(tarjetaDTO.getPersona());
-//        a.show();
+        MenuPrincipal a = new MenuPrincipal(personaDTO);
+        a.show();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
@@ -145,9 +158,9 @@ public class ContraseñaTarjetas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JTextField contrasenaTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtAgregarNumCuenta;
     // End of variables declaration//GEN-END:variables
 }

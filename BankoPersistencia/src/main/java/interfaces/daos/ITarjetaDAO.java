@@ -30,6 +30,6 @@ public interface ITarjetaDAO {
 
     public void actualizar(Tarjeta tarjeta) throws PersistenciaException;
 
-    public void eliminar(Tarjeta tarjeta) throws PersistenciaException;
+    public void eliminar(Persona persona, Tarjeta tarjeta) throws PersistenciaException;
 //    public boolean realizarTransferencia(Transferencia transferenciaa);
 }

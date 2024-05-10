@@ -9,14 +9,18 @@ import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import entidades.Persona;
 import entidades.Tarjeta;
 import interfaces.daos.ITarjetaDAO;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import static java.util.Spliterators.iterator;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -83,11 +87,20 @@ public class TarjetaDAO implements ITarjetaDAO {
     }
 
     @Override
-    public void eliminar(Tarjeta tarjeta) {
-        try {
-            coleccionTarjetas.deleteOne(Filters.eq("_id", tarjeta.getId()));
-        } catch (MongoException e) {
-            System.out.println(e);
+    public void eliminar(Persona persona, Tarjeta tarjeta) {
+       if (persona != null) {
+            List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona);
+            Iterator<Tarjeta> iterator = tarjetas.iterator();
+            while (iterator.hasNext()) {
+                Tarjeta t = iterator.next();
+                if (t.getNumeroCuenta().equals(tarjeta.getNumeroCuenta())) {
+                    iterator.remove();
+                    break;
+                }
+            }
+            coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.set("listaTarjetas", tarjetas));
+        } else {
+            System.out.println("No se encontró la persona.");
         }
     }
 

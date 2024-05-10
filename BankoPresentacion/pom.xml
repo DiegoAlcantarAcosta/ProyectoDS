@@ -53,5 +53,10 @@
             <artifactId>IniciarSesionSS</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>EliminarTarjetaSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

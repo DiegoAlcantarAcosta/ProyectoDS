@@ -23,7 +23,10 @@ public class pruebasDAOS {
         Persona p = new Persona("RAGI930420MDFRRS05");
         Persona person = pd.obtenerPersonaPorCurp(p);
         System.out.println(td.obtenerTarjetasPersona(person).toString());
+        Persona persona = new Persona();
+        persona = pd.obtenerPersonaPorTelefonoYContrasena("5587650987", "abc123def");
 //        
+
 //        System.out.println(td.obtenerUltimaTarjetaPersona(person).toString());
 //        
 //        System.out.println(td.obtenerTarjetaPorNumero(t).toString());
@@ -32,6 +35,8 @@ public class pruebasDAOS {
 //        System.out.println(pd.obtenerTodasLasPersonas().toString());
 
 //            System.out.println(td.obtenerTarjetaPorNumero(t).toString());
+Tarjeta tarjetita = td.obtenerTarjetaPorNumero(t);
+        td.eliminar(persona, tarjetita);
     }
 
 }

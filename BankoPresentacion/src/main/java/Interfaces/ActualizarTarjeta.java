@@ -4,7 +4,10 @@
  */
 package Interfaces;
 
+import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.TarjetaSS;
 import javax.swing.JFrame;
 import org.eclipse.persistence.internal.libraries.asm.Opcodes;
 
@@ -14,14 +17,18 @@ import org.eclipse.persistence.internal.libraries.asm.Opcodes;
  */
 public class ActualizarTarjeta extends javax.swing.JFrame {
 
+    ITarjetaSS tarjetaSS;
     TarjetaDTO tarjeta;
+    PersonaDTO persona;
 
     /**
      * Creates new form MenuPrincipal
      */
     public ActualizarTarjeta(TarjetaDTO tarjetaDTO) {
         initComponents();
+        tarjetaSS = new TarjetaSS();
         tarjeta = tarjetaDTO;
+        persona = tarjetaSS.obtenerPersonaDeTarjeta(tarjeta);
         numTarjetaTextField.setText(tarjeta.getNumeroCuenta());
     }
 
@@ -167,12 +174,12 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        OpcionesTarjeta a = new OpcionesTarjeta(tarjeta);
+        OpcionesTarjeta a = new OpcionesTarjeta(persona);
         this.dispose(); // Cierra el formulario actual    }//GEN-LAST:event_btnAceptarActionPerformed
     }
     
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        OpcionesTarjeta a = new OpcionesTarjeta(tarjeta);
+        OpcionesTarjeta a = new OpcionesTarjeta(persona);
         dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
