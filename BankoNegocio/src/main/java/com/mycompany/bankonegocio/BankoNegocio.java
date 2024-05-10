@@ -34,7 +34,7 @@ public class BankoNegocio {
         TarjetaDTO tarjeDesti;
         
 
-//        Tarjeta tarjeta = new Tarjeta("111111111");
+        Tarjeta tarjeta = new Tarjeta("111111111");
 //        Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(tarjeta);
 //        TarjetaDTO tarjetaDTO = ot.convertirEntidadADTO(tarjetaBuscada);
 ////        System.out.println(ot.obtenerPersonaDeTarjeta(tarjetaDTO));

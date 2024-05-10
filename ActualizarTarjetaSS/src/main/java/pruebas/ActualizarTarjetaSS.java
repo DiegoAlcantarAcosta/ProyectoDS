@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.anadirtarjetass;
+package pruebas;
 
 /**
  *
  * @author Diego
  */
-public class AnadirTarjetaSS {
+public class ActualizarTarjetaSS {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");

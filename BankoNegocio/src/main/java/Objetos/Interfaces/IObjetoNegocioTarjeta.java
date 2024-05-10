@@ -24,7 +24,7 @@ public interface IObjetoNegocioTarjeta {
     
         public List<TarjetaDTO> obtenerTodasLasTarjetasDeClientes();
         
-        public void guardar(TarjetaDTO tarjeta) throws PersistenciaException;
+        public void guardar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException;
 
     public void actualizar(TarjetaDTO tarjeta) throws PersistenciaException;
 

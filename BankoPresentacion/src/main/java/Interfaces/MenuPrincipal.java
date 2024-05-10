@@ -182,7 +182,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Añadir Tarjeta");
+        jLabel9.setText("Gestion Tarjetas");
 
         jLabel10.setText("Transferir");
 
@@ -392,6 +392,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void añadirTarjetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirTarjetaButtonActionPerformed
         ContraseñaTarjetas a = new ContraseñaTarjetas(personaDTO);
         a.show();
+        dispose();
     }//GEN-LAST:event_añadirTarjetaButtonActionPerformed
 
     private void tarjetasTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetasTextFieldActionPerformed

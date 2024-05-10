@@ -221,6 +221,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         MenuPrincipal a = new MenuPrincipal(personaDTO);
         a.show();
+        dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
@@ -246,7 +247,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showConfirmDialog(null, "No se pudo eliminar la tarjeta");
+                JOptionPane.showConfirmDialog(null, "No se pudo  eliminar la tarjeta");
             }
         } catch (PersistenciaException e) {
             System.out.println("Error: " + e);

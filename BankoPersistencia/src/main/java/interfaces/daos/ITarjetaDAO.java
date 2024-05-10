@@ -26,7 +26,7 @@ public interface ITarjetaDAO {
     
     public Tarjeta obtenerUltimaTarjetaPersona(Persona persona);
     
-      public void guardar(Tarjeta tarjeta) throws PersistenciaException;
+      public void guardar(Persona persona ,Tarjeta tarjeta) throws PersistenciaException;
 
     public void actualizar(Tarjeta tarjeta) throws PersistenciaException;
 

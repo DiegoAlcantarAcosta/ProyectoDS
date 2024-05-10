@@ -14,13 +14,9 @@ import entidades.Persona;
 import entidades.Tarjeta;
 import interfaces.daos.ITarjetaDAO;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import static java.util.Spliterators.iterator;
-import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -68,12 +64,8 @@ public class TarjetaDAO implements ITarjetaDAO {
     }
 
     @Override
-    public void guardar(Tarjeta tarjeta) {
-        try {
-            this.coleccionTarjetas.insertOne(tarjeta);
-        } catch (MongoException e) {
-            System.out.println(e);
-        }
+    public void guardar(Persona persona ,Tarjeta tarjeta) {
+               coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaTarjetas", tarjeta));
     }
 
     @Override

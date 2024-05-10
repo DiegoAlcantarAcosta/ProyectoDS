@@ -199,9 +199,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     }
 
     @Override
-    public void guardar(TarjetaDTO tarjeta) throws PersistenciaException {
+    public void guardar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException {
+        ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
         Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
-        td.guardar(tarjetaEnt);
+        Persona personaEnt = onp.convertirDTOAEntidad(persona);
+        td.guardar( personaEnt,tarjetaEnt);
     }
 
     @Override

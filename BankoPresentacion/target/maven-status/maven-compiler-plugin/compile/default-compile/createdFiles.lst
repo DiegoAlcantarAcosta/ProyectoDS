@@ -39,6 +39,7 @@ Interfaces\ConfirmacionAñadirTarjeta.class
 Interfaces\AgregarContactoInf$2.class
 Interfaces\MenuPrincipal$5.class
 Interfaces\TransferenciaForm$4.class
+Interfaces\AñadirTarjeta$3.class
 Interfaces\AgregarContactoInf$5.class
 Prueba\ProyectoDS.class
 Interfaces\ContraseñaTarjetas$1.class
