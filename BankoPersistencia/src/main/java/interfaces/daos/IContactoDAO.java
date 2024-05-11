@@ -15,7 +15,7 @@ import java.util.List;
 public interface IContactoDAO {
     public Boolean agregar(Contacto contacto);
     public Boolean eliminar(Contacto contacto);
-    public List<Contacto> obtenerContactosPersona(Persona persona);
-    public Contacto obtenerContactoPersona(Contacto contacto, Persona persona);
+    public List<Contacto> obtenerContactosPersona();
+    public Contacto obtenerContactoPersona();
     
 }

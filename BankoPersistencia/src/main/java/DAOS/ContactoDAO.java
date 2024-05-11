@@ -5,6 +5,8 @@
 package DAOS;
 
 import Conexion.Conexion;
+import com.mongodb.client.MongoCollection;
+import entidades.Contacto;
 import interfaces.daos.IContactoDAO;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
  */
 public class ContactoDAO implements IContactoDAO {
 
-    private final MongoCollection<Persona> coleccionContactos;
+    MongoCollection<Contacto> coleccionContactos;
 
     public ContactoDAO() {
         this.coleccionContactos = Conexion.getDatabase().getCollection("Contactos", Contacto.class);
@@ -35,14 +37,14 @@ public class ContactoDAO implements IContactoDAO {
     }
     
     @Override
-    public List<Contacto> obtenerContactosPersona(Persona persona) {
+    public List<Contacto> obtenerContactosPersona() {
   
         return null;
   
     }
     
     @Override
-    public Contacto obtenerContactoPersona(Contacto contacto, Persona persona) {
+    public Contacto obtenerContactoPersona() {
 
         return null;
 
