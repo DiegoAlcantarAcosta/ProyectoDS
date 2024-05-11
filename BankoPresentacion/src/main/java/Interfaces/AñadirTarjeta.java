@@ -236,21 +236,21 @@ public class AñadirTarjeta extends javax.swing.JFrame {
                             a.show();
                             this.dispose(); // Cierra el formulario actual
                         } else {
-                            JOptionPane.showConfirmDialog(null, "No se puede agregar una tarjeta caducada");
+                            JOptionPane.showMessageDialog(this, "No se puede agregar una tarjeta caducada", "AVISO", JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showConfirmDialog(null, "Numero de cuenta ya existente");
+                        JOptionPane.showMessageDialog(this, "Numero de cuenta ya existente", "AVISO", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showConfirmDialog(null, "Ingrese un numero de tarjeta de 10 digitos");
+                    JOptionPane.showMessageDialog(this, "Ingrese un numero de tarjeta de 10 digitos", "AVISO", JOptionPane.WARNING_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showConfirmDialog(null, "No deje espacios en blanco");
+                JOptionPane.showMessageDialog(this, "No deje espacios en blanco", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
-            JOptionPane.showConfirmDialog(null, "No se pudo agregar la tarjeta");
+            JOptionPane.showMessageDialog(this, "No se pudo agregar la tarjeta", "AVISO", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_AceptarButtonActionPerformed
 

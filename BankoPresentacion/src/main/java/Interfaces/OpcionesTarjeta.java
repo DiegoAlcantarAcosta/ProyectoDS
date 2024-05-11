@@ -250,13 +250,13 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
                     eliminarTarjetaSS.eliminar(personaDTO, tarjeDesti);
                     List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
                     this.llenarTablaTarjetas(listaTarjetas);
-                    JOptionPane.showConfirmDialog(null, "Tarjeta eliminada con exito");
+                    JOptionPane.showMessageDialog(this, "Tarjeta eliminada con exito", "AVISO", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    JOptionPane.showConfirmDialog(null, "No puede dejar la cuenta sin tarjetas");
+                    JOptionPane.showMessageDialog(this, "No puedes dejar la cuenta sin tarjetas", "AVISO", JOptionPane.WARNING_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showConfirmDialog(null, "No se pudo  eliminar la tarjeta");
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar la tarjeta", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
         } catch (PersistenciaException e) {
             System.out.println("Error: " + e);

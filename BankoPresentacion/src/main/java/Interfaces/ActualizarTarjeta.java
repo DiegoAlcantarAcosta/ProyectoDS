@@ -226,14 +226,14 @@ public class ActualizarTarjeta extends javax.swing.JFrame {
                             a.show();
                             this.dispose(); // Cierra el formulario actual
                         } else {
-                            JOptionPane.showConfirmDialog(null, "No se puede poner una fecha caducada");
+                            JOptionPane.showMessageDialog(this, "No se puede poner una fecha caducada", "AVISO", JOptionPane.WARNING_MESSAGE);
                         }
             } else {
-                JOptionPane.showConfirmDialog(null, "No deje espacios en blanco");
+                JOptionPane.showMessageDialog(this, "No deje espacios en blanco", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
-            JOptionPane.showConfirmDialog(null, "No se pudo actualizar la tarjeta");
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la tarjeta", "AVISO", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_AceptarButtonActionPerformed
 
