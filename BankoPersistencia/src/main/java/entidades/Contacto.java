@@ -12,18 +12,17 @@ import org.bson.types.ObjectId;
  */
 public class Contacto {
     
-    private ObjectId id;
     private String alias;
     private String nombre;
     private String apellidoP;
     private String apellidoM;
     private String numeroCuenta;
-    private tipoBanco banco;
+    private String banco;
 
     public Contacto() {
     }
 
-    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBanco banco) {
+    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, String banco) {
         this.alias = alias;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -31,6 +30,8 @@ public class Contacto {
         this.numeroCuenta = numeroCuenta;
         this.banco = banco;
     }
+    
+    
 
 //    public Contacto(String numeroCuenta, Persona persona) {
 //        this.numeroCuenta = numeroCuenta;
@@ -39,16 +40,6 @@ public class Contacto {
 
     public Contacto(String alias) {
         this.alias = alias;
-    }
-    
-    
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getAlias() {
@@ -91,17 +82,17 @@ public class Contacto {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public tipoBanco getBanco() {
+    public String getBanco() {
         return banco;
     }
 
-    public void setBanco(tipoBanco banco) {
+    public void setBanco(String banco) {
         this.banco = banco;
     }
 
     @Override
     public String toString() {
-        return "Contacto{" + "id=" + id + ", alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + '}';
+        return "Contacto{" + "alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + '}';
     }
     
 }
