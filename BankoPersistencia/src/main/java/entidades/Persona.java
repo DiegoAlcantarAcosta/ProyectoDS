@@ -21,6 +21,7 @@ public class Persona {
     private Date fechaNac;
     private String telefono;
     private List<Tarjeta> listaTarjetas;
+    private List<Contacto> listaContactos;
 
     public Persona() {
     }
@@ -148,11 +149,16 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", contrasena=" + contrasena + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", listaTarjetas=" + listaTarjetas + '}';
+    public List<Contacto> getListaContactos() {
+        return listaContactos;
     }
 
+    public void setListaContactos(List<Contacto> listaContactos) {
+        this.listaContactos = listaContactos;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", contrasena=" + contrasena + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", listaTarjetas=" + listaTarjetas + ", listaContactos=" + listaContactos + '}';
+    }
 }

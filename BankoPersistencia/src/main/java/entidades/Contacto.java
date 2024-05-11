@@ -4,76 +4,36 @@
  */
 package entidades;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 /**
  *
  * @author Dell
  */
-@Entity
-@Table (name = "contactos")
-public class Contacto implements Serializable {
-
+public class Contacto {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column (name ="alias", nullable = false)
     private String alias;
-    
-    @Column (name ="nombre", nullable = false)
     private String nombre;
-    
-    @Column (name ="apellido_paterno", nullable = false)
     private String apellidoP;
-    
-    @Column (name ="apellido_materno", nullable = false)
     private String apellidoM;
-    
-    @Column (name ="numero_cuenta", nullable = false)
     private String numeroCuenta;
-    
-    @Column (name ="Banco", nullable = false)
-    @Enumerated (EnumType.STRING)
     private tipoBanco banco;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_persona", nullable = false)
-    private Persona persona;
 
     public Contacto() {
     }
 
-    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBanco banco, Persona persona) {
+    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBanco banco) {
         this.alias = alias;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.numeroCuenta = numeroCuenta;
         this.banco = banco;
-        this.persona = persona;
     }
 
 //    public Contacto(String numeroCuenta, Persona persona) {
 //        this.numeroCuenta = numeroCuenta;
 //        this.persona = persona;
 //    }
-    
-    public Contacto(String alias, Persona persona) {
-        this.alias = alias;
-        this.persona = persona;
-    }
 
     public Contacto(String alias) {
         this.alias = alias;
@@ -137,21 +97,9 @@ public class Contacto implements Serializable {
         this.banco = banco;
     }
 
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
     @Override
     public String toString() {
-        return "Contacto{" + "id=" + id + ", alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + ", persona=" + persona + '}';
+        return "Contacto{" + "id=" + id + ", alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + '}';
     }
-
-    
-    
-    
     
 }

@@ -4,8 +4,7 @@
  */
 package DAOS;
 
-import entidades.Contacto;
-import entidades.Persona;
+import Conexion.Conexion;
 import interfaces.daos.IContactoDAO;
 import java.util.List;
 
@@ -15,10 +14,10 @@ import java.util.List;
  */
 public class ContactoDAO implements IContactoDAO {
 
-    private PersonaDAO pd = new PersonaDAO();
-    private TarjetaDAO td = new TarjetaDAO();
+    private final MongoCollection<Persona> coleccionContactos;
 
     public ContactoDAO() {
+        this.coleccionContactos = Conexion.getDatabase().getCollection("Contactos", Contacto.class);
     }
 
     @Override
