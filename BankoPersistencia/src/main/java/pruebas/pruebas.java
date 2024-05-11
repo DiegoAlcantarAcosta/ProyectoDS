@@ -19,9 +19,8 @@ public class pruebas {
         ContactoDAO cd = new ContactoDAO();
         PersonaDAO pd = new PersonaDAO();
         Contacto contacto = new Contacto("Wili");
-        Persona persona = new Persona("RASM920730HDFNXN09");
-        cd.obtenerContactoPersona(contacto, persona);
-        System.out.println(cd.obtenerContactoPersona(contacto, persona));
+        Persona persona = new Persona("");
+        System.out.println(cd.agregar(persona, contacto));
     }
     
 }

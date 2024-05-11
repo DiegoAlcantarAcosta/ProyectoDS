@@ -4,13 +4,15 @@
  */
 package entidades;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author Dell
  */
 public class Contacto {
     
-    private Long id;
+    private ObjectId id;
     private String alias;
     private String nombre;
     private String apellidoP;
@@ -41,11 +43,11 @@ public class Contacto {
     
     
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
