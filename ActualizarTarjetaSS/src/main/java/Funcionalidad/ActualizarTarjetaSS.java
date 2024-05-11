@@ -21,7 +21,7 @@ public class ActualizarTarjetaSS implements IActualizarTarjetaSS {
     public ActualizarTarjetaSS() {
         tarjeta = new ObjetoNegocioTarjeta();
     }
-    
+       // Diego Alcantar
     @Override
     public void actualizar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
        this.tarjeta.actualizar(persona, tarjeta);

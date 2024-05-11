@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
  * @author Wilber
  */
 public class TarjetaDTO {
-
+    
     private ObjectId id;
     private String numeroCuenta;
     private tipoTarjetaDTO tipo;

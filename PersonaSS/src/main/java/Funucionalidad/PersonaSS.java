@@ -26,12 +26,12 @@ public class PersonaSS implements IPersonaSS {
     public Boolean registrar(PersonaDTO personaDTO) {
        return persona.registrar(personaDTO);
     }
-
+    // Diego Alcantar
     @Override
     public boolean personaRegistrada(PersonaDTO personaDTO) {
        return persona.personaRegistrada(personaDTO);
     }
-
+    // Diego Alcantar
     @Override
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO) {
        PersonaDTO personaDTObuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);

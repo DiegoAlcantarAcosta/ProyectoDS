@@ -18,10 +18,10 @@ public class PersonaDTO {
     private String apellidoP;
     private String apellidoM;
     private String curp;
-    private String contrasena;
+    private String contrasena; // Diego Alcantar
     private Date fechaNac;
     private String telefono;
-    private List<TarjetaDTO> listaTarjetas;
+    private List<TarjetaDTO> listaTarjetas; // Diego Alcantar
 
 
    public PersonaDTO() {

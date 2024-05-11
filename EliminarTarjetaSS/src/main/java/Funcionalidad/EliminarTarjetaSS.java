@@ -22,7 +22,7 @@ public class EliminarTarjetaSS implements  IEliminarTarjetaSS{
     public EliminarTarjetaSS() {
         tarjeta = new ObjetoNegocioTarjeta();
     }
-    
+    // Diego Alcantar
     @Override
     public void eliminar(PersonaDTO persona ,TarjetaDTO tarjeta) throws PersistenciaException {
         this.tarjeta.eliminar(persona ,tarjeta);

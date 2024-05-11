@@ -32,13 +32,13 @@ public class TarjetaDAO implements ITarjetaDAO {
         this.coleccionTarjetas = Conexion.getDatabase().getCollection("Personas", Tarjeta.class);
         this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
     }
-
+    // Diego Alcantar
     @Override
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona) {
         List<Tarjeta> lista = persona.getListaTarjetas();
         return lista;
     }
-
+    // Diego Alcantar
     @Override
     public Tarjeta obtenerUltimaTarjetaPersona(Persona persona) {
         List<Tarjeta> tarjetas = persona.getListaTarjetas();
@@ -47,7 +47,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         }
         return tarjetas.get(tarjetas.size() - 1); // Devuelve la última tarjeta de la lista
     }
-
+    // Diego Alcantar
     @Override
     public Tarjeta obtenerTarjetaPorNumero(Tarjeta tarjeta) {
         try {
@@ -62,12 +62,12 @@ public class TarjetaDAO implements ITarjetaDAO {
         }
         return null;
     }
-
+// Diego Alcantar
     @Override
     public void guardar(Persona persona, Tarjeta tarjeta) {
         coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaTarjetas", tarjeta));
     }
-
+// Diego Alcantar
     @Override
     public void actualizarTarjeta(Persona persona, Tarjeta tarjeta) {
        coleccionPersonas.updateOne(
@@ -79,7 +79,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         );
 
     }
-
+// Diego Alcantar
     @Override
     public void eliminar(Persona persona, Tarjeta tarjeta) {
         if (persona != null) {
@@ -97,7 +97,7 @@ public class TarjetaDAO implements ITarjetaDAO {
             System.out.println("No se encontró la persona.");
         }
     }
-
+// Diego Alcantar
     @Override
     public List<Tarjeta> obtenerTodasLasTarjetasDeClientes() {
         List<Tarjeta> todasLasTarjetas = new ArrayList<>();
@@ -123,7 +123,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         }
         return todasLasTarjetas;
     }
-
+// Diego Alcantar
     @Override
     public Persona obtenerPersonaDeTarjeta(Tarjeta tarjeta) {
         try {

@@ -26,7 +26,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     public ObjetoNegocioPersona() {
         this.pd = new PersonaDAO();
     }
-
+    // Diego Alcantar
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
         
@@ -54,19 +54,19 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
         return persona;
     }
-
+    // Diego Alcantar
     public Persona convertirDTOAEntidadCURP(PersonaDTO personaDTO) {
         Persona persona = new Persona();
         persona.setCurp(personaDTO.getCurp());
         return persona;
     }
-
+    // Diego Alcantar
     public PersonaDTO convertirEntidadADTOCURP(Persona persona) {
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setCurp(persona.getCurp());
         return personaDTO;
     }
-
+    // Diego Alcantar
     public PersonaDTO convertirEntidadADTO(Persona persona) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
         PersonaDTO personaDTO = new PersonaDTO();
@@ -100,26 +100,26 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         Boolean registro = pd.registrar(persona);
         return registro;
     }
-
+    // Diego Alcantar
     @Override
     public boolean personaRegistrada(PersonaDTO personaDTO) {
         Persona persona = this.convertirDTOAEntidad(personaDTO);
         boolean validar = pd.personaRegistrada(persona);
         return validar;
     }
-
+    // Diego Alcantar
     @Override
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO) {
         Persona p = pd.obtenerPersonaPorCurp(convertirDTOAEntidadCURP(personaDTO));
         PersonaDTO personaConvert = this.convertirEntidadADTO(p);
         return personaConvert;
     }
-
+    // Diego Alcantar
     @Override
     public Boolean procesarInicioSesion(String telefono, String contaseña) {
         return pd.procesarInicioSesion(telefono, contaseña);
     }
-
+    // Diego Alcantar
     @Override
     public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
         Persona persona = pd.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);

@@ -35,7 +35,8 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         td = new TarjetaDAO();
         pd = new PersonaDAO();
     }
-
+    
+    // Diego Alcantar
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
@@ -90,7 +91,8 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
         return tarjeta;
     }
-
+    
+    // Diego Alcantar
     public TarjetaDTO convertirEntidadADTO(Tarjeta tarjeta) {
         TarjetaDTO tarjetaDTO = new TarjetaDTO();
         tarjetaDTO.setFechaVencimiento(tarjeta.getFechaVencimiento());
@@ -145,7 +147,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
         return tarjetaDTO;
     }
-
+    // Diego Alcantar
     @Override
     public List<TarjetaDTO> obtenerTarjetasDTOPersona(PersonaDTO personaDTO) {
         try {
@@ -165,7 +167,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         }
         return null;
     }
-
+    // Diego Alcantar
     @Override
     public TarjetaDTO obtenerUltimaTarjetaDTOPersona(PersonaDTO personaDTO) {
         ObjetoNegocioPersona op = new ObjetoNegocioPersona();
@@ -178,7 +180,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         return tarjetaConvert;
 
     }
-
+    // Diego Alcantar
     @Override
     public TarjetaDTO obtenerTarjetaDTOPorNumero(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(new Tarjeta(tarjetaDTO.getNumeroCuenta()));
@@ -186,7 +188,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
         return tarjetaConvert;
     }
-
+    // Diego Alcantar
     @Override
     public List<TarjetaDTO> obtenerTodasLasTarjetasDeClientes() {
         List<Tarjeta> listaEnt = td.obtenerTodasLasTarjetasDeClientes();
@@ -197,7 +199,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         }
         return listaDTO;
     }
-
+    // Diego Alcantar
     @Override
     public void guardar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -205,7 +207,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         Persona personaEnt = onp.convertirDTOAEntidad(persona);
         td.guardar(personaEnt, tarjetaEnt);
     }
-
+    // Diego Alcantar
     @Override
     public void actualizar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -213,7 +215,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         Persona personaEnt = onp.convertirDTOAEntidad(persona);
         td.actualizarTarjeta(personaEnt ,tarjetaEnt);
     }
-
+    // Diego Alcantar
     @Override
     public void eliminar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -221,7 +223,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         Persona personaEnt = onp.convertirDTOAEntidad(persona);
         td.eliminar(personaEnt, tarjetaEnt);
     }
-
+    // Diego Alcantar
     @Override
     public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta) {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();

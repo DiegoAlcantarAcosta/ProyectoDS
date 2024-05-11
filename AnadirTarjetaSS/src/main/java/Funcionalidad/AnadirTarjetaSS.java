@@ -21,7 +21,7 @@ public class AnadirTarjetaSS implements IAnadirTarjetaSS {
     public AnadirTarjetaSS() {
         tarjeta = new ObjetoNegocioTarjeta();
     }
-    
+        // Diego Alcantar
     @Override
     public void guardar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
        this.tarjeta.guardar(persona, tarjeta);

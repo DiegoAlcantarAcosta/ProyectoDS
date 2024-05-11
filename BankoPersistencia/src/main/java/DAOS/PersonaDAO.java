@@ -40,7 +40,7 @@ public class PersonaDAO implements IPersonaDAO {
         }
         return false;
     }
-
+    // Diego Alcantar
     @Override
     public boolean personaRegistrada(Persona persona) {
         Bson filtroID = Filters.eq("_id", persona.getId());
@@ -54,7 +54,7 @@ public class PersonaDAO implements IPersonaDAO {
         }
         return false;
     }
-
+    
     @Override
     public Persona obtenerPersonaPorCurp(Persona persona) {
         Bson filtroID = Filters.eq("curp", persona.getCurp());
@@ -65,7 +65,7 @@ public class PersonaDAO implements IPersonaDAO {
             return null;
         }
     }
-
+    // Diego Alcantar
     @Override
     public List<Persona> obtenerTodasLasPersonas() {
        List<Persona> todasLasPersonas = new ArrayList<>();
@@ -85,7 +85,7 @@ public class PersonaDAO implements IPersonaDAO {
 
         return todasLasPersonas;
     }
-
+    // Diego Alcantar
     @Override
     public Boolean procesarInicioSesion(String telefono, String contaseña) {
         try  {
@@ -101,7 +101,7 @@ public class PersonaDAO implements IPersonaDAO {
             return false;
         }
     }
-
+    // Diego Alcantar
     @Override
     public Persona obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
         try  {

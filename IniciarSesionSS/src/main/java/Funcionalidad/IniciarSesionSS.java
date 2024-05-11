@@ -20,12 +20,12 @@ public class IniciarSesionSS implements IIniciarSesionSS {
     public IniciarSesionSS() {
         persona = new ObjetoNegocioPersona();
     }
-
+    // Diego Alcantar
     @Override
     public Boolean procesarInicioSesion(String telefono, String contaseña) {
        return persona.procesarInicioSesion(telefono, contaseña);
     }
-
+    // Diego Alcantar
     @Override
     public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
         return persona.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);
