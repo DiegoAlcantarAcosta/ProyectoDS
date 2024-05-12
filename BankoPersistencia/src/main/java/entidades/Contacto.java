@@ -17,12 +17,12 @@ public class Contacto {
     private String apellidoP;
     private String apellidoM;
     private String numeroCuenta;
-    private String banco;
+    private tipoBanco banco;
 
     public Contacto() {
     }
 
-    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, String banco) {
+    public Contacto(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBanco banco) {
         this.alias = alias;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -82,11 +82,11 @@ public class Contacto {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public String getBanco() {
+    public tipoBanco getBanco() {
         return banco;
     }
 
-    public void setBanco(String banco) {
+    public void setBanco(tipoBanco banco) {
         this.banco = banco;
     }
 

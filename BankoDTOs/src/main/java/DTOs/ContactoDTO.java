@@ -12,31 +12,25 @@ public class ContactoDTO {
     private String apellidoP;
     private String apellidoM;
     private String numeroCuenta;
-    private String banco;
-    private PersonaDTO persona;
+    private tipoBancoDTO banco;
 
    public ContactoDTO() {
     }
 
-    public ContactoDTO(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, String banco, PersonaDTO persona) {
+    public ContactoDTO(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBancoDTO banco) {
         this.alias = alias;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.numeroCuenta = numeroCuenta;
         this.banco = banco;
-        this.persona = persona;
     }
 
 //    public ContactoDTO(String numeroCuenta, Persona persona) {
 //        this.numeroCuenta = numeroCuenta;
 //        this.persona = persona;
 //    }
-    
-    public ContactoDTO(String alias, PersonaDTO persona) {
-        this.alias = alias;
-        this.persona = persona;
-    }
+
 
     public ContactoDTO(String alias) {
         this.alias = alias;
@@ -84,27 +78,16 @@ public class ContactoDTO {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public String getBanco() {
+    public tipoBancoDTO getBanco() {
         return banco;
     }
 
-    public void setBanco(String banco) {
+    public void setBanco(tipoBancoDTO banco) {
         this.banco = banco;
-    }
-
-    public PersonaDTO getPersona() {
-        return persona;
-    }
-
-    public void setPersona(PersonaDTO persona) {
-        this.persona = persona;
     }
 
     @Override
     public String toString() {
-        return "ContactoDTO{" + "alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + ", persona=" + persona + '}';
+        return "ContactoDTO{" + "alias=" + alias + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", numeroCuenta=" + numeroCuenta + ", banco=" + banco + '}';
     }
-    
-    
-    
 }

@@ -32,9 +32,11 @@ public class BankoNegocio {
         ObjetoNegocioTransferencia otr = new ObjetoNegocioTransferencia();
         TarjetaDAO td = new TarjetaDAO();
         TarjetaDTO tarjeDesti;
+        ContactoDTO contactoDTO = new ContactoDTO("Wili", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
+        PersonaDTO personaDTO = new PersonaDTO("");
         
 
-        Tarjeta tarjeta = new Tarjeta("111111111");
+//        Tarjeta tarjeta = new Tarjeta("111111111");
 //        Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(tarjeta);
 //        TarjetaDTO tarjetaDTO = ot.convertirEntidadADTO(tarjetaBuscada);
 ////        System.out.println(ot.obtenerPersonaDeTarjeta(tarjetaDTO));

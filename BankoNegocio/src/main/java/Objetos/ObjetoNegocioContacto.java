@@ -5,6 +5,7 @@
 package Objetos;
 
 import DAOS.ContactoDAO;
+import DAOS.PersonaDAO;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
@@ -13,6 +14,7 @@ import entidades.Contacto;
 import entidades.Persona;
 import entidades.tipoBanco;
 import interfaces.daos.IContactoDAO;
+import interfaces.daos.IPersonaDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,11 @@ import java.util.List;
 public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
 
     IContactoDAO cd;
+    IPersonaDAO pd;
 
     public ObjetoNegocioContacto() {
         this.cd = new ContactoDAO();
+        this.pd = new PersonaDAO();
     }
 
     public Contacto convertirDTOAEntidad(ContactoDTO contactoDTO) {
@@ -65,19 +69,10 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
             contacto.setNombre(contactoDTO.getNombre());
             contacto.setNumeroCuenta(contactoDTO.getNumeroCuenta());
 
-            ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-            PersonaDTO personaDTO = onp.obtenerPersonaDTOPorCurp(contactoDTO.getPersona());
-            Persona persona = onp.convertirDTOAEntidad(personaDTO);
-
-            contacto.setPersona(persona);
-
             return contacto;
         } else {
             Contacto contacto = new Contacto();
             contacto.setAlias(contactoDTO.getAlias());
-            ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-            PersonaDTO personaDTO = onp.obtenerPersonaDTOPorCurp(contactoDTO.getPersona());
-            Persona persona = onp.convertirDTOAEntidad(personaDTO);
             return contacto;
 
         }
@@ -164,13 +159,6 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
             contactoDTO.setNombre(contacto.getNombre());
             contactoDTO.setNumeroCuenta(contacto.getNumeroCuenta());
 
-            ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-
-            PersonaDTO personaCurp = new PersonaDTO(contacto.getPersona().getCurp());
-            PersonaDTO personaDTO = onp.obtenerPersonaDTOPorCurp(personaCurp);
-
-            contactoDTO.setPersona(personaDTO);
-
             return contactoDTO;
 
         } else {
@@ -182,26 +170,38 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
     }
 
     @Override
-    public Boolean agregar(ContactoDTO contactoDTO) {
+    public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
-        Boolean verifica = cd.agregar(contacto);
+        Persona persona = new Persona(personaDTO.getCurp());
+        Persona personaBuscada = pd.obtenerPersonaPorCurp(persona);
+        Boolean verifica = cd.agregar(personaBuscada, contacto);
         return verifica;
     }
 
     @Override
-    public Boolean eliminar(ContactoDTO contactoDTO) {
-        Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
-        Boolean verifica = cd.eliminar(contacto);
+    public Boolean eliminar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
+        Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
+        Contacto contactoConvert = this.convertirDTOAEntidad(contactoDTO);
+        Contacto contactoBuscado = cd.obtenerContactoPersona(personaBuscada, contactoConvert);
+        Boolean verifica = cd.eliminar(personaBuscada, contactoBuscado);
+        return verifica;
+    }
+    
+    @Override
+    public Boolean actualizar(PersonaDTO personaDTO, ContactoDTO contactoOrigiDTO, ContactoDTO contactoNuevoDTO) {
+        Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
+        Contacto contactoOrConvert = this.convertirDTOAEntidad(contactoOrigiDTO);
+        Contacto contactoNuConvert = this.convertirDTOAEntidad(contactoNuevoDTO);
+        Contacto contactoOrBuscado = cd.obtenerContactoPersona(personaBuscada, contactoOrConvert);
+        Boolean verifica = cd.actualizar(personaBuscada, contactoOrBuscado, contactoNuConvert);
         return verifica;
     }
 
     @Override
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO) {
-        ObjetoNegocioPersona op = new ObjetoNegocioPersona();
-        PersonaDTO personaBuscada = op.obtenerPersonaDTOPorCurp(personaDTO);
-        Persona persona = op.convertirDTOAEntidad(personaBuscada);
+        Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
 
-        List<Contacto> listaEnt = cd.obtenerContactosPersona(persona);
+        List<Contacto> listaEnt = personaBuscada.getListaContactos();
         List<ContactoDTO> listaDTO = new ArrayList<>();
 
         for (Contacto contacto : listaEnt) {
@@ -212,15 +212,12 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
     }
 
     @Override
-    public ContactoDTO obtenerContactoDTOPersona(ContactoDTO contactoDTO, PersonaDTO personaDTO) {
-        ObjetoNegocioPersona op = new ObjetoNegocioPersona();
-        PersonaDTO personaBuscada = op.obtenerPersonaDTOPorCurp(personaDTO);
-        Persona persona = op.convertirDTOAEntidad(personaBuscada);
-
-        contactoDTO.setPersona(personaBuscada);
+    public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
+        
+        Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
 
         Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
-        Contacto contactoBuscado = cd.obtenerContactoPersona(contacto, persona);
+        Contacto contactoBuscado = cd.obtenerContactoPersona(personaBuscada, contacto);
         ContactoDTO contactoConvert = this.convertirEntidadADTO(contactoBuscado);
         return contactoConvert;
     }

@@ -22,6 +22,7 @@ public class PersonaDTO {
     private Date fechaNac;
     private String telefono;
     private List<TarjetaDTO> listaTarjetas; // Diego Alcantar
+    private List<ContactoDTO> listaContactos; // Jonathan Astorga
 
 
    public PersonaDTO() {
@@ -43,6 +44,21 @@ public class PersonaDTO {
         this.telefono = telefono;
         this.listaTarjetas = listaTarjetas;
     }
+
+    //Jonathan Astorga
+    public PersonaDTO(String nombre, String apellidoP, String apellidoM, String curp, String contrasena, Date fechaNac, String telefono, List<TarjetaDTO> listaTarjetas, List<ContactoDTO> listaContactos) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.curp = curp;
+        this.contrasena = contrasena;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.listaTarjetas = listaTarjetas;
+        this.listaContactos = listaContactos;
+    }
+    
+    
 
     
     

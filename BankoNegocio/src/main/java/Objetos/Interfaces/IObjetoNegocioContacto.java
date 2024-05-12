@@ -14,11 +14,13 @@ import java.util.List;
  */
 public interface IObjetoNegocioContacto {
     
-    public Boolean agregar(ContactoDTO contactoDTO);
+    public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO);
     
-    public Boolean eliminar(ContactoDTO contactoDTO);
+    public Boolean eliminar(PersonaDTO personaDTO, ContactoDTO contactoDTO);
+    
+    public Boolean actualizar(PersonaDTO personaDTO, ContactoDTO contactoOrigiDTO, ContactoDTO contactoNuevoDTO);
     
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO);
     
-    public ContactoDTO obtenerContactoDTOPersona(ContactoDTO contactoDTO, PersonaDTO personaDTO);
+    public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO);
 }
