@@ -39,7 +39,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     // Diego Alcantar
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
-        
+
         Persona persona = new Persona();
         persona.setNombre(personaDTO.getNombre());
         ObjectId id = new ObjectId("" + personaDTO.getId());
@@ -50,7 +50,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         persona.setTelefono(personaDTO.getTelefono());
         persona.setCurp(personaDTO.getCurp());
         persona.setContrasena(personaDTO.getContrasena());
-        
+
         List<TarjetaDTO> tarjetas = personaDTO.getListaTarjetas();
         List<Tarjeta> tarjetasResultado = new ArrayList<>();
 
@@ -59,22 +59,24 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
             // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
             tarjetasResultado.add(tarjeta);
         }
-        
+
         persona.setListaTarjetas(tarjetasResultado);
-        
+
         List<ContactoDTO> contactos = personaDTO.getListaContactos();
         List<Contacto> contactosResultado = new ArrayList<>();
 
-        for (ContactoDTO contactoDTO : contactos) {
-            Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
-            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
-            contactosResultado.add(contacto);
-        }
-        
-        persona.setListaContactos(contactosResultado);
+        if (contactos != null) {
+            for (ContactoDTO contactoDTO : contactos) {
+                Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
+                // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
+                contactosResultado.add(contacto);
+            }
 
+            persona.setListaContactos(contactosResultado);
+        }
         return persona;
     }
+    
     // Diego Alcantar
     public Persona convertirDTOAEntidadCURP(PersonaDTO personaDTO) {
         Persona persona = new Persona();
@@ -88,7 +90,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         return personaDTO;
     }
     // Diego Alcantar
-    public PersonaDTO convertirEntidadADTO(Persona persona) {
+   public PersonaDTO convertirEntidadADTO(Persona persona) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setNombre(persona.getNombre());
@@ -108,10 +110,21 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
             // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
             tarjetasResultado.add(tarjeta);
         }
-        
+
         personaDTO.setListaTarjetas(tarjetasResultado);
 
-        
+        List<Contacto> contactos = persona.getListaContactos();
+        List<ContactoDTO> contactosResultado = new ArrayList<>();
+
+        if (persona.getListaContactos() != null) {
+            for (Contacto conta : contactos) {
+                ContactoDTO contactoDTO = this.convertirEntidadADTO(conta);
+                contactosResultado.add(contactoDTO);
+            }
+
+            personaDTO.setListaContactos(contactosResultado);
+        }
+
         return personaDTO;
     }
 

@@ -16,6 +16,7 @@ import interfaces.daos.ITarjetaDAO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 
 /**
@@ -24,21 +25,25 @@ import org.bson.conversions.Bson;
  */
 public class TarjetaDAO implements ITarjetaDAO {
 
-    PersonaDAO pd = new PersonaDAO();
-    private final MongoCollection<Tarjeta> coleccionTarjetas;
     private final MongoCollection<Persona> coleccionPersonas;
 
     public TarjetaDAO() {
-        this.coleccionTarjetas = Conexion.getDatabase().getCollection("Personas", Tarjeta.class);
         this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
     }
 
     // Diego Alcantar
     @Override
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona) {
-        List<Tarjeta> lista = persona.getListaTarjetas();
-        return lista;
+      List<Tarjeta> tarjetas = new ArrayList<>();
+        if (persona != null) {
+            Persona personaEncontrada = coleccionPersonas.find(new Document("_id", persona.getId())).first();
+            if (personaEncontrada != null) {
+                tarjetas = personaEncontrada.getListaTarjetas();
+            }
+        }
+        return tarjetas;
     }
+    
 
     // Diego Alcantar
     @Override

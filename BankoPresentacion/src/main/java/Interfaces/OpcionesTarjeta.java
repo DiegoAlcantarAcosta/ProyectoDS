@@ -247,7 +247,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
                 TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
                 if (countRows - 1 != 0) {
                     eliminarTarjetaSS.eliminar(personaDTO, tarjetaBuscada);
-                    List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
+                    List<TarjetaDTO> listaTarjetas = tarjetaSS.obtenerTarjetasDTOPersona(personaDTO);
                     this.llenarTablaTarjetas(listaTarjetas);
                     JOptionPane.showMessageDialog(this, "Tarjeta eliminada con exito", "AVISO", JOptionPane.WARNING_MESSAGE);
                 } else {

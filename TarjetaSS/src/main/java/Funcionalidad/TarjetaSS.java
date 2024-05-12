@@ -30,8 +30,7 @@ public class TarjetaSS implements ITarjetaSS {
     // Diego Alcantar
     @Override
     public List<TarjetaDTO> obtenerTarjetasDTOPersona(PersonaDTO personaDTO) {
-        List<TarjetaDTO> tarjetas = tarjeta.obtenerTarjetasDTOPersona(personaDTO);
-        return tarjetas;
+        return personaDTO.getListaTarjetas();
     }
     // Diego Alcantar
     @Override

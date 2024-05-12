@@ -164,8 +164,8 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
             return listaDTO;
         } catch (Exception e) {
             System.out.println(e);
+             return null;
         }
-        return null;
     }
     // Diego Alcantar
     @Override
