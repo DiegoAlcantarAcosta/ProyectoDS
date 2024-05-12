@@ -80,7 +80,7 @@ SolicitudInvitacion solicitud = new SolicitudInvitacion(usuarioId, grupoId, "Men
     transaccionDAO.registrarTransaccion(transaccion);
 
     // Obtener las transacciones del grupo
-    List<Transaccion> transaccionesDelGrupo = transaccionDAO.obtenerTransacccionesPorGrupo(grupoId);
+    List<Transaccion> transaccionesDelGrupo = transaccionDAO.obtenerTransaccionesPorGrupo(grupoId);
     System.out.println("Transacciones del grupo: " + transaccionesDelGrupo);
 
     mongoClient.close();
