@@ -34,7 +34,6 @@ Interfaces\FrmEditaMiContacto$1.class
 Interfaces\FrmAgregarMiContacto.class
 Interfaces\ActualizarTarjeta$3.class
 Interfaces\MenuPrincipal$9.class
-Interfaces\FrmCrearGrupo$1.class
 Interfaces\AgregarContactoInf$1.class
 Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\MenuPrincipal$1.class
@@ -70,7 +69,6 @@ Interfaces\TransferenciaForm$3.class
 Interfaces\AgregarContactoInf$9.class
 Interfaces\MenuPrincipal$4.class
 Interfaces\AgregarContactoInf$3.class
-Interfaces\FrmCrearGrupo.class
 Interfaces\MenuPrincipal.class
 Interfaces\ActualizarTarjeta$1.class
 Interfaces\OpcionesTarjeta$5.class
