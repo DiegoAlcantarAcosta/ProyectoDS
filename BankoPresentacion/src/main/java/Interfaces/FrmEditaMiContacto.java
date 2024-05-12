@@ -8,7 +8,7 @@ import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
 import Funcionalidad.ActualizarContactoSS;
-import FuncionalidadIEliminarContactoSS;
+import Funcionalidad.IEliminarContactoSS;
 import Funcionalidad.IActualizarContactoSS;
 import Funcionalidad.IEliminarContactoSS;
 import javax.swing.JOptionPane;

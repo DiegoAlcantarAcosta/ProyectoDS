@@ -153,5 +153,15 @@
             <artifactId>BankoPersistencia</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>EliminarContactoSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ActualizarContactoSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
