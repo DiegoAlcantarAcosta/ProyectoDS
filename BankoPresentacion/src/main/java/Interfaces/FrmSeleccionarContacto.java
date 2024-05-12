@@ -223,18 +223,18 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = tableContactos.getSelectedRow();
-        if (selectedRow != -1) {
-            String alias = (String) tableContactos.getValueAt(selectedRow, 0);
-            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
-            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
-            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
-            trans.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
-        }
+//        // TODO add your handling code here:
+//        int selectedRow = tableContactos.getSelectedRow();
+//        if (selectedRow != -1) {
+//            String alias = (String) tableContactos.getValueAt(selectedRow, 0);
+////            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
+//            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
+//            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
+//            trans.setVisible(true);
+//            this.setVisible(false);
+//        } else {
+//            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
+//        }
 
 //        String seleccionado = listContactos.getSelectedValue();
 //        if(seleccionado.equals(seleccionado)){

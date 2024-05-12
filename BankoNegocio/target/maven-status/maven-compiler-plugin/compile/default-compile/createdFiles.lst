@@ -1,11 +1,13 @@
 com\mycompany\bankonegocio\ProbarSolicitudes.class
 Objetos\Interfaces\INegocioSolicitudInvitacion.class
 Objetos\ObjetoNegocioTransferencia.class
+Objetos\Interfaces\IObjetoNegocioTransaccion.class
 com\mycompany\bankonegocio\BankoNegocio.class
 Objetos\Interfaces\IObjetoNegocioPersona.class
 Objetos\Interfaces\IObjetoNegocioTransferencia.class
 Objetos\Interfaces\IObjetoNegocioContacto.class
 Objetos\ObjetoNegocioPersona.class
+com\mycompany\bankonegocio\MongoTransaccionDAO.class
 com\mycompany\bankonegocio\PruebaObjetoNegocioGrupo.class
 Objetos\ObjetoNegocioContacto$1.class
 Objetos\ObjetoNegocioTarjeta.class
@@ -16,5 +18,7 @@ com\mycompany\bankonegocio\SimulatedSolicitudInvitacionDAO.class
 Objetos\Interfaces\IObjetoNegocioMiembroGrupo.class
 Objetos\ObjetoNegocioGrupo.class
 Objetos\Interfaces\IObjetoNegocioTarjeta.class
+com\mycompany\bankonegocio\PruebaNegocioTransaccion.class
 Objetos\ObjetoNegocioContacto.class
 Objetos\ObjetoNegocioTarjeta$1.class
+Objetos\ObjetoNegocioTransaccion.class

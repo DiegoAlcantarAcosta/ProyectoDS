@@ -37,7 +37,7 @@ public class TransaccionDAO implements ITransaccionDAO {
     }
 
     @Override
-    public List<Transaccion> obtenerTransacccionesPorGrupo(ObjectId grupoId) {
+public List<Transaccion> obtenerTransaccionesPorGrupo(ObjectId grupoId) {
         List<Transaccion> transacciones = new ArrayList<>();
         for (Document documento : collection.find(new Document("grupoId", grupoId))) {
             Transaccion transaccion = new Transaccion();
