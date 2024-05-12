@@ -8,6 +8,7 @@ import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
 import Funcionalidad.ActualizarContactoSS;
+import Funcionalidad.EliminarContactoSS;
 import Funcionalidad.IEliminarContactoSS;
 import Funcionalidad.IActualizarContactoSS;
 import Funcionalidad.IEliminarContactoSS;
@@ -28,8 +29,8 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
      */
     public FrmEditaMiContacto(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         initComponents();
-//        this.actualiza = new ActualizarContactoSS();
-//        this.elimina = new EliminarContactoSS();
+        this.actualiza = new ActualizarContactoSS();
+        this.elimina = new EliminarContactoSS();
         this.personaDTO = personaDTO;
         this.contactoOrigiDTO = contactoDTO;
         

@@ -58,11 +58,9 @@ public class AnadirContactoSS implements IAnadirContactoSS {
                 }
             }
 
-            return true;
-
         }
 
-        return false;
+        return true;
     }
 
 }

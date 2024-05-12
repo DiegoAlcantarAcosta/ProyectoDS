@@ -19,29 +19,34 @@ public class FrmMisContactos extends javax.swing.JFrame {
 
     IMostrarContactoSS mostrarContactoSS;
     PersonaDTO personaDTO;
+
     /**
      * Creates new form FrmMisContactos
      */
     public FrmMisContactos(PersonaDTO personaDTO) {
         initComponents();
-        
+
         mostrarContactoSS = new MostrarContactoSS();
         this.personaDTO = personaDTO;
 
         List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(personaDTO);
-        this.llenarTablaContactos(listaContactos);
-    }
-    
-    private void llenarTablaContactos(List<ContactoDTO> contactos) {
-        DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
-        model.setRowCount(0);
 
-        for (ContactoDTO contacto : contactos) {
-            Object[] row = {
-                contacto.getAlias()
-            };
-            model.addRow(row);
+        this.llenarTablaContactos(listaContactos);
+
+    }
+
+    private void llenarTablaContactos(List<ContactoDTO> contactos) {
+            DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
+            model.setRowCount(0);
+
+            for (ContactoDTO contacto : contactos) {
+                Object[] row = {
+                    contacto.getAlias()
+                };
+                model.addRow(row);
+            
         }
+
     }
 
     /**
@@ -206,12 +211,12 @@ public class FrmMisContactos extends javax.swing.JFrame {
             ec.show();
             this.dispose();
         }
-        
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tableContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContactosMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tableContactosMouseClicked
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed

@@ -11,7 +11,8 @@ import org.bson.types.ObjectId;
  * @author Oley
  */
 public class MiembroGrupoDTO {
-        private ObjectId id;
+    
+    private ObjectId id;
 
     private String nombre;
     private String apellidoPaterno;
@@ -33,7 +34,6 @@ public class MiembroGrupoDTO {
     public void setId(ObjectId id) {
         this.id = id;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -58,4 +58,8 @@ public class MiembroGrupoDTO {
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
+
+    
+    
+    
 }

@@ -24,10 +24,10 @@ public class prueba {
         
         ContactoDTO contactoDTO = new ContactoDTO("Wili", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
         ContactoDTO contactoActualizaDTO = new ContactoDTO("Wilito", "wiliberto", "Perez", "Perez", "2", tipoBancoDTO.BANCOPPEL);
-        PersonaDTO personaDTO = new PersonaDTO("SALM851225MDFRPR09");
+        PersonaDTO personaDTO = new PersonaDTO("MOGS821015MDFRFN04");
         PersonaDTO persona2DTO = new PersonaDTO("SALM851225MDFRPR09");
         
-        System.out.println(a.agregar(persona2DTO, contactoActualizaDTO));
+        System.out.println(a.agregar(personaDTO, contactoActualizaDTO));
         
 //        ContactoDTO con = new ContactoDTO("Pepe", "Camila", "Fernández", "Gómez", 
 //                "1234567891", tipoBancoDTO.BANCOPPEL, pepe);

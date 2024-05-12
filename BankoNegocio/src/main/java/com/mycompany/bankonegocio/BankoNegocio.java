@@ -33,10 +33,11 @@ public class BankoNegocio {
         TarjetaDAO td = new TarjetaDAO();
         TarjetaDTO tarjeDesti;
         ContactoDTO contactoDTO = new ContactoDTO("Wili", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
-        ContactoDTO contactoActualizaDTO = new ContactoDTO("Wilito", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
-        PersonaDTO personaDTO = new PersonaDTO("SALM851225MDFRPR09");
+        ContactoDTO contactoActualizaDTO = new ContactoDTO("Wilito", "wiliberto", "Perez", "Perez", "2", tipoBancoDTO.BANCOPPEL);
+        PersonaDTO personaDTO = new PersonaDTO("TORL950505HDFRDS09");
         PersonaDTO persona2DTO = new PersonaDTO("SALM851225MDFRPR09");
-//        System.out.println(oc.obtenerContactoDTOPersona(personaDTO, contactoActualizaDTO));
+        System.out.println(oc.agregar(personaDTO, contactoActualizaDTO));
+//        System.out.println(oc.obtenerContactosDTOPersona(personaDTO));
         
         
 

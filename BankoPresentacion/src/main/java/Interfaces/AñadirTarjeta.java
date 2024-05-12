@@ -34,7 +34,7 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         persona = personaDTO;
         tarjetaSS = new AnadirTarjetaSS();
         tarjetaSS2 = new TarjetaSS();
-        tarjetasClientes = tarjetaSS2.obtenerTodasLasTarjetasDeClientes();
+        tarjetasClientes = tarjetaSS2.obtenerTarjetasDTOPersona(personaDTO);
 
         for (tipoTarjetaDTO value : tipoTarjetaDTO.values()) {
             tipoTarjetaComboBox.addItem(value);
