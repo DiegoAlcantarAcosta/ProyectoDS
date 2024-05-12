@@ -1,8 +1,15 @@
 
 package Funcionalidad;
 
+import DTOs.PersonaDTO;
+import DTOs.TarjetaDTO;
 import DTOs.TransferenciaDTO;
+import Objetos.Interfaces.IObjetoNegocioContacto;
+import Objetos.Interfaces.IObjetoNegocioPersona;
+import Objetos.Interfaces.IObjetoNegocioTarjeta;
 import Objetos.Interfaces.IObjetoNegocioTransferencia;
+import Objetos.ObjetoNegocioPersona;
+import Objetos.ObjetoNegocioTarjeta;
 import Objetos.ObjetoNegocioTransferencia;
 
 /**
@@ -12,9 +19,13 @@ import Objetos.ObjetoNegocioTransferencia;
 public class TransferenciaSS implements ITransferenciaSS{
     
     IObjetoNegocioTransferencia transferencia;
+    IObjetoNegocioPersona persona;
+    IObjetoNegocioTarjeta tarjeta;
 
     public TransferenciaSS() {
-       this.transferencia = new ObjetoNegocioTransferencia(); 
+       this.transferencia = new ObjetoNegocioTransferencia();
+       this.persona = new ObjetoNegocioPersona();
+       this.tarjeta = new ObjetoNegocioTarjeta();
         
     }
     
@@ -22,7 +33,11 @@ public class TransferenciaSS implements ITransferenciaSS{
     @Override
     public boolean realizarTransferencia(TransferenciaDTO transferenciaDTO){
          
-        return transferencia.realizarTransferencia(transferenciaDTO);
+        PersonaDTO personaBuscada = tarjeta.obtenerPersonaDeTarjeta(new TarjetaDTO(transferenciaDTO.getNumeroCuentaDestinatario()));
+        if(personaBuscada != null){
+            return transferencia.realizarTransferencia(transferenciaDTO);
+        }
+        return false;
         
         
     }
