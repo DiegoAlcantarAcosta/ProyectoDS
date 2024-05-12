@@ -32,12 +32,14 @@ public class TarjetaDAO implements ITarjetaDAO {
         this.coleccionTarjetas = Conexion.getDatabase().getCollection("Personas", Tarjeta.class);
         this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
     }
+
     // Diego Alcantar
     @Override
     public List<Tarjeta> obtenerTarjetasPersona(Persona persona) {
         List<Tarjeta> lista = persona.getListaTarjetas();
         return lista;
     }
+
     // Diego Alcantar
     @Override
     public Tarjeta obtenerUltimaTarjetaPersona(Persona persona) {
@@ -47,6 +49,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         }
         return tarjetas.get(tarjetas.size() - 1); // Devuelve la última tarjeta de la lista
     }
+
     // Diego Alcantar
     @Override
     public Tarjeta obtenerTarjetaPorNumero(Tarjeta tarjeta) {
@@ -63,14 +66,16 @@ public class TarjetaDAO implements ITarjetaDAO {
         return null;
     }
 // Diego Alcantar
+
     @Override
     public void guardar(Persona persona, Tarjeta tarjeta) {
         coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaTarjetas", tarjeta));
     }
 // Diego Alcantar
+
     @Override
     public void actualizarTarjeta(Persona persona, Tarjeta tarjeta) {
-       coleccionPersonas.updateOne(
+        coleccionPersonas.updateOne(
                 Filters.and(
                         Filters.eq("_id", persona.getId()),
                         Filters.eq("listaTarjetas._id", tarjeta.getId())
@@ -80,10 +85,11 @@ public class TarjetaDAO implements ITarjetaDAO {
 
     }
 // Diego Alcantar
+
     @Override
     public void eliminar(Persona persona, Tarjeta tarjeta) {
         if (persona != null) {
-            List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona);
+            List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona); // Obtener las tarjetas una sola vez
             Iterator<Tarjeta> iterator = tarjetas.iterator();
             while (iterator.hasNext()) {
                 Tarjeta t = iterator.next();
@@ -94,10 +100,11 @@ public class TarjetaDAO implements ITarjetaDAO {
             }
             coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.set("listaTarjetas", tarjetas));
         } else {
-            System.out.println("No se encontró la persona.");
+            System.out.println("No se encontró la tarjeta.");
         }
     }
 // Diego Alcantar
+
     @Override
     public List<Tarjeta> obtenerTodasLasTarjetasDeClientes() {
         List<Tarjeta> todasLasTarjetas = new ArrayList<>();
@@ -124,6 +131,7 @@ public class TarjetaDAO implements ITarjetaDAO {
         return todasLasTarjetas;
     }
 // Diego Alcantar
+
     @Override
     public Persona obtenerPersonaDeTarjeta(Tarjeta tarjeta) {
         try {
