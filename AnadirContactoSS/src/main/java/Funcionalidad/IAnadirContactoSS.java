@@ -5,6 +5,7 @@
 package Funcionalidad;
 
 import DTOs.ContactoDTO;
+import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
 
 /**
@@ -12,6 +13,6 @@ import DTOs.TarjetaDTO;
  * @author Diego
  */
 public interface IAnadirContactoSS {
-    public Boolean agregar(ContactoDTO contactoDTO);
+    public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO);
     
 }
