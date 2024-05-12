@@ -59,7 +59,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
         SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
+            List<TarjetaDTO> listaTarjetas = tarjetas;
             if (listaTarjetas.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontraron resultados", "AVISO", JOptionPane.WARNING_MESSAGE);
                 dispose();
@@ -245,9 +245,8 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
             if (selectedRow != -1) {
                 String numero = (String) tablaTarjetas.getValueAt(selectedRow, 0);
                 TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
-                tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(tarjetaBuscada.getNumeroCuenta()));
                 if (countRows - 1 != 0) {
-                    eliminarTarjetaSS.eliminar(personaDTO, tarjeDesti);
+                    eliminarTarjetaSS.eliminar(personaDTO, tarjetaBuscada);
                     List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
                     this.llenarTablaTarjetas(listaTarjetas);
                     JOptionPane.showMessageDialog(this, "Tarjeta eliminada con exito", "AVISO", JOptionPane.WARNING_MESSAGE);

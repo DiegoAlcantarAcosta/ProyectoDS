@@ -8,7 +8,6 @@ package Funucionalidad;
 import DTOs.PersonaDTO;
 import Objetos.Interfaces.IObjetoNegocioPersona;
 import Objetos.ObjetoNegocioPersona;
-import Objetos.ObjetoNegocioTarjeta;
 
 /**
  *
@@ -37,6 +36,4 @@ public class PersonaSS implements IPersonaSS {
        PersonaDTO personaDTObuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
         return personaDTObuscada;
     }
-
-    
 }
