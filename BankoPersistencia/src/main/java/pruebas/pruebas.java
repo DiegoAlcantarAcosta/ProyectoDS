@@ -30,7 +30,7 @@ public class pruebas {
 //        System.out.println(cd.obtenerContactoPersona(persona1, contacto2));
 //        System.out.println(cd.obtenerContactosPersona(persona1));
 //        System.out.println(cd.actualizar(persona, contacto, contacto1Actua));
-        System.out.println(cd.eliminar(persona1, contacto1Actua));
+        System.out.println(cd.agregar(personaCurp, contacto1Actua));
 //        System.out.println(cd.obtenerContactosPersona(persona1));
 //        System.out.println(cd.obtenerContactoPersona(persona1, contacto2));
     }
