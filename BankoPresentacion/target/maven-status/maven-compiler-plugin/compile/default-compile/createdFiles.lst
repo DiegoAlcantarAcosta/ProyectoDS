@@ -5,6 +5,7 @@ Interfaces\AñadirTarjeta$1.class
 Interfaces\TransferenciaForm$2.class
 Interfaces\AgregarContactoInf$7.class
 Interfaces\MenuPrincipal$6.class
+Interfaces\FrmEditaMiContacto$2.class
 Interfaces\OpcionesTarjeta$4.class
 Interfaces\FrmMisContactos$5.class
 Interfaces\InicioSesionForm$3.class
@@ -27,7 +28,9 @@ Interfaces\AgregarContactoInf$4.class
 Interfaces\AñadirTarjeta$2.class
 Interfaces\AgregarContactoInf$8.class
 Interfaces\ContraseñaTarjetas$3.class
+Interfaces\FrmEditaMiContacto.class
 Interfaces\MenuPrincipal$2.class
+Interfaces\FrmEditaMiContacto$1.class
 Interfaces\FrmAgregarMiContacto.class
 Interfaces\ActualizarTarjeta$3.class
 Interfaces\MenuPrincipal$9.class
@@ -56,6 +59,7 @@ Interfaces\TransferenciaForm.class
 Interfaces\AgregarContactoInf$6.class
 Interfaces\MenuPrincipal$7.class
 Interfaces\FrmMisContactos$4.class
+Interfaces\FrmEditaMiContacto$3.class
 Interfaces\TransferenciaConfirmacion$3.class
 Interfaces\AgregarContacto$2.class
 Interfaces\TransferenciaExitosa.class

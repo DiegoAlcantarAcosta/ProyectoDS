@@ -75,7 +75,6 @@ public class FrmMisContactos extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Editar");
-        btnEditar.setActionCommand("Editar");
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +185,7 @@ public class FrmMisContactos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -197,6 +197,15 @@ public class FrmMisContactos extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tableContactos.getSelectedRow();
+        if (selectedRow != -1) {
+            String alias = (String) tableContactos.getValueAt(selectedRow, 0);
+            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(personaDTO, new ContactoDTO(alias));
+            System.out.println(contactoBuscado);
+            FrmEditaMiContacto ec = new FrmEditaMiContacto(personaDTO, contactoBuscado);
+            ec.show();
+            this.dispose();
+        }
         
     }//GEN-LAST:event_btnEditarActionPerformed
 

@@ -121,9 +121,7 @@ public class ContactoDAO implements IContactoDAO {
     }
 
     public Boolean validaContactoPersona(Contacto contacto, Contacto contacto2) {
-        if (contacto.getAlias().equals(contacto2.getAlias()) && contacto.getApellidoM().equals(contacto2.getApellidoM())
-                && contacto.getApellidoP().equals(contacto2.getApellidoP()) && contacto.getBanco().equals(contacto2.getBanco())
-                && contacto.getNombre().equals(contacto2.getNombre()) && contacto.getNumeroCuenta().equals(contacto2.getNumeroCuenta())) {
+        if (contacto.getAlias().equals(contacto2.getAlias())) {
             return true;
 
         }
