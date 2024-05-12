@@ -12,13 +12,13 @@ public class ContactoDTO {
     private String apellidoP;
     private String apellidoM;
     private String numeroCuenta;
-    private tipoBancoDTO banco;
+    private String banco;
     private PersonaDTO persona;
 
    public ContactoDTO() {
     }
 
-    public ContactoDTO(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, tipoBancoDTO banco, PersonaDTO persona) {
+    public ContactoDTO(String alias, String nombre, String apellidoP, String apellidoM, String numeroCuenta, String banco, PersonaDTO persona) {
         this.alias = alias;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -84,11 +84,11 @@ public class ContactoDTO {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public tipoBancoDTO getBanco() {
+    public String getBanco() {
         return banco;
     }
 
-    public void setBanco(tipoBancoDTO banco) {
+    public void setBanco(String banco) {
         this.banco = banco;
     }
 
