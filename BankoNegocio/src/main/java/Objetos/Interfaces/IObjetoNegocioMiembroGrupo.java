@@ -5,12 +5,16 @@
 package Objetos.Interfaces;
 
 import DTOs.MiembroGrupoDTO;
+import java.util.List;
 
 /**
  *
  * @author Oley
  */
 public interface IObjetoNegocioMiembroGrupo {
-        Boolean agregarMiembro(MiembroGrupoDTO miembroDTO, String idGrupo);
+
+    Boolean agregarMiembro(MiembroGrupoDTO miembroDTO, String idGrupo);
+
+
 
 }

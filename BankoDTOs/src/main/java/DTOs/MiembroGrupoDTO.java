@@ -4,11 +4,15 @@
  */
 package DTOs;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author Oley
  */
 public class MiembroGrupoDTO {
+        private ObjectId id;
+
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -20,6 +24,14 @@ public class MiembroGrupoDTO {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
 

@@ -37,7 +37,6 @@ public class PruebaNegocioTransaccion {
         transaccion.setMonto(100.0); 
         transaccion.setDescripcion("Compra de productos"); 
 
-        // Probar el método registrarTransaccion
         boolean registroExitoso = negocioTransaccion.registrarTransaccion(transaccion);
         if (registroExitoso) {
             System.out.println("La transacción se registró exitosamente.");
