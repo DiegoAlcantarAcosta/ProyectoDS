@@ -203,6 +203,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("Mis Contactos");
 
+        crearGrupoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearGrupoButtonActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Crear Grupo");
 
         añadirTarjetaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -467,6 +473,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mc.setVisible(rootPaneCheckingEnabled);
         this.setVisible(false);
     }//GEN-LAST:event_btnMisContactosActionPerformed
+
+    private void crearGrupoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearGrupoButtonActionPerformed
+    FrmCrearGrupo menuPrincipal = new FrmCrearGrupo(personaDTO);
+
+    menuPrincipal.setVisible(true);
+
+    this.setVisible(false);
+    }//GEN-LAST:event_crearGrupoButtonActionPerformed
 
     /**
      * @param args the command line arguments

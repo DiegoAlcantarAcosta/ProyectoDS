@@ -7,10 +7,10 @@ package Interfaces;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
-import Funcionalidad.ActualizarContactoSS;
-import Funcionalidad.IEliminarContactoSS;
-import Funcionalidad.IActualizarContactoSS;
-import Funcionalidad.IEliminarContactoSS;
+//import Funcionalidad.ActualizarContactoSS;
+import Funcionalidad.IEliminarTarjetaSS;
+import Funcionalidad.IActualizarTarjetaSS;
+import Funcionalidad.IEliminarTarjetaSS;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +21,8 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
 
     PersonaDTO personaDTO;
     ContactoDTO contactoOrigiDTO;
-    IActualizarContactoSS actualiza;
-    IEliminarContactoSS elimina;
+//    IActualizarContactoSS actualiza;
+//    IEliminarContactoSS elimina;
     /**
      * Creates new form FrmEditaMiContacto
      */
@@ -223,26 +223,26 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
             tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
             ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
                 txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
-            Boolean verifica = actualiza.actualizar(personaDTO, contactoOrigiDTO, contactoDTO);
-            if(verifica == true){
-                JOptionPane.showMessageDialog(this, "Contacto Editado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-                FrmMisContactos mc = new FrmMisContactos(personaDTO);
-                mc.show();
-                this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-        else if(i == 1){
-            FrmMisContactos mc = new FrmMisContactos(personaDTO);
-            mc.show();
-            this.dispose();
-        }
-        else if (i == 2){
-            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
-
+//            Boolean verifica = actualiza.actualizar(personaDTO, contactoOrigiDTO, contactoDTO);
+//            if(verifica == true){
+//                JOptionPane.showMessageDialog(this, "Contacto Editado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//                FrmMisContactos mc = new FrmMisContactos(personaDTO);
+//                mc.show();
+//                this.dispose();
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//
+//        }
+//        else if(i == 1){
+//            FrmMisContactos mc = new FrmMisContactos(personaDTO);
+//            mc.show();
+//            this.dispose();
+//        }
+//        else if (i == 2){
+//            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
+//
         }
 
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -261,28 +261,28 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
                 + "Alias:" + contactoOrigiDTO.getAlias(), "Confirmacion",
             JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
 
-        if(i == 0){
-            Boolean verifica = elimina.eliminar(personaDTO, contactoOrigiDTO);
-            if(verifica == true){
-                JOptionPane.showMessageDialog(this, "Contacto Eliminado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-                FrmMisContactos mc = new FrmMisContactos(personaDTO);
-                mc.show();
-                this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-        else if(i == 1){
-            FrmMisContactos mc = new FrmMisContactos(personaDTO);
-            mc.show();
-            this.dispose();
-        }
-        else if (i == 2){
-            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
-
-        }
+//        if(i == 0){
+//            Boolean verifica = elimina.eliminar(personaDTO, contactoOrigiDTO);
+//            if(verifica == true){
+//                JOptionPane.showMessageDialog(this, "Contacto Eliminado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//                FrmMisContactos mc = new FrmMisContactos(personaDTO);
+//                mc.show();
+//                this.dispose();
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//
+//        }
+//        else if(i == 1){
+//            FrmMisContactos mc = new FrmMisContactos(personaDTO);
+//            mc.show();
+//            this.dispose();
+//        }
+//        else if (i == 2){
+//            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
+//
+//        }
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 

@@ -19,10 +19,8 @@ import org.bson.types.ObjectId;
  *
  * @author Oley
  */
-@Entity
-@Table(name = "transaccion")
+
 public class Transaccion {
-    @Id
      private ObjectId id;
     private ObjectId grupoId;
     private double monto;
