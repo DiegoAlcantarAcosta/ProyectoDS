@@ -6,8 +6,10 @@ Interfaces\TransferenciaForm$2.class
 Interfaces\AgregarContactoInf$7.class
 Interfaces\MenuPrincipal$6.class
 Interfaces\OpcionesTarjeta$4.class
+Interfaces\FrmMisContactos$5.class
 Interfaces\InicioSesionForm$3.class
 Interfaces\ActualizarTarjeta$2.class
+Interfaces\FrmAgregarMiContacto$1.class
 Interfaces\MenuPrincipal$3.class
 Interfaces\FrmSeleccionarContacto$2.class
 Interfaces\FrmSeleccionarContacto$5.class
@@ -19,13 +21,18 @@ Interfaces\TransferenciaForm$1.class
 Interfaces\AñadirTarjeta.class
 Interfaces\AgregarContactoInf.class
 Interfaces\FrmSeleccionarContacto$3.class
+Interfaces\FrmMisContactos.class
+Interfaces\FrmMisContactos$2.class
 Interfaces\AgregarContactoInf$4.class
 Interfaces\AñadirTarjeta$2.class
 Interfaces\AgregarContactoInf$8.class
 Interfaces\ContraseñaTarjetas$3.class
 Interfaces\MenuPrincipal$2.class
+Interfaces\FrmAgregarMiContacto.class
 Interfaces\ActualizarTarjeta$3.class
+Interfaces\MenuPrincipal$9.class
 Interfaces\AgregarContactoInf$1.class
+Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\MenuPrincipal$1.class
 Interfaces\OpcionesTarjeta.class
 Interfaces\FrmSeleccionarContacto$4.class
@@ -36,6 +43,7 @@ Interfaces\OpcionesTarjeta$3.class
 Interfaces\TransferenciaConfirmacion$2.class
 Interfaces\AgregarContacto$3.class
 Interfaces\ConfirmacionAñadirTarjeta$1.class
+Interfaces\FrmMisContactos$3.class
 Interfaces\ConfirmacionAñadirTarjeta.class
 Interfaces\AgregarContactoInf$2.class
 Interfaces\MenuPrincipal$5.class
@@ -47,6 +55,7 @@ Interfaces\ContraseñaTarjetas$1.class
 Interfaces\TransferenciaForm.class
 Interfaces\AgregarContactoInf$6.class
 Interfaces\MenuPrincipal$7.class
+Interfaces\FrmMisContactos$4.class
 Interfaces\TransferenciaConfirmacion$3.class
 Interfaces\AgregarContacto$2.class
 Interfaces\TransferenciaExitosa.class
@@ -62,4 +71,6 @@ Interfaces\TransferenciaConfirmacion.class
 Interfaces\InicioSesionForm$2.class
 Interfaces\OpcionesTarjeta$2.class
 Interfaces\FrmSeleccionarContacto$1.class
+Interfaces\AñadirTarjeta$4.class
 Interfaces\ActualizarTarjeta.class
+Interfaces\FrmMisContactos$1.class

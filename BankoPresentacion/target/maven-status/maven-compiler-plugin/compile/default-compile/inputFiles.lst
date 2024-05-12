@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaForm.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\InicioSesionForm.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\AgregarContacto.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\FrmSeleccionarContacto.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaConfirmacion.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\AgregarContactoInf.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\AñadirTarjeta.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\FrmAgregarMiContacto.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\ContraseñaTarjetas.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\ActualizarTarjeta.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaExitosa.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\MenuPrincipal.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\FrmMisContactos.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\ConfirmacionAñadirTarjeta.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\OpcionesTarjeta.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\java\Prueba\ProyectoDS.java
+=======
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaForm.java
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\ConfirmacionAñadirTarjeta.java
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\InicioSesionForm.java
@@ -12,3 +30,4 @@ C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacio
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaConfirmacion.java
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\FrmSeleccionarContacto.java
 C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoPresentacion\src\main\java\Interfaces\TransferenciaExitosa.java
+>>>>>>> c4ce9d052a8d6f26e6d613216462be230352a57c

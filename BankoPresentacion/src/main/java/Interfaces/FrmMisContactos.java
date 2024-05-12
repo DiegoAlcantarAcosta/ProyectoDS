@@ -4,45 +4,34 @@
  */
 package Interfaces;
 
-import DAOS.ContactoDAO;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
-import DTOs.TarjetaDTO;
 import Funcionalidad.IMostrarContactoSS;
-import Funcionalidad.ITarjetaSS;
 import Funcionalidad.MostrarContactoSS;
-import Funcionalidad.TarjetaSS;
-import entidades.Contacto;
-import interfaces.daos.IContactoDAO;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Usuario
+ * @author Dell
  */
-public class FrmSeleccionarContacto extends javax.swing.JFrame {
+public class FrmMisContactos extends javax.swing.JFrame {
 
-    private IMostrarContactoSS mostrarContactoSS;
-    private ITarjetaSS tarjetaSS;
-    TarjetaDTO tarjeta;
-    TarjetaDTO tarjeDesti;
-    PersonaDTO persona;
+    IMostrarContactoSS mostrarContactoSS;
+    PersonaDTO personaDTO;
     /**
-     * Creates new form FrmSeleccionarContacto
+     * Creates new form FrmMisContactos
      */
-    public FrmSeleccionarContacto(TarjetaDTO tarjetaDTO) {
+    public FrmMisContactos(PersonaDTO personaDTO) {
         initComponents();
-        tarjetaSS = new TarjetaSS();
-        tarjeta = tarjetaDTO;
-//        persona = tarjeta.getPersona();
+        
         mostrarContactoSS = new MostrarContactoSS();
+        this.personaDTO = personaDTO;
 
-        List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(persona);
+        List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(personaDTO);
         this.llenarTablaContactos(listaContactos);
     }
-
+    
     private void llenarTablaContactos(List<ContactoDTO> contactos) {
         DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
         model.setRowCount(0);
@@ -64,26 +53,69 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRegresar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableContactos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblContactos = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
-        btnContinuar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableContactos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Selecciona Contacto");
+        setTitle(" Mis Contactos");
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.setActionCommand("Editar");
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        tableContactos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Alias"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableContactos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tableContactos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableContactosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableContactos);
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
         jPanel1.setForeground(new java.awt.Color(153, 0, 0));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Transferencia");
+        jLabel2.setText("Mis Contactos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,45 +142,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         lblContactos.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblContactos.setText("Contactos: ");
 
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
-        btnContinuar.setText("Siguiente");
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
-        tableContactos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Alias"
-            }
-        ));
-        tableContactos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableContactosMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tableContactos);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,22 +152,19 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(btnRegresar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnContinuar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
+                        .addGap(108, 108, 108)
+                        .addComponent(btnEditar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblContactos))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                            .addComponent(lblContactos)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,80 +178,39 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
                 .addComponent(lblContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
-                    .addComponent(btnSalir)
-                    .addComponent(btnContinuar))
+                    .addComponent(btnEditar))
                 .addGap(23, 23, 23))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
-        AgregarContacto ac = new AgregarContacto(tarjeta);
-        ac.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-//     Long idPersona1 = 1L; // Reemplaza esto con el valor real del ID de la persona 1
-//    
-//    SeleccionarTarjeta s = new SeleccionarTarjeta(idPersona1);
-//    s.setVisible(true);
-//    this.setVisible(false);
+        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal(personaDTO);
+        mp.show();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal m = new MenuPrincipal(persona);
-        m.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-
-        // TODO add your handling code here:
-        int selectedRow = tableContactos.getSelectedRow();
-        if (selectedRow != -1) {
-            String alias = (String) tableContactos.getValueAt(selectedRow, 0);
-            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(persona, new ContactoDTO(alias));
-            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
-            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
-            trans.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
-        }
-//        // TODO add your handling code here:
-//        int selectedRow = tableContactos.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String alias = (String) tableContactos.getValueAt(selectedRow, 0);
-////            ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(new ContactoDTO(alias), persona);
-//            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
-//            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
-//            trans.setVisible(true);
-//            this.setVisible(false);
-//        } else {
-//            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
-//        }
-//        String seleccionado = listContactos.getSelectedValue();
-//        if(seleccionado.equals(seleccionado)){
-//        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tableContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContactosMouseClicked
         // TODO add your handling code here:
-//        int selectedRow = tableContactos.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String alias = (String) tableContactos.getValueAt(selectedRow, 1);
-//            Contacto contactoBuscado = cd.obtenerContactoPersona(new Contacto(alias), cd.getDatos().getPersona());
-//            cd.getDatos().setContacto(contactoBuscado);
-//            }
+        
     }//GEN-LAST:event_tableContactosMouseClicked
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        FrmAgregarMiContacto amc = new FrmAgregarMiContacto(personaDTO);
+        amc.show();
+        this.dispose();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,29 +229,28 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionarContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMisContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionarContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMisContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionarContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMisContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionarContacto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMisContactos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new FrmSeleccionarContacto().setVisible(true);
+//                new FrmMisContactos().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

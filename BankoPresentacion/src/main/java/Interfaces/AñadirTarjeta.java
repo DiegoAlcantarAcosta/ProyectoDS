@@ -115,6 +115,12 @@ public class AñadirTarjeta extends javax.swing.JFrame {
             }
         });
 
+        bancoComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bancoComboBoxActionPerformed(evt);
+            }
+        });
+
         AceptarButton.setText("Aceptar");
         AceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +259,10 @@ public class AñadirTarjeta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo agregar la tarjeta", "AVISO", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_AceptarButtonActionPerformed
+
+    private void bancoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bancoComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bancoComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
