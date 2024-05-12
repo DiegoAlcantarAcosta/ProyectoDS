@@ -34,7 +34,7 @@ public class BankoNegocio {
         TarjetaDTO tarjeDesti;
         ContactoDTO contactoDTO = new ContactoDTO("Wili", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
         PersonaDTO personaDTO = new PersonaDTO("SALM851225MDFRPR09");
-        System.out.println(oc.agregar(personaDTO, contactoDTO));
+//        System.out.println(oc.agregar(personaDTO, contactoDTO));
         
         
 
