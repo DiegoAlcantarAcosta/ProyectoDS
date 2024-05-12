@@ -35,7 +35,8 @@ public class BankoNegocio {
         ContactoDTO contactoDTO = new ContactoDTO("Wili", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
         ContactoDTO contactoActualizaDTO = new ContactoDTO("Wilito", "wiliberto", "Perez", "Perez", "1", tipoBancoDTO.BANCOPPEL);
         PersonaDTO personaDTO = new PersonaDTO("SALM851225MDFRPR09");
-        System.out.println(oc.obtenerContactoDTOPersona(personaDTO, contactoActualizaDTO));
+        PersonaDTO persona2DTO = new PersonaDTO("SALM851225MDFRPR09");
+//        System.out.println(oc.obtenerContactoDTOPersona(personaDTO, contactoActualizaDTO));
         
         
 
