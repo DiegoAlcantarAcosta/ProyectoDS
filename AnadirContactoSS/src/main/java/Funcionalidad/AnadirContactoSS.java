@@ -32,10 +32,11 @@ public class AnadirContactoSS implements IAnadirContactoSS {
 
     @Override
     public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
-        if (this.validaAgrega(personaDTO, contactoDTO)) {
-            Boolean confi = contacto.agregar(personaDTO, contactoDTO);
-            return confi;
-
+        if (personaDTO != null && contactoDTO != null) {
+            if (this.validaAgrega(personaDTO, contactoDTO)) {
+                Boolean confi = contacto.agregar(personaDTO, contactoDTO);
+                return confi;
+            }
         }
 
         return false;

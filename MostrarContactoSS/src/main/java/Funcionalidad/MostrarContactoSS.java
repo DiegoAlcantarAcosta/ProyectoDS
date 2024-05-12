@@ -28,24 +28,27 @@ public class MostrarContactoSS implements IMostrarContactoSS {
 
     @Override
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO) {
-        if (personaDTO.getCurp() != null) {
-            List<ContactoDTO> lista = contacto.obtenerContactosDTOPersona(personaDTO);
-            return lista;
+        if (personaDTO != null) {
+            if (personaDTO.getCurp() != null) {
+                List<ContactoDTO> lista = contacto.obtenerContactosDTOPersona(personaDTO);
+                return lista;
+            }
         }
         return null;
     }
 
     @Override
     public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
-        if (personaDTO.getCurp() != null && contactoDTO.getAlias() != null && 
-                this.validaMuestra(personaDTO, contactoDTO) == true) {
-            
-            ContactoDTO contactoBuscado = contacto.obtenerContactoDTOPersona(personaDTO, contactoDTO);
-            return contactoBuscado;
+        if (personaDTO != null && contactoDTO != null) {
+            if (personaDTO.getCurp() != null && contactoDTO.getAlias() != null
+                    && this.validaMuestra(personaDTO, contactoDTO) == true) {
+                ContactoDTO contactoBuscado = contacto.obtenerContactoDTOPersona(personaDTO, contactoDTO);
+                return contactoBuscado;
+            }
         }
         return null;
     }
-    
+
     private Boolean validaMuestra(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         PersonaDTO personaBuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
 
