@@ -24,7 +24,7 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author Dell
+ * @author ES EL MAS ACTUAL
  */
 public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
