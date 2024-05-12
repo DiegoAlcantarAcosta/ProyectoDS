@@ -124,6 +124,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+<<<<<<< HEAD
             <artifactId>EliminarContactoSS</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -131,6 +132,15 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>ActualizarContactoSS</artifactId>
             <version>${project.version}</version>
+=======
+            <artifactId>BankoPersistencia</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE210</version>
+>>>>>>> 014f751c40d3249fc923158b94465cd1cdb9a45a
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

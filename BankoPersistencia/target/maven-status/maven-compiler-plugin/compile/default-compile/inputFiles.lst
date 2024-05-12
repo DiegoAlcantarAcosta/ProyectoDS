@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\interfaces\daos\ITarjetaDAO.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\entidades\Contacto.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\entidades\Grupo.java
@@ -31,3 +32,38 @@ C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\DAOS\T
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\interfaces\daos\IGrupoDAO.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\entidades\SolicitudInvitacion.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPersistencia\src\main\java\entidades\Tarjeta.java
+=======
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\TarjetaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Transferencia.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\ITransaccionDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\ISolicitudInvitacionDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\ITransferenciaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\SolicitudInvitacion.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Consultas.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\tipoBanco.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Persona.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\IGrupoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\Excepciones\PersistenciaException.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\ITarjetaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\GrupoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\IContactoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\ContactoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Inserts.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\TransferenciaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\PersonaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\IMiembroGrupoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\pruebas\PruebasGrupos.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Tarjeta.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\pruebas\pruebas.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\tipoTarjeta.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\Conexion\Conexion.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Contacto.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\pruebasDAOS.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\TransaccionDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Grupo.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\interfaces\daos\IPersonaDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\MiembroGrupoDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\MiembroGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\entidades\Transaccion.java
+C:\Users\Diego\Desktop\ProDS\BankoPersistencia\src\main\java\DAOS\SolicitudInvitacionDAO.java
+>>>>>>> 014f751c40d3249fc923158b94465cd1cdb9a45a

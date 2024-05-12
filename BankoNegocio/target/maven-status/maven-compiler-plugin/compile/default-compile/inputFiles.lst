@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\ProbarSolicitudes.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTarjeta.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTransferencia.java
@@ -21,3 +22,28 @@ C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\Objetos\Int
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioSolicitudInvitacion.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\PruebaObjetoNegocioGrupo.java
 C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTransaccion.java
+=======
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\BankoNegocio.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\INegocioSolicitudInvitacion.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioTransferencia.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioSolicitudInvitacion.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioTarjeta.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioContacto.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\ProbarSolicitudes.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioTransaccion.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTransferencia.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\PruebaNegocioTransaccion.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\UltimaPruebaDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\SimulatedSolicitudInvitacionDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTarjeta.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioContacto.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioMiembroGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioMiembroGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\Interfaces\IObjetoNegocioPersona.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\MongoTransaccionDAO.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioPersona.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\com\mycompany\bankonegocio\PruebaObjetoNegocioGrupo.java
+C:\Users\Diego\Desktop\ProDS\BankoNegocio\src\main\java\Objetos\ObjetoNegocioTransaccion.java
+>>>>>>> 014f751c40d3249fc923158b94465cd1cdb9a45a
