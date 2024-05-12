@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
-
 package Funcionalidad;
 
 import DTOs.ContactoDTO;
@@ -20,23 +19,53 @@ import java.util.List;
 public class MostrarContactoSS implements IMostrarContactoSS {
 
     IObjetoNegocioContacto contacto;
+    IObjetoNegocioPersona persona;
 
     public MostrarContactoSS() {
         contacto = new ObjetoNegocioContacto();
+        persona = new ObjetoNegocioPersona();
     }
-    
+
     @Override
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO) {
-        List<ContactoDTO> lista = contacto.obtenerContactosDTOPersona(personaDTO);
-        return lista;
+        if (personaDTO.getCurp() != null) {
+            List<ContactoDTO> lista = contacto.obtenerContactosDTOPersona(personaDTO);
+            return lista;
+        }
+        return null;
     }
 
     @Override
-    public ContactoDTO obtenerContactoDTOPersona(ContactoDTO contactoDTO, PersonaDTO personaDTO) {
-//       ContactoDTO lista = contacto.obtenerContactoDTOPersona( contactoDTO,personaDTO);
-//        return lista;
+    public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
+        if (personaDTO.getCurp() != null && contactoDTO.getAlias() != null && 
+                this.validaMuestra(personaDTO, contactoDTO) == true) {
+            
+            ContactoDTO contactoBuscado = contacto.obtenerContactoDTOPersona(personaDTO, contactoDTO);
+            return contactoBuscado;
+        }
+        return null;
+    }
+    
+    private Boolean validaMuestra(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
+        PersonaDTO personaBuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
 
-    return null;
+        List<ContactoDTO> listaContactos = personaBuscada.getListaContactos();
+
+        if (listaContactos != null) {
+
+            for (ContactoDTO conta : listaContactos) {
+                if (conta.getAlias().equalsIgnoreCase(contactoDTO.getAlias())) {
+
+                    return true;
+
+                }
+            }
+
+            return false;
+
+        }
+
+        return false;
     }
 
 }

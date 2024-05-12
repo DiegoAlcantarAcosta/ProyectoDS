@@ -15,5 +15,5 @@ import java.util.List;
 public interface IMostrarContactoSS {
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO);
     
-    public ContactoDTO obtenerContactoDTOPersona(ContactoDTO contactoDTO, PersonaDTO personaDTO);
+    public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO);
 }
