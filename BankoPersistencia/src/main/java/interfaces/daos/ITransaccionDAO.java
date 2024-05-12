@@ -15,6 +15,6 @@ import org.bson.types.ObjectId;
  */
 public interface ITransaccionDAO {
 
-      void registrarTransaccion(Transaccion transaccion);
+      boolean registrarTransaccion(Transaccion transaccion);
     List<Transaccion> obtenerTransaccionesPorGrupo(ObjectId grupoId);
 }

@@ -27,11 +27,18 @@ public class MongoTransaccionDAO implements ITransaccionDAO {
     }
 
     @Override
-    public void registrarTransaccion(Transaccion transaccion) {
-        Document documento = new Document("grupoId", transaccion.getGrupoId())
-                .append("monto", transaccion.getMonto())
-                .append("descripcion", transaccion.getDescripcion());
-        collection.insertOne(documento);
+    public boolean registrarTransaccion(Transaccion transaccion) {
+            try {
+            Document documento = new Document("grupoId", transaccion.getGrupoId())
+                    .append("monto", transaccion.getMonto())
+                    .append("descripcion", transaccion.getDescripcion());
+            collection.insertOne(documento);
+            return true; // Se registró exitosamente
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Ocurrió un error al registrar la transacción
+        }
+    
     }
 
     @Override
