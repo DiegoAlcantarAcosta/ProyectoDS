@@ -24,9 +24,15 @@ public class pruebas {
         Contacto contacto1Actua = new Contacto("Wilo", "wiliberto", "perez", "perez", "1", "BANCOPPEL");
         Contacto contacto2 = new Contacto("Mari", "Juna", "perez", "Lopez", "2", "BANCOPPEL");
         Persona persona = new Persona(new ObjectId("663ff128d0ef4e16ee77a384"));
-//        System.out.println(cd.obtenerContactoPersona(persona, contacto));
-//        System.out.println(cd.actualizar(persona, contacto, contacto1Actua));
-        System.out.println(cd.eliminar(persona, contacto1Actua));
+        Persona personaCurp = new Persona("PEGJ900615HDFRZN00");
+        Persona persona1 = pd.obtenerPersonaPorCurp(personaCurp);
+        
+        System.out.println(cd.obtenerContactoPersona(persona1, contacto2));
+        System.out.println(cd.obtenerContactosPersona(persona1));
+        System.out.println(cd.actualizar(persona, contacto, contacto1Actua));
+        System.out.println(cd.eliminar(persona1, contacto2));
+        System.out.println(cd.obtenerContactosPersona(persona1));
+        System.out.println(cd.obtenerContactoPersona(persona1, contacto2));
     }
     
 }

@@ -70,45 +70,39 @@ public class ContactoDAO implements IContactoDAO {
 
     @Override
     public List<Contacto> obtenerContactosPersona(Persona persona) {
+        if(persona.getListaContactos() != null) {
 
+            List<Contacto> listaContactos = persona.getListaContactos();
+
+            return listaContactos;
+        }
+        
         return null;
-
     }
 
     @Override
-public Contacto obtenerContactoPersona(Persona persona, Contacto contacto) {
-//    if (persona.getId() != null && contacto.getId() != null) {
-//        Document query = new Document("_id", persona.getId())
-//                            .append("listaContactos._id", contacto.getId());
-//        
-//        Document projection = new Document("listaContactos.$", 1); // Proyecta solo el contacto específico
-//
-//        FindIterable<Contacto> result = coleccionPersonas.find(query).projection(projection);
-//
-//        Contacto personaDoc = result.first();
-//        Document doc = (Document)personaDoc;
-//        if (personaDoc != null) {
-//            List<Document> contactosDocs = personaDoc.getList("listaContactos", Document.class);
-//
-//            // Busca el contacto en la lista de contactos de la persona
-//            for (Document contactoDoc : contactosDocs) {
-//                if (contactoDoc.getObjectId("_id").equals(contacto.getId())) {
-//                    Contacto contactoEncontrado = new Contacto();
-//                    contactoEncontrado.setId(contactoDoc.getObjectId("_id"));
-//                    contactoEncontrado.setAlias(contactoDoc.getString("alias"));
-//                    contactoEncontrado.setNombre(contactoDoc.getString("nombre"));
-//                    contactoEncontrado.setApellidoP(contactoDoc.getString("apellidoP"));
-//                    contactoEncontrado.setApellidoM(contactoDoc.getString("apellidoM"));
-//                    contactoEncontrado.setNumeroCuenta(contactoDoc.getString("numeroCuenta"));
-//                    contactoEncontrado.setBanco(tipoBanco.valueOf(contactoDoc.getString("banco")));
-//                    return contactoEncontrado;
-//                }
-//            }
-//        }
-//    }
-//
-//    return null; // Devuelve null si no se encontró el contacto para la persona dada
-return null;
-}
+    public Contacto obtenerContactoPersona(Persona persona, Contacto contacto) {
+        if(persona.getId() != null && contacto.getAlias() != null){
+            List<Contacto> listaContactos = persona.getListaContactos();
+            for(Contacto conta : listaContactos){
+                if(this.validaContactoPersona(contacto, conta)){
+                    return conta;
+                }  
+            }
+        }
+        return null;
+    }
+    
+    public Boolean validaContactoPersona(Contacto contacto, Contacto contacto2){
+        if(contacto.getAlias().equals(contacto2.getAlias()) && contacto.getApellidoM().equals(contacto2.getApellidoM())
+                && contacto.getApellidoP().equals(contacto2.getApellidoP()) && contacto.getBanco().equals(contacto2.getBanco())
+                && contacto.getNombre().equals(contacto2.getNombre()) && contacto.getNumeroCuenta().equals(contacto2.getNumeroCuenta())
+                ){
+            return true;
+            
+        }
+        
+        return false;
+    }
 
 }
