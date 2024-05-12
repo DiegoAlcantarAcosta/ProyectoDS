@@ -76,48 +76,6 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
             return contacto;
 
         }
-//        Contacto contacto = new Contacto();
-//        contacto.setAlias(contactoDTO.getAlias());
-//        contacto.setApellidoM(contactoDTO.getApellidoM());
-//        contacto.setApellidoP(contactoDTO.getApellidoP());
-//
-//        tipoBancoDTO banco = contactoDTO.getBanco();
-//        tipoBanco banc;
-//
-//        switch (banco) {
-//            case BANAMEX:
-//                banc = tipoBanco.BANAMEX;
-//                break;
-//            case BANCOPPEL:
-//                banc = tipoBanco.BANCOPPEL;
-//                break;
-//            case BANREGIO:
-//                banc = tipoBanco.BANREGIO;
-//                break;
-//            case BBVA:
-//                banc = tipoBanco.BBVA;
-//                break;
-//            case HSBC:
-//                banc = tipoBanco.HSBC;
-//                break;
-//            case SANTANDER:
-//                banc = tipoBanco.SANTANDER;
-//                break;
-//            // Añade casos para otros valores de tipoBanco si es necesario
-//            default:
-//                banc = tipoBanco.BANAMEX;
-//        }
-//
-//        contacto.setBanco(banc);
-//        contacto.setNombre(contactoDTO.getNombre());
-//        contacto.setNumeroCuenta(contactoDTO.getNumeroCuenta());
-//
-//        ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-//        PersonaDTO personaDTO = onp.obtenerPersonaDTOPorCurp(contactoDTO.getPersona());
-//        Persona persona = onp.convertirDTOAEntidad(personaDTO);
-//
-//        contacto.setPersona(persona);
-
     }
 
     public ContactoDTO convertirEntidadADTO(Contacto contacto) {

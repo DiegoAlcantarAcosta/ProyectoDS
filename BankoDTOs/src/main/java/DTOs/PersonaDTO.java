@@ -163,14 +163,17 @@ public class PersonaDTO {
         this.telefono = telefono;
     }
 
-    @Override
-    public String toString() {
-        return "PersonaDTO{" + "nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", id=" + id + '}';
+    public List<ContactoDTO> getListaContactos() {
+        return listaContactos;
     }
 
-    
+    public void setListaContactos(List<ContactoDTO> listaContactos) {
+        this.listaContactos = listaContactos;
+    }
 
-  
-
+    @Override
+    public String toString() {
+        return "PersonaDTO{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", curp=" + curp + ", contrasena=" + contrasena + ", fechaNac=" + fechaNac + ", telefono=" + telefono + ", listaTarjetas=" + listaTarjetas + ", listaContactos=" + listaContactos + '}';
+    }
     
 }

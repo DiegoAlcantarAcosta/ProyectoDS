@@ -5,11 +5,21 @@
 package Objetos;
 
 import DAOS.PersonaDAO;
+import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import DTOs.tipoBancoDTO;
 import Objetos.Interfaces.IObjetoNegocioPersona;
+import entidades.Contacto;
 import entidades.Persona;
 import entidades.Tarjeta;
+import entidades.tipoBanco;
+import static entidades.tipoBanco.BANAMEX;
+import static entidades.tipoBanco.BANCOPPEL;
+import static entidades.tipoBanco.BANREGIO;
+import static entidades.tipoBanco.BBVA;
+import static entidades.tipoBanco.HSBC;
+import static entidades.tipoBanco.SANTANDER;
 import interfaces.daos.IPersonaDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +61,17 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         }
         
         persona.setListaTarjetas(tarjetasResultado);
+        
+        List<ContactoDTO> contactos = personaDTO.getListaContactos();
+        List<Contacto> contactosResultado = new ArrayList<>();
+
+        for (ContactoDTO contactoDTO : contactos) {
+            Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
+            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
+            contactosResultado.add(contacto);
+        }
+        
+        persona.setListaContactos(contactosResultado);
 
         return persona;
     }
@@ -125,5 +146,101 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         Persona persona = pd.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);
         PersonaDTO personaDTO = convertirEntidadADTO(persona);
         return personaDTO;
+    }
+    
+    // Contacto convercion
+    public Contacto convertirDTOAEntidad(ContactoDTO contactoDTO) {
+        if (contactoDTO.getBanco() != null) {
+            Contacto contacto = new Contacto();
+            contacto.setAlias(contactoDTO.getAlias());
+            contacto.setApellidoM(contactoDTO.getApellidoM());
+            contacto.setApellidoP(contactoDTO.getApellidoP());
+
+            tipoBancoDTO banco = contactoDTO.getBanco();
+            tipoBanco banc;
+            switch (banco) {
+                case BANAMEX:
+                    banc = tipoBanco.BANAMEX;
+                    break;
+                case BANCOPPEL:
+                    banc = tipoBanco.BANCOPPEL;
+                    break;
+                case BANREGIO:
+                    banc = tipoBanco.BANREGIO;
+                    break;
+                case BBVA:
+                    banc = tipoBanco.BBVA;
+                    break;
+                case HSBC:
+                    banc = tipoBanco.HSBC;
+                    break;
+                case SANTANDER:
+                    banc = tipoBanco.SANTANDER;
+                    break;
+                // Añade casos para otros valores de tipoBanco si es necesario
+                default:
+                    banc = tipoBanco.BANAMEX;
+            }
+
+            contacto.setBanco(banc);
+            contacto.setNombre(contactoDTO.getNombre());
+            contacto.setNumeroCuenta(contactoDTO.getNumeroCuenta());
+
+            return contacto;
+        } else {
+            Contacto contacto = new Contacto();
+            contacto.setAlias(contactoDTO.getAlias());
+            return contacto;
+
+        }
+    }
+
+    public ContactoDTO convertirEntidadADTO(Contacto contacto) {
+        if (contacto.getBanco() != null) {
+            ContactoDTO contactoDTO = new ContactoDTO();
+            contactoDTO.setAlias(contacto.getAlias());
+            contactoDTO.setApellidoM(contacto.getApellidoM());
+            contactoDTO.setApellidoP(contacto.getApellidoP());
+
+            tipoBanco banco = contacto.getBanco();
+            tipoBancoDTO banc;
+
+            switch (banco) {
+                case BANAMEX:
+                    banc = tipoBancoDTO.BANAMEX;
+                    break;
+                case BANCOPPEL:
+                    banc = tipoBancoDTO.BANCOPPEL;
+                    break;
+                case BANREGIO:
+                    banc = tipoBancoDTO.BANREGIO;
+                    break;
+                case BBVA:
+                    banc = tipoBancoDTO.BBVA;
+                    break;
+                case HSBC:
+                    banc = tipoBancoDTO.HSBC;
+                    break;
+                case SANTANDER:
+                    banc = tipoBancoDTO.SANTANDER;
+                    break;
+                // Añade casos para otros valores de tipoBanco si es necesario
+                default:
+                    banc = null;
+            }
+
+            //tipoBancoDTO banc = (tipoBancoDTO) banco;
+            contactoDTO.setBanco(banc);
+            contactoDTO.setNombre(contacto.getNombre());
+            contactoDTO.setNumeroCuenta(contacto.getNumeroCuenta());
+
+            return contactoDTO;
+
+        } else {
+            ContactoDTO contactoDTO = new ContactoDTO();
+            contactoDTO.setAlias(contacto.getAlias());
+            return contactoDTO;
+        }
+
     }
 }
