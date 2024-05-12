@@ -24,9 +24,9 @@ public class prueba {
         
         PersonaDTO pepe = op.obtenerPersonaDTOPorCurp(per);
         
-        ContactoDTO con = new ContactoDTO("Pepe", "Camila", "Fernández", "Gómez", 
-                "1234567891", tipoBancoDTO.BANCOPPEL, pepe);
+//        ContactoDTO con = new ContactoDTO("Pepe", "Camila", "Fernández", "Gómez", 
+//                "1234567891", tipoBancoDTO.BANCOPPEL, pepe);
         
-        System.out.println(a.agregar(con));
+//        System.out.println(a.agregar(con));
     }
 }

@@ -33,8 +33,10 @@ public class MostrarContactoSS implements IMostrarContactoSS {
 
     @Override
     public ContactoDTO obtenerContactoDTOPersona(ContactoDTO contactoDTO, PersonaDTO personaDTO) {
-       ContactoDTO lista = contacto.obtenerContactoDTOPersona( contactoDTO,personaDTO);
-        return lista;
+//       ContactoDTO lista = contacto.obtenerContactoDTOPersona( contactoDTO,personaDTO);
+//        return lista;
+
+    return null;
     }
 
 }

@@ -25,7 +25,8 @@ public class AnadirContactoSS implements IAnadirContactoSS {
 
     @Override
     public Boolean agregar(ContactoDTO contactoDTO) {
-       return contacto.agregar(contactoDTO);
+//       return contacto.agregar(contactoDTO);
+     return null;
     }
 
    
