@@ -24,7 +24,7 @@ import javax.swing.JComboBox;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    IPersonaSS personaSS;
+  IPersonaSS personaSS;
     ITarjetaSS tarjetaSS;
     PersonaDTO personaDTO;
     TarjetaDTO tarjetaDTO;
@@ -36,19 +36,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         personaSS = new PersonaSS();
         tarjetaSS = new TarjetaSS();
         personaDTO = persona;
-//        btnMisContactos.setIcon(this.setIcono("/Imagenes/MisContactos.png", btnMisContactos));
-//        btnMisContactos.setPressedIcon(this.setIconoPrecionado("/Imagenes/MisContactos.png", btnMisContactos, 20, 30));
         
         cargarBox(numeroCuentaComboBox);
-//        
-        TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerUltimaTarjetaDTOPersona(personaDTO);
-        
-        tarjetaDTO = tarjetaBuscada;
-        //SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
-        
-//        lblSaldo.setText(tarjetaBuscada.getSaldo().toString());
-//        TarjetaDTO t = (TarjetaDTO) numeroCuentaComboBox.getSelectedItem();
-//        SaldoDisponibleTexxField.setText(""+t.getSaldo());
+
     }
     
     public Icon setIcono(String url, JButton boton){
@@ -410,8 +400,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      public void cargarBox(JComboBox<String> cB) {
     DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
     cB.setModel(modelo);
-    
-    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personaDTO);
+    PersonaDTO personita = personaSS.obtenerPersonaDTOPorCurp(personaDTO);
+    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personita);
     
     for (int i = 0; i < lista.size(); i++) {
         modelo.addElement(lista.get(i).getNumeroCuenta());
