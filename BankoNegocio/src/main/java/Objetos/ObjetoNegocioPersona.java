@@ -107,12 +107,13 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
         for (Tarjeta tarjetaDTO : tarjetas) {
             TarjetaDTO tarjeta = ont.convertirEntidadADTO(tarjetaDTO);
-            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta
+            // Puedes agregar más asignaciones aquí si hay más atributos en la entidad Tarjeta aa
             tarjetasResultado.add(tarjeta);
         }
 
         personaDTO.setListaTarjetas(tarjetasResultado);
 
+        
         List<Contacto> contactos = persona.getListaContactos();
         List<ContactoDTO> contactosResultado = new ArrayList<>();
 
