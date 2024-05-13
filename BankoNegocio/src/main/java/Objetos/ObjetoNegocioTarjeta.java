@@ -40,7 +40,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
-        tarjeta.setId(new ObjectId("" + tarjetaDTO.getId()));
+        tarjeta.setId(tarjetaDTO.getId());
         tarjeta.setNumeroCuenta(tarjetaDTO.getNumeroCuenta());
         tarjeta.setSaldo(tarjetaDTO.getSaldo());
 
@@ -239,7 +239,8 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     @Override
     public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta) {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-        Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjeta);
+        TarjetaDTO tarjetaTemporal = obtenerTarjetaDTOPorNumero(tarjeta);
+        Tarjeta tarjetaEnt = convertirDTOAEntidad(tarjetaTemporal);
         Persona personaEnt = td.obtenerPersonaDeTarjeta(tarjetaEnt);
         return onp.convertirEntidadADTO(personaEnt);
     }

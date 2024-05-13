@@ -71,7 +71,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblContactos = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -111,13 +110,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
 
         lblContactos.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblContactos.setText("Contactos: ");
-
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -159,11 +151,9 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnRegresar)
-                        .addGap(18, 18, 18)
+                        .addGap(65, 65, 65)
                         .addComponent(btnSalir)
-                        .addGap(18, 18, 18)
+                        .addGap(102, 102, 102)
                         .addComponent(btnContinuar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -192,7 +182,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
                     .addComponent(btnSalir)
                     .addComponent(btnContinuar))
                 .addGap(23, 23, 23))
@@ -208,14 +197,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         ac.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-//     Long idPersona1 = 1L; // Reemplaza esto con el valor real del ID de la persona 1
-//    
-//    SeleccionarTarjeta s = new SeleccionarTarjeta(idPersona1);
-//    s.setVisible(true);
-//    this.setVisible(false);
-    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -303,7 +284,6 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

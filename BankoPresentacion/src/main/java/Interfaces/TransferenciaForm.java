@@ -8,6 +8,8 @@ import Funcionalidad.ITarjetaSS;
 import Funcionalidad.ITransferenciaSS;
 import Funcionalidad.TarjetaSS;
 import Funcionalidad.TransferenciaSS;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -249,11 +251,7 @@ public class TransferenciaForm extends javax.swing.JFrame {
         String motivo = txtMotivo.getText();
 
         // Crear la entidad Transferenciaa
-        TransferenciaDTO transferenciaa = new TransferenciaDTO(numeroCuentaDestinatario, numeroCuentaPropietario, importe, motivo);
-        transferenciaa.setNumeroCuentaDestinatario(numeroCuentaDestinatario);
-        transferenciaa.setNumeroCuentaPropietario(numeroCuentaPropietario);
-        transferenciaa.setImporte(importe);
-        transferenciaa.setMotivo(motivo);
+        TransferenciaDTO transferenciaa = new TransferenciaDTO(new ObjectId(), numeroCuentaDestinatario, numeroCuentaPropietario, importe, motivo, new Date());
 
         // Realizar la transferencia
         TransferenciaConfirmacion si = new TransferenciaConfirmacion(tarjetaDestino, tarjetaDTO, transferenciaa, contactoDTO);

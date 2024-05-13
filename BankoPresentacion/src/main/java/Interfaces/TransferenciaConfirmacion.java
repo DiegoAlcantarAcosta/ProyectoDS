@@ -196,9 +196,9 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaDestino);
-        if (tarjetaBuscada != null) {
-            PersonaDTO personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaBuscada);
+        TarjetaDTO tarjetaBuena = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaDTO);
+        if (tarjetaBuena != null) {
+            PersonaDTO personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaBuena);
             if (personaDTO != null) {
                 if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
                     // Transferencia exitosa

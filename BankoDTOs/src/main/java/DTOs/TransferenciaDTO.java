@@ -4,12 +4,14 @@ package DTOs;
 import entidades.Transferencia;
 import java.time.Instant;
 import java.util.Date;
+import org.bson.types.ObjectId;
 /**
  *
  * @author Wilber
  */
 public class TransferenciaDTO {
  
+ private ObjectId id;
   private String numeroCuentaDestinatario;
   private String numeroCuentaPropietario;
   private Double  importe;
@@ -20,6 +22,17 @@ public class TransferenciaDTO {
          fechaMovimiento = Date.from(Instant.now());
     }
 
+    public TransferenciaDTO(ObjectId id, String numeroCuentaDestinatario, String numeroCuentaPropietario, Double importe, String motivo, Date fechaMovimiento) {
+        this.id = id;
+        this.numeroCuentaDestinatario = numeroCuentaDestinatario;
+        this.numeroCuentaPropietario = numeroCuentaPropietario;
+        this.importe = importe;
+        this.motivo = motivo;
+        this.fechaMovimiento = fechaMovimiento;
+    }
+
+     
+     
     public TransferenciaDTO(String numeroCuentaDestinatario, String numeroCuentaPropietario, Double  importe, String motivo) {
         this.numeroCuentaDestinatario = numeroCuentaDestinatario;
         this.numeroCuentaPropietario = numeroCuentaPropietario;
