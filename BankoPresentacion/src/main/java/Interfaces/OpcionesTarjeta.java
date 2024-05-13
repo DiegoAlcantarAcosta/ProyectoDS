@@ -44,10 +44,11 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
         eliminarTarjetaSS = new EliminarTarjetaSS();
         tarjetaSS = new TarjetaSS();
 
-        this.llenarTablaTarjetas();
+        List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(persona);
+        this.llenarTablaTarjetas(listaTarjetas);
     }
 
-    private void llenarTablaTarjetas() {
+    private void llenarTablaTarjetas(List<TarjetaDTO> tarjetas) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Numero");
         modelo.addColumn("Tipo");
@@ -58,8 +59,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
         SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            List<TarjetaDTO> listaTarjetas = mostrarTarjetasSS.obtenerTarjetasDTOPersona(personaDTO);
-
+            List<TarjetaDTO> listaTarjetas = tarjetas;
             if (listaTarjetas.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontraron resultados", "AVISO", JOptionPane.WARNING_MESSAGE);
                 dispose();
@@ -247,7 +247,8 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
                 TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numero));
                 if (countRows - 1 != 0) {
                     eliminarTarjetaSS.eliminar(personaDTO, tarjetaBuscada);
-                    this.llenarTablaTarjetas();
+                    List<TarjetaDTO> listaTarjetas = tarjetaSS.obtenerTarjetasDTOPersona(personaDTO);
+                    this.llenarTablaTarjetas(listaTarjetas);
                     JOptionPane.showMessageDialog(this, "Tarjeta eliminada con exito", "AVISO", JOptionPane.WARNING_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "No puedes dejar la cuenta sin tarjetas", "AVISO", JOptionPane.WARNING_MESSAGE);

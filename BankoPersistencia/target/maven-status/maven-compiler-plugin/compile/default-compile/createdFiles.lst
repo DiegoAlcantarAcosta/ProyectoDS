@@ -1,5 +1,6 @@
 entidades\Tarjeta.class
 entidades\Transferencia.class
+interfaces\daos\IMovimientoDAO.class
 Excepciones\PersistenciaException.class
 Conexion\Conexion.class
 entidades\Inserts.class
@@ -23,9 +24,11 @@ DAOS\TransferenciaDAO.class
 entidades\MiembroGrupo.class
 interfaces\daos\IContactoDAO.class
 DAOS\GrupoDAO.class
+entidades\Movimiento.class
 entidades\Persona.class
 DAOS\TarjetaDAO.class
 DAOS\SolicitudInvitacionDAO.class
+DAOS\MovimientoDAO.class
 interfaces\daos\IPersonaDAO.class
 DAOS\ContactoDAO.class
 entidades\SolicitudInvitacion.class

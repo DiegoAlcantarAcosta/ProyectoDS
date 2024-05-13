@@ -18,9 +18,11 @@ import org.bson.types.ObjectId;
  *
  * @author Oley
  */
-
+@Entity
+@Table(name = "solicitud_invitacion")
 public class SolicitudInvitacion {
 
+    @Id
    
   private ObjectId id;
     private ObjectId usuarioId;

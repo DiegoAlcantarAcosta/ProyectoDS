@@ -144,7 +144,7 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         Boolean verifica = cd.eliminar(personaBuscada, contactoBuscado);
         return verifica;
     }
-
+    
     @Override
     public Boolean actualizar(PersonaDTO personaDTO, ContactoDTO contactoOrigiDTO, ContactoDTO contactoNuevoDTO) {
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
@@ -159,23 +159,19 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO) {
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
 
+        List<Contacto> listaEnt = personaBuscada.getListaContactos();
         List<ContactoDTO> listaDTO = new ArrayList<>();
-        if (personaBuscada != null && personaBuscada.getListaContactos() != null) {
-            List<Contacto> listaEnt = personaBuscada.getListaContactos();
 
-            for (Contacto contacto : listaEnt) {
-                ContactoDTO contaClonDTO = this.convertirEntidadADTO(contacto);
-                listaDTO.add(contaClonDTO);
-            }
-            return listaDTO;
+        for (Contacto contacto : listaEnt) {
+            ContactoDTO contaClonDTO = this.convertirEntidadADTO(contacto);
+            listaDTO.add(contaClonDTO);
         }
-
         return listaDTO;
     }
 
     @Override
     public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
-
+        
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
 
         Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
