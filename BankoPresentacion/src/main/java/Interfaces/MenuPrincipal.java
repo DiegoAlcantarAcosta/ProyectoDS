@@ -479,7 +479,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_crearGrupoButtonActionPerformed
 
     private void movimientosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movimientosButtonActionPerformed
-        
+        FrmMovimientos mv = new FrmMovimientos(personaDTO);
+        mv.setVisible(rootPaneCheckingEnabled);
+        this.setVisible(false);
 
     }//GEN-LAST:event_movimientosButtonActionPerformed
 

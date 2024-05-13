@@ -1,7 +1,6 @@
 
 package DTOs;
 
-import entidades.tipoBanco;
 import java.util.Date;
 import org.bson.types.ObjectId;
 

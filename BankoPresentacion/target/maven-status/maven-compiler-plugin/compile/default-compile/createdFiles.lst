@@ -54,6 +54,7 @@ Interfaces\TransferenciaConfirmacion$2.class
 Interfaces\AgregarContacto$3.class
 Interfaces\ConfirmacionAñadirTarjeta$1.class
 Interfaces\FrmMisContactos$3.class
+Interfaces\MenuPrincipal$11.class
 Interfaces\ConfirmacionAñadirTarjeta.class
 Interfaces\FrmAgregarMiContacto$6.class
 Interfaces\AgregarContactoInf$2.class
