@@ -16,9 +16,10 @@ import javax.swing.JOptionPane;
  * @author Dell
  */
 public class FrmAgregarMiContacto extends javax.swing.JFrame {
-    
+
     PersonaDTO personaDTO;
     IAnadirContactoSS agrega;
+
     /**
      * Creates new form FrmAgregarMiContacto
      */
@@ -30,7 +31,13 @@ public class FrmAgregarMiContacto extends javax.swing.JFrame {
         for (tipoBancoDTO value : tipoBancoDTO.values()) {
             comboBanco.addItem(value);
         }
-        
+
+    }
+
+    public boolean validarNumeroCuenta(String numeroCuenta) {
+        // Expresión regular para validar que el número de cuenta tenga exactamente 9 dígitos
+        String regex = "\\d{10}";
+        return numeroCuenta.matches(regex);
     }
 
     /**
@@ -106,6 +113,42 @@ public class FrmAgregarMiContacto extends javax.swing.JFrame {
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
+            }
+        });
+
+        txtNumCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumCuentaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumCuentaKeyTyped(evt);
+            }
+        });
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
+        txtAP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAPKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAPKeyTyped(evt);
+            }
+        });
+
+        txtAM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAMKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAMKeyTyped(evt);
             }
         });
 
@@ -200,38 +243,108 @@ public class FrmAgregarMiContacto extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
-        String[] botones = {"Si", "Cancelar", "No"};
-        int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres agregar este contacto? \nAlias:" + txtAlias.getText(), "Confirmacion", 
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
-        
-        if(i == 0){
-            tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
-            ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), 
-                    txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
-            Boolean verifica = agrega.agregar(personaDTO, contactoDTO);
-            if(verifica == true){
-                JOptionPane.showMessageDialog(this, "Contacto Agregado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        if (this.validarNumeroCuenta(txtNumCuenta.getText())) {
+            String[] botones = {"Si", "Cancelar", "No"};
+            int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres agregar este contacto? \nAlias:" + txtAlias.getText(), "Confirmacion",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+
+            if (i == 0) {
+                tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
+                ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
+                        txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
+                Boolean verifica = agrega.agregar(personaDTO, contactoDTO);
+                if (verifica == true) {
+                    JOptionPane.showMessageDialog(this, "Contacto Agregado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                    FrmMisContactos mc = new FrmMisContactos(personaDTO);
+                    mc.show();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Algo fallo!!! \nEs posible que estes intentando agregar un contacto que ya esta en tu lisa\n"
+                            + "Revisa bien el Alias o el Número de cuenta", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else if (i == 1) {
                 FrmMisContactos mc = new FrmMisContactos(personaDTO);
                 mc.show();
                 this.dispose();
+            } else if (i == 2) {
+                JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
+
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nEs posible que estes intentando agregar un contacto que ya esta en tu lisa\n"
-                        + "Revisa bien el Alias o el Número de cuenta", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Número de cuenta no valido:\nEl número de cuenta tiene que ser de 10 digitos.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE
+            );
         }
-        else if(i == 1){
-            FrmMisContactos mc = new FrmMisContactos(personaDTO);
-                mc.show();
-                this.dispose();
-        }
-        else if (i == 2){
-            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
-            
-        }
-        
+
+
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void txtNumCuentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtNumCuentaKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtAPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAPKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtAPKeyPressed
+
+    private void txtAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtAMKeyPressed
+
+    private void txtNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+        {
+
+        }
+
+        String textoActual = txtNumCuenta.getText();
+
+        if (textoActual.length() + 1 > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumCuentaKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtAPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAPKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAPKeyTyped
+
+    private void txtAMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAMKeyTyped
 
     /**
      * @param args the command line arguments
