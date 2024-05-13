@@ -19,7 +19,7 @@ import Funcionalidad.IEliminarTarjetaSS;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * la buena
  * @author Dell
  */
 public class FrmEditaMiContacto extends javax.swing.JFrame {
