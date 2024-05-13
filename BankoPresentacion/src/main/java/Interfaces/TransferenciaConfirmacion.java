@@ -16,6 +16,7 @@ import Funcionalidad.TransferenciaSS;
 import Interfaces.ConfirmacionAñadirTarjeta;
 import Interfaces.MenuPrincipal;
 import interfaces.daos.ITarjetaDAO;
+import java.text.Normalizer;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -50,6 +51,13 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
         txtNumTarjeta.setText(contactoDTO.getNumeroCuenta());
         txtTitular.setText(contactoDTO.getNombre());
 
+    }
+
+    public String igualaValores(String cadena1) {
+        String cadenaNormalizada1 = Normalizer.normalize(cadena1, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        return cadenaNormalizada1;
+        
     }
 
     /**
@@ -185,7 +193,7 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
 
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-   FrmSeleccionarContacto menuPrincipal = new FrmSeleccionarContacto(tarjetaDTO); // Instancia el formulario principal
+        FrmSeleccionarContacto menuPrincipal = new FrmSeleccionarContacto(tarjetaDTO); // Instancia el formulario principal
         menuPrincipal.setVisible(true); // Muestra el formulario principal
         this.dispose(); // Cierra el formulario actual
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -196,24 +204,43 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        TarjetaDTO tarjetaBuena = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaDTO);
+        TarjetaDTO tarjetaBuena = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaDestino);
         if (tarjetaBuena != null) {
             PersonaDTO personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaBuena);
             if (personaDTO != null) {
-                if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
-                    // Transferencia exitosa
 
-                    TransferenciaExitosa t = new TransferenciaExitosa(transferenciaDTO, tarjetaDTO);
-                    t.show();
-                    dispose();
+                String contactoNombre = this.igualaValores(contactoDTO.getNombre());
+                String personaNombre = this.igualaValores(personaDTO.getNombre());
+                String contactoAP = this.igualaValores(contactoDTO.getApellidoP());
+                String personaAP = this.igualaValores(personaDTO.getApellidoP());
+//                System.out.println("cN " + contactoNombre);
+//                System.out.println("cAP " + contactoAP);
+//                System.out.println("pN " + personaNombre);
+//                System.out.println("pAP " + personaAP);
+
+                if (personaNombre.equalsIgnoreCase(contactoNombre) && personaAP.equalsIgnoreCase(contactoAP)
+                        && tarjetaBuena.getBanco().equals(contactoDTO.getBanco())
+                        && tarjetaBuena.getNumeroCuenta().equalsIgnoreCase(contactoDTO.getNumeroCuenta())) {
+
+                    if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
+//                         Transferencia exitosa
+
+                        TransferenciaExitosa t = new TransferenciaExitosa(transferenciaDTO, tarjetaDTO);
+                        t.show();
+                        dispose();
+                    } else {
+//                         Saldo insuficiente
+                        JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    // Saldo insuficiente
-                    JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Datos del Contacto Incorrectos favor de revisarlos", "Error", JOptionPane.ERROR_MESSAGE);
+                    FrmSeleccionarContacto sc = new FrmSeleccionarContacto(tarjetaDTO);
+                    sc.show();
+                    this.dispose();
                 }
 
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Datos del Contacto Incorrectos favor de revisarlos", "Error", JOptionPane.ERROR_MESSAGE);
             FrmSeleccionarContacto sc = new FrmSeleccionarContacto(tarjetaDTO);
             sc.show();

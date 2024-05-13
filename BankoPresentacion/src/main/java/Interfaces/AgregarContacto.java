@@ -99,6 +99,11 @@ public class AgregarContacto extends javax.swing.JFrame {
                 txtAgregarNumCuentaActionPerformed(evt);
             }
         });
+        txtAgregarNumCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAgregarNumCuentaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,6 +178,24 @@ public class AgregarContacto extends javax.swing.JFrame {
         sc.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void txtAgregarNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgregarNumCuentaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+        {
+
+        }
+
+        String textoActual = txtAgregarNumCuenta.getText();
+
+        if (textoActual.length() + 1 > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAgregarNumCuentaKeyTyped
 
     /**
      * @param args the command line arguments

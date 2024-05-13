@@ -129,6 +129,11 @@ public class AgregarContactoInf extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Banco:");
@@ -164,10 +169,20 @@ public class AgregarContactoInf extends javax.swing.JFrame {
                 txtAPActionPerformed(evt);
             }
         });
+        txtAP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAPKeyTyped(evt);
+            }
+        });
 
         txtAM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAMActionPerformed(evt);
+            }
+        });
+        txtAM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAMKeyTyped(evt);
             }
         });
 
@@ -351,6 +366,33 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private void comboBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBancoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBancoActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtAPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAPKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAPKeyTyped
+
+    private void txtAMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAMKeyTyped
 
     /**
      * @param args the command line arguments

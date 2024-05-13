@@ -162,6 +162,12 @@ public class TransferenciaForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Importe:");
 
+        txtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtImporteKeyTyped(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Motivo:");
 
@@ -275,6 +281,19 @@ public class TransferenciaForm extends javax.swing.JFrame {
     private void txtNumCuentaDestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCuentaDestActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumCuentaDestActionPerformed
+
+    private void txtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if ((c < '0' || c > '9') && c != '.') {
+            evt.consume();
+        }
+        {
+
+        }
+
+    }//GEN-LAST:event_txtImporteKeyTyped
 
     /**
      * @param args the command line arguments

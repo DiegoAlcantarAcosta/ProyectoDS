@@ -15,7 +15,6 @@ Interfaces\ActualizarTarjeta$2.class
 Interfaces\FrmAgregarMiContacto$1.class
 Interfaces\MenuPrincipal$3.class
 Interfaces\FrmSeleccionarContacto$2.class
-Interfaces\FrmSeleccionarContacto$5.class
 Interfaces\InicioSesionForm.class
 Interfaces\FrmEditaMiContacto$5.class
 Interfaces\TransferenciaExitosa$1.class
@@ -41,6 +40,7 @@ Interfaces\FrmAgregarMiContacto.class
 Interfaces\ActualizarTarjeta$3.class
 Interfaces\MenuPrincipal$9.class
 Interfaces\AgregarContactoInf$1.class
+Interfaces\TransferenciaForm$5.class
 Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\MenuPrincipal$1.class
 Interfaces\OpcionesTarjeta.class
