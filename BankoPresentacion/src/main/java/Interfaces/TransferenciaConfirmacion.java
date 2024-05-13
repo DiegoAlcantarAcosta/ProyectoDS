@@ -185,8 +185,8 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
 
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//   MenuPrincipal menuPrincipal = new MenuPrincipal(tarjetaDTO.getPersona()); // Instancia el formulario principal
-//        menuPrincipal.setVisible(true); // Muestra el formulario principal
+   FrmSeleccionarContacto menuPrincipal = new FrmSeleccionarContacto(tarjetaDTO); // Instancia el formulario principal
+        menuPrincipal.setVisible(true); // Muestra el formulario principal
         this.dispose(); // Cierra el formulario actual
     }//GEN-LAST:event_btnCancelarActionPerformed
 
