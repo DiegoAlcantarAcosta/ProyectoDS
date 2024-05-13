@@ -1,10 +1,23 @@
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\PersonaDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\TarjetaDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\TransaccionDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\GrupoDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\tipoTarjetaDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\tipoBancoDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\TransferenciaDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\SolicitudInvitacionDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\ContactoDTO.java
-C:\Users\Oley\Documents\GitHub\ProyectoDS\ProyectoDS\ProyectoDS\BankoDTOs\src\main\java\DTOs\MiembroGrupoDTO.java
+<<<<<<< HEAD
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\tipoTarjetaDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\ContactoDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\TransferenciaDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\tipoBancoDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\PersonaDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\SolicitudInvitacionDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\TarjetaDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\GrupoDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\MiembroGrupoDTO.java
+C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoDTOs\src\main\java\DTOs\TransaccionDTO.java
+=======
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\ContactoDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\MiembroGrupoDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\SolicitudInvitacionDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\tipoTarjetaDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\PersonaDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\tipoBancoDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\GrupoDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\TarjetaDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\TransferenciaDTO.java
+C:\Users\Diego\Desktop\ProDS\BankoDTOs\src\main\java\DTOs\TransaccionDTO.java
+>>>>>>> 014f751c40d3249fc923158b94465cd1cdb9a45a

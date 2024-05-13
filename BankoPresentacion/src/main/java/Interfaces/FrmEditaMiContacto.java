@@ -8,13 +8,18 @@ import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
 import Funcionalidad.ActualizarContactoSS;
+import Funcionalidad.EliminarContactoSS;
 import Funcionalidad.IEliminarContactoSS;
 import Funcionalidad.IActualizarContactoSS;
 import Funcionalidad.IEliminarContactoSS;
+//import Funcionalidad.ActualizarContactoSS;
+import Funcionalidad.IEliminarTarjetaSS;
+import Funcionalidad.IActualizarTarjetaSS;
+import Funcionalidad.IEliminarTarjetaSS;
 import javax.swing.JOptionPane;
 
 /**
- * la buena
+ *
  * @author Dell
  */
 public class FrmEditaMiContacto extends javax.swing.JFrame {
@@ -23,16 +28,17 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
     ContactoDTO contactoOrigiDTO;
     IActualizarContactoSS actualiza;
     IEliminarContactoSS elimina;
+
     /**
      * Creates new form FrmEditaMiContacto
      */
     public FrmEditaMiContacto(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         initComponents();
-//        this.actualiza = new ActualizarContactoSS();
-//        this.elimina = new EliminarContactoSS();
+        this.actualiza = new ActualizarContactoSS();
+        this.elimina = new EliminarContactoSS();
         this.personaDTO = personaDTO;
         this.contactoOrigiDTO = contactoDTO;
-        
+
         this.txtAlias.setText(contactoDTO.getAlias());
         this.txtNombre.setText(contactoDTO.getNombre());
         this.txtNumCuenta.setText(contactoDTO.getNumeroCuenta());
@@ -42,7 +48,13 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
             comboBanco.addItem(value);
         }
         comboBanco.setSelectedItem(contactoDTO.getBanco());
-        
+
+    }
+
+    public boolean validarNumeroCuenta(String numeroCuenta) {
+        // Expresión regular para validar que el número de cuenta tenga exactamente 9 dígitos
+        String regex = "\\d{10}";
+        return numeroCuenta.matches(regex);
     }
 
     /**
@@ -102,9 +114,45 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
+        txtNumCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumCuentaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumCuentaKeyTyped(evt);
+            }
+        });
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Alias: ");
 
+        txtAP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAPKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAPKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Nombre: ");
+
+        txtAM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAMKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAMKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Apellido paterno: ");
 
@@ -215,35 +263,41 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 //         TODO add your handling code here:
-        String[] botones = {"Si", "Cancelar", "No"};
-        int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres editar este contacto? \nAlias:" + txtAlias.getText(), "Confirmacion",
-            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        if (this.validarNumeroCuenta(txtNumCuenta.getText())) {
+            String[] botones = {"Si", "Cancelar", "No"};
+            int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres editar este contacto? \nAlias:" + txtAlias.getText(), "Confirmacion",
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
 
-        if(i == 0){
-            tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
-            ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
-                txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
-            Boolean verifica = actualiza.actualizar(personaDTO, contactoOrigiDTO, contactoDTO);
-            if(verifica == true){
-                JOptionPane.showMessageDialog(this, "Contacto Editado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            if (i == 0) {
+                tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
+                ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
+                        txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
+                Boolean verifica = actualiza.actualizar(personaDTO, contactoOrigiDTO, contactoDTO);
+                if (verifica == true) {
+                    JOptionPane.showMessageDialog(this, "Contacto Editado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                    FrmMisContactos mc = new FrmMisContactos(personaDTO);
+                    mc.show();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else if (i == 1) {
                 FrmMisContactos mc = new FrmMisContactos(personaDTO);
                 mc.show();
                 this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (i == 2) {
+                JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
+
             }
 
         }
-        else if(i == 1){
-            FrmMisContactos mc = new FrmMisContactos(personaDTO);
-            mc.show();
-            this.dispose();
+        else{
+            JOptionPane.showMessageDialog(this, "Número de cuenta no valido:\nEl número de cuenta tiene que ser de 10 digitos.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE
+                    );
         }
-        else if (i == 2){
-            JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
 
-        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -259,32 +313,93 @@ public class FrmEditaMiContacto extends javax.swing.JFrame {
         String[] botones = {"Si", "Cancelar", "No"};
         int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres eliminar este contacto? \n Aunque hayas editado algún campo, si no confirmaste la edición se borrara el siguiente contacto:\n"
                 + "Alias:" + contactoOrigiDTO.getAlias(), "Confirmacion",
-            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
 
-        if(i == 0){
+        if (i == 0) {
             Boolean verifica = elimina.eliminar(personaDTO, contactoOrigiDTO);
-            if(verifica == true){
+            if (verifica == true) {
                 JOptionPane.showMessageDialog(this, "Contacto Eliminado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 FrmMisContactos mc = new FrmMisContactos(personaDTO);
                 mc.show();
                 this.dispose();
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Algo fallo!!! \nIntentalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-        }
-        else if(i == 1){
+        } else if (i == 1) {
             FrmMisContactos mc = new FrmMisContactos(personaDTO);
             mc.show();
             this.dispose();
-        }
-        else if (i == 2){
+        } else if (i == 2) {
             JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
 
         }
-        
+
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtNumCuentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtNumCuentaKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtAPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAPKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtAPKeyPressed
+
+    private void txtAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtAMKeyPressed
+
+    private void txtNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+        {
+
+        }
+
+        String textoActual = txtNumCuenta.getText();
+
+        if (textoActual.length() + 1 > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumCuentaKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtAPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAPKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAPKeyTyped
+
+    private void txtAMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAMKeyTyped
 
     /**
      * @param args the command line arguments

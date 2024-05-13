@@ -10,6 +10,7 @@ import Objetos.Interfaces.IObjetoNegocioContacto;
 import Objetos.Interfaces.IObjetoNegocioPersona;
 import Objetos.ObjetoNegocioContacto;
 import Objetos.ObjetoNegocioPersona;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,20 +53,14 @@ public class MostrarContactoSS implements IMostrarContactoSS {
     private Boolean validaMuestra(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         PersonaDTO personaBuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
 
-        List<ContactoDTO> listaContactos = personaBuscada.getListaContactos();
-
-        if (listaContactos != null) {
+        if (personaBuscada != null && personaBuscada.getListaContactos() != null) {
+            List<ContactoDTO> listaContactos = personaBuscada.getListaContactos();
 
             for (ContactoDTO conta : listaContactos) {
                 if (conta.getAlias().equalsIgnoreCase(contactoDTO.getAlias())) {
-
                     return true;
-
                 }
             }
-
-            return false;
-
         }
 
         return false;

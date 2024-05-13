@@ -35,7 +35,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
     public ObjetoNegocioPersona() {
         this.pd = new PersonaDAO();
-    } 
+    }
     // Diego Alcantar
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
@@ -62,9 +62,9 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
         persona.setListaTarjetas(tarjetasResultado);
 
-
         List<ContactoDTO> contactos = personaDTO.getListaContactos();
         List<Contacto> contactosResultado = new ArrayList<>();
+
         if (contactos != null) {
             for (ContactoDTO contactoDTO : contactos) {
                 Contacto contacto = this.convertirDTOAEntidad(contactoDTO);

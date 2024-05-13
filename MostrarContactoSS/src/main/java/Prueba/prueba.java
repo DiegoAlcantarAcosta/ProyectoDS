@@ -30,7 +30,7 @@ public class prueba {
 //        IObjetoNegocioPersona per = new ObjetoNegocioPersona();
 //        PersonaDTO perDTO = per.obtenerPersonaDTOPorCurp(p);
         
-        System.out.println(m.obtenerContactoDTOPersona(personaDTO, contactoActualizaDTO));
+        System.out.println(m.obtenerContactosDTOPersona(personaDTO));
         
         
     }
