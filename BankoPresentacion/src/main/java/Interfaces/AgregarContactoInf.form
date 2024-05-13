@@ -63,8 +63,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtBanco" max="32767" attributes="0"/>
                               <Component id="txtAM" pref="193" max="32767" attributes="0"/>
+                              <Component id="comboBanco" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -100,7 +100,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBanco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBanco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -209,11 +209,6 @@
         <Property name="text" type="java.lang.String" value="Guardar contacto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBanco">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBancoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="checkBxGuardar">
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkBxGuardarMouseClicked"/>
@@ -261,6 +256,19 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Apellido Materno:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBanco">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBancoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;tipoBancoDTO&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

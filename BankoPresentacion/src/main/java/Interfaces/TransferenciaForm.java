@@ -19,22 +19,24 @@ public class TransferenciaForm extends javax.swing.JFrame {
     ITarjetaSS tarjetaSS;
     TarjetaDTO tarjetaDTO;
     TarjetaDTO tarjetaDestino;
+    ContactoDTO contactoDTO;
     
 
     /**
      * Creates new form MenuPrincipal
      */
-    public TransferenciaForm(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta) {
+    public TransferenciaForm(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta, ContactoDTO contacto) {
         initComponents();
         transferenciaSS = new TransferenciaSS();
         tarjetaSS = new TarjetaSS();
         tarjetaDestino = tarjetaDesti;
         tarjetaDTO = tarjeta;
+        contactoDTO = contacto;
 
         SaldoDisponibleTexxField.setText(""+tarjetaDTO.getSaldo());
-        txtBancoDestinatario.setText(tarjetaDestino.getBanco().toString());
-//        txtNombreDestinatario.setText(tarjetaDestino.getPersona().getNombre());
-        txtNumCuentaDest.setText(tarjetaDestino.getNumeroCuenta());
+        txtBancoDestinatario.setText(contactoDTO.getBanco().toString());
+        txtNombreDestinatario.setText(contacto.getNombre());
+        txtNumCuentaDest.setText(contactoDTO.getNumeroCuenta());
 
     }
 
@@ -241,20 +243,20 @@ public class TransferenciaForm extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // Obtener los datos de la transferencia
 
-        String numeroCuentaDestinatario = tarjetaDestino.getNumeroCuenta();
+        String numeroCuentaDestinatario = contactoDTO.getNumeroCuenta();
         String numeroCuentaPropietario = tarjetaDTO.getNumeroCuenta();
         Double importe = Double.parseDouble(txtImporte.getText());
         String motivo = txtMotivo.getText();
 
         // Crear la entidad Transferenciaa
-        TransferenciaDTO transferenciaa = new TransferenciaDTO();
+        TransferenciaDTO transferenciaa = new TransferenciaDTO(numeroCuentaDestinatario, numeroCuentaPropietario, importe, motivo);
         transferenciaa.setNumeroCuentaDestinatario(numeroCuentaDestinatario);
         transferenciaa.setNumeroCuentaPropietario(numeroCuentaPropietario);
         transferenciaa.setImporte(importe);
         transferenciaa.setMotivo(motivo);
 
         // Realizar la transferencia
-        TransferenciaConfirmacion si = new TransferenciaConfirmacion(tarjetaDestino, tarjetaDTO, transferenciaa);
+        TransferenciaConfirmacion si = new TransferenciaConfirmacion(tarjetaDestino, tarjetaDTO, transferenciaa, contactoDTO);
         si.show();
         dispose();
 

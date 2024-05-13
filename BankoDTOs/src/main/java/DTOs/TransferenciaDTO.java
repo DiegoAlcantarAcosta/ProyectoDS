@@ -15,8 +15,6 @@ public class TransferenciaDTO {
   private Double  importe;
   private String motivo;
   private Date fechaMovimiento;
-  private PersonaDTO persona;
-  private TarjetaDTO tarjeta;
 
      public TransferenciaDTO() {
          fechaMovimiento = Date.from(Instant.now());
@@ -74,28 +72,10 @@ public class TransferenciaDTO {
         this.fechaMovimiento = fechaMovimiento;
     }
 
-    public PersonaDTO getPersona() {
-        return persona;
-    }
-
-    public void setPersona(PersonaDTO persona) {
-        this.persona = persona;
-    }
-
-    public TarjetaDTO getTarjeta() {
-        return tarjeta;
-    }
-
-    public void setTarjeta(TarjetaDTO tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
     @Override
     public String toString() {
-        return "TransferenciaDTO{" + "numeroCuentaDestinatario=" + numeroCuentaDestinatario + ", numeroCuentaPropietario=" + numeroCuentaPropietario + ", importe=" + importe + ", motivo=" + motivo + ", fechaMovimiento=" + fechaMovimiento + ", persona=" + persona + ", tarjeta=" + tarjeta + '}';
+        return "TransferenciaDTO{" + "numeroCuentaDestinatario=" + numeroCuentaDestinatario + ", numeroCuentaPropietario=" + numeroCuentaPropietario + ", importe=" + importe + ", motivo=" + motivo + ", fechaMovimiento=" + fechaMovimiento + '}';
     }
-  
-  
   
         
 }

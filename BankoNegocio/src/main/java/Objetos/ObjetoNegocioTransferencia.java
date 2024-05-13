@@ -56,18 +56,6 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         transferenciaDTO.setNumeroCuentaDestinatario(transferencia.getNumeroCuentaDestinatario());
         transferenciaDTO.setNumeroCuentaPropietario(transferencia.getNumeroCuentaPropietario());
 
-        ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
-        PersonaDTO personaDTO = onp.convertirEntidadADTO(transferencia.getPersona());
-        PersonaDTO persona = onp.obtenerPersonaDTOPorCurp(personaDTO);
-
-        transferenciaDTO.setPersona(persona);
-        
-        ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
-        TarjetaDTO tarjetaDTO = ont.convertirEntidadADTO(transferencia.getTarjeta());
-        TarjetaDTO tarjeta = ont.obtenerTarjetaDTOPorNumero(tarjetaDTO);
-
-        transferenciaDTO.setTarjeta(tarjetaDTO);
-
         return transferenciaDTO;
     }
     

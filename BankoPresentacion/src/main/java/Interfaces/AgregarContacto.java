@@ -14,11 +14,12 @@ import javax.swing.JOptionPane;
  * @author Wilber
  */
 public class AgregarContacto extends javax.swing.JFrame {
-
+    
     IAnadirContactoSS contacto;
     ITarjetaSS tarjetaSS;
     TarjetaDTO tarjetaDTO;
     TarjetaDTO tarjetaContacto;
+
     /**
      * Creates new form MenuPrincipal
      */
@@ -27,7 +28,7 @@ public class AgregarContacto extends javax.swing.JFrame {
         tarjetaDTO = tarjeta;
         tarjetaSS = new TarjetaSS();
         contacto = new AnadirContactoSS();
-        tarjetaContacto = new  TarjetaDTO(txtAgregarNumCuenta.getText());
+        tarjetaContacto = new TarjetaDTO(txtAgregarNumCuenta.getText());
 
 //       txtAgregarNumCuenta.setText("0006407926304483");
     }
@@ -141,22 +142,23 @@ public class AgregarContacto extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // Capturar el número de cuenta ingresado
-        tarjetaContacto = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(txtAgregarNumCuenta.getText()));
-         
-        if (tarjetaContacto != null){
-             // Crear una instancia del formulario AgregarContactoInf y pasar el número de cuenta
-        AgregarContactoInf agregarConInf = new AgregarContactoInf( tarjetaDTO, tarjetaContacto);
+//        tarjetaContacto = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(txtAgregarNumCuenta.getText()));
+//         
+//        if (tarjetaContacto != null){
+        // Crear una instancia del formulario AgregarContactoInf y pasar el número de cuenta
+        tarjetaContacto.setNumeroCuenta(txtAgregarNumCuenta.getText());
+        AgregarContactoInf agregarConInf = new AgregarContactoInf(tarjetaDTO, tarjetaContacto);
 
         // Mostrar el formulario AgregarContactoInf
         agregarConInf.setVisible(true);
 
         // Cerrar el formulario actual
         this.dispose();
-        } else {
-            JOptionPane.showConfirmDialog(null, "Numero de cuenta no existente");
-        }
+//        } else {
+//            JOptionPane.showConfirmDialog(null, "Numero de cuenta no existente");
+//        }
 
-       
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtAgregarNumCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgregarNumCuentaActionPerformed

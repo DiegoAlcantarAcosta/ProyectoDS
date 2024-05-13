@@ -1,6 +1,7 @@
 package Interfaces;
 
 import DTOs.ContactoDTO;
+import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
 import DTOs.tipoBancoDTO;
 import Funcionalidad.AnadirContactoSS;
@@ -11,6 +12,7 @@ import Funcionalidad.MostrarContactoSS;
 import Funcionalidad.TarjetaSS;
 import Interfaces.TransferenciaForm;
 import entidades.Consultas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,11 +36,21 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         tarjetass = new TarjetaSS();
         tarjetaDesti = tarjetaDestinatario;
         tarjetaOri = tarjetaOrigen;
-        
+
+        for (tipoBancoDTO value : tipoBancoDTO.values()) {
+            comboBanco.addItem(value);
+        }
+
 //        txtNombre.setText(tarjetaDestinatario.getPersona().getNombre());
 //        txtAP.setText(tarjetaDestinatario.getPersona().getApellidoP());
 //        txtAM.setText(tarjetaDestinatario.getPersona().getApellidoM());
-        txtBanco.setText(tarjetaDestinatario.getBanco().toString());
+//        txtBanco.setText(tarjetaDestinatario.getBanco().toString());
+    }
+
+    public boolean validarNumeroCuenta(String numeroCuenta) {
+        // Expresión regular para validar que el número de cuenta tenga exactamente 9 dígitos
+        String regex = "\\d{10}";
+        return numeroCuenta.matches(regex);
     }
 
     /**
@@ -58,7 +70,6 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtBanco = new javax.swing.JTextField();
         checkBxGuardar = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         txtAlias = new javax.swing.JTextField();
@@ -66,6 +77,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         txtAP = new javax.swing.JTextField();
         txtAM = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        comboBanco = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar Contacto");
@@ -123,12 +135,6 @@ public class AgregarContactoInf extends javax.swing.JFrame {
 
         jLabel5.setText("Guardar contacto");
 
-        txtBanco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBancoActionPerformed(evt);
-            }
-        });
-
         checkBxGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 checkBxGuardarMouseClicked(evt);
@@ -168,6 +174,12 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Apellido Materno:");
 
+        comboBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBancoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,8 +215,8 @@ public class AgregarContactoInf extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtBanco)
-                                .addComponent(txtAM, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+                                .addComponent(txtAM, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                                .addComponent(comboBanco, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,7 +242,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -251,19 +263,49 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        PersonaDTO personaDTO = tarjetass.obtenerPersonaDeTarjeta(tarjetaOri);
+
         if (checkBxGuardar.isSelected()) {
-            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
-            
-//            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), tarjetaDesti.getNumeroCuenta(), tarjeBusc.getBanco(), tarjetaOri.getPersona());
-//            ss.agregar(cont);
-            //ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(cont, tarjetaOri.getPersona());
-            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
-            transferencia.show();
-            this.dispose();
+            if (this.validarNumeroCuenta(tarjetaDesti.getNumeroCuenta())) {
+                String[] botones = {"Si", "Cancelar", "No"};
+                int i = JOptionPane.showOptionDialog(this, "¿Seguro que quieres agregar este contacto? \nAlias:" + txtAlias.getText(), "Confirmacion",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+
+                if (i == 0) {
+                    tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
+                    ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
+                            tarjetaDesti.getNumeroCuenta(), (tipoBancoDTO) tipoBanco);
+                    Boolean verifica = ss.agregar(personaDTO, contactoDTO);
+                    if (verifica == true) {
+                        JOptionPane.showMessageDialog(this, "Contacto Agregado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                        TransferenciaForm transferencia = new TransferenciaForm(tarjetaDesti, tarjetaOri, contactoDTO);
+                        transferencia.show();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Algo fallo!!! \nEs posible que estes intentando agregar un contacto que ya esta en tu lisa\n"
+                                + "Revisa bien el Alias o el Número de cuenta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else if (i == 1) {
+                    FrmSeleccionarContacto sc = new FrmSeleccionarContacto(tarjetaOri);
+                    sc.show();
+                    this.dispose();
+                } else if (i == 2) {
+                    JOptionPane.showMessageDialog(this, "Muy bien, termina de editar tu contacto:) ", "Continua Editando", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Número de cuenta no valido:\nEl número de cuenta tiene que ser de 10 digitos.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE
+                );
+            }
         } else {
-            ContactoDTO cont = new ContactoDTO();
-            TarjetaDTO tarjeBusc = tarjetass.obtenerTarjetaDTOPorNumero(tarjetaDesti);
-            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri);
+            tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
+            ContactoDTO cont = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(), 
+                    tarjetaDesti.getNumeroCuenta(), tipoBanco);
+            TarjetaDTO tarjeBusc = tarjetaDesti;
+            TransferenciaForm transferencia = new TransferenciaForm(tarjeBusc, tarjetaOri, cont);
             transferencia.show();
             dispose();
         }
@@ -274,7 +316,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private void checkBxGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBxGuardarActionPerformed
         if (checkBxGuardar.isSelected()) {
             txtAlias.setEnabled(true);
-        } else if(!checkBxGuardar.isSelected()){
+        } else if (!checkBxGuardar.isSelected()) {
             txtAlias.setEnabled(false);
         }
     }//GEN-LAST:event_checkBxGuardarActionPerformed
@@ -282,10 +324,6 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBancoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBancoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         AgregarContacto agregarContacto = new AgregarContacto(tarjetaOri);
@@ -310,6 +348,10 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkBxGuardarMouseClicked
 
+    private void comboBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBancoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBancoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +360,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAtras;
     private javax.swing.JCheckBox checkBxGuardar;
+    private javax.swing.JComboBox<tipoBancoDTO> comboBanco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,7 +372,6 @@ public class AgregarContactoInf extends javax.swing.JFrame {
     private javax.swing.JTextField txtAM;
     private javax.swing.JTextField txtAP;
     private javax.swing.JTextField txtAlias;
-    private javax.swing.JTextField txtBanco;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

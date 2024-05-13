@@ -36,7 +36,7 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         initComponents();
         tarjetaSS = new TarjetaSS();
         tarjeta = tarjetaDTO;
-//        persona = tarjeta.getPersona();
+        persona = tarjetaSS.obtenerPersonaDeTarjeta(tarjeta);
         mostrarContactoSS = new MostrarContactoSS();
 
         List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(persona);
@@ -44,15 +44,17 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
     }
 
     private void llenarTablaContactos(List<ContactoDTO> contactos) {
-        DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
-        model.setRowCount(0);
+            DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
+            model.setRowCount(0);
 
-        for (ContactoDTO contacto : contactos) {
-            Object[] row = {
-                contacto.getAlias()
-            };
-            model.addRow(row);
+            for (ContactoDTO contacto : contactos) {
+                Object[] row = {
+                    contacto.getAlias()
+                };
+                model.addRow(row);
+            
         }
+
     }
 
     /**
@@ -230,7 +232,7 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
             String alias = (String) tableContactos.getValueAt(selectedRow, 0);
             ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(persona, new ContactoDTO(alias));
             tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
-            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta);
+            TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta, contactoBuscado);
             trans.setVisible(true);
             this.setVisible(false);
         } else {
