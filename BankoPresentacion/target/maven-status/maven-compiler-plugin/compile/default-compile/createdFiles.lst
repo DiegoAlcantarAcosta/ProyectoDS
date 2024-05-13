@@ -2,6 +2,7 @@ Interfaces\ContraseñaTarjetas$2.class
 Interfaces\OpcionesTarjeta$1.class
 Interfaces\AgregarContacto$1.class
 Interfaces\AñadirTarjeta$1.class
+Interfaces\FrmMovimientos$4.class
 Interfaces\TransferenciaForm$2.class
 Interfaces\AgregarContactoInf$7.class
 Interfaces\MenuPrincipal$6.class
@@ -28,6 +29,7 @@ Interfaces\FrmMisContactos.class
 Interfaces\FrmMisContactos$2.class
 Interfaces\FrmAgregarMiContacto$5.class
 Interfaces\AgregarContactoInf$4.class
+Interfaces\FrmMovimientos$3.class
 Interfaces\AñadirTarjeta$2.class
 Interfaces\AgregarContactoInf$8.class
 Interfaces\ContraseñaTarjetas$3.class
@@ -58,6 +60,8 @@ Interfaces\AgregarContactoInf$2.class
 Interfaces\MenuPrincipal$5.class
 Interfaces\TransferenciaForm$4.class
 Interfaces\AñadirTarjeta$3.class
+Interfaces\FrmMovimientos$2.class
+Interfaces\FrmMovimientos$5.class
 Interfaces\AgregarContactoInf$5.class
 Prueba\ProyectoDS.class
 Interfaces\ContraseñaTarjetas$1.class
@@ -72,10 +76,12 @@ Interfaces\TransferenciaConfirmacion$3.class
 Interfaces\AgregarContacto$2.class
 Interfaces\TransferenciaExitosa.class
 Interfaces\AgregarContacto.class
+Interfaces\FrmMovimientos.class
 Interfaces\TransferenciaForm$3.class
 Interfaces\AgregarContactoInf$9.class
 Interfaces\MenuPrincipal$4.class
 Interfaces\AgregarContactoInf$3.class
+Interfaces\FrmMovimientos$1.class
 Interfaces\MenuPrincipal.class
 Interfaces\ActualizarTarjeta$1.class
 Interfaces\OpcionesTarjeta$5.class

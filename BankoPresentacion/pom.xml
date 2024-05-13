@@ -15,17 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>AnadirContactoSS</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>BankoNegocio</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>TarjetaSS</artifactId>
             <version>${project.version}</version>
             <exclusions>
@@ -135,6 +124,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>MostrarContactoSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AnadirContactoSS</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
