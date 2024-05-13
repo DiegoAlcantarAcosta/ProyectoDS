@@ -182,6 +182,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Perfil");
 
+        movimientosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movimientosButtonActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Movimientos");
 
         btnMisContactos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -471,6 +477,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //
 //    this.setVisible(false);
     }//GEN-LAST:event_crearGrupoButtonActionPerformed
+
+    private void movimientosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movimientosButtonActionPerformed
+        
+
+    }//GEN-LAST:event_movimientosButtonActionPerformed
 
     /**
      * @param args the command line arguments
