@@ -92,29 +92,22 @@ public class TarjetaDAO implements ITarjetaDAO {
 // Diego Alcantar
 
     @Override
-public void eliminar(Persona persona, Tarjeta tarjeta) {
-    if (persona != null && persona.getListaTarjetas() != null) {
-        List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona); // Obtener las tarjetas una sola vez
-        Iterator<Tarjeta> iterator = tarjetas.iterator();
-        boolean encontrada = false;
-        while (iterator.hasNext()) {
-            Tarjeta t = iterator.next();
-            if (t.getNumeroCuenta().equals(tarjeta.getNumeroCuenta())) {
-                iterator.remove();
-                encontrada = true;
-                break;
+    public void eliminar(Persona persona, Tarjeta tarjeta) {
+        if (persona != null) {
+            List<Tarjeta> tarjetas = obtenerTarjetasPersona(persona); // Obtener las tarjetas una sola vez
+            Iterator<Tarjeta> iterator = tarjetas.iterator();
+            while (iterator.hasNext()) {
+                Tarjeta t = iterator.next();
+                if (t.getNumeroCuenta().equals(tarjeta.getNumeroCuenta())) {
+                    iterator.remove();
+                    break;
+                }
             }
-        }
-        if (encontrada) {
             coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.set("listaTarjetas", tarjetas));
         } else {
             System.out.println("No se encontró la tarjeta.");
         }
-    } else {
-        System.out.println("No se encontró la persona o no tiene tarjetas.");
     }
-}
-
 // Diego Alcantar
 
     @Override

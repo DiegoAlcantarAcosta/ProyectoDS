@@ -24,7 +24,7 @@ import javax.swing.JComboBox;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-  IPersonaSS personaSS;
+    IPersonaSS personaSS;
     ITarjetaSS tarjetaSS;
     PersonaDTO personaDTO;
     TarjetaDTO tarjetaDTO;
@@ -36,9 +36,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         personaSS = new PersonaSS();
         tarjetaSS = new TarjetaSS();
         personaDTO = persona;
+//        btnMisContactos.setIcon(this.setIcono("/Imagenes/MisContactos.png", btnMisContactos));
+//        btnMisContactos.setPressedIcon(this.setIconoPrecionado("/Imagenes/MisContactos.png", btnMisContactos, 20, 30));
         
         cargarBox(numeroCuentaComboBox);
-
+//        
+        TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerUltimaTarjetaDTOPersona(personaDTO);
+        
+        tarjetaDTO = tarjetaBuscada;
+        //SaldoDisponibleTexxField.setText(tarjetaBuscada.getSaldo().toString());
+        
+//        lblSaldo.setText(tarjetaBuscada.getSaldo().toString());
+//        TarjetaDTO t = (TarjetaDTO) numeroCuentaComboBox.getSelectedItem();
+//        SaldoDisponibleTexxField.setText(""+t.getSaldo());
     }
     
     public Icon setIcono(String url, JButton boton){
@@ -192,12 +202,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jLabel7.setText("Mis Contactos");
-
-        crearGrupoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearGrupoButtonActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Crear Grupo");
 
@@ -400,8 +404,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      public void cargarBox(JComboBox<String> cB) {
     DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
     cB.setModel(modelo);
-    PersonaDTO personita = personaSS.obtenerPersonaDTOPorCurp(personaDTO);
-    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personita);
+    
+    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personaDTO);
     
     for (int i = 0; i < lista.size(); i++) {
         modelo.addElement(lista.get(i).getNumeroCuenta());
@@ -463,14 +467,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mc.setVisible(rootPaneCheckingEnabled);
         this.setVisible(false);
     }//GEN-LAST:event_btnMisContactosActionPerformed
-
-    private void crearGrupoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearGrupoButtonActionPerformed
-//    FrmCrearGrupo menuPrincipal = new FrmCrearGrupo(personaDTO);
-//
-//    menuPrincipal.setVisible(true);
-//
-//    this.setVisible(false);
-    }//GEN-LAST:event_crearGrupoButtonActionPerformed
 
     /**
      * @param args the command line arguments

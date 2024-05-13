@@ -20,8 +20,10 @@ import org.bson.types.ObjectId;
  *
  * @author Oley
  */
-
+@Entity
+@Table(name = "grupo")
 public class Grupo {
+    @Id
     private ObjectId id;
     private String nombre;
     private double montoTotal;

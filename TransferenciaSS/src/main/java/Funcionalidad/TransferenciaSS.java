@@ -37,9 +37,6 @@ public class TransferenciaSS implements ITransferenciaSS{
         if(personaBuscada != null){
             return transferencia.realizarTransferencia(transferenciaDTO);
         }
-        
-        
-        
         return false;
         
         
