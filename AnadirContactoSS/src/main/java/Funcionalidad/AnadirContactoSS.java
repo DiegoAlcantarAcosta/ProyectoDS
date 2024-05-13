@@ -16,7 +16,7 @@ import Objetos.ObjetoNegocioTarjeta;
 import java.util.List;
 
 /**
- *
+ * ya jala wey
  * @author Diego
  */
 public class AnadirContactoSS implements IAnadirContactoSS {
