@@ -19,41 +19,39 @@ import interfaces.daos.ITarjetaDAO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
-
 /**
  *
  * @author Diego
  */
 public class TransferenciaConfirmacion extends javax.swing.JFrame {
-    
-     ITransferenciaSS transferenciaSS;
+
+    ITransferenciaSS transferenciaSS;
     ITarjetaSS tarjetaSS;
     TarjetaDTO tarjetaDTO;
     TarjetaDTO tarjetaDestino;
     ContactoDTO contactoDTO;
     TransferenciaDTO transferenciaDTO;
+
     /**
      * Creates new form MenuPrincipal
      */
     public TransferenciaConfirmacion(TarjetaDTO tarjetaDesti, TarjetaDTO tarjeta, TransferenciaDTO transferencia, ContactoDTO contacto) {
-        
+
         initComponents();
-        
+
         transferenciaSS = new TransferenciaSS();
         tarjetaSS = new TarjetaSS();
         tarjetaDestino = tarjetaDesti;
         tarjetaDTO = tarjeta;
         contactoDTO = contacto;
         transferenciaDTO = transferencia;
-        
+
         txtImporte.setText("" + transferencia.getImporte());
         txtNumTarjeta.setText(contactoDTO.getNumeroCuenta());
         txtTitular.setText(contactoDTO.getNombre());
-        
+
     }
 
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,8 +182,8 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 //   MenuPrincipal menuPrincipal = new MenuPrincipal(tarjetaDTO.getPersona()); // Instancia el formulario principal
 //        menuPrincipal.setVisible(true); // Muestra el formulario principal
@@ -199,32 +197,34 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         TarjetaDTO tarjetaBuscada = tarjetaSS.obtenerTarjetaDTOPorNumero(tarjetaDestino);
-       PersonaDTO personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaBuscada);
-        if(personaDTO != null){
-            if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
-            // Transferencia exitosa
+        if (tarjetaBuscada != null) {
+            PersonaDTO personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaBuscada);
+            if (personaDTO != null) {
+                if (transferenciaSS.realizarTransferencia(transferenciaDTO)) {
+                    // Transferencia exitosa
 
-            TransferenciaExitosa t = new TransferenciaExitosa(transferenciaDTO, tarjetaDTO);
-            t.show();
-            dispose();
-        } else {
-            // Saldo insuficiente
-            JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    TransferenciaExitosa t = new TransferenciaExitosa(transferenciaDTO, tarjetaDTO);
+                    t.show();
+                    dispose();
+                } else {
+                    // Saldo insuficiente
+                    JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
         }
-           
-       }
         else{
             JOptionPane.showMessageDialog(this, "Datos del Contacto Incorrectos favor de revisarlos", "Error", JOptionPane.ERROR_MESSAGE);
             FrmSeleccionarContacto sc = new FrmSeleccionarContacto(tarjetaDTO);
             sc.show();
             this.dispose();
         }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

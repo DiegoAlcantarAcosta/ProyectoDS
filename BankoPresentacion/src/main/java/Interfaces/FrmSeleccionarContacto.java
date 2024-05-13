@@ -231,12 +231,12 @@ public class FrmSeleccionarContacto extends javax.swing.JFrame {
         if (selectedRow != -1) {
             String alias = (String) tableContactos.getValueAt(selectedRow, 0);
             ContactoDTO contactoBuscado = mostrarContactoSS.obtenerContactoDTOPersona(persona, new ContactoDTO(alias));
-            tarjeDesti = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(contactoBuscado.getNumeroCuenta()));
+            tarjeDesti = new TarjetaDTO(contactoBuscado.getNumeroCuenta());
             TransferenciaForm trans = new TransferenciaForm(tarjeDesti, tarjeta, contactoBuscado);
             trans.setVisible(true);
             this.setVisible(false);
         } else {
-            JOptionPane.showConfirmDialog(null, "Seleccione un contacto");
+            JOptionPane.showConfirmDialog(this, "Seleccione un contacto");
         }
 //        // TODO add your handling code here:
 //        int selectedRow = tableContactos.getSelectedRow();

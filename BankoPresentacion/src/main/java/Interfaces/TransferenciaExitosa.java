@@ -6,6 +6,8 @@ package Interfaces;
 
 import DTOs.TarjetaDTO;
 import DTOs.TransferenciaDTO;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.TarjetaSS;
 import java.text.SimpleDateFormat;
 
 /**
@@ -13,8 +15,10 @@ import java.text.SimpleDateFormat;
  * @author Diego
  */
 public class TransferenciaExitosa extends javax.swing.JFrame {
-
-        TransferenciaDTO transferenciaDTO;
+    
+    
+    ITarjetaSS tarjetass;    
+    TransferenciaDTO transferenciaDTO;
         TarjetaDTO tarjetaDTO;
     /**
      * Creates new form MenuPrincipal
@@ -23,6 +27,7 @@ public class TransferenciaExitosa extends javax.swing.JFrame {
         initComponents();
         transferenciaDTO = transferencia;
         tarjetaDTO = tarjeta;
+        tarjetass = new TarjetaSS();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato de la fecha
         String fechaString = sdf.format(transferenciaDTO.getFechaMovimiento()); // Convierte la fecha a String
         
@@ -172,8 +177,8 @@ public class TransferenciaExitosa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
-//        MenuPrincipal menu = new MenuPrincipal(tarjetaDTO.getPersona());
-//        menu.show();
+        MenuPrincipal menu = new MenuPrincipal(tarjetass.obtenerPersonaDeTarjeta(tarjetaDTO));
+        menu.show();
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
