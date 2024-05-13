@@ -17,42 +17,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Wilber
  */
-@Entity
-@Table(name = "transferencias")
-public class Transferencia implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "numero_tarjetaDestinatario", nullable = false)
+public class Transferencia {
+    
+    private ObjectId id;
     private String numeroCuentaDestinatario;
-    
-    @Column(name = "numero_tarjetaPropietario", nullable = false)
     private String numeroCuentaPropietario;
-    
-    @Column(name = "importe", nullable = false)
     private Double  importe;
-    
-    @Column(name = "motivo", nullable = false)
     private String motivo;
-    
-    @Column(name = "fecha_importe", nullable = false)
-    @Temporal(TemporalType.DATE)
     private Date fechaMovimiento;
-    
-     @ManyToOne
-    @JoinColumn(name = "persona_id_origen")
-    private Persona persona;
-
-    @ManyToOne
-    @JoinColumn(name = "tarjeta_id_origen")
-    private Tarjeta tarjeta;
 
     public Transferencia() {
     }
@@ -64,24 +42,6 @@ public class Transferencia implements Serializable {
         this.motivo = motivo;
         this.fechaMovimiento = fechaMovimiento;
     }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Tarjeta getTarjeta() {
-        return tarjeta;
-    }
-
-    public void setTarjeta(Tarjeta tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
-   
 
     public String getNumeroCuentaDestinatario() {
         return numeroCuentaDestinatario;
@@ -115,11 +75,11 @@ public class Transferencia implements Serializable {
         this.motivo = motivo;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -131,13 +91,9 @@ public class Transferencia implements Serializable {
         this.fechaMovimiento = fechaMovimiento;
     }
 
-  
-    
-    
-
     @Override
     public String toString() {
-        return "entidades.Transferencia[ id=" + id + " ]";
+        return "Transferencia{" + "id=" + id + ", numeroCuentaDestinatario=" + numeroCuentaDestinatario + ", numeroCuentaPropietario=" + numeroCuentaPropietario + ", importe=" + importe + ", motivo=" + motivo + ", fechaMovimiento=" + fechaMovimiento + '}';
     }
 
 }
