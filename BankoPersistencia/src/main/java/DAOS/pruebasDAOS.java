@@ -24,7 +24,7 @@ public class pruebasDAOS {
     public static void main(String[] args) {
 //       TarjetaDAO td = new TarjetaDAO();
 //        PersonaDAO pd = new PersonaDAO();
-        Tarjeta t = new Tarjeta("1234567897");
+        Tarjeta t = new Tarjeta("1234567891");
 //        Persona p = new Persona("RAGI930420MDFRRS05");
 //        Persona person = pd.obtenerPersonaPorCurp(p);
 //        System.out.println(td.obtenerTarjetasPersona(person).toString());
@@ -58,7 +58,7 @@ public class pruebasDAOS {
 //
 //        
         TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-        System.out.println(transferenciaDAO.ingresosDelDia(t));
+        System.out.println(transferenciaDAO.obtenerTransferenciasSinFecha(t));
         
         
         

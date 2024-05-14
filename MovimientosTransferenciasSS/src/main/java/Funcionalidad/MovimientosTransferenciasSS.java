@@ -50,5 +50,10 @@ public class MovimientosTransferenciasSS implements IMovimientosTransferenciasSS
         return transferencia.egresosDelDia(tarjetaDTO);
 
     }
+    
+    @Override
+    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO){
+        return transferencia.obtenerTransferenciasSinFecha(tarjetaDTO);
+    }
 
 }

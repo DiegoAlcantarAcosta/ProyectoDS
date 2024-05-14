@@ -1,6 +1,5 @@
 package DTOs;
 
-import entidades.Persona;
 import java.util.Calendar;
 import java.util.Date;
 import org.bson.types.ObjectId;

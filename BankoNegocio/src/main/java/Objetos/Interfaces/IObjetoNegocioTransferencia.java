@@ -8,7 +8,6 @@ import DTOs.TarjetaDTO;
 import DTOs.TransferenciaDTO;
 import java.util.Date;
 import java.util.List;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -23,5 +22,6 @@ public interface IObjetoNegocioTransferencia {
     public List<TransferenciaDTO> obtenerTransferencias(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
     public Double ingresosDelDia (TarjetaDTO tarjetaDTO);
     public Double egresosDelDia (TarjetaDTO tarjetaDTO);
+    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO);
 
 }   

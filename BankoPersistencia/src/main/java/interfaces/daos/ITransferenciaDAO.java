@@ -22,4 +22,6 @@ public interface ITransferenciaDAO {
     public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin);
     public Double ingresosDelDia (Tarjeta tarjeta);
     public Double egresosDelDia (Tarjeta tarjeta);
+    public List<Transferencia> obtenerTransferenciasSinFecha(Tarjeta tarjeta);
+    //completo
 }

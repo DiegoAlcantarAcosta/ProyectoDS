@@ -277,5 +277,20 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         return egreso;
 
     }
+    
+    @Override
+    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO){
+        Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
+        List<Transferencia> transferenciasEntidad = trd.obtenerTransferenciasSinFecha(tarjetaConvert);
+        List<TransferenciaDTO> transferenciasDTO = new ArrayList<>();
+
+        for (Transferencia transferencia : transferenciasEntidad) {
+            TransferenciaDTO transferenciaDTO = convertirEntidadADTO(transferencia);
+            transferenciasDTO.add(transferenciaDTO);
+        }
+
+        return transferenciasDTO;
+        
+    }
 
 }

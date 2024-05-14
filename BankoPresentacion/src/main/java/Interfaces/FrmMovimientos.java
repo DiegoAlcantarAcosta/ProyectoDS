@@ -8,6 +8,7 @@ import Funcionalidad.MovimientosTransferenciasSS;
 import Funcionalidad.TarjetaSS;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
 
@@ -35,20 +36,11 @@ public class FrmMovimientos extends javax.swing.JFrame {
         this.tarjetaDTO = tarjetaDTO;
         this.personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaDTO);
         movimientos = new MovimientosTransferenciasSS();
-        
-        
-        
-        
+
         lblNombre.setText(this.lblNombre.getText() + ": " + this.personaDTO.getNombre() + this.personaDTO.getApellidoP());
         lblCuenta.setText(this.lblCuenta.getText() + ": " + this.tarjetaDTO.getNumeroCuenta());
         lblBanco.setText(this.lblBanco.getText() + ": " + this.tarjetaDTO.getBanco().toString());
-      
-        
-        
-        
-        
-        
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -300,11 +292,15 @@ public class FrmMovimientos extends javax.swing.JFrame {
         List<TransferenciaDTO> transferencias;
         if (ingresos && egresos) {
             transferencias = movimientos.obtenerTransferencias(tarjetaDTO, fechaInicio, fechaFin);
-        } else if (ingresos) {
+        } else if (ingresos && fechaInicio != null && fechaFin != null) {
             transferencias = movimientos.obtenerTransferenciasIngreso(tarjetaDTO, fechaInicio, fechaFin);
-        } else if (egresos) {
+        } else if (egresos && fechaInicio != null && fechaFin != null) {
             transferencias = movimientos.obtenerTransferenciasEgreso(tarjetaDTO, fechaInicio, fechaFin);
+
+        } else if (!egresos && !ingresos && fechaInicio == null && fechaFin == null) {
+            transferencias = movimientos.obtenerTransferenciasSinFecha(tarjetaDTO);
         } else {
+            JOptionPane.showMessageDialog(this, "Seleccione las fechas y seleccione si es ingreso o egreso","Alerta",JOptionPane.WARNING_MESSAGE);
             // No se seleccionó ningún filtro, mostrar un mensaje de error o manejar el caso según sea necesario
             return;
         }

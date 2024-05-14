@@ -1,7 +1,6 @@
 
 package DTOs;
 
-import entidades.Transferencia;
 import java.time.Instant;
 import java.util.Date;
 import org.bson.types.ObjectId;
@@ -41,7 +40,7 @@ public class TransferenciaDTO {
         fechaMovimiento = Date.from(Instant.now());
     }
     
-     public TransferenciaDTO(Transferencia transferencia) {
+     public TransferenciaDTO(TransferenciaDTO transferencia) {
          
     }
 

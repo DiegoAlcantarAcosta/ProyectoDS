@@ -25,4 +25,6 @@ public interface IMovimientosTransferenciasSS {
     public Double ingresosDelDia (TarjetaDTO tarjetaDTO);
     
     public Double egresosDelDia (TarjetaDTO tarjetaDTO);
+    
+    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO);
 }

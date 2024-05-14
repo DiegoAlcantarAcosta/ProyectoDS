@@ -16,6 +16,7 @@ import entidades.Transferencia;
 import interfaces.daos.ITarjetaDAO;
 import interfaces.daos.ITransferenciaDAO;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.bson.BsonDateTime;
@@ -24,6 +25,7 @@ import org.bson.types.ObjectId;
 
 /**
  * YA LISTOOO
+ *
  * @author Wilber
  */
 public class TransferenciaDAO implements ITransferenciaDAO {
@@ -90,7 +92,6 @@ public class TransferenciaDAO implements ITransferenciaDAO {
             // Convertir la fecha al formato BsonDateTime
 //            BsonDateTime fechaMovimientoBson = new BsonDateTime(transferencia.getFechaMovimiento().getTime());
 //            transferencia.setFechaMovimientoBson(fechaMovimientoBson);
-
             coleccionTransferencias.insertOne(transferencia);
 
             return true;
@@ -104,25 +105,14 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     public List<Transferencia> obtenerTransferenciasEgreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
 
-        // Crear un filtro para buscar transferencias asociadas a la tarjeta
-        Document filtroTarjeta = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
+        Document filtroFecha = new Document("fechaMovimiento",
+                new Document("$gte", fechaInicio).append("$lte", fechaFin));
 
-        // Aplicar el filtro de la tarjeta a la consulta
-        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroTarjeta).into(new ArrayList<>());
+        Document filtroCombinado = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta())
+                .append("$and", Arrays.asList(filtroFecha));
 
-        // Ahora, necesitas aplicar los filtros adicionales de fecha y tipo de transferencia.
-        // Para ello, puedes utilizar el operador "and" en MongoDB.
-        BasicDBObject fechaQuery = new BasicDBObject();
-        fechaQuery.put("$gte", fechaInicio); // Mayor o igual que fechaInicio
-        fechaQuery.put("$lte", fechaFin);   // Menor o igual que fechaFin
-
-        // Combinar los filtros
-        BasicDBObject filtro = new BasicDBObject();
-        filtro.put("fechaMovimiento", fechaQuery);
-//        filtro.put("importe", new BasicDBObject("$lt", 0)); // Importe negativo para egresos
-
-        // Aplicar el filtro combinado
-        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtro).into(new ArrayList<>());
+        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroCombinado)
+                .into(new ArrayList<>());
 
         return listaBuscada;
     }
@@ -131,103 +121,112 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     public List<Transferencia> obtenerTransferenciasIngreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
 
-        // Crear un filtro para buscar transferencias asociadas a la tarjeta
-        Document filtroTarjeta = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
+        Document filtroFecha = new Document("fechaMovimiento",
+                new Document("$gte", fechaInicio).append("$lte", fechaFin));
 
-        // Aplicar el filtro de la tarjeta a la consulta
-        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroTarjeta).into(new ArrayList<>());
+        Document filtroCombinado = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta())
+                .append("$and", Arrays.asList(filtroFecha));
 
-        // Ahora, necesitas aplicar los filtros adicionales de fecha y tipo de transferencia.
-        // Para ello, puedes utilizar el operador "and" en MongoDB.
-        BasicDBObject fechaQuery = new BasicDBObject();
-        fechaQuery.put("$gte", fechaInicio); // Mayor o igual que fechaInicio
-        fechaQuery.put("$lte", fechaFin);   // Menor o igual que fechaFin
+        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroCombinado)
+                .into(new ArrayList<>());
 
-        // Combinar los filtros
-        BasicDBObject filtro = new BasicDBObject();
-        filtro.put("fechaMovimiento", fechaQuery);
-//        filtro.put("importe", new BasicDBObject("$lt", 0)); // Importe negativo para egresos
+        return listaBuscada;
 
-        // Aplicar el filtro combinado
-        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtro).into(new ArrayList<>());
+    }
+
+//    @Override
+//    public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
+//        MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
+//
+//        // Crear un filtro para buscar transferencias asociadas a la tarjeta
+//        Document filtroTarjetaEgreso = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
+//        Document filtroTarjetaIngreso = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
+//
+//        // Aplicar el filtro de la tarjeta a la consulta
+//        List<Transferencia> listaBuscadaEgreso = coleccionTransferencias.find(filtroTarjetaEgreso).into(new ArrayList<>());
+//        List<Transferencia> listaBuscadaIngreso = coleccionTransferencias.find(filtroTarjetaIngreso).into(new ArrayList<>());
+//
+//        // Ahora, necesitas aplicar los filtros adicionales de fecha y tipo de transferencia.
+//        // Para ello, puedes utilizar el operador "and" en MongoDB.
+//        BasicDBObject fechaQuery1 = new BasicDBObject();
+//        fechaQuery1.put("$gte", fechaInicio); // Mayor o igual que fechaInicio
+//        fechaQuery1.put("$lte", fechaFin);   // Menor o igual que fechaFin
+//
+//        // Combinar los filtros
+//        BasicDBObject filtro1 = new BasicDBObject();
+//        filtro1.put("fechaMovimiento", fechaQuery1);
+////        filtro1.put("importe", new BasicDBObject("$lt", 0)); // Importe negativo para egresos
+//
+//        // Aplicar el filtro combinado
+//        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
+//        List<Transferencia> transferenciasIngreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
+//
+//        List<Transferencia> transferencias = new ArrayList<>();
+//        transferencias.addAll(listaBuscadaEgreso);
+//        transferencias.addAll(listaBuscadaIngreso);
+//
+//        return transferencias;
+//    }
+    @Override
+    public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
+        List<Transferencia> listaIngresos = this.obtenerTransferenciasIngreso(tarjeta, fechaInicio, fechaFin);
+        List<Transferencia> listaEgresos = this.obtenerTransferenciasEgreso(tarjeta, fechaInicio, fechaFin);
+
+        List<Transferencia> lista = new ArrayList<>();
+        lista.addAll(listaIngresos);
+        lista.addAll(listaEgresos);
+
+        return lista;
+    }
+
+    @Override
+    public List<Transferencia> obtenerTransferenciasSinFecha(Tarjeta tarjeta) {
+        MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
+
+        Document filtroTarjeta = new Document("$or", Arrays.asList(
+                new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta()),
+                new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta())));
+
+        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroTarjeta)
+                .into(new ArrayList<>());
 
         return listaBuscada;
     }
 
     @Override
-    public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
-        MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
-
-        // Crear un filtro para buscar transferencias asociadas a la tarjeta
-        Document filtroTarjetaEgreso = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
-        Document filtroTarjetaIngreso = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
-                    
-        
-        
-        // Aplicar el filtro de la tarjeta a la consulta
-        List<Transferencia> listaBuscadaEgreso = coleccionTransferencias.find(filtroTarjetaEgreso).into(new ArrayList<>());
-        List<Transferencia> listaBuscadaIngreso = coleccionTransferencias.find(filtroTarjetaIngreso).into(new ArrayList<>());
-
-        // Ahora, necesitas aplicar los filtros adicionales de fecha y tipo de transferencia.
-        // Para ello, puedes utilizar el operador "and" en MongoDB.
-        BasicDBObject fechaQuery1 = new BasicDBObject();
-        fechaQuery1.put("$gte", fechaInicio); // Mayor o igual que fechaInicio
-        fechaQuery1.put("$lte", fechaFin);   // Menor o igual que fechaFin
-
-
-        // Combinar los filtros
-        BasicDBObject filtro1 = new BasicDBObject();
-        filtro1.put("fechaMovimiento", fechaQuery1);
-//        filtro1.put("importe", new BasicDBObject("$lt", 0)); // Importe negativo para egresos
-
-       
-        // Aplicar el filtro combinado
-        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
-        List<Transferencia> transferenciasIngreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
-
-        List<Transferencia> transferencias = new ArrayList<>();
-        transferencias.addAll(listaBuscadaEgreso);
-        transferencias.addAll(listaBuscadaIngreso);
-
-        return transferencias;
-    }
-
-    
-    public Double ingresosDelDia (Tarjeta tarjeta) {
+    public Double ingresosDelDia(Tarjeta tarjeta) {
         Date fecha = new Date();
         List<Transferencia> listaIngresos = this.obtenerTransferenciasIngreso(tarjeta, fecha, fecha);
-        
-        Double ingreso = 0d;   
-        
+
+        Double ingreso = 0d;
+
         if (listaIngresos != null) {
-            
-           for (Transferencia transferencia : listaIngresos) {
-             ingreso += transferencia.getImporte();
-          } 
-      }
-   
-        
+
+            for (Transferencia transferencia : listaIngresos) {
+                ingreso += transferencia.getImporte();
+            }
+        }
+
         return ingreso;
-        
+
     }
-    
-    public Double egresosDelDia (Tarjeta tarjeta) {
+
+    @Override
+    public Double egresosDelDia(Tarjeta tarjeta) {
         Date fecha = new Date();
         List<Transferencia> listaEgresos = this.obtenerTransferenciasEgreso(tarjeta, fecha, fecha);
-        
-        Double egreso = 0d;   
-        
+
+        Double egreso = 0d;
+
         if (listaEgresos != null) {
-            
-           for (Transferencia transferencia : listaEgresos) {
-             egreso += transferencia.getImporte();
-          } 
-      }
-   
-        
+
+            for (Transferencia transferencia : listaEgresos) {
+                egreso += transferencia.getImporte();
+            }
+        }
+
         return egreso;
-        
+
     }
-    
-    
+
 }
