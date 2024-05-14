@@ -57,8 +57,20 @@ public class pruebasDAOS {
 //        System.out.println(transferenciaDAO.obtenerTransferencias(t, fecha1, fecha2));
 //
 //        
+
+ Date fecha1 = new Date(124, 4, 14);
+
+Date fecha = new Date();
+//        fecha1.setHours(23);
+//        fecha1.setMinutes(59);
+//        fecha1.setSeconds(59);
+//        fecha.setHours(0);
+//        fecha.setMinutes(0);
+//        fecha.setSeconds(0);
         TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-        System.out.println(transferenciaDAO.obtenerTransferenciasSinFecha(t));
+        System.out.println(transferenciaDAO.obtenerTransferenciasEgreso(t, fecha, fecha));
+//        System.out.println(fecha1);
+        System.out.println(transferenciaDAO.egresosDelDia(t));
         
         
         

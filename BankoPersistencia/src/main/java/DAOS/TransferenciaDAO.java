@@ -17,10 +17,12 @@ import interfaces.daos.ITarjetaDAO;
 import interfaces.daos.ITransferenciaDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.bson.BsonDateTime;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -104,33 +106,68 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     @Override
     public List<Transferencia> obtenerTransferenciasEgreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
+        
+        Date fechaI = new Date(fechaInicio.getTime());
+        Date fechaF = new Date(fechaFin.getTime());
+        fechaI.setHours(0);
+        fechaI.setMinutes(0);
+        fechaI.setSeconds(0);
 
-        Document filtroFecha = new Document("fechaMovimiento",
-                new Document("$gte", fechaInicio).append("$lte", fechaFin));
+        fechaF.setHours(23);
+        fechaF.setMinutes(59);
+        fechaF.setSeconds(59);
 
-        Document filtroCombinado = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta())
-                .append("$and", Arrays.asList(filtroFecha));
+        System.out.println("Inicio: " + fechaI);
+        System.out.println("Fin: " + fechaF);
 
-        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroCombinado)
-                .into(new ArrayList<>());
+        Document filtroTarjeta = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
+        
+        Document filtroFecha = new Document();
+        filtroFecha.put("$gte", fechaI);
+        filtroFecha.put("$lte", fechaF);
+        
+        List<Document> filtros = new ArrayList<>();
+        filtros.add(filtroTarjeta);
+        filtros.add(new Document("fechaMovimiento", filtroFecha));
+        Document filtroCombinado = new Document("$and", filtros);
+        
+        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtroCombinado).into(new ArrayList<>());
 
-        return listaBuscada;
+        return transferenciasEgreso;
     }
 
     @Override
     public List<Transferencia> obtenerTransferenciasIngreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
+        
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
+        
+        Date fechaI = new Date(fechaInicio.getTime());
+        Date fechaF = new Date(fechaFin.getTime());
+        fechaI.setHours(0);
+        fechaI.setMinutes(0);
+        fechaI.setSeconds(0);
 
-        Document filtroFecha = new Document("fechaMovimiento",
-                new Document("$gte", fechaInicio).append("$lte", fechaFin));
+        fechaF.setHours(23);
+        fechaF.setMinutes(59);
+        fechaF.setSeconds(59);
 
-        Document filtroCombinado = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta())
-                .append("$and", Arrays.asList(filtroFecha));
+        System.out.println("Inicio: " + fechaI);
+        System.out.println("Fin: " + fechaF);
 
-        List<Transferencia> listaBuscada = coleccionTransferencias.find(filtroCombinado)
-                .into(new ArrayList<>());
+        Document filtroTarjeta = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
+        
+        Document filtroFecha = new Document();
+        filtroFecha.put("$gte", fechaI);
+        filtroFecha.put("$lte", fechaF);
+        
+        List<Document> filtros = new ArrayList<>();
+        filtros.add(filtroTarjeta);
+        filtros.add(new Document("fechaMovimiento", filtroFecha));
+        Document filtroCombinado = new Document("$and", filtros);
+        
+        List<Transferencia> transferenciasIngreso = coleccionTransferencias.find(filtroCombinado).into(new ArrayList<>());
 
-        return listaBuscada;
+        return transferenciasIngreso;
 
     }
 
