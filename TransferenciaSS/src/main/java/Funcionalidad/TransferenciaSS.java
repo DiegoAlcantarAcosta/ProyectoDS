@@ -11,6 +11,9 @@ import Objetos.Interfaces.IObjetoNegocioTransferencia;
 import Objetos.ObjetoNegocioPersona;
 import Objetos.ObjetoNegocioTarjeta;
 import Objetos.ObjetoNegocioTransferencia;
+import java.util.Date;
+import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -44,7 +47,5 @@ public class TransferenciaSS implements ITransferenciaSS{
         
         
     }
-
-    
-    
+       
 }

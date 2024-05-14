@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.bson.BsonDateTime;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
@@ -31,6 +33,7 @@ public class Transferencia {
     private Double  importe;
     private String motivo;
     private Date fechaMovimiento;
+   // private BsonDateTime fechaMovimientoBson;
 
     public Transferencia() {
     }
@@ -42,6 +45,19 @@ public class Transferencia {
         this.motivo = motivo;
         this.fechaMovimiento = fechaMovimiento;
     }
+
+    
+    
+//    public BsonDateTime getFechaMovimientoBson() {
+//        return fechaMovimientoBson;
+//    }
+//
+//    public void setFechaMovimientoBson(BsonDateTime fechaMovimientoBson) {
+//        this.fechaMovimientoBson = fechaMovimientoBson;
+//    }
+
+   
+   
 
     public String getNumeroCuentaDestinatario() {
         return numeroCuentaDestinatario;
@@ -95,5 +111,12 @@ public class Transferencia {
     public String toString() {
         return "Transferencia{" + "id=" + id + ", numeroCuentaDestinatario=" + numeroCuentaDestinatario + ", numeroCuentaPropietario=" + numeroCuentaPropietario + ", importe=" + importe + ", motivo=" + motivo + ", fechaMovimiento=" + fechaMovimiento + '}';
     }
+
+   
+
+   
+
+    
+   
 
 }

@@ -11,8 +11,6 @@ import entidades.Transaccion;
 import interfaces.daos.ITransaccionDAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 

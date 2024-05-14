@@ -5,6 +5,7 @@
 package Objetos.Interfaces;
 
 import DTOs.MovimientoDTO;
+import entidades.Movimiento;
 import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -16,5 +17,5 @@ import org.bson.types.ObjectId;
 public interface IObjetoNegocioMovimiento {
     
     public List<MovimientoDTO> obtenerMovimientos(ObjectId userId, Date fechaInicio, Date fechaFin, boolean ingresos, boolean egresos);
-    
+    public void guardarMovimiento(Movimiento movimiento);
 }

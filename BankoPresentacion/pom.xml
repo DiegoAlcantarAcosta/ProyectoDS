@@ -133,7 +133,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>MovimientosSS</artifactId>
+            <artifactId>MovimientosTransferenciasSS</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

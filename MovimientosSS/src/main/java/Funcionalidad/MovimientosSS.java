@@ -27,7 +27,6 @@ public class MovimientosSS implements IMovimientosSS {
     @Override
     public List<MovimientoDTO> obtenerMovimientos(ObjectId userId, Date fechaInicio, Date fechaFin, boolean ingresos, boolean egresos) {
         return movimiento.obtenerMovimientos(userId, fechaInicio, fechaFin, ingresos, egresos);
-    
     }
     
 }

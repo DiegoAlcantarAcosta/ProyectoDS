@@ -7,6 +7,7 @@ package Objetos;
 import DTOs.MovimientoDTO;
 import Objetos.Interfaces.IObjetoNegocioMovimiento;
 import entidades.Movimiento;
+import entidades.tipoBanco;
 import interfaces.daos.IMovimientoDAO;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,13 +36,17 @@ public class ObjetoNegocioMovimiento implements IObjetoNegocioMovimiento{
     public List<MovimientoDTO> obtenerMovimientos(ObjectId userId, Date fechaInicio, Date fechaFin, boolean ingresos, boolean egresos) {
         List<Movimiento> movimientosEntidad = movimientoDAO.obtenerMovimientos(userId, fechaInicio, fechaFin, ingresos, egresos);
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
-
+  
         for (Movimiento movimiento : movimientosEntidad) {
             MovimientoDTO movimientoDTO = onm.convertirEntidadADTO(movimiento);
             movimientosDTO.add(movimientoDTO);
         }
 
         return movimientosDTO;
+    }
+    
+     public void guardarMovimiento(Movimiento movimiento) {
+        movimientoDAO.guardarMovimiento(movimiento);
     }
     
     

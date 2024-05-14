@@ -47,6 +47,14 @@ public class MovimientoDAO implements IMovimientoDAO {
 
         return movimientos;
     }
+    
+    @Override
+    public void guardarMovimiento(Movimiento movimiento) {
+        Document documentoMovimiento = convertirEntidadADocumento(movimiento);
+        coleccionMovimientos.insertOne(documentoMovimiento);
+    }
+    
+    
 
     private Movimiento convertirDocumentoAMovimientoDTO(Document doc) {
         ObjectId id = (ObjectId) doc.get("_id");
@@ -63,5 +71,25 @@ public class MovimientoDAO implements IMovimientoDAO {
         return new Movimiento(id, nombre, importe, motivo, banco, numeroCuenta, fecha);
 
     }
+    
+    private Document convertirEntidadADocumento(Movimiento movimiento) {
+    Document documentoMovimiento = new Document();
+    
+    // Agregar los campos del objeto Movimiento al Document
+    documentoMovimiento.append("nombre", movimiento.getNombre())
+                       .append("importe", movimiento.getImporte())
+                       .append("motivo", movimiento.getMotivo())
+                       .append("banco", movimiento.getBanco().toString()) // Asumiendo que tipoBanco tiene un método toString()
+                       .append("numeroCuenta", movimiento.getNumeroCuenta())
+                       .append("fecha", movimiento.getFecha());
+    
+    // Si el objeto Movimiento tiene un ID asignado, agregar el campo "_id"
+    if (movimiento.getId() != null) {
+        documentoMovimiento.append("_id", movimiento.getId());
+    }
+    
+    return documentoMovimiento;
+}
+    
 
 }

@@ -1,13 +1,15 @@
-
 package Interfaces;
 
-import DTOs.MovimientoDTO;
 import DTOs.PersonaDTO;
-import Funcionalidad.IMovimientosSS;
-import Funcionalidad.MovimientosSS;
+import DTOs.TarjetaDTO;
+import DTOs.TransferenciaDTO;
+import Funcionalidad.ITarjetaSS;
+import Funcionalidad.MovimientosTransferenciasSS;
+import Funcionalidad.TarjetaSS;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -15,20 +17,40 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmMovimientos extends javax.swing.JFrame {
 
-    PersonaDTO personaDTO;
-    IMovimientosSS mN;
-    
+    private ITarjetaSS tarjetaSS;
+    private PersonaDTO personaDTO;
+    private TarjetaDTO tarjetaDTO;
+
+    MovimientosTransferenciasSS movimientos;
+
     /**
      * Creates new form Movimientos
+     *
      * @param personaDTO
      */
-    public FrmMovimientos(PersonaDTO personaDTO) {
+    public FrmMovimientos(TarjetaDTO tarjetaDTO) {
         initComponents();
-        this.personaDTO = personaDTO;
-        mN = new MovimientosSS();
+        tarjetaSS = new TarjetaSS();
+        personaDTO = personaDTO;
+        this.tarjetaDTO = tarjetaDTO;
+        this.personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaDTO);
+        movimientos = new MovimientosTransferenciasSS();
+        
+        
+        
+        
+        lblNombre.setText(this.lblNombre.getText() + ": " + this.personaDTO.getNombre() + this.personaDTO.getApellidoP());
+        lblCuenta.setText(this.lblCuenta.getText() + ": " + this.tarjetaDTO.getNumeroCuenta());
+        lblBanco.setText(this.lblBanco.getText() + ": " + this.tarjetaDTO.getBanco().toString());
+      
+        
+        
+        
+        
+        
+        
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,9 +60,8 @@ public class FrmMovimientos extends javax.swing.JFrame {
         perfilButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
         lblBanco = new javax.swing.JLabel();
-        lblNumero = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
@@ -87,14 +108,11 @@ public class FrmMovimientos extends javax.swing.JFrame {
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Cuenta");
+        lblCuenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCuenta.setText("Cuenta");
 
         lblBanco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblBanco.setText("Banco");
-
-        lblNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblNumero.setText("Numero");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Inicio:");
@@ -127,13 +145,13 @@ public class FrmMovimientos extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Destinatario", "Importe", "Motivo", "Banco", "Numero Cuenta", "Fecha"
+                "Destinatario", "Importe", "Motivo", "Numero Cuenta", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -161,12 +179,9 @@ public class FrmMovimientos extends javax.swing.JFrame {
                                 .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNumero)
-                                    .addComponent(lblNombre)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lblBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(158, 158, 158)
                                 .addComponent(btnBuscar))
@@ -183,7 +198,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
                                             .addComponent(chbxEgresos)
                                             .addComponent(chbxIngresos)))
                                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 304, Short.MAX_VALUE))
+                        .addGap(0, 254, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -207,11 +222,9 @@ public class FrmMovimientos extends javax.swing.JFrame {
                             .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(lblBanco))
+                        .addComponent(lblCuenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNumero)
+                        .addComponent(lblBanco)
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,22 +248,47 @@ public class FrmMovimientos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void actualizarEncabezadosTabla(boolean ingresos, boolean egresos) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setColumnIdentifiers(new String[]{
+            ingresos ? "Emisor" : "Destinatario",
+            "Importe",
+            "Motivo",
+            "Numero Cuenta",
+            "Fecha"
+        });
+    }
+
+    private void llenarTabla(List<TransferenciaDTO> transferencias) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0); // Limpiar el modelo antes de agregar las nuevas filas
+
+        for (TransferenciaDTO transferencia : transferencias) {
+            Object[] fila = new Object[5]; // Número de columnas en tu tabla
+            fila[0] = transferencia.getNumeroCuentaDestinatario(); // Emisor o Destinatario
+            fila[1] = transferencia.getImporte();
+            fila[2] = transferencia.getMotivo();
+            fila[3] = transferencia.getNumeroCuentaPropietario();
+            fila[4] = transferencia.getFechaMovimiento();
+            modelo.addRow(fila); // Agregar la fila al modelo de la tabla
+        }
+    }
+
     private void perfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButtonActionPerformed
 
     }//GEN-LAST:event_perfilButtonActionPerformed
 
     private void chbxIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxIngresosActionPerformed
         if (chbxIngresos.isSelected()) {
-        chbxEgresos.setSelected(false); 
-    }
+            chbxEgresos.setSelected(false);
+        }
 
     }//GEN-LAST:event_chbxIngresosActionPerformed
 
     private void chbxEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxEgresosActionPerformed
-         if (chbxEgresos.isSelected()) {
-        chbxIngresos.setSelected(false); 
-    }
-
+        if (chbxEgresos.isSelected()) {
+            chbxIngresos.setSelected(false);
+        }
     }//GEN-LAST:event_chbxEgresosActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -259,21 +297,21 @@ public class FrmMovimientos extends javax.swing.JFrame {
         boolean ingresos = chbxIngresos.isSelected();
         boolean egresos = chbxEgresos.isSelected();
 
-        List<MovimientoDTO> movimientos = mN.obtenerMovimientos(personaDTO.getId(), fechaInicio, fechaFin, ingresos, egresos);
-
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-
-        for (MovimientoDTO movimiento : movimientos) {
-            Object[] fila = new Object[6];
-            fila[0] = ingresos ? movimiento.getNombre() : "Destinatario";
-            fila[1] = movimiento.getImporte();
-            fila[2] = movimiento.getMotivo();
-            fila[3] = movimiento.getBanco().name();
-            fila[4] = movimiento.getNumeroCuenta();
-            fila[5] = movimiento.getFecha();
-            modelo.addRow(fila);
+        List<TransferenciaDTO> transferencias;
+        if (ingresos && egresos) {
+            transferencias = movimientos.obtenerTransferencias(tarjetaDTO, fechaInicio, fechaFin);
+        } else if (ingresos) {
+            transferencias = movimientos.obtenerTransferenciasIngreso(tarjetaDTO, fechaInicio, fechaFin);
+        } else if (egresos) {
+            transferencias = movimientos.obtenerTransferenciasEgreso(tarjetaDTO, fechaInicio, fechaFin);
+        } else {
+            // No se seleccionó ningún filtro, mostrar un mensaje de error o manejar el caso según sea necesario
+            return;
         }
+
+        actualizarEncabezadosTabla(ingresos, egresos);
+        llenarTabla(transferencias);
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -328,15 +366,14 @@ public class FrmMovimientos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBanco;
+    private javax.swing.JLabel lblCuenta;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNumero;
     private javax.swing.JButton perfilButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Objetos.Interfaces;
+package Funcionalidad;
 
 import DTOs.TarjetaDTO;
 import DTOs.TransferenciaDTO;
@@ -12,16 +12,17 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author Dell
+ * @author Wilber
  */
-public interface IObjetoNegocioTransferencia {
+public interface IMovimientosTransferenciasSS {
 
-    public boolean realizarTransferencia(TransferenciaDTO transferenciaDTO);
-    
     public List<TransferenciaDTO> obtenerTransferenciasEgreso(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
-    public List<TransferenciaDTO> obtenerTransferenciasIngreso(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
-    public List<TransferenciaDTO> obtenerTransferencias(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
-    public Double ingresosDelDia (TarjetaDTO tarjetaDTO);
-    public Double egresosDelDia (TarjetaDTO tarjetaDTO);
 
-}   
+    public List<TransferenciaDTO> obtenerTransferenciasIngreso(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
+
+    public List<TransferenciaDTO> obtenerTransferencias(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin);
+
+    public Double ingresosDelDia (TarjetaDTO tarjetaDTO);
+    
+    public Double egresosDelDia (TarjetaDTO tarjetaDTO);
+}

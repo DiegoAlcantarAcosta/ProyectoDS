@@ -6,7 +6,9 @@ package Interfaces;
 
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
+import Funcionalidad.IMovimientosTransferenciasSS;
 import Funcionalidad.ITarjetaSS;
+import Funcionalidad.MovimientosTransferenciasSS;
 import Funcionalidad.TarjetaSS;
 import Funucionalidad.IPersonaSS;
 import Funucionalidad.PersonaSS;
@@ -24,43 +26,53 @@ import javax.swing.JComboBox;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-  IPersonaSS personaSS;
+    IMovimientosTransferenciasSS movimientosTransferenciasSS;
+    IPersonaSS personaSS;
     ITarjetaSS tarjetaSS;
     PersonaDTO personaDTO;
     TarjetaDTO tarjetaDTO;
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal(PersonaDTO persona) {
         initComponents();
+        movimientosTransferenciasSS = new MovimientosTransferenciasSS();
         personaSS = new PersonaSS();
         tarjetaSS = new TarjetaSS();
         personaDTO = persona;
-        
+
         cargarBox(numeroCuentaComboBox);
 
+       
+      IngresosTexxField.setText(movimientosTransferenciasSS.ingresosDelDia(tarjetaDTO).toString());
+      GastosTexxField.setText(movimientosTransferenciasSS.egresosDelDia(tarjetaDTO).toString());
+        
+        
+        
+        
     }
-    
-    public Icon setIcono(String url, JButton boton){
+
+    public Icon setIcono(String url, JButton boton) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
         int ancho = boton.getWidth();
-        int alto = boton.getHeight() ;
-        
+        int alto = boton.getHeight();
+
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
+
         return icono;
-        
+
     }
-    
-    public Icon setIconoPrecionado(String url, JButton boton, int alto, int ancho){
+
+    public Icon setIconoPrecionado(String url, JButton boton, int alto, int ancho) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
         int width = boton.getWidth() - ancho;
         int height = boton.getHeight() - alto;
-        
+
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-        
+
         return icono;
-        
+
     }
 
     /**
@@ -403,18 +415,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-     public void cargarBox(JComboBox<String> cB) {
-    DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
-    cB.setModel(modelo);
-    PersonaDTO personita = personaSS.obtenerPersonaDTOPorCurp(personaDTO);
-    List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personita);
-    
-    for (int i = 0; i < lista.size(); i++) {
-        modelo.addElement(lista.get(i).getNumeroCuenta());
+    public void cargarBox(JComboBox<String> cB) {
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        cB.setModel(modelo);
+        PersonaDTO personita = personaSS.obtenerPersonaDTOPorCurp(personaDTO);
+        List<TarjetaDTO> lista = tarjetaSS.obtenerTarjetasDTOPersona(personita);
+
+        for (int i = 0; i < lista.size(); i++) {
+            modelo.addElement(lista.get(i).getNumeroCuenta());
+        }
     }
-}
-    
-    
+
+
     private void SaldoDisponibleTexxFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoDisponibleTexxFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SaldoDisponibleTexxFieldActionPerformed
@@ -438,7 +450,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tarjetasTextFieldActionPerformed
 
     private void transferirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirButtonActionPerformed
-        
 
         FrmSeleccionarContacto contacto = new FrmSeleccionarContacto(tarjetaDTO);
         contacto.setVisible(true);
@@ -446,21 +457,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_transferirButtonActionPerformed
 
     private void cerrarSesionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionButtonActionPerformed
-       InicioSesionForm i = new InicioSesionForm();
-       i.setVisible(true);
-       dispose();
+        InicioSesionForm i = new InicioSesionForm();
+        i.setVisible(true);
+        dispose();
     }//GEN-LAST:event_cerrarSesionButtonActionPerformed
 
     private void numeroCuentaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroCuentaComboBoxActionPerformed
         // TODO add your handling code here:
         String numC = numeroCuentaComboBox.getSelectedItem().toString();
-        
+
         tarjetaDTO = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numC));
 //        Tarjeta tarjeta = tarjetas.obtenerTarjetaPorNumero(new Tarjeta(numC));
         SaldoDisponibleTexxField.setText(tarjetaDTO.getSaldo().toString());
         lblSaldo.setText(tarjetaDTO.getSaldo().toString());
-        
-        
+
+
     }//GEN-LAST:event_numeroCuentaComboBoxActionPerformed
 
     private void btnMisContactosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisContactosActionPerformed
@@ -479,8 +490,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_crearGrupoButtonActionPerformed
 
     private void movimientosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movimientosButtonActionPerformed
-        FrmMovimientos mv = new FrmMovimientos(personaDTO);
-        mv.setVisible(rootPaneCheckingEnabled);
+        String numC = numeroCuentaComboBox.getSelectedItem().toString();
+        tarjetaDTO = tarjetaSS.obtenerTarjetaDTOPorNumero(new TarjetaDTO(numC));
+
+        FrmMovimientos mv = new FrmMovimientos(tarjetaDTO);
+        mv.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_movimientosButtonActionPerformed

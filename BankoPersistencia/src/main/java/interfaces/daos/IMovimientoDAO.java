@@ -13,5 +13,5 @@ import org.bson.types.ObjectId;
 public interface IMovimientoDAO {
     
    List<Movimiento> obtenerMovimientos(ObjectId userId, Date fechaInicio, Date fechaFin, boolean ingresos, boolean egresos);
-    
+    void guardarMovimiento(Movimiento movimiento);
 }

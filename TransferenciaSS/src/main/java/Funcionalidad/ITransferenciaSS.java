@@ -2,6 +2,9 @@
 package Funcionalidad;
 
 import DTOs.TransferenciaDTO;
+import java.util.Date;
+import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -10,5 +13,5 @@ import DTOs.TransferenciaDTO;
 public interface ITransferenciaSS {
     
   public boolean realizarTransferencia(TransferenciaDTO transferenciaDTO);
-
+  
 }
