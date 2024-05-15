@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,20 +23,26 @@ import org.bson.types.ObjectId;
  */
 
 public class Grupo {
-    private ObjectId id;
+      private ObjectId id;
     private String nombre;
     private double montoTotal;
-    private String motivo;  
+    private String motivo;
+    private List<Contacto> contactos;
 
-    public Grupo() {
-    }
+  public Grupo() {
+    this.id = new ObjectId();
+    this.contactos = new ArrayList<>();
+}
 
-    public Grupo(String nombre, double monto, String motivo) {
-        this.nombre = nombre;
-        this.montoTotal = monto;
-        this.motivo = motivo;
-    }
+public Grupo(String nombre, double montoTotal, String motivo) {
+    this.id = new ObjectId();
+    this.nombre = nombre;
+    this.montoTotal = montoTotal;
+    this.motivo = motivo;
+    this.contactos = new ArrayList<>();
+}
 
+   
     public ObjectId getId() {
         return id;
     }
@@ -67,4 +74,23 @@ public class Grupo {
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
+
+    // Métodos para manejar la lista de contactos
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    public void agregarContacto(Contacto contacto) {
+        this.contactos.add(contacto);
+    }
+
+    public void removerContacto(Contacto contacto) {
+        this.contactos.remove(contacto);
+    }
+    
+
 }

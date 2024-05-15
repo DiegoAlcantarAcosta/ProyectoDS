@@ -4,6 +4,7 @@
  */
 package interfaces.daos;
 
+import entidades.Contacto;
 import entidades.Grupo;
 import org.bson.types.ObjectId;
 
@@ -12,6 +13,8 @@ import org.bson.types.ObjectId;
  * @author Oley
  */
 public interface IGrupoDAO {
-    boolean crearGrupo(Grupo grupo);
+ObjectId crearGrupo(Grupo grupo);
     Grupo obtenerGrupoPorID(ObjectId  id);
+        Boolean agregarContacto(Contacto contacto, String idGrupo);
+
 }

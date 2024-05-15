@@ -18,7 +18,6 @@ public interface ISolicitudInvitacionDAO {
  boolean enviarSolicitud(SolicitudInvitacion solicitudInvitacion);
     List<SolicitudInvitacion> obtenerSolicitudesPendientesPorUsuario(ObjectId usuarioId);
     boolean aceptarSolicitudInvitacion(String solicitudId);
-    void rechazarSolicitudInvitacion(ObjectId solicitudId);
-    List<SolicitudInvitacion> obtenerSolicitudesEnviadasPorUsuario(ObjectId usuarioId);
+    public SolicitudInvitacion obtenerSolicitudPorId(String solicitudId);
 
 }

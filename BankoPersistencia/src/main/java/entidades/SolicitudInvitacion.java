@@ -22,23 +22,18 @@ import org.bson.types.ObjectId;
 public class SolicitudInvitacion {
 
    
-  private ObjectId id;
     private ObjectId usuarioId;
-    private ObjectId grupoId;
     private String mensaje;
+private double monto;
+    private String numeroCuentaContacto; 
 
-    public ObjectId getId() {
-        return id;
-    }
+ 
 
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-
-    public SolicitudInvitacion(ObjectId idUsuario, ObjectId idGrupo, String mensaje) {
-        this.usuarioId = idUsuario;
-        this.grupoId = idGrupo;
-        this.mensaje = mensaje;
+ public SolicitudInvitacion(ObjectId idUsuario, String mensaje, double monto, String numeroCuentaContacto) {
+       this.usuarioId=idUsuario;
+     this.mensaje = mensaje;
+        this.monto = monto;
+        this.numeroCuentaContacto = numeroCuentaContacto; // Asignamos el número de cuenta proporcionado
     }
 
     public SolicitudInvitacion() {
@@ -52,13 +47,7 @@ public class SolicitudInvitacion {
         this.usuarioId = usuarioId;
     }
 
-    public ObjectId getGrupoId() {
-        return grupoId;
-    }
-
-    public void setGrupoId(ObjectId grupoId) {
-        this.grupoId = grupoId;
-    }
+  
 
     public String getMensaje() {
         return mensaje;
@@ -66,6 +55,22 @@ public class SolicitudInvitacion {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public String getNumeroCuentaContacto() {
+        return numeroCuentaContacto;
+    }
+
+    public void setNumeroCuentaContacto(String numeroCuentaContacto) {
+        this.numeroCuentaContacto = numeroCuentaContacto;
     }
 
 

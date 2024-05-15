@@ -4,13 +4,22 @@
  */
 package DAOS;
 
+import Conexion.Conexion;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
+import entidades.Contacto;
 import entidades.Grupo;
+import entidades.Persona;
 import interfaces.daos.IGrupoDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -18,40 +27,50 @@ import org.bson.types.ObjectId;
  * @author Oley
  */
 public class GrupoDAO implements IGrupoDAO {
- private MongoCollection<Document> collection;
+private MongoCollection<Grupo> collection;
 
-    public GrupoDAO(MongoDatabase database) {
-        this.collection = database.getCollection("grupos");
+    public GrupoDAO(MongoCollection<Grupo> collection) {
+        this.collection = collection;
     }
 
-   
+  
+
+    public GrupoDAO() {
+        this.collection = Conexion.getDatabase().getCollection("Grupo", Grupo.class);
+    }
 
     @Override
     public Grupo obtenerGrupoPorID(ObjectId id) {
-        Document documento = collection.find(new Document("_id", id)).first();
+        Grupo documento = collection.find(new Document("_id", id)).first();
         if (documento != null) {
-            Grupo grupo = new Grupo();
-            grupo.setId(id);
-            grupo.setNombre(documento.getString("nombre"));
-            grupo.setMontoTotal(documento.getDouble("montoTotal"));
-            grupo.setMotivo(documento.getString("motivo"));
-            return grupo;
+            return documento;
         }
         return null;
     }
 
     @Override
-    public boolean crearGrupo(Grupo grupo) {
- try {
-        Document documento = new Document("nombre", grupo.getNombre())
-                                .append("montoTotal", grupo.getMontoTotal())
-                                .append("motivo", grupo.getMotivo());
-        collection.insertOne(documento);
-        return true; // La inserción fue exitosa
-    } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    public ObjectId crearGrupo(Grupo grupo) {
+        try {
+            collection.insertOne(grupo);
+            return grupo.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-   
+
+    @Override
+    public Boolean agregarContacto(Contacto contacto, String idGrupo) {
+        try {
+            ObjectId objectId = new ObjectId(idGrupo);
+            Document filtro = new Document("_id", objectId);
+            Document documentoContacto = new Document("nombre", contacto.getNombre())
+                    .append("apellidoP", contacto.getApellidoP())
+                    .append("apellidoM", contacto.getApellidoM());
+            UpdateResult resultado = collection.updateOne(filtro, Updates.addToSet("contactos", documentoContacto));
+            return resultado.getModifiedCount() > 0;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al agregar el contacto al grupo: " + e.getMessage(), e);
+        }
     }
 }
