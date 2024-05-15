@@ -13,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
 
 /**
+ * ya kedo La clase FrmMovimientos es una interfaz gráfica de usuario (GUI) en
+ * Java Swing para visualizar los movimientos financieros asociados a una
+ * tarjeta.
  *
  * @author Wilber
  */
@@ -25,9 +28,10 @@ public class FrmMovimientos extends javax.swing.JFrame {
     MovimientosTransferenciasSS movimientos;
 
     /**
-     * Creates new form Movimientos
+     * Constructor de la clase.
      *
-     * @param personaDTO
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a la tarjeta para la cual
+     * se mostrarán los movimientos.
      */
     public FrmMovimientos(TarjetaDTO tarjetaDTO) {
         initComponents();
@@ -37,7 +41,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
         this.personaDTO = tarjetaSS.obtenerPersonaDeTarjeta(tarjetaDTO);
         movimientos = new MovimientosTransferenciasSS();
 
-        lblNombre.setText(this.lblNombre.getText() + ": " + this.personaDTO.getNombre() + this.personaDTO.getApellidoP());
+        lblNombre.setText(this.lblNombre.getText() + ": " + this.personaDTO.getNombre() + " " + this.personaDTO.getApellidoP());
         lblCuenta.setText(this.lblCuenta.getText() + ": " + this.tarjetaDTO.getNumeroCuenta());
         lblBanco.setText(this.lblBanco.getText() + ": " + this.tarjetaDTO.getBanco().toString());
 
@@ -49,7 +53,6 @@ public class FrmMovimientos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        perfilButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblCuenta = new javax.swing.JLabel();
@@ -64,6 +67,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,23 +83,17 @@ public class FrmMovimientos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(343, 343, 343)
+                .addGap(374, 374, 374)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addComponent(jLabel5)
-                .addGap(38, 38, 38))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
-
-        perfilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perfilButtonActionPerformed(evt);
-            }
-        });
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setText("Nombre");
@@ -106,8 +104,20 @@ public class FrmMovimientos extends javax.swing.JFrame {
         lblBanco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblBanco.setText("Banco");
 
+        jDateChooser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jDateChooser1KeyTyped(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Inicio:");
+
+        jDateChooser2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jDateChooser2KeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Fin:");
@@ -155,6 +165,9 @@ public class FrmMovimientos extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel3.setText("Para ver todos los movimientos, deja las fechas vacías y los checkbox vacíos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,83 +176,98 @@ public class FrmMovimientos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(jLabel1)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(158, 158, 158)
-                                .addComponent(btnBuscar))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(232, 232, 232)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(95, 95, 95)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4))
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(chbxEgresos)
-                                            .addComponent(chbxIngresos)))
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 254, Short.MAX_VALUE))
+                                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(95, 95, 95)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(chbxEgresos)
+                                                        .addComponent(chbxIngresos)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(346, 346, 346))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(389, 389, 389)
+                                .addComponent(btnBuscar)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addGap(243, 243, 243)
+                        .addComponent(jLabel3)
+                        .addGap(0, 248, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(372, 372, 372)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(377, 377, 377)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(266, 266, 266))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombre))
+                        .addGap(112, 112, 112))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblCuenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblBanco)
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(chbxIngresos))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addComponent(chbxEgresos, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(36, 36, 36)
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(chbxIngresos))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(chbxEgresos, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBuscar)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(19, 19, 19))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Actualiza los encabezados de la tabla de movimientos dependiendo de si se
+     * están mostrando los ingresos o los egresos.
+     * @param ingresos True si se están mostrando los ingresos, False si se
+     * están mostrando los egresos.
+     * @param egresos True si se están mostrando los egresos, False si se están
+     * mostrando los ingresos.
+     */
     private void actualizarEncabezadosTabla(boolean ingresos, boolean egresos) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setColumnIdentifiers(new String[]{
@@ -251,25 +279,29 @@ public class FrmMovimientos extends javax.swing.JFrame {
         });
     }
 
+    /**
+ * Llena la tabla de movimientos con los datos de las transferencias financieras proporcionadas en la lista.
+ * @param transferencias Lista de objetos TransferenciaDTO que contienen los datos de las transferencias financieras.
+ */
     private void llenarTabla(List<TransferenciaDTO> transferencias) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0); // Limpiar el modelo antes de agregar las nuevas filas
+        modelo.setRowCount(0);
 
         for (TransferenciaDTO transferencia : transferencias) {
-            Object[] fila = new Object[5]; // Número de columnas en tu tabla
-            fila[0] = transferencia.getNumeroCuentaDestinatario(); // Emisor o Destinatario
+            Object[] fila = new Object[5];
+            fila[0] = transferencia.getNumeroCuentaDestinatario();
             fila[1] = transferencia.getImporte();
             fila[2] = transferencia.getMotivo();
             fila[3] = transferencia.getNumeroCuentaPropietario();
             fila[4] = transferencia.getFechaMovimiento();
-            modelo.addRow(fila); // Agregar la fila al modelo de la tabla
+            modelo.addRow(fila);
         }
     }
 
-    private void perfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButtonActionPerformed
-
-    }//GEN-LAST:event_perfilButtonActionPerformed
-
+    /**
+ * Maneja el evento de acción cuando el usuario selecciona o deselecciona el checkbox de "Ingresos".
+ * Si se selecciona este checkbox, se deselecciona el checkbox de "Egresos".
+ */
     private void chbxIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxIngresosActionPerformed
         if (chbxIngresos.isSelected()) {
             chbxEgresos.setSelected(false);
@@ -277,12 +309,21 @@ public class FrmMovimientos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_chbxIngresosActionPerformed
 
+    /**
+ * Maneja el evento de acción cuando el usuario selecciona o deselecciona el checkbox de "Egresos".
+ * Si se selecciona este checkbox, se deselecciona el checkbox de "Ingresos".
+ */
     private void chbxEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxEgresosActionPerformed
         if (chbxEgresos.isSelected()) {
             chbxIngresos.setSelected(false);
         }
     }//GEN-LAST:event_chbxEgresosActionPerformed
 
+    /**
+ * Maneja el evento de acción cuando el usuario hace clic en el botón "Buscar".
+ * Obtiene las fechas de inicio y fin seleccionadas por el usuario, así como los checkboxes de "Ingresos" y "Egresos".
+ * Luego, utiliza esta información para obtener las transferencias financieras correspondientes y actualizar la tabla.
+ */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Date fechaInicio = jDateChooser1.getDate();
         Date fechaFin = jDateChooser2.getDate();
@@ -300,8 +341,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
         } else if (!egresos && !ingresos && fechaInicio == null && fechaFin == null) {
             transferencias = movimientos.obtenerTransferenciasSinFecha(tarjetaDTO);
         } else {
-            JOptionPane.showMessageDialog(this, "Seleccione las fechas y seleccione si es ingreso o egreso","Alerta",JOptionPane.WARNING_MESSAGE);
-            // No se seleccionó ningún filtro, mostrar un mensaje de error o manejar el caso según sea necesario
+            JOptionPane.showMessageDialog(this, "Seleccione las fechas y seleccione si es ingreso o egreso", "Alerta", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -311,12 +351,39 @@ public class FrmMovimientos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+ * Maneja el evento de acción cuando el usuario hace clic en el botón "Regresar".
+ * Cierra la ventana actual y vuelve al menú principal.
+ */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         MenuPrincipal mp = new MenuPrincipal(personaDTO);
         mp.show();
         this.dispose();
 
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    /**
+ * Maneja eventos de teclado para el componente de selección de fecha jDateChooser1.
+ * Solo se permiten caracteres válidos en este campo (letras, dígitos y espacios en blanco).
+ */
+    private void jDateChooser1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser1KeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isDigit(c) && !Character.isWhitespace(c) && c != '\b') {
+
+            evt.consume();
+        }    }//GEN-LAST:event_jDateChooser1KeyTyped
+
+    /**
+ * Maneja eventos de teclado para el componente de selección de fecha jDateChooser2.
+ * Solo se permiten caracteres válidos en este campo (letras, dígitos y espacios en blanco).
+ */
+    private void jDateChooser2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser2KeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isLetter(c) && !Character.isDigit(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+        }    }//GEN-LAST:event_jDateChooser2KeyTyped
 
     /**
      * @param args the command line arguments
@@ -362,6 +429,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -370,6 +438,5 @@ public class FrmMovimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblBanco;
     private javax.swing.JLabel lblCuenta;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JButton perfilButton;
     // End of variables declaration//GEN-END:variables
 }

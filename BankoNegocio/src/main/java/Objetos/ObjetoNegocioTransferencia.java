@@ -31,6 +31,10 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
+ * La clase ObjetoNegocioTransferencia implementa la interfaz
+ * IObjetoNegocioTransferencia y proporciona métodos para convertir entre
+ * objetos de transferencia y DTO, así como para realizar operaciones
+ * relacionadas con transferencias financieras.
  *
  * @author Dell
  */
@@ -38,10 +42,21 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 
     ITransferenciaDAO trd;
 
+    /**
+     * Constructor de la clase ObjetoNegocioTransferencia. Inicializa el objeto
+     * TransferenciaDAO.
+     */
     public ObjetoNegocioTransferencia() {
         trd = new TransferenciaDAO();
     }
 
+    /**
+     * Convierte un objeto de transferencia DTO a un objeto de entidad
+     * Transferencia.
+     *
+     * @param transferenciaDTO El objeto de transferencia DTO a convertir.
+     * @return El objeto de transferencia convertido a entidad.
+     */
     public Transferencia convertirDTOAEntidad(TransferenciaDTO transferenciaDTO) {
         Transferencia transferencia = new Transferencia();
         transferencia.setFechaMovimiento(transferenciaDTO.getFechaMovimiento());
@@ -64,6 +79,13 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         return transferencia;
     }
 
+    /**
+     * Convierte un objeto de entidad Transferencia a un objeto de transferencia
+     * DTO.
+     *
+     * @param transferencia El objeto de entidad Transferencia a convertir.
+     * @return El objeto de transferencia convertido a DTO.
+     */
     public TransferenciaDTO convertirEntidadADTO(Transferencia transferencia) {
         TransferenciaDTO transferenciaDTO = new TransferenciaDTO();
         transferenciaDTO.setFechaMovimiento(transferencia.getFechaMovimiento());
@@ -75,6 +97,15 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         return transferenciaDTO;
     }
 
+    /**
+     * Realiza una transferencia financiera utilizando un objeto de
+     * transferencia DTO.
+     *
+     * @param transferenciaDTO El objeto de transferencia DTO que contiene la
+     * información de la transferencia.
+     * @return true si la transferencia se realizó con éxito, false en caso
+     * contrario.
+     */
     @Override
     public boolean realizarTransferencia(TransferenciaDTO transferenciaDTO) {
         Transferencia transferencia = this.convertirDTOAEntidad(transferenciaDTO);
@@ -94,6 +125,16 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 //
 //    return transferenciasDTO;
 //}
+    /**
+     * Obtiene una lista de transferencias de egreso realizadas desde una
+     * tarjeta en un rango de fechas.
+     *
+     * @param tarjetaDTO El objeto de DTO de tarjeta asociado a las
+     * transferencias de egreso.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de transferencias de egreso en formato DTO.
+     */
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
@@ -149,7 +190,13 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         return tarjeta;
     }
 
-    // Diego Alcantar
+    // Diego Alcantar 
+    /**
+     * Convierte un objeto de entidad Tarjeta a un objeto de transferencia DTO.
+     *
+     * @param tarjeta El objeto de entidad Tarjeta a convertir.
+     * @return El objeto de transferencia DTO convertido.
+     */
     public TarjetaDTO convertirEntidadADTO(Tarjeta tarjeta) {
         TarjetaDTO tarjetaDTO = new TarjetaDTO();
         tarjetaDTO.setFechaVencimiento(tarjeta.getFechaVencimiento());
@@ -217,6 +264,16 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 //
 //    return transferenciasDTO;
 //}
+    /**
+     * Obtiene una lista de transferencias de egreso realizadas desde una
+     * tarjeta en un rango de fechas.
+     *
+     * @param tarjetaDTO El objeto de DTO de tarjeta asociado a las
+     * transferencias de egreso.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de transferencias de egreso en formato DTO.
+     */
     @Override
     public List<TransferenciaDTO> obtenerTransferenciasEgreso(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
@@ -232,6 +289,16 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 
     }
 
+    /**
+     * Obtiene todas las transferencias de ingreso de una tarjeta en un rango de
+     * fechas.
+     *
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a las transferencias.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de objetos TransferenciaDTO que representan las
+     * transferencias de ingreso.
+     */
     @Override
     public List<TransferenciaDTO> obtenerTransferenciasIngreso(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
@@ -247,6 +314,16 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 
     }
 
+    /**
+     * Obtiene todas las transferencias asociadas a una tarjeta en un rango de
+     * fechas.
+     *
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a las transferencias.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de objetos TransferenciaDTO que representan todas las
+     * transferencias asociadas a la tarjeta en el rango especificado.
+     */
     @Override
     public List<TransferenciaDTO> obtenerTransferencias(TarjetaDTO tarjetaDTO, Date fechaInicio, Date fechaFin) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
@@ -262,6 +339,13 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 
     }
 
+    /**
+     * Obtiene el total de ingresos realizados en un día específico mediante una
+     * tarjeta.
+     *
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a los ingresos.
+     * @return El total de ingresos realizados en el día mediante la tarjeta.
+     */
     @Override
     public Double ingresosDelDia(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
@@ -270,6 +354,13 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
 
     }
 
+    /**
+     * Obtiene el total de egresos realizados en un día específico mediante una
+     * tarjeta.
+     *
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a los egresos.
+     * @return El total de egresos realizados en el día mediante la tarjeta.
+     */
     @Override
     public Double egresosDelDia(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
@@ -277,9 +368,17 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         return egreso;
 
     }
-    
+
+    /**
+     * Obtiene todas las transferencias asociadas a una tarjeta sin tener en
+     * cuenta la fecha.
+     *
+     * @param tarjetaDTO El objeto TarjetaDTO asociado a las transferencias.
+     * @return Una lista de objetos TransferenciaDTO que representan todas las
+     * transferencias asociadas a la tarjeta.
+     */
     @Override
-    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO){
+    public List<TransferenciaDTO> obtenerTransferenciasSinFecha(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjetaConvert = this.convertirDTOAEntidad(tarjetaDTO);
         List<Transferencia> transferenciasEntidad = trd.obtenerTransferenciasSinFecha(tarjetaConvert);
         List<TransferenciaDTO> transferenciasDTO = new ArrayList<>();
@@ -290,7 +389,7 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
         }
 
         return transferenciasDTO;
-        
+
     }
 
 }

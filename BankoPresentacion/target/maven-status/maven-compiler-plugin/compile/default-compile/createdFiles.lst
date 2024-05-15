@@ -24,6 +24,7 @@ Interfaces\FrmEditaMiContacto.class
 Interfaces\AgregarContacto$4.class
 Interfaces\ActualizarTarjeta$3.class
 Interfaces\MenuPrincipal$9.class
+Interfaces\FrmMovimientos$6.class
 Interfaces\TransferenciaForm$5.class
 Interfaces\MenuPrincipal$1.class
 Interfaces\OpcionesTarjeta.class

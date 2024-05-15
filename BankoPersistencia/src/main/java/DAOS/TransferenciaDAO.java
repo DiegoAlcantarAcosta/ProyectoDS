@@ -27,6 +27,9 @@ import org.bson.types.ObjectId;
 
 /**
  * YA LISTOOO
+ * La clase TransferenciaDAO implementa la interfaz ITransferenciaDAO
+ * y proporciona funcionalidades para realizar operaciones relacionadas con
+ * transferencias financieras en una base de datos MongoDB.
  *
  * @author Wilber
  */
@@ -36,29 +39,38 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     MongoCollection<Persona> coleccionPersonas;
     ITarjetaDAO td;
 
+    /**
+     * Constructor por defecto de la clase TransferenciaDAO. Inicializa las
+     * colecciones y el objeto para acceder a las funcionalidades relacionadas
+     * con las tarjetas.
+     */
     public TransferenciaDAO() {
         coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
         coleccionTransferencia = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
         td = new TarjetaDAO();
     }
 
+    /**
+     * Realiza una transferencia financiera entre dos cuentas.
+     *
+     * @param transferencia La transferencia a realizar.
+     * @return true si la transferencia se realizó con éxito, false en caso
+     * contrario.
+     */
     @Override
     public boolean realizarTransferencia(Transferencia transferencia) {
         try {
-            // Validar que las tarjetas sean diferentes
+
             if (transferencia.getNumeroCuentaDestinatario().equals(transferencia.getNumeroCuentaPropietario())) {
                 return false;
             }
 
-            // Obtener las tarjetas involucradas
             Tarjeta tarjetaPropietario = td.obtenerTarjetaPorNumero(new Tarjeta(transferencia.getNumeroCuentaPropietario()));
             Tarjeta tarjetaDestinatario = td.obtenerTarjetaPorNumero(new Tarjeta(transferencia.getNumeroCuentaDestinatario()));
 
-            // Obtener las personas involucradas
             Persona personaRemitente = td.obtenerPersonaDeTarjeta(tarjetaPropietario);
             Persona personaDestinatario = td.obtenerPersonaDeTarjeta(tarjetaDestinatario);
 
-            // Validar que se encontraron las personas y que tienen suficiente saldo
             if (personaRemitente == null || personaDestinatario == null) {
                 return false;
             }
@@ -90,10 +102,6 @@ public class TransferenciaDAO implements ITransferenciaDAO {
             transferencia.setFechaMovimiento(new Date());
             MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
 
-            // Convertir la fecha al formato de MongoDB
-            // Convertir la fecha al formato BsonDateTime
-//            BsonDateTime fechaMovimientoBson = new BsonDateTime(transferencia.getFechaMovimiento().getTime());
-//            transferencia.setFechaMovimientoBson(fechaMovimientoBson);
             coleccionTransferencias.insertOne(transferencia);
 
             return true;
@@ -103,10 +111,19 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         }
     }
 
+    /**
+     * Obtiene una lista de transferencias de egreso realizadas desde una
+     * tarjeta en un rango de fechas.
+     *
+     * @param tarjeta La tarjeta asociada a las transferencias de egreso.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de transferencias de egreso.
+     */
     @Override
     public List<Transferencia> obtenerTransferenciasEgreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
-        
+
         Date fechaI = new Date(fechaInicio.getTime());
         Date fechaF = new Date(fechaFin.getTime());
         fechaI.setHours(0);
@@ -121,26 +138,35 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         System.out.println("Fin: " + fechaF);
 
         Document filtroTarjeta = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
-        
+
         Document filtroFecha = new Document();
         filtroFecha.put("$gte", fechaI);
         filtroFecha.put("$lte", fechaF);
-        
+
         List<Document> filtros = new ArrayList<>();
         filtros.add(filtroTarjeta);
         filtros.add(new Document("fechaMovimiento", filtroFecha));
         Document filtroCombinado = new Document("$and", filtros);
-        
+
         List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtroCombinado).into(new ArrayList<>());
 
         return transferenciasEgreso;
     }
 
+    /**
+     * Obtiene una lista de transferencias de ingreso recibidas en una tarjeta
+     * en un rango de fechas.
+     *
+     * @param tarjeta La tarjeta asociada a las transferencias de ingreso.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de transferencias de ingreso.
+     */
     @Override
     public List<Transferencia> obtenerTransferenciasIngreso(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
-        
+
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
-        
+
         Date fechaI = new Date(fechaInicio.getTime());
         Date fechaF = new Date(fechaFin.getTime());
         fechaI.setHours(0);
@@ -155,55 +181,33 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         System.out.println("Fin: " + fechaF);
 
         Document filtroTarjeta = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
-        
+
         Document filtroFecha = new Document();
         filtroFecha.put("$gte", fechaI);
         filtroFecha.put("$lte", fechaF);
-        
+
         List<Document> filtros = new ArrayList<>();
         filtros.add(filtroTarjeta);
         filtros.add(new Document("fechaMovimiento", filtroFecha));
         Document filtroCombinado = new Document("$and", filtros);
-        
+
         List<Transferencia> transferenciasIngreso = coleccionTransferencias.find(filtroCombinado).into(new ArrayList<>());
 
         return transferenciasIngreso;
 
     }
 
-//    @Override
-//    public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
-//        MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
-//
-//        // Crear un filtro para buscar transferencias asociadas a la tarjeta
-//        Document filtroTarjetaEgreso = new Document("numeroCuentaPropietario", tarjeta.getNumeroCuenta());
-//        Document filtroTarjetaIngreso = new Document("numeroCuentaDestinatario", tarjeta.getNumeroCuenta());
-//
-//        // Aplicar el filtro de la tarjeta a la consulta
-//        List<Transferencia> listaBuscadaEgreso = coleccionTransferencias.find(filtroTarjetaEgreso).into(new ArrayList<>());
-//        List<Transferencia> listaBuscadaIngreso = coleccionTransferencias.find(filtroTarjetaIngreso).into(new ArrayList<>());
-//
-//        // Ahora, necesitas aplicar los filtros adicionales de fecha y tipo de transferencia.
-//        // Para ello, puedes utilizar el operador "and" en MongoDB.
-//        BasicDBObject fechaQuery1 = new BasicDBObject();
-//        fechaQuery1.put("$gte", fechaInicio); // Mayor o igual que fechaInicio
-//        fechaQuery1.put("$lte", fechaFin);   // Menor o igual que fechaFin
-//
-//        // Combinar los filtros
-//        BasicDBObject filtro1 = new BasicDBObject();
-//        filtro1.put("fechaMovimiento", fechaQuery1);
-////        filtro1.put("importe", new BasicDBObject("$lt", 0)); // Importe negativo para egresos
-//
-//        // Aplicar el filtro combinado
-//        List<Transferencia> transferenciasEgreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
-//        List<Transferencia> transferenciasIngreso = coleccionTransferencias.find(filtro1).into(new ArrayList<>());
-//
-//        List<Transferencia> transferencias = new ArrayList<>();
-//        transferencias.addAll(listaBuscadaEgreso);
-//        transferencias.addAll(listaBuscadaIngreso);
-//
-//        return transferencias;
-//    }
+    /**
+     * Obtiene una lista de todas las transferencias (tanto ingresos como
+     * egresos) realizadas por una tarjeta dentro de un rango de fechas
+     * especificado.
+     *
+     * @param tarjeta La tarjeta asociada a las transferencias.
+     * @param fechaInicio La fecha de inicio del rango.
+     * @param fechaFin La fecha de fin del rango.
+     * @return Una lista de todas las transferencias realizadas por la tarjeta
+     * en el rango de fechas especificado.
+     */
     @Override
     public List<Transferencia> obtenerTransferencias(Tarjeta tarjeta, Date fechaInicio, Date fechaFin) {
         List<Transferencia> listaIngresos = this.obtenerTransferenciasIngreso(tarjeta, fechaInicio, fechaFin);
@@ -216,6 +220,14 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         return lista;
     }
 
+    /**
+     * Obtiene una lista de todas las transferencias (tanto ingresos como
+     * egresos) realizadas por una tarjeta sin tener en cuenta la fecha.
+     *
+     * @param tarjeta La tarjeta asociada a las transferencias.
+     * @return Una lista de todas las transferencias realizadas por la tarjeta
+     * sin tener en cuenta la fecha.
+     */
     @Override
     public List<Transferencia> obtenerTransferenciasSinFecha(Tarjeta tarjeta) {
         MongoCollection<Transferencia> coleccionTransferencias = Conexion.getDatabase().getCollection("Transferencias", Transferencia.class);
@@ -230,6 +242,12 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         return listaBuscada;
     }
 
+    /**
+     * Calcula el total de ingresos realizados por una tarjeta en el día actual.
+     *
+     * @param tarjeta La tarjeta asociada a los ingresos.
+     * @return El total de ingresos realizados por la tarjeta en el día actual.
+     */
     @Override
     public Double ingresosDelDia(Tarjeta tarjeta) {
         Date fecha = new Date();
@@ -248,6 +266,12 @@ public class TransferenciaDAO implements ITransferenciaDAO {
 
     }
 
+    /**
+     * Calcula el total de egresos realizados por una tarjeta en el día actual.
+     *
+     * @param tarjeta La tarjeta asociada a los egresos.
+     * @return El total de egresos realizados por la tarjeta en el día actual.
+     */
     @Override
     public Double egresosDelDia(Tarjeta tarjeta) {
         Date fecha = new Date();
