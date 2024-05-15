@@ -4,8 +4,10 @@
  */
 package Objetos.Interfaces;
 
+import DTOs.ContactoDTO;
 import DTOs.GrupoDTO;
 import DTOs.MiembroGrupoDTO;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -13,25 +15,13 @@ import DTOs.MiembroGrupoDTO;
  */
 public interface IObjetoNegocioGrupo {
 
-    /**
-     * metodo para crear grupo
-     * @param grupoDTO grupo
-     * @return  boolean
-     */
-    Boolean crearGrupo(GrupoDTO grupoDTO);
 
-    /**
-     * metodo para obtener grupo por id
-     * @param id id
-     * @return  grupoDTO
-     */
+     ObjectId  crearGrupo(GrupoDTO grupoDTO);
+
+ 
     GrupoDTO obtenerGrupoPorId(String id);
 
-    /***
-     * metodo para agregar miembro
-     * @param miembroDTO miembro
-     * @param idGrupo idgrupo
-     * @return  boolean
-     */
-    Boolean agregarMiembro(MiembroGrupoDTO miembroDTO, String idGrupo);
+    
+    Boolean agregarContacto(ContactoDTO contactoDTO, String idGrupo); // Agregar este método
+
 }
