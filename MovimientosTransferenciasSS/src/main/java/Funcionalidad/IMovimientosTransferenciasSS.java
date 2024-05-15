@@ -19,7 +19,8 @@ import org.bson.types.ObjectId;
  * @author Wilber
  */
 public interface IMovimientosTransferenciasSS {
-
+//hola
+    ////holaaa
     /**
      * Obtiene una lista de transferencias de egreso asociadas a una tarjeta
      * dentro de un rango de fechas específico.
