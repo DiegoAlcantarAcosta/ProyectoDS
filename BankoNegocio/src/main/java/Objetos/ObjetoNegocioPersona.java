@@ -10,6 +10,8 @@ import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
 import DTOs.tipoBancoDTO;
 import Objetos.Interfaces.IObjetoNegocioPersona;
+import encriptacion.Encriptador;
+import encriptacion.IEncriptador;
 import entidades.Contacto;
 import entidades.Persona;
 import entidades.Tarjeta;
@@ -32,6 +34,7 @@ import org.bson.types.ObjectId;
 public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
     IPersonaDAO pd;
+    IEncriptador enc = new Encriptador();
 
     public ObjetoNegocioPersona() {
         this.pd = new PersonaDAO();
@@ -98,9 +101,9 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         personaDTO.setApellidoP(persona.getApellidoP());
         personaDTO.setApellidoM(persona.getApellidoM());
         personaDTO.setFechaNac(persona.getFechaNac());
-        personaDTO.setTelefono(persona.getTelefono());
-        personaDTO.setCurp(persona.getCurp());
-        personaDTO.setContrasena(persona.getContrasena());
+        personaDTO.setTelefono(enc.getAESDecrypt(persona.getTelefono()));
+        personaDTO.setCurp(enc.getAESDecrypt(persona.getCurp()));
+        personaDTO.setContrasena(enc.getAESDecrypt(persona.getContrasena()));
 
         List<Tarjeta> tarjetas = persona.getListaTarjetas();
         List<TarjetaDTO> tarjetasResultado = new ArrayList<>();
@@ -246,7 +249,7 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
             //tipoBancoDTO banc = (tipoBancoDTO) banco;
             contactoDTO.setBanco(banc);
             contactoDTO.setNombre(contacto.getNombre());
-            contactoDTO.setNumeroCuenta(contacto.getNumeroCuenta());
+            contactoDTO.setNumeroCuenta(enc.getAESDecrypt(contacto.getNumeroCuenta()));
 
             return contactoDTO;
 
@@ -256,5 +259,9 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
             return contactoDTO;
         }
 
+    }
+    
+    public Boolean insertMasivo(){
+        return pd.insertMasivo();
     }
 }

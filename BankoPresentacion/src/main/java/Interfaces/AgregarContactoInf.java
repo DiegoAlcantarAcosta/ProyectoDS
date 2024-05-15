@@ -80,7 +80,7 @@ public class AgregarContactoInf extends javax.swing.JFrame {
         comboBanco = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Agregar Contacto");
+        setTitle("Agregar Contacto Información");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));

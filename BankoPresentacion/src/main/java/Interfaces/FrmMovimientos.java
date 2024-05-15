@@ -70,6 +70,7 @@ public class FrmMovimientos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Movimientos");
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
         jPanel1.setForeground(new java.awt.Color(153, 0, 0));
@@ -206,11 +207,10 @@ public class FrmMovimientos extends javax.swing.JFrame {
                                         .addGap(346, 346, 346))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(389, 389, 389)
-                                .addComponent(btnBuscar)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jLabel3)
+                                .addComponent(btnBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(243, 243, 243)
+                                .addComponent(jLabel3)))
                         .addGap(0, 248, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()

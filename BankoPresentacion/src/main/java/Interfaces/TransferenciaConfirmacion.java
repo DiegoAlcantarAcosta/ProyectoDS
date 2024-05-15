@@ -81,6 +81,7 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Confirmación de Trasnferencia");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
@@ -230,7 +231,8 @@ public class TransferenciaConfirmacion extends javax.swing.JFrame {
                         dispose();
                     } else {
 //                         Saldo insuficiente
-                        JOptionPane.showMessageDialog(this, "Algo fallo.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Saldo insuficiente: \nCuentas con $"+ tarjetaDTO.getSaldo() + " y quieres enviar $" + txtImporte.getText()
+                                , "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Datos del Contacto Incorrectos favor de revisarlos", "Error", JOptionPane.ERROR_MESSAGE);

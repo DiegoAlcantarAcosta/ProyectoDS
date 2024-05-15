@@ -11,6 +11,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
+import encriptacion.Encriptador;
+import encriptacion.IEncriptador;
 import entidades.Contacto;
 import entidades.Persona;
 import interfaces.daos.IContactoDAO;
@@ -26,6 +28,7 @@ import org.bson.conversions.Bson;
 public class ContactoDAO implements IContactoDAO {
 
     MongoCollection<Contacto> coleccionPersonas;
+    private Encriptador enc = new Encriptador();
 
     public ContactoDAO() {
         this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Contacto.class);
@@ -34,6 +37,7 @@ public class ContactoDAO implements IContactoDAO {
     @Override
     public Boolean agregar(Persona persona, Contacto contacto) throws PersistenceException {
         try {
+            contacto.setNumeroCuenta(enc.getAES(contacto.getNumeroCuenta()));
             if (persona.getId() != null) {
                 coleccionPersonas.updateOne(Filters.eq("_id", persona.getId()), Updates.push("listaContactos", contacto));
                 return true;
@@ -50,6 +54,7 @@ public class ContactoDAO implements IContactoDAO {
     @Override
     public Boolean eliminar(Persona persona, Contacto contacto) throws PersistenceException {
         try {
+            contacto.setNumeroCuenta(enc.getAES(contacto.getNumeroCuenta()));
             if (persona.getId() != null && contacto.getAlias() != null) {
                 Bson filtro = Filters.and(Filters.eq("_id", persona.getId()), Filters.eq("listaContactos.alias", contacto.getAlias()));
                 Bson update = Updates.pull("listaContactos", Filters.eq("alias", contacto.getAlias()));
@@ -67,6 +72,7 @@ public class ContactoDAO implements IContactoDAO {
     @Override
     public Boolean actualizar(Persona persona, Contacto contactoOri, Contacto contactoActua) throws PersistenceException {
         try {
+            contactoActua.setNumeroCuenta(enc.getAES(contactoActua.getNumeroCuenta()));
             if (persona.getId() != null && contactoOri.getAlias() != null && contactoOri.getNumeroCuenta() != null) {
 
                 coleccionPersonas.updateOne(
@@ -105,6 +111,7 @@ public class ContactoDAO implements IContactoDAO {
     @Override
     public Contacto obtenerContactoPersona(Persona persona, Contacto contacto) throws PersistenceException {
         try {
+            
             if (persona.getId() != null && contacto.getAlias() != null) {
                 List<Contacto> listaContactos = persona.getListaContactos();
                 for (Contacto conta : listaContactos) {

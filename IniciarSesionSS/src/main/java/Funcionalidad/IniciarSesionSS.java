@@ -30,5 +30,4 @@ public class IniciarSesionSS implements IIniciarSesionSS {
     public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
         return persona.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);
     }
-    
 }

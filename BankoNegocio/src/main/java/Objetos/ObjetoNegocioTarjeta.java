@@ -12,6 +12,8 @@ import DTOs.tipoBancoDTO;
 import DTOs.tipoTarjetaDTO;
 import Excepciones.PersistenciaException;
 import Objetos.Interfaces.IObjetoNegocioTarjeta;
+import encriptacion.Encriptador;
+import encriptacion.IEncriptador;
 import entidades.Persona;
 import entidades.Tarjeta;
 import entidades.tipoBanco;
@@ -30,6 +32,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
     ITarjetaDAO td;
     IPersonaDAO pd;
+    IEncriptador enc = new Encriptador();
 
     public ObjetoNegocioTarjeta() {
         td = new TarjetaDAO();
@@ -41,7 +44,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
         tarjeta.setId(tarjetaDTO.getId());
-        tarjeta.setNumeroCuenta(tarjetaDTO.getNumeroCuenta());
+        tarjeta.setNumeroCuenta(enc.getAES(tarjetaDTO.getNumeroCuenta()));
         tarjeta.setSaldo(tarjetaDTO.getSaldo());
 
         tipoBancoDTO banco = tarjetaDTO.getBanco();
@@ -97,7 +100,7 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         TarjetaDTO tarjetaDTO = new TarjetaDTO();
         tarjetaDTO.setFechaVencimiento(tarjeta.getFechaVencimiento());
         tarjetaDTO.setId(new ObjectId("" + tarjeta.getId()));
-        tarjetaDTO.setNumeroCuenta(tarjeta.getNumeroCuenta());
+        tarjetaDTO.setNumeroCuenta(enc.getAESDecrypt(tarjeta.getNumeroCuenta()));
         tarjetaDTO.setSaldo(tarjeta.getSaldo());
 
         tipoBanco banco = tarjeta.getBanco();

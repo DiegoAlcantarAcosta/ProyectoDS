@@ -1,6 +1,5 @@
 package Interfaces;
 
-import DAOS.PersonaDAO;
 import DTOs.PersonaDTO;
 import Funcionalidad.IIniciarSesionSS;
 import Funcionalidad.IniciarSesionSS;
@@ -15,6 +14,7 @@ import javax.swing.JOptionPane;
 public class InicioSesionForm extends javax.swing.JFrame {
 
     IIniciarSesionSS iniciarSesionSS;
+    IPersonaSS personaSS;
 
     /**
      * Creates new form MenuPrincipal
@@ -22,6 +22,8 @@ public class InicioSesionForm extends javax.swing.JFrame {
     public InicioSesionForm() {
         initComponents();
         iniciarSesionSS = new IniciarSesionSS();
+        personaSS = new PersonaSS();
+        this.IconoOcultar.setVisible(false);
 //       txtAgregarNumCuenta.setText("0006407926304483");
     }
 
@@ -40,7 +42,11 @@ public class InicioSesionForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         telefonoTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        contraseñaTextField = new javax.swing.JTextField();
+        btnInsert = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        contraseñaTextField = new javax.swing.JPasswordField();
+        iconoVer = new javax.swing.JLabel();
+        IconoOcultar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
@@ -60,7 +66,7 @@ public class InicioSesionForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(154, 154, 154))
+                .addGap(176, 176, 176))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,9 +95,34 @@ public class InicioSesionForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña:");
 
+        btnInsert.setText("Insert Masivo");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Insert masivo de personas");
+
         contraseñaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraseñaTextFieldActionPerformed(evt);
+            }
+        });
+
+        iconoVer.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\IconoVer.png")); // NOI18N
+        iconoVer.setText("j");
+        iconoVer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconoVerMouseClicked(evt);
+            }
+        });
+
+        IconoOcultar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\IconoOcultar.png")); // NOI18N
+        IconoOcultar.setText("j");
+        IconoOcultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IconoOcultarMouseClicked(evt);
             }
         });
 
@@ -103,23 +134,33 @@ public class InicioSesionForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jLabel2))
+                        .addContainerGap()
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel3)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(238, 238, 238)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(telefonoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(123, 123, 123)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnInsert)
+                        .addGap(99, 99, 99)
                         .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197))))
+                        .addGap(227, 227, 227))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefonoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IconoOcultar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iconoVer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(96, 96, 96))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +173,17 @@ public class InicioSesionForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addGap(55, 55, 55))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IconoOcultar)
+                    .addComponent(iconoVer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnInsert))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -164,20 +212,49 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_telefonoTextFieldActionPerformed
 
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        Boolean valida = personaSS.insertMasivo();
+        if(valida){
+            JOptionPane.showMessageDialog(this, "Personas agregadas", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Ya se han agregado las personas anteriormente", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInsertActionPerformed
+
     private void contraseñaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaTextFieldActionPerformed
+
+    private void iconoVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconoVerMouseClicked
+        // TODO add your handling code here:
+        iconoVer.setVisible(false);
+        IconoOcultar.setVisible(true);
+        contraseñaTextField.setEchoChar((char)0);
+    }//GEN-LAST:event_iconoVerMouseClicked
+
+    private void IconoOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IconoOcultarMouseClicked
+        // TODO add your handling code here:
+        IconoOcultar.setVisible(false);
+        iconoVer.setVisible(true);
+        contraseñaTextField.setEchoChar('●');
+    }//GEN-LAST:event_IconoOcultarMouseClicked
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IconoOcultar;
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JTextField contraseñaTextField;
+    private javax.swing.JButton btnInsert;
+    private javax.swing.JPasswordField contraseñaTextField;
+    private javax.swing.JLabel iconoVer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField telefonoTextField;
     // End of variables declaration//GEN-END:variables

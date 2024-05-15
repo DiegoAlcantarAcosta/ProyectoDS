@@ -101,7 +101,7 @@ public class OpcionesTarjeta extends javax.swing.JFrame {
         añadirButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Selecciona Contacto");
+        setTitle("Gestion de Tarjetas");
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
         jPanel1.setForeground(new java.awt.Color(153, 0, 0));

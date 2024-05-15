@@ -58,6 +58,7 @@ public class TransferenciaExitosa extends javax.swing.JFrame {
         salirButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Transferencia Exitosa");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));

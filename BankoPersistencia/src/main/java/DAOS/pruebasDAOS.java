@@ -4,6 +4,7 @@
  */
 package DAOS;
 
+import encriptacion.Encriptador;
 import entidades.Persona;
 import entidades.Tarjeta;
 import entidades.Transferencia;
@@ -23,7 +24,7 @@ public class pruebasDAOS {
      */
     public static void main(String[] args) {
 //       TarjetaDAO td = new TarjetaDAO();
-//        PersonaDAO pd = new PersonaDAO();
+        PersonaDAO pd = new PersonaDAO();
         Tarjeta t = new Tarjeta("1234567891");
 //        Persona p = new Persona("RAGI930420MDFRRS05");
 //        Persona person = pd.obtenerPersonaPorCurp(p);
@@ -57,23 +58,27 @@ public class pruebasDAOS {
 //        System.out.println(transferenciaDAO.obtenerTransferencias(t, fecha1, fecha2));
 //
 //        
+        Date fecha1 = new Date(124, 4, 14);
 
- Date fecha1 = new Date(124, 4, 14);
-
-Date fecha = new Date();
+        Date fecha = new Date();
+        Encriptador enc = new Encriptador();
+        
+        System.out.println(enc.getAES("1"));
+        System.out.println(enc.getAES("1"));
+        System.out.println(enc.getAESDecrypt("Ydk9ZfXtAqFS2eHuaIYoing=="));
+        System.out.println(enc.getAESDecrypt("slDhE3b2uGT/mZeHHUfnfA=="));
+//        System.out.println(pd.insertMasivo());
 //        fecha1.setHours(23);
 //        fecha1.setMinutes(59);
 //        fecha1.setSeconds(59);
 //        fecha.setHours(0);
 //        fecha.setMinutes(0);
 //        fecha.setSeconds(0);
-        TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-        System.out.println(transferenciaDAO.obtenerTransferenciasEgreso(t, fecha, fecha));
-//        System.out.println(fecha1);
-        System.out.println(transferenciaDAO.egresosDelDia(t));
-        
-        
-        
+//        TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
+//        System.out.println(transferenciaDAO.obtenerTransferenciasEgreso(t, fecha, fecha));
+////        System.out.println(fecha1);
+//        System.out.println(transferenciaDAO.egresosDelDia(t));
+
     }
 
 }

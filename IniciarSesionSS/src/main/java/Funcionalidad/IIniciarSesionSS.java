@@ -13,6 +13,7 @@ import DTOs.PersonaDTO;
  */
 public interface IIniciarSesionSS {
     public Boolean procesarInicioSesion(String telefono, String contaseña);
+    
     public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena);
     
 }

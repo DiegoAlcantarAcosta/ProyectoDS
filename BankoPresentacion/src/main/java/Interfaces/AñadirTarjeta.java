@@ -72,6 +72,7 @@ public class AñadirTarjeta extends javax.swing.JFrame {
         fechaVencimientoJDateChooser = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Añadir Tarjeta");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));

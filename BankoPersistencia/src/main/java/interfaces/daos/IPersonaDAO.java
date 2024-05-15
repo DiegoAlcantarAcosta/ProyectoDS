@@ -24,4 +24,6 @@ public interface IPersonaDAO {
     public Persona obtenerPersonaPorCurp(Persona persona);
     
     public List<Persona> obtenerTodasLasPersonas();
+    
+    public Boolean insertMasivo();
 }

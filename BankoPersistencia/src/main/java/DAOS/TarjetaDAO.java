@@ -10,6 +10,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import encriptacion.Encriptador;
+import encriptacion.IEncriptador;
 import entidades.Persona;
 import entidades.Tarjeta;
 import interfaces.daos.ITarjetaDAO;
@@ -26,6 +28,7 @@ import org.bson.conversions.Bson;
 public class TarjetaDAO implements ITarjetaDAO {
 
     private final MongoCollection<Persona> coleccionPersonas;
+    private Encriptador enc = new Encriptador();
 
     public TarjetaDAO() {
         this.coleccionPersonas = Conexion.getDatabase().getCollection("Personas", Persona.class);
@@ -59,6 +62,7 @@ public class TarjetaDAO implements ITarjetaDAO {
     @Override
     public Tarjeta obtenerTarjetaPorNumero(Tarjeta tarjeta) {
         try {
+            tarjeta.setNumeroCuenta(enc.getAES(tarjeta.getNumeroCuenta()));
             List<Tarjeta> listaTarjetas = obtenerTodasLasTarjetasDeClientes();
             for (int i = 0; i < listaTarjetas.size(); i++) {
                 if (tarjeta.getNumeroCuenta().equalsIgnoreCase(listaTarjetas.get(i).getNumeroCuenta())) {

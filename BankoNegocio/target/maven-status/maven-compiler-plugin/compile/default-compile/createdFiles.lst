@@ -3,6 +3,7 @@ Objetos\ObjetoNegocioTransferencia.class
 Objetos\Interfaces\IObjetoNegocioTransaccion.class
 Objetos\ObjetoNegocioTransferencia$1.class
 com\mycompany\bankonegocio\BankoNegocio.class
+Objetos\ObjetoNegocioEncriptador.class
 com\mycompany\bankonegocio\UltimaPruebaDTO.class
 Objetos\Interfaces\IObjetoNegocioTransferencia.class
 Objetos\Interfaces\IObjetoNegocioContacto.class
@@ -18,6 +19,7 @@ com\mycompany\bankonegocio\ProbarSolicitudes.class
 Objetos\Interfaces\IObjetoNegocioPersona.class
 Objetos\ObjetoNegocioPersona.class
 com\mycompany\bankonegocio\MongoTransaccionDAO.class
+Objetos\Interfaces\IObjetoNegocioEncriptador.class
 Objetos\Interfaces\IObjetoNegocioGrupo.class
 Objetos\ObjetoNegocioSolicitudInvitacion.class
 Objetos\ObjetoNegocioGrupo.class

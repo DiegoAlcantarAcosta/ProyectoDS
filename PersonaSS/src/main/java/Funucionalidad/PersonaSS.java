@@ -36,4 +36,8 @@ public class PersonaSS implements IPersonaSS {
        PersonaDTO personaDTObuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
         return personaDTObuscada;
     }
+    
+    public Boolean insertMasivo(){
+        return persona.insertMasivo();
+    }
 }

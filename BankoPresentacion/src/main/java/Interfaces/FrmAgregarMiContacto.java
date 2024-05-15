@@ -232,6 +232,7 @@ public class FrmAgregarMiContacto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -249,18 +250,25 @@ public class FrmAgregarMiContacto extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
 
             if (i == 0) {
-                tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
-                ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText(), txtNombre.getText(), txtAP.getText(), txtAM.getText(),
-                        txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
-                Boolean verifica = agrega.agregar(personaDTO, contactoDTO);
-                if (verifica == true) {
-                    JOptionPane.showMessageDialog(this, "Contacto Agregado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-                    FrmMisContactos mc = new FrmMisContactos(personaDTO);
-                    mc.show();
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Algo fallo!!! \nEs posible que estes intentando agregar un contacto que ya esta en tu lisa\n"
-                            + "Revisa bien el Alias o el Número de cuenta", "Error", JOptionPane.ERROR_MESSAGE);
+                if (!txtAlias.getText().isBlank() && !txtAP.getText().isBlank() && !txtNombre.getText().isBlank()) {
+                    tipoBancoDTO tipoBanco = (tipoBancoDTO) comboBanco.getSelectedItem();
+                    ContactoDTO contactoDTO = new ContactoDTO(txtAlias.getText().trim(), txtNombre.getText().trim(), txtAP.getText().trim(), txtAM.getText().trim(),
+                            txtNumCuenta.getText(), (tipoBancoDTO) tipoBanco);
+                    Boolean verifica = agrega.agregar(personaDTO, contactoDTO);
+                    if (verifica == true) {
+                        JOptionPane.showMessageDialog(this, "Contacto Agregado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                        FrmMisContactos mc = new FrmMisContactos(personaDTO);
+                        mc.show();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Algo fallo!!! \nEs posible que estes intentando agregar un contacto que ya esta en tu lisa\n"
+                                + "Revisa bien el Alias o el Número de cuenta", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Favor de llenar los datos del contacto.\n(En caso de no tener apelliddo materno lo puedes omitir)",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE
+            );
                 }
 
             } else if (i == 1) {

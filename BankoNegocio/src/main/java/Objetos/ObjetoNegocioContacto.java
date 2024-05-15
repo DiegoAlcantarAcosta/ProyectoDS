@@ -10,6 +10,8 @@ import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.tipoBancoDTO;
 import Objetos.Interfaces.IObjetoNegocioContacto;
+import encriptacion.Encriptador;
+import encriptacion.IEncriptador;
 import entidades.Contacto;
 import entidades.Persona;
 import entidades.tipoBanco;
@@ -26,6 +28,7 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
 
     IContactoDAO cd;
     IPersonaDAO pd;
+    IEncriptador enc = new Encriptador();
 
     public ObjetoNegocioContacto() {
         this.cd = new ContactoDAO();
@@ -115,7 +118,7 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
             //tipoBancoDTO banc = (tipoBancoDTO) banco;
             contactoDTO.setBanco(banc);
             contactoDTO.setNombre(contacto.getNombre());
-            contactoDTO.setNumeroCuenta(contacto.getNumeroCuenta());
+            contactoDTO.setNumeroCuenta(enc.getAESDecrypt(contacto.getNumeroCuenta()));
 
             return contactoDTO;
 

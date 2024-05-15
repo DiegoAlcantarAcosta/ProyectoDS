@@ -16,4 +16,6 @@ public interface IPersonaSS {
     public boolean personaRegistrada(PersonaDTO personaDTO);
     
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO);
+    
+    public Boolean insertMasivo();
 }
