@@ -7,7 +7,6 @@ com\mycompany\bankonegocio\UltimaPruebaDTO.class
 Objetos\Interfaces\IObjetoNegocioTransferencia.class
 Objetos\Interfaces\IObjetoNegocioContacto.class
 Objetos\ObjetoNegocioMiembroGrupo.class
-Objetos\ObjetoNegocioMovimiento.class
 com\mycompany\bankonegocio\PruebaObjetoNegocioGrupo.class
 Objetos\ObjetoNegocioContacto$1.class
 Objetos\ObjetoNegocioTarjeta.class
@@ -18,7 +17,6 @@ Objetos\Interfaces\IObjetoNegocioTarjeta.class
 com\mycompany\bankonegocio\ProbarSolicitudes.class
 Objetos\Interfaces\IObjetoNegocioPersona.class
 Objetos\ObjetoNegocioPersona.class
-Objetos\Interfaces\IObjetoNegocioMovimiento.class
 com\mycompany\bankonegocio\MongoTransaccionDAO.class
 Objetos\Interfaces\IObjetoNegocioGrupo.class
 Objetos\ObjetoNegocioSolicitudInvitacion.class
