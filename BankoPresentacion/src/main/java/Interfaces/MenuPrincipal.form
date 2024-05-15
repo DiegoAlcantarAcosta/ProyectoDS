@@ -272,11 +272,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="perfilButton">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\Perfil.png"/>
-        </Property>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="perfilButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
@@ -333,11 +331,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="movimientosButton">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\movimientosIcon.png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="movimientosButtonActionPerformed"/>
       </Events>
@@ -349,9 +342,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnMisContactos">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\MisContactos.png"/>
-        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -376,9 +366,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="crearGrupoButton">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\CrearGrupo.png"/>
-        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[56, 57]"/>
         </Property>
@@ -400,9 +387,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="a&#xf1;adirTarjetaButton">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\MisTarjetas.png"/>
-        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[56, 57]"/>
         </Property>
@@ -419,9 +403,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="transferirButton">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\Transferencia.png"/>
-        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[56, 57]"/>
         </Property>

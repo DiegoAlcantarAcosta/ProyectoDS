@@ -76,7 +76,7 @@ public class InicioSesionForm extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        btnAceptar.setText("Aceptar");
+        btnAceptar.setText("Iniciar Sesion");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -110,16 +110,14 @@ public class InicioSesionForm extends javax.swing.JFrame {
             }
         });
 
-        iconoVer.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\IconoVer.png")); // NOI18N
-        iconoVer.setText("j");
+        iconoVer.setText("Ver");
         iconoVer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconoVerMouseClicked(evt);
             }
         });
 
-        IconoOcultar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\IconoOcultar.png")); // NOI18N
-        IconoOcultar.setText("j");
+        IconoOcultar.setText("Ocultar");
         IconoOcultar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IconoOcultarMouseClicked(evt);
@@ -146,17 +144,17 @@ public class InicioSesionForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnInsert)
                         .addGap(99, 99, 99)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(227, 227, 227))
+                        .addComponent(btnAceptar)
+                        .addGap(211, 211, 211))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(telefonoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IconoOcultar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iconoVer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(96, 96, 96))))
+                            .addComponent(iconoVer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IconoOcultar))
+                        .addGap(94, 94, 94))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(230, 230, 230)
                 .addComponent(jLabel3)

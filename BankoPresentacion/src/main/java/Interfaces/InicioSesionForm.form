@@ -47,8 +47,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnInsert" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="btnAceptar" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -57,10 +57,10 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="IconoOcultar" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="iconoVer" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="IconoOcultar" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -146,7 +146,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnAceptar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aceptar"/>
+        <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarActionPerformed"/>
@@ -193,10 +193,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="iconoVer">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\IconoVer.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="j"/>
+        <Property name="text" type="java.lang.String" value="Ver"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="iconoVerMouseClicked"/>
@@ -204,10 +201,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="IconoOcultar">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Dell\Documents\GitHub\ProyectoDS\BankoPresentacion\src\main\imagen\IconoOcultar.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="j"/>
+        <Property name="text" type="java.lang.String" value="Ocultar"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IconoOcultarMouseClicked"/>

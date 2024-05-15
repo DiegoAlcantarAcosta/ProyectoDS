@@ -161,7 +161,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        perfilButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\Perfil.png")); // NOI18N
+        perfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilButtonActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
 
@@ -189,7 +193,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Perfil");
 
-        movimientosButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\movimientosIcon.png")); // NOI18N
         movimientosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 movimientosButtonActionPerformed(evt);
@@ -198,7 +201,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel6.setText("Movimientos");
 
-        btnMisContactos.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\MisContactos.png")); // NOI18N
         btnMisContactos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMisContactos.setMaximumSize(new java.awt.Dimension(56, 57));
         btnMisContactos.setMinimumSize(new java.awt.Dimension(56, 57));
@@ -211,7 +213,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("Mis Contactos");
 
-        crearGrupoButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\CrearGrupo.png")); // NOI18N
         crearGrupoButton.setMaximumSize(new java.awt.Dimension(56, 57));
         crearGrupoButton.setMinimumSize(new java.awt.Dimension(56, 57));
         crearGrupoButton.setPreferredSize(new java.awt.Dimension(56, 57));
@@ -223,7 +224,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel8.setText("Crear Grupo");
 
-        añadirTarjetaButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\MisTarjetas.png")); // NOI18N
         añadirTarjetaButton.setMaximumSize(new java.awt.Dimension(56, 57));
         añadirTarjetaButton.setMinimumSize(new java.awt.Dimension(56, 57));
         añadirTarjetaButton.setPreferredSize(new java.awt.Dimension(56, 57));
@@ -233,7 +233,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        transferirButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\ProyectoDS\\BankoPresentacion\\src\\main\\imagen\\Transferencia.png")); // NOI18N
         transferirButton.setMaximumSize(new java.awt.Dimension(56, 57));
         transferirButton.setMinimumSize(new java.awt.Dimension(56, 57));
         transferirButton.setPreferredSize(new java.awt.Dimension(56, 57));
@@ -503,6 +502,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         a.show();
         dispose();
     }//GEN-LAST:event_añadirTarjetaButtonActionPerformed
+
+    private void perfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButtonActionPerformed
+       FrmPerfil a = new FrmPerfil(personaDTO);
+       a.show();
+       dispose();
+    }//GEN-LAST:event_perfilButtonActionPerformed
 
     /**
      * @param args the command line arguments
