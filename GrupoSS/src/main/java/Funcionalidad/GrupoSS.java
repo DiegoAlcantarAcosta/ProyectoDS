@@ -7,7 +7,6 @@ package Funcionalidad;
 import DTOs.GrupoDTO;
 import DTOs.MiembroGrupoDTO;
 import entidades.Grupo;
-import entidades.MiembroGrupo;
 import interfaces.daos.IGrupoDAO;
 import java.util.ArrayList;
 import java.util.List;

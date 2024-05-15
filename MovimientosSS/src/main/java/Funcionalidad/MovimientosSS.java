@@ -5,8 +5,7 @@
 package Funcionalidad;
 
 import DTOs.MovimientoDTO;
-import Objetos.Interfaces.IObjetoNegocioMovimiento;
-import Objetos.ObjetoNegocioMovimiento;
+
 import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;

@@ -7,7 +7,7 @@ package Interfaces;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import Funcionalidad.IAgregarContactoSS;
-import Funcionalidad.ICrearGrupoSS;
+import Funcionalidad.IGrupoSS;
 import Funcionalidad.IMostrarContactoSS;
 import Funcionalidad.MostrarContactoSS;
 import Objetos.ObjetoNegocioGrupo;
@@ -24,7 +24,7 @@ public class FrmCrearGrupo extends javax.swing.JFrame {
 ObjetoNegocioGrupo objetoNegocioGrupo;
 PersonaDTO personaDTO;
     IAgregarContactoSS agregarContactoSS;
-    ICrearGrupoSS crearGrupoSS;
+     IGrupoSS grupoSS;
     IMostrarContactoSS mostrarContactoSS;
     List<Object[]> rowData;
     /**
@@ -144,7 +144,7 @@ PersonaDTO personaDTO;
             }
 
             // Abrir FrmInformacionGrupo y pasar la lista de contactos seleccionados
-            FrmInformacionGrupo informacionGrupo = new FrmInformacionGrupo(crearGrupoSS, agregarContactoSS, rowData);
+            FrmInformacionGrupo informacionGrupo = new FrmInformacionGrupo(grupoSS, agregarContactoSS, rowData);
             informacionGrupo.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor selecciona al menos un contacto.", "Error", JOptionPane.ERROR_MESSAGE);

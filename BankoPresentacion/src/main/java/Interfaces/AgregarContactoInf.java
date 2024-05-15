@@ -11,7 +11,6 @@ import Funcionalidad.ITarjetaSS;
 import Funcionalidad.MostrarContactoSS;
 import Funcionalidad.TarjetaSS;
 import Interfaces.TransferenciaForm;
-import entidades.Consultas;
 import javax.swing.JOptionPane;
 
 /**

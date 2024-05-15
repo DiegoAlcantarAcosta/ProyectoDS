@@ -9,10 +9,10 @@ import DTOs.GrupoDTO;
 import DTOs.PersonaDTO;
 import Funcionalidad.ActualizarContactoSS;
 import Funcionalidad.AgregarContactoSS;
-import Funcionalidad.CrearGrupoSS;
+import Funcionalidad.GruposSS;
 import Funcionalidad.IAgregarContactoSS;
-import Funcionalidad.ICrearGrupoSS;
 import Funcionalidad.IEnviarSolicitudSS;
+import Funcionalidad.IGrupoSS;
 import Funcionalidad.IMostrarContactoSS;
 import Funcionalidad.MostrarContactoSS;
 import entidades.SolicitudInvitacion;
@@ -29,7 +29,7 @@ import org.bson.types.ObjectId;
  */
 public class FrmInformacionGrupo extends javax.swing.JFrame {
   private List<Object[]> rowData;
-     ICrearGrupoSS crearGrupoSS;
+     IGrupoSS grupoSS;
     IAgregarContactoSS agregarContactoSS;
         IMostrarContactoSS mostrarContactoSS;
         private IEnviarSolicitudSS enviarSolicitudSS;
@@ -39,9 +39,9 @@ public class FrmInformacionGrupo extends javax.swing.JFrame {
     /**
      * Creates new form FrmInformacionGrupo
      */
-    public FrmInformacionGrupo(ICrearGrupoSS crearGrupoSS, IAgregarContactoSS agregarContactoSS,List<Object[]> rowData ) {
+    public FrmInformacionGrupo(IGrupoSS grupoSS, IAgregarContactoSS agregarContactoSS,List<Object[]> rowData ) {
       initComponents();
-      this.crearGrupoSS=new CrearGrupoSS();
+      this.grupoSS=new GruposSS();
       this.agregarContactoSS=new AgregarContactoSS();
         mostrarContactoSS = new MostrarContactoSS();
         this.enviarSolicitudSS = enviarSolicitudSS;
@@ -186,7 +186,7 @@ FrmCrearGrupo frmCrearGrupo = new FrmCrearGrupo( personaDTO);
         grupoDTO.setSaldo(total); // Establecer el saldo como el monto total
         
         // Llamar al método para crear el grupo y obtener su ID
-        ObjectId grupoId = crearGrupoSS.crearGrupo(grupoDTO);
+        ObjectId grupoId = grupoSS.crearGrupo(grupoDTO);
         
         // Verificar si se creó el grupo correctamente
         if (grupoId != null) {

@@ -9,6 +9,7 @@ Interfaces\FrmAgregarMiContacto$4.class
 Interfaces\OpcionesTarjeta$4.class
 Interfaces\FrmMisContactos$5.class
 Interfaces\InicioSesionForm$3.class
+Interfaces\FrmCrearGrupo$2.class
 Interfaces\FrmAgregarMiContacto$1.class
 Interfaces\MenuPrincipal$3.class
 Interfaces\AñadirTarjeta$5.class
@@ -62,6 +63,7 @@ Interfaces\AñadirTarjeta$1.class
 Interfaces\FrmMovimientos$4.class
 Interfaces\AgregarContactoInf$7.class
 Interfaces\ActualizarTarjeta$2.class
+Interfaces\FrmInformacionGrupo$1.class
 Interfaces\TransferenciaExitosa$1.class
 Interfaces\TransferenciaConfirmacion$1.class
 Interfaces\TransferenciaForm$1.class
@@ -76,9 +78,12 @@ Interfaces\FrmEditaMiContacto$1.class
 Interfaces\InicioSesionForm$4.class
 Interfaces\FrmAgregarMiContacto.class
 Interfaces\MenuPrincipal$12.class
+Interfaces\FrmCrearGrupo$1.class
 Interfaces\AgregarContactoInf$1.class
 Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\FrmEditaMiContacto$4.class
+Interfaces\FrmInformacionGrupo$2.class
+Interfaces\FrmInformacionGrupo.class
 Interfaces\OpcionesTarjeta$3.class
 Interfaces\ConfirmacionAñadirTarjeta$1.class
 Interfaces\FrmMisContactos$3.class
@@ -99,6 +104,7 @@ Interfaces\AgregarContacto.class
 Interfaces\FrmMovimientos.class
 Interfaces\TransferenciaForm$3.class
 Interfaces\MenuPrincipal$4.class
+Interfaces\FrmCrearGrupo.class
 Interfaces\FrmMovimientos$1.class
 Interfaces\ActualizarTarjeta$1.class
 Interfaces\FrmPerfil.class
