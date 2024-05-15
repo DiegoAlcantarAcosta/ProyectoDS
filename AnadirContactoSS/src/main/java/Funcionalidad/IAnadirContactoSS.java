@@ -6,13 +6,19 @@ package Funcionalidad;
 
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
-import DTOs.TarjetaDTO;
 
 /**
  *
  * @author Diego
  */
 public interface IAnadirContactoSS {
+    
+    /**
+     *  Metodo para agregar un contacto a una persona
+     * @param personaDTO persona dueña del contacto
+     * @param contactoDTO contacto que se le agregara
+     * @return  true o false
+     */
     public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO);
     
 }

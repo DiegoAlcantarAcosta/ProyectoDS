@@ -18,10 +18,20 @@ public class AnadirTarjetaSS implements IAnadirTarjetaSS {
 
      IObjetoNegocioTarjeta tarjeta;
 
+     /**
+     * Constructor que inicializa el objeto de negocio necesario para añadir tarjetas.
+     */
     public AnadirTarjetaSS() {
         tarjeta = new ObjetoNegocioTarjeta();
     }
-        // Diego Alcantar
+    
+     /**
+     * Guarda la información de una tarjeta asociada a una persona.
+     * 
+     * @param persona La información de la persona.
+     * @param tarjeta La información de la tarjeta.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia de la tarjeta.
+     */
     @Override
     public void guardar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
        this.tarjeta.guardar(persona, tarjeta);

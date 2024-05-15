@@ -131,8 +131,6 @@ public class ObjetoNegocioTransferencia implements IObjetoNegocioTransferencia {
      *
      * @param tarjetaDTO El objeto de DTO de tarjeta asociado a las
      * transferencias de egreso.
-     * @param fechaInicio La fecha de inicio del rango.
-     * @param fechaFin La fecha de fin del rango.
      * @return Una lista de transferencias de egreso en formato DTO.
      */
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {

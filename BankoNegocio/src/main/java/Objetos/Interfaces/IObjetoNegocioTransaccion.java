@@ -12,7 +12,18 @@ import org.bson.types.ObjectId;
  * @author Oley
  */
 public interface IObjetoNegocioTransaccion {
+    
+    /**
+     * metodo para hacer transferencia
+     * @param transaccion transaccion
+     * @return  boolean
+     */
     boolean registrarTransaccion(Transaccion transaccion);
 
+    /**
+     * obtener transaccion por id
+     * @param grupoid id grupo
+     * @return  transaccion
+     */
     Transaccion obtenerTransaccionPorId(ObjectId grupoid);
 }

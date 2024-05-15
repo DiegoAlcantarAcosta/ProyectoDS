@@ -13,6 +13,12 @@ import java.util.List;
  */
 public interface IObjetoNegocioMiembroGrupo {
 
+    /***
+     * metodo para agregar miembro 
+     * @param miembroDTO miembro
+     * @param idGrupo id grupo
+     * @return  boolean
+     */
     Boolean agregarMiembro(MiembroGrupoDTO miembroDTO, String idGrupo);
 
 

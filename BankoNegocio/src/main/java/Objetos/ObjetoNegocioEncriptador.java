@@ -15,15 +15,28 @@ import encriptacion.IEncriptador;
 public class ObjetoNegocioEncriptador implements IObjetoNegocioEncriptador{
     IEncriptador enc;
 
+    /**
+     * Constructor que inicializa
+     */
     public ObjetoNegocioEncriptador() {
         enc = new Encriptador();
     }
 
+    /**
+     * Metodo para obtener el AES
+     * @param data dato
+     * @return  cadena
+     */
     @Override
     public String getAES(String data) {
         return enc.getAES(data);
     }
 
+    /**
+     * Metodo para settear el AES
+     * @param data dato
+     * @return cadena
+     */
     @Override
     public String getAESDecrypt(String data) {
         return enc.getAESDecrypt(data);

@@ -17,10 +17,19 @@ import org.bson.types.ObjectId;
 public class ObjetoNegocioTransaccion implements IObjetoNegocioTransaccion{
     private final ITransaccionDAO transaccionDAO;
 
+    /**
+     * Constructor para inicializar
+     * @param transaccionDAO  dao
+     */
     public ObjetoNegocioTransaccion(ITransaccionDAO transaccionDAO) {
         this.transaccionDAO = transaccionDAO;
     }
 
+    /**
+     * Metodo para registrar una transaccion
+     * @param transaccion transaccion
+     * @return  true o false
+     */
     @Override
     public boolean registrarTransaccion(Transaccion transaccion) {
         if (transaccion.getMonto() <= 0) {
@@ -37,6 +46,11 @@ public class ObjetoNegocioTransaccion implements IObjetoNegocioTransaccion{
         }
     }
 
+    /**
+     * Metodo para obtener una transaccio  por ID
+     * @param grupoid grupoid
+     * @return  transaccion
+     */
     @Override
     public Transaccion obtenerTransaccionPorId(ObjectId grupoid) {
     List<Transaccion> transacciones = transaccionDAO.obtenerTransaccionesPorGrupo(grupoid);

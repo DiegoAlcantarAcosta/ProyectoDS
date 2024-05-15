@@ -6,13 +6,10 @@ package Funcionalidad;
 
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
-import DTOs.TarjetaDTO;
 import Objetos.Interfaces.IObjetoNegocioContacto;
 import Objetos.Interfaces.IObjetoNegocioPersona;
-import Objetos.Interfaces.IObjetoNegocioTarjeta;
 import Objetos.ObjetoNegocioContacto;
 import Objetos.ObjetoNegocioPersona;
-import Objetos.ObjetoNegocioTarjeta;
 import java.util.List;
 
 /**
@@ -24,12 +21,22 @@ public class AnadirContactoSS implements IAnadirContactoSS {
     IObjetoNegocioContacto contacto;
     IObjetoNegocioPersona persona;
 
+    /**
+     * Constructor que inicializa los objetos de negocio necesarios para agregar contactos.
+     */
     public AnadirContactoSS() {
         contacto = new ObjetoNegocioContacto();
         persona = new ObjetoNegocioPersona();
 
     }
 
+    /**
+     * Agrega un nuevo contacto a una persona específica.
+     * 
+     * @param personaDTO La información de la persona.
+     * @param contactoDTO La información del nuevo contacto.
+     * @return {@code true} si la adición es exitosa, {@code false} en caso contrario.
+     */
     @Override
     public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         if (personaDTO != null && contactoDTO != null) {
@@ -42,6 +49,13 @@ public class AnadirContactoSS implements IAnadirContactoSS {
         return false;
     }
 
+    /**
+     * Valida si la información del nuevo contacto puede ser agregada.
+     * 
+     * @param personaDTO La información de la persona.
+     * @param contactoDTO La información del nuevo contacto.
+     * @return {@code true} si la validación es exitosa y el contacto puede ser agregado, {@code false} en caso contrario.
+     */
     private Boolean validaAgrega(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         PersonaDTO personaBuscada = persona.obtenerPersonaDTOPorCurp(personaDTO);
 

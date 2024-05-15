@@ -14,6 +14,7 @@ Interfaces\MenuPrincipal$3.class
 Interfaces\AñadirTarjeta$5.class
 Interfaces\FrmSeleccionarContacto$2.class
 Interfaces\InicioSesionForm.class
+IniciarPrograma\ProyectoDS.class
 Interfaces\FrmEditaMiContacto$5.class
 Interfaces\FrmSeleccionarContacto.class
 Interfaces\AgregarContactoInf.class
@@ -70,11 +71,11 @@ Interfaces\FrmSeleccionarContacto$3.class
 Interfaces\FrmMisContactos.class
 Interfaces\FrmAgregarMiContacto$5.class
 Interfaces\AgregarContactoInf$4.class
-Interfaces\ContraseñaTarjetas$3.class
 Interfaces\MenuPrincipal$2.class
 Interfaces\FrmEditaMiContacto$1.class
 Interfaces\InicioSesionForm$4.class
 Interfaces\FrmAgregarMiContacto.class
+Interfaces\MenuPrincipal$12.class
 Interfaces\AgregarContactoInf$1.class
 Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\FrmEditaMiContacto$4.class
@@ -87,7 +88,7 @@ Interfaces\TransferenciaForm$4.class
 Interfaces\AñadirTarjeta$3.class
 Interfaces\FrmMovimientos$2.class
 Interfaces\AgregarContactoInf$5.class
-Prueba\ProyectoDS.class
+Interfaces\FrmPerfil$1.class
 Interfaces\TransferenciaForm.class
 Interfaces\AgregarContactoInf$6.class
 Interfaces\FrmAgregarMiContacto$3.class
@@ -100,6 +101,7 @@ Interfaces\TransferenciaForm$3.class
 Interfaces\MenuPrincipal$4.class
 Interfaces\FrmMovimientos$1.class
 Interfaces\ActualizarTarjeta$1.class
+Interfaces\FrmPerfil.class
 Interfaces\OpcionesTarjeta$2.class
 Interfaces\FrmSeleccionarContacto$1.class
 Interfaces\AñadirTarjeta$4.class

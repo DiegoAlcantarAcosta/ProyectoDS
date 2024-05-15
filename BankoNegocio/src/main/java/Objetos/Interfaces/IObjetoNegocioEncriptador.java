@@ -9,7 +9,17 @@ package Objetos.Interfaces;
  * @author Dell
  */
 public interface IObjetoNegocioEncriptador {
+    /**
+     * metodo para encriptar
+     * @param data dato
+     * @return  cadena
+     */
     public String getAES(String data);
     
+    /**
+     * metodo para desencriptar
+     * @param data data
+     * @return  cadena
+     */
     public String getAESDecrypt(String data);
 }

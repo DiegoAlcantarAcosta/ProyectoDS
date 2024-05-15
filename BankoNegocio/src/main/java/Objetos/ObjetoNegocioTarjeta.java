@@ -26,7 +26,7 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author ES EL MAS ACTUAL BRR
+ * @author Diego
  */
 public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
@@ -34,12 +34,19 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
     IPersonaDAO pd;
     IEncriptador enc = new Encriptador();
 
+    /**
+     * Constructor para inicializar
+     */
     public ObjetoNegocioTarjeta() {
         td = new TarjetaDAO();
         pd = new PersonaDAO();
     }
 
-    // Diego Alcantar
+   /**
+    * convertir DTO a entidad
+    * @param tarjetaDTO tarjeta
+    * @return  tarjeta
+    */
     public Tarjeta convertirDTOAEntidad(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setFechaVencimiento(tarjetaDTO.getFechaVencimiento());
@@ -95,7 +102,12 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         return tarjeta;
     }
 
-    // Diego Alcantar
+   
+    /**
+     * convertir entidad a DTO
+     * @param tarjeta tarjeta
+     * @return  tarjetaDTO
+     */
     public TarjetaDTO convertirEntidadADTO(Tarjeta tarjeta) {
         TarjetaDTO tarjetaDTO = new TarjetaDTO();
         tarjetaDTO.setFechaVencimiento(tarjeta.getFechaVencimiento());
@@ -151,7 +163,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         return tarjetaDTO;
     }
 
-    // Diego Alcantar
+   /**
+    * obtiene las tarjetasDTO de una persona
+    * @param personaDTO persona
+    * @return  lista de tarjetas DTO
+    */
     @Override
     public List<TarjetaDTO> obtenerTarjetasDTOPersona(PersonaDTO personaDTO) {
         try {
@@ -172,7 +188,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         }
     }
 
-    // Diego Alcantar
+    /**
+     * obtener la uultima tarjeta d euna persona
+     * @param personaDTO persona
+     * @return  tarjeta
+     */
     @Override
     public TarjetaDTO obtenerUltimaTarjetaDTOPersona(PersonaDTO personaDTO) {
         ObjetoNegocioPersona op = new ObjetoNegocioPersona();
@@ -186,7 +206,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
     }
 
-    // Diego Alcantar
+   /**
+    * obtener una tarjeta por numero
+    * @param tarjetaDTO tarjeta
+    * @return  tarjetaDTO
+    */
     @Override
     public TarjetaDTO obtenerTarjetaDTOPorNumero(TarjetaDTO tarjetaDTO) {
         Tarjeta tarjetaBuscada = td.obtenerTarjetaPorNumero(new Tarjeta(tarjetaDTO.getNumeroCuenta()));
@@ -199,7 +223,10 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
 
     }
 
-    // Diego Alcantar
+    /**
+     * obtener todas las tarjetas
+     * @return lista de tarjetasDTO
+     */
     @Override
     public List<TarjetaDTO> obtenerTodasLasTarjetasDeClientes() {
         List<Tarjeta> listaEnt = td.obtenerTodasLasTarjetasDeClientes();
@@ -211,7 +238,12 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         return listaDTO;
     }
 
-    // Diego Alcantar
+   /**
+    * Metodo para guardar una tarjeta
+    * @param persona persona
+    * @param tarjeta tarjeta
+    * @throws PersistenciaException  excepccion
+    */
     @Override
     public void guardar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -220,7 +252,12 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         td.guardar(personaEnt, tarjetaEnt);
     }
 
-    // Diego Alcantar
+    /**
+     * Metodo para actualizar una tarjeta 
+     * @param persona persona
+     * @param tarjeta tarjeta
+     * @throws PersistenciaException en caso de error
+     */
     @Override
     public void actualizar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -229,7 +266,12 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         td.actualizarTarjeta(personaEnt, tarjetaEnt);
     }
 
-    // Diego Alcantar
+   /**
+    * Metodo para eliminar una tarjeta
+    * @param persona persona
+    * @param tarjeta tarjeta
+    * @throws PersistenciaException en caso de error
+    */
     @Override
     public void eliminar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();
@@ -238,7 +280,11 @@ public class ObjetoNegocioTarjeta implements IObjetoNegocioTarjeta {
         td.eliminar(personaEnt, tarjetaEnt);
     }
 
-    // Diego Alcantar
+   /**
+    * Metodo para obtener una persona con una tarjeta
+    * @param tarjeta tarejta
+    * @return  personaDTO
+    */
     @Override
     public PersonaDTO obtenerPersonaDeTarjeta(TarjetaDTO tarjeta) {
         ObjetoNegocioPersona onp = new ObjetoNegocioPersona();

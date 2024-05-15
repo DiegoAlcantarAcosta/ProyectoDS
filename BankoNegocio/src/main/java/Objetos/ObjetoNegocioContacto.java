@@ -30,11 +30,19 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
     IPersonaDAO pd;
     IEncriptador enc = new Encriptador();
 
+    /**
+     * Constructor inicializador
+     */
     public ObjetoNegocioContacto() {
         this.cd = new ContactoDAO();
         this.pd = new PersonaDAO();
     }
 
+    /**
+     * Metodo para convertir una DTO a Entidad
+     * @param contactoDTO contactoDTO
+     * @return contacto entidad
+     */
     public Contacto convertirDTOAEntidad(ContactoDTO contactoDTO) {
         if (contactoDTO.getBanco() != null) {
             Contacto contacto = new Contacto();
@@ -81,6 +89,11 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         }
     }
 
+    /**
+     * Metodo para convertir una entidad a DTO
+     * @param contacto contacto entidad
+     * @return contactoDTO
+     */
     public ContactoDTO convertirEntidadADTO(Contacto contacto) {
         if (contacto.getBanco() != null) {
             ContactoDTO contactoDTO = new ContactoDTO();
@@ -130,6 +143,12 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
 
     }
 
+    /**
+     * Metodo para agregar un contacto 
+     * @param personaDTO persona
+     * @param contactoDTO contacto
+     * @return  true o false
+     */
     @Override
     public Boolean agregar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         Contacto contacto = this.convertirDTOAEntidad(contactoDTO);
@@ -139,6 +158,12 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         return verifica;
     }
 
+    /**
+     * Metodo para eliminar un contacto
+     * @param personaDTO persona
+     * @param contactoDTO contacto
+     * @return  true o false
+     */
     @Override
     public Boolean eliminar(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
@@ -148,6 +173,13 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         return verifica;
     }
 
+    /**
+     * Metodo para actualizar un contacto
+     * @param personaDTO persona
+     * @param contactoOrigiDTO contacto base
+     * @param contactoNuevoDTO contacto actualizado
+     * @return  true o false
+     */
     @Override
     public Boolean actualizar(PersonaDTO personaDTO, ContactoDTO contactoOrigiDTO, ContactoDTO contactoNuevoDTO) {
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
@@ -158,6 +190,11 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         return verifica;
     }
 
+    /**
+     * Metodo para obtener los contactos de una persona
+     * @param personaDTO persona
+     * @return  lista de contactos
+     */
     @Override
     public List<ContactoDTO> obtenerContactosDTOPersona(PersonaDTO personaDTO) {
         Persona personaBuscada = pd.obtenerPersonaPorCurp(new Persona(personaDTO.getCurp()));
@@ -176,6 +213,12 @@ public class ObjetoNegocioContacto implements IObjetoNegocioContacto {
         return listaDTO;
     }
 
+    /**
+     * Metodo para obtener un contacto de una persona
+     * @param personaDTO persona
+     * @param contactoDTO contacto
+     * @return  contactoDTO s
+     */
     @Override
     public ContactoDTO obtenerContactoDTOPersona(PersonaDTO personaDTO, ContactoDTO contactoDTO) {
 

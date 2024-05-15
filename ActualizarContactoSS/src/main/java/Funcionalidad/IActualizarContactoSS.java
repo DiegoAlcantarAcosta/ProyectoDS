@@ -13,6 +13,13 @@ import DTOs.PersonaDTO;
  */
 public interface IActualizarContactoSS {
     
+    /**
+     * Metodo para actualizar un ocntacto
+     * @param personaDTO persona dueña de contactos
+     * @param contactoOrigiDTO contacto registrado
+     * @param contactoNuevoDTO contacto por el que se reemplazara
+     * @return  true o false
+     */
     public Boolean actualizar(PersonaDTO personaDTO, ContactoDTO contactoOrigiDTO, ContactoDTO contactoNuevoDTO);
     
 }

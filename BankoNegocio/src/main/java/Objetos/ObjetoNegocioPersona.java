@@ -36,10 +36,18 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
     IPersonaDAO pd;
     IEncriptador enc = new Encriptador();
 
+    /**
+     * Constructor para inicializar
+     */
     public ObjetoNegocioPersona() {
         this.pd = new PersonaDAO();
     }
-    // Diego Alcantar
+   
+    /**
+     * convertir DTO a entidad
+     * @param personaDTO persona
+     * @return  persona
+     */
     public Persona convertirDTOAEntidad(PersonaDTO personaDTO) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
 
@@ -80,19 +88,33 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         return persona;
     }
     
-    // Diego Alcantar
+    /**
+     * convertir DTO a entidad
+     * @param personaDTO personaDTO
+     * @return  persona
+     */
     public Persona convertirDTOAEntidadCURP(PersonaDTO personaDTO) {
         Persona persona = new Persona();
         persona.setCurp(personaDTO.getCurp());
         return persona;
     }
-    // Diego Alcantar
+   
+    /**
+     * convertir entidad a DTO
+     * @param persona persona
+     * @return personaDTO
+     */
     public PersonaDTO convertirEntidadADTOCURP(Persona persona) {
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setCurp(persona.getCurp());
         return personaDTO;
     }
-    // Diego Alcantar
+    
+    /**
+     * convertir entidad a DTO
+     * @param persona persona
+     * @return personaDTO
+     */
    public PersonaDTO convertirEntidadADTO(Persona persona) {
         ObjetoNegocioTarjeta ont = new ObjetoNegocioTarjeta();
         PersonaDTO personaDTO = new PersonaDTO();
@@ -132,32 +154,59 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         return personaDTO;
     }
 
+   /**
+    * Persona para agregar una persona
+    * @param personaDTO personaDTO
+    * @return  true o false
+    */
     @Override
     public Boolean registrar(PersonaDTO personaDTO) {
         Persona persona = this.convertirDTOAEntidad(personaDTO);
         Boolean registro = pd.registrar(persona);
         return registro;
     }
-    // Diego Alcantar
+    
+    /**
+     * metodo para verificar registro de una persona
+     * @param personaDTO persona
+     * @return  true o false
+     */
     @Override
     public boolean personaRegistrada(PersonaDTO personaDTO) {
         Persona persona = this.convertirDTOAEntidad(personaDTO);
         boolean validar = pd.personaRegistrada(persona);
         return validar;
     }
-    // Diego Alcantar
+   
+    /**
+     * Metodo para encontrar una persona por curp
+     * @param personaDTO persona
+     * @return  personaDTO
+     */
     @Override
     public PersonaDTO obtenerPersonaDTOPorCurp(PersonaDTO personaDTO) {
         Persona p = pd.obtenerPersonaPorCurp(convertirDTOAEntidadCURP(personaDTO));
         PersonaDTO personaConvert = this.convertirEntidadADTO(p);
         return personaConvert;
     }
-    // Diego Alcantar
+   
+    /**
+     * Metodo para iniciar sesion
+     * @param telefono telefono
+     * @param contaseña contra
+     * @return  true o false
+     */
     @Override
     public Boolean procesarInicioSesion(String telefono, String contaseña) {
         return pd.procesarInicioSesion(telefono, contaseña);
     }
-    // Diego Alcantar
+    
+    /**
+     * Metodo para tener una persona por telefono y contra
+     * @param telefono telefono
+     * @param contrasena contra
+     * @return  personaDTO
+     */
     @Override
     public PersonaDTO obtenerPersonaPorTelefonoYContrasena(String telefono, String contrasena) {
         Persona persona = pd.obtenerPersonaPorTelefonoYContrasena(telefono, contrasena);
@@ -165,7 +214,11 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
         return personaDTO;
     }
     
-    // Contacto convercion
+   /**
+    * convertir DTO a entidad
+    * @param contactoDTO contacto
+    * @return  contacto
+    */
     public Contacto convertirDTOAEntidad(ContactoDTO contactoDTO) {
         if (contactoDTO.getBanco() != null) {
             Contacto contacto = new Contacto();
@@ -211,7 +264,12 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
         }
     }
-
+    
+    /**
+     * convertir entidad a DTO
+     * @param contacto contacto
+     * @return  contactoDTO
+     */
     public ContactoDTO convertirEntidadADTO(Contacto contacto) {
         if (contacto.getBanco() != null) {
             ContactoDTO contactoDTO = new ContactoDTO();
@@ -261,6 +319,10 @@ public class ObjetoNegocioPersona implements IObjetoNegocioPersona {
 
     }
     
+    /**
+     * Metodo para hacer los insert
+     * @return  true o false
+     */
     public Boolean insertMasivo(){
         return pd.insertMasivo();
     }

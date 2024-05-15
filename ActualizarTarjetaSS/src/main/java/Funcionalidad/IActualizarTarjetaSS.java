@@ -14,6 +14,12 @@ import Excepciones.PersistenciaException;
  */
 public interface IActualizarTarjetaSS {
 
+    /**
+     *  Metodo para actualizar la tarjeta de una persona
+     * @param persona persona dueña
+     * @param tarjeta tarjeta a editar
+     * @throws PersistenciaException  excepcion
+     */
     public void actualizar(PersonaDTO persona, TarjetaDTO tarjeta) throws PersistenciaException;
 
 }
