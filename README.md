@@ -1,4 +1,0 @@
-Diego
-Orlando
-Wilber
-Astorga
