@@ -140,7 +140,6 @@
         </dependency>
         
         
-        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
@@ -149,6 +148,21 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>GrupoSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>EnviarSolicitudSS1</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>MiembroGrupo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AgregarContactos</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

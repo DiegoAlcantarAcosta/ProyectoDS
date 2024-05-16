@@ -13,9 +13,7 @@ import org.bson.types.ObjectId;
  * @author Oley
  */
 public interface IGrupoSS {
- Boolean crearGrupo(GrupoDTO grupoDTO);
+     ObjectId  crearGrupo(GrupoDTO grupoDTO);
 
-    GrupoDTO obtenerGrupoPorId(ObjectId id);
 
-    Boolean agregarMiembro(MiembroGrupoDTO miembroDTO, String idGrupo);
 }

@@ -486,11 +486,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMisContactosActionPerformed
 
     private void crearGrupoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearGrupoButtonActionPerformed
-//    FrmCrearGrupo menuPrincipal = new FrmCrearGrupo(personaDTO);
-//
-//    menuPrincipal.setVisible(true);
-//
-//    this.setVisible(false);
+    FrmCrearGrupo menuPrincipal = new FrmCrearGrupo(personaDTO);
+
+    menuPrincipal.setVisible(true);
+
+    this.setVisible(false);
     }//GEN-LAST:event_crearGrupoButtonActionPerformed
 
     private void movimientosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movimientosButtonActionPerformed

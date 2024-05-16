@@ -6,6 +6,9 @@ package Interfaces;
 
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
+import DTOs.TarjetaDTO;
+import Funcionalidad.IAgregarContactos;
+import Funcionalidad.IGrupoSS;
 //import Funcionalidad.IAgregarContactoSS;
 //import Funcionalidad.IGrupoSS;
 import Funcionalidad.IMostrarContactoSS;
@@ -21,42 +24,44 @@ import javax.swing.table.DefaultTableModel;
  * @author Oley
  */
 public class FrmCrearGrupo extends javax.swing.JFrame {
-//ObjetoNegocioGrupo objetoNegocioGrupo;
-//PersonaDTO personaDTO;
-////    IAgregarContactoSS agregarContactoSS;
-//     IGrupoSS grupoSS;
-//    IMostrarContactoSS mostrarContactoSS;
-//    List<Object[]> rowData;
+ObjetoNegocioGrupo objetoNegocioGrupo;
+PersonaDTO personaDTO;
+    IAgregarContactos agregarContactos;
+     IGrupoSS grupoSS;
+    IMostrarContactoSS mostrarContactoSS;
+    List<Object[]> rowData;
+        TarjetaDTO tarjetaDTO;
+
     /**
      * Creates new form FrmCrearGrupo
      */
-//    public FrmCrearGrupo(PersonaDTO personaDTO) {
-//        initComponents();
-//        this.personaDTO = personaDTO;
-//        
-//        // Inicializar objetoNegocioGrupo
-//        this.objetoNegocioGrupo = new ObjetoNegocioGrupo();
-//
-//        // Inicializar mostrarContactoSS
-//        mostrarContactoSS = new MostrarContactoSS();
-//
-//        // Obtener lista de contactos y llenar la tabla
-//        List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(personaDTO);
-//        llenarTablaContactos(listaContactos);
-//        tableContactos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-//
-//    }
-// private void llenarTablaContactos(List<ContactoDTO> contactos) {
-//        DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
-//        model.setRowCount(0);
-//
-//        for (ContactoDTO contacto : contactos) {
-//            Object[] row = {
-//                contacto.getAlias(),contacto.getApellidoP(),contacto.getApellidoM(),contacto.getBanco()
-//            };
-//            model.addRow(row);
-//        }
-//    }
+    public FrmCrearGrupo(PersonaDTO personaDTO) {
+        initComponents();
+        this.personaDTO = new PersonaDTO();
+        
+        // Inicializar objetoNegocioGrupo
+        this.objetoNegocioGrupo = new ObjetoNegocioGrupo();
+
+        // Inicializar mostrarContactoSS
+        mostrarContactoSS = new MostrarContactoSS();
+
+        // Obtener lista de contactos y llenar la tabla
+        List<ContactoDTO> listaContactos = mostrarContactoSS.obtenerContactosDTOPersona(personaDTO);
+        llenarTablaContactos(listaContactos);
+        tableContactos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+    }
+ private void llenarTablaContactos(List<ContactoDTO> contactos) {
+        DefaultTableModel model = (DefaultTableModel) tableContactos.getModel();
+        model.setRowCount(0);
+
+        for (ContactoDTO contacto : contactos) {
+            Object[] row = {
+                contacto.getAlias(),contacto.getApellidoP(),contacto.getApellidoM(),contacto.getBanco()
+            };
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,30 +139,29 @@ public class FrmCrearGrupo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       // Obtener los índices de las filas seleccionadas
-//        int[] selectedRows = tableContactos.getSelectedRows();
-//        if (selectedRows.length > 0) {
-//            List<Object[]> rowData = new ArrayList<>();
-//            for (int rowIndex : selectedRows) {
-//                Object[] row = new Object[1]; // Una fila con una sola columna (alias)
-//                row[0] = tableContactos.getValueAt(rowIndex, 0); // Obtener el alias
-//                rowData.add(row); // Agregar la fila a la lista
-//            }
-//
-//            // Abrir FrmInformacionGrupo y pasar la lista de contactos seleccionados
-////            FrmInformacionGrupo informacionGrupo = new FrmInformacionGrupo(grupoSS, agregarContactoSS, rowData);
-////            informacionGrupo.setVisible(true);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Por favor selecciona al menos un contacto.", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
+        int[] selectedRows = tableContactos.getSelectedRows();
+        if (selectedRows.length > 0) {
+            List<Object[]> rowData = new ArrayList<>();
+            for (int rowIndex : selectedRows) {
+                Object[] row = new Object[1]; // Una fila con una sola columna (alias)
+                row[0] = tableContactos.getValueAt(rowIndex, 0); // Obtener el alias
+                rowData.add(row); // Agregar la fila a la lista
+            }
+            FrmInformacionGrupo2 informacionGrupo = new FrmInformacionGrupo2( grupoSS,  agregarContactos,rowData);
+
+            informacionGrupo.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor selecciona al menos un contacto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        MenuPrincipal mp = new MenuPrincipal(personaDTO);
-//
-//        mp.show();
-//        this.dispose();
+        MenuPrincipal mp = new MenuPrincipal(personaDTO,tarjetaDTO);
+
+        mp.show();
+        this.dispose();
 
 
         // TODO add your handling code here:
