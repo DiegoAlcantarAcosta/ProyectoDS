@@ -1,0 +1,11 @@
+DTOs\TarjetaDTO.class
+DTOs\SolicitudInvitacionDTO.class
+DTOs\MiembroGrupoDTO.class
+DTOs\MovimientoDTO.class
+DTOs\tipoBancoDTO.class
+DTOs\GrupoDTO.class
+DTOs\tipoTarjetaDTO.class
+DTOs\TransaccionDTO.class
+DTOs\TransferenciaDTO.class
+DTOs\ContactoDTO.class
+DTOs\PersonaDTO.class
