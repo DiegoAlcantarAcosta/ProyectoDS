@@ -7,15 +7,15 @@ import DTOs.ContactoDTO;
 import DTOs.GrupoDTO;
 import DTOs.PersonaDTO;
 import Funcionalidad.ActualizarContactoSS;
-import Funcionalidad.AgregarContactos;
+//import Funcionalidad.AgregarContactos;
 import Funcionalidad.GrupoSS;
-import Funcionalidad.IAgregarContactos;
+//import Funcionalidad.IAgregarContactos;
 import Funcionalidad.IGrupoSS;
 import Funcionalidad.IMostrarContactoSS;
 import Funcionalidad.MostrarContactoSS;
 import Interfaces.MenuPrincipal;
 import entidades.SolicitudInvitacion;
-import funcionalidad.IEnviarSolicitudSS;
+//import funcionalidad.IEnviarSolicitudSS;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,22 +29,22 @@ import org.bson.types.ObjectId;
 public class FrmInformacionGrupo2 extends javax.swing.JFrame {
 private List<Object[]> rowData;
      IGrupoSS grupoSS;
-    IAgregarContactos agregarContactoSS;
+//    IAgregarContactos agregarContactoSS;
         IMostrarContactoSS mostrarContactoSS;
-        private IEnviarSolicitudSS enviarSolicitudSS;
+//        private IEnviarSolicitudSS enviarSolicitudSS;
         PersonaDTO personaDTO;
     /**
      * Creates new form FrmInformacionGrupo2
      */
-    public FrmInformacionGrupo2(IGrupoSS grupoSS, IAgregarContactos agregarContactoSS,List<Object[]> rowData) {
-        initComponents();
-        this.grupoSS=new GrupoSS();
-      this.agregarContactoSS=new AgregarContactos();
-        mostrarContactoSS = new MostrarContactoSS();
-        this.enviarSolicitudSS = enviarSolicitudSS;
-         this.rowData = rowData; 
-               llenarTablaContactos(rowData);
-    }
+//    public FrmInformacionGrupo2(IGrupoSS grupoSS, IAgregarContactos agregarContactoSS,List<Object[]> rowData) {
+//        initComponents();
+//        this.grupoSS=new GrupoSS();
+////      this.agregarContactoSS=new AgregarContactos();
+//        mostrarContactoSS = new MostrarContactoSS();
+////        this.enviarSolicitudSS = enviarSolicitudSS;
+//         this.rowData = rowData; 
+//               llenarTablaContactos(rowData);
+//    }
 private void llenarTablaContactos(List<Object[]> rowData) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -180,12 +180,12 @@ String motivo = Motivo.getText();
                     
                     // Crear y enviar la solicitud de invitación para este contacto
                     SolicitudInvitacion solicitud = new SolicitudInvitacion(grupoId, "Mensaje de invitación para " + alias, total,""); // Establecer el monto en la solicitud
-                    boolean enviado = enviarSolicitudSS.enviarSolicitud(solicitud);
+//                    boolean enviado = enviarSolicitudSS.enviarSolicitud(solicitud);
                     
                     // Si la solicitud se envió correctamente, puedes realizar alguna acción (por ejemplo, mostrar un mensaje)
-                    if (enviado) {
-                        System.out.println("Solicitud de invitación enviada a " + alias);
-                    }
+//                    if (enviado) {
+//                        System.out.println("Solicitud de invitación enviada a " + alias);
+//                    }
                 } else {
                     // Indicar que rowData no tiene suficientes elementos
                     System.err.println("rowData no tiene suficientes elementos.");

@@ -7,7 +7,7 @@ package Interfaces;
 import DTOs.ContactoDTO;
 import DTOs.PersonaDTO;
 import DTOs.TarjetaDTO;
-import Funcionalidad.IAgregarContactos;
+//import Funcionalidad.IAgregarContactos;
 import Funcionalidad.IGrupoSS;
 //import Funcionalidad.IAgregarContactoSS;
 //import Funcionalidad.IGrupoSS;
@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrmCrearGrupo extends javax.swing.JFrame {
 ObjetoNegocioGrupo objetoNegocioGrupo;
 PersonaDTO personaDTO;
-    IAgregarContactos agregarContactos;
+//    IAgregarContactos agregarContactos;
      IGrupoSS grupoSS;
     IMostrarContactoSS mostrarContactoSS;
     List<Object[]> rowData;
@@ -147,9 +147,9 @@ PersonaDTO personaDTO;
                 row[0] = tableContactos.getValueAt(rowIndex, 0); // Obtener el alias
                 rowData.add(row); // Agregar la fila a la lista
             }
-            FrmInformacionGrupo2 informacionGrupo = new FrmInformacionGrupo2( grupoSS,  agregarContactos,rowData);
+//            FrmInformacionGrupo2 informacionGrupo = new FrmInformacionGrupo2( grupoSS,  agregarContactos,rowData);
 
-            informacionGrupo.setVisible(true);
+//            informacionGrupo.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor selecciona al menos un contacto.", "Error", JOptionPane.ERROR_MESSAGE);
         }
