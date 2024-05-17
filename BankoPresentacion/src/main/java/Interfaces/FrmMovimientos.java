@@ -9,7 +9,9 @@ import Funcionalidad.ITarjetaSS;
 import Funcionalidad.ImprimirPDFSS;
 import Funcionalidad.MovimientosTransferenciasSS;
 import Funcionalidad.TarjetaSS;
+import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -409,29 +411,42 @@ public class FrmMovimientos extends javax.swing.JFrame {
         }    }//GEN-LAST:event_jDateChooser2KeyTyped
 
     private void imprimirPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirPDFActionPerformed
-   Date fechaInicio = jDateChooser1.getDate();
-    Date fechaFin = jDateChooser2.getDate();
-    boolean ingresos = chbxIngresos.isSelected();
-    boolean egresos = chbxEgresos.isSelected();
+    Date fechaInicio = jDateChooser1.getDate();
+        Date fechaFin = jDateChooser2.getDate();
+        boolean ingresos = chbxIngresos.isSelected();
+        boolean egresos = chbxEgresos.isSelected();
 
-    try {
-        ByteArrayOutputStream baos = impPDF.imprimirPDF(tarjetaDTO, fechaInicio, fechaFin, ingresos, egresos);
+        try {
+            ByteArrayOutputStream baos = impPDF.imprimirPDF(tarjetaDTO, fechaInicio, fechaFin, ingresos, egresos);
 
-        if (baos != null) {
-            String userHome = System.getProperty("user.home");
-            String desktopPath = userHome + "/Desktop/Movimientos.pdf";
+            if (baos != null) {
+                String userHome = System.getProperty("user.home");
+                String desktopPath = userHome + "/Desktop/Movimientos.pdf";
 
-            try (FileOutputStream fos = new FileOutputStream(desktopPath)) {
-                baos.writeTo(fos);
+                try (FileOutputStream fos = new FileOutputStream(desktopPath)) {
+                    baos.writeTo(fos);
+                }
+
+                JOptionPane.showMessageDialog(this, "PDF generado exitosamente en el escritorio", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                
+                File pdfFile = new File(desktopPath);
+                if (pdfFile.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().open(pdfFile);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La funcionalidad de abrir archivos no está soportada en este sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El archivo PDF no existe", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudieron obtener las transferencias para generar el PDF", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "PDF generado exitosamente en el escritorio", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudieron obtener las transferencias para generar el PDF", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al generar el PDF", "Error", JOptionPane.ERROR_MESSAGE);
-    }
     
 
     }//GEN-LAST:event_imprimirPDFActionPerformed
