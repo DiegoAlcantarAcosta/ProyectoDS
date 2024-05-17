@@ -6,6 +6,7 @@ Interfaces\TransferenciaForm$2.class
 Interfaces\MenuPrincipal$6.class
 Interfaces\FrmEditaMiContacto$2.class
 Interfaces\FrmAgregarMiContacto$4.class
+Interfaces\FrmBuzon.class
 Interfaces\OpcionesTarjeta$4.class
 Interfaces\FrmMisContactos$5.class
 Interfaces\InicioSesionForm$3.class
@@ -15,6 +16,7 @@ Interfaces\MenuPrincipal$3.class
 Interfaces\AñadirTarjeta$5.class
 Interfaces\FrmSeleccionarContacto$2.class
 Interfaces\InicioSesionForm.class
+Interfaces\MenuPrincipal$13.class
 IniciarPrograma\ProyectoDS.class
 Interfaces\FrmEditaMiContacto$5.class
 Interfaces\FrmSeleccionarContacto.class
@@ -84,6 +86,7 @@ Interfaces\FrmAgregarMiContacto$2.class
 Interfaces\FrmEditaMiContacto$4.class
 Interfaces\OpcionesTarjeta$3.class
 Interfaces\ConfirmacionAñadirTarjeta$1.class
+Interfaces\FrmBuzon$1.class
 Interfaces\FrmInformacionGrupo2$1.class
 Interfaces\FrmMisContactos$3.class
 Interfaces\ConfirmacionAñadirTarjeta.class
