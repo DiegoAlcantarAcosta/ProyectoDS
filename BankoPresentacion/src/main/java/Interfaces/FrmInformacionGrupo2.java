@@ -7,8 +7,11 @@ import DTOs.ContactoDTO;
 import DTOs.GrupoDTO;
 import DTOs.PersonaDTO;
 import Funcionalidad.ActualizarContactoSS;
+import Funcionalidad.AgregarContactoSS;
 //import Funcionalidad.AgregarContactos;
 import Funcionalidad.GrupoSS;
+import Funcionalidad.IAgregarContactoSS;
+import Funcionalidad.IEnviarSolicitudSS;
 //import Funcionalidad.IAgregarContactos;
 import Funcionalidad.IGrupoSS;
 import Funcionalidad.IMostrarContactoSS;
@@ -29,22 +32,22 @@ import org.bson.types.ObjectId;
 public class FrmInformacionGrupo2 extends javax.swing.JFrame {
 private List<Object[]> rowData;
      IGrupoSS grupoSS;
-//    IAgregarContactos agregarContactoSS;
+    IAgregarContactoSS AgregarContactoSS;
         IMostrarContactoSS mostrarContactoSS;
-//        private IEnviarSolicitudSS enviarSolicitudSS;
+        private IEnviarSolicitudSS enviarSolicitudSS;
         PersonaDTO personaDTO;
     /**
      * Creates new form FrmInformacionGrupo2
      */
-//    public FrmInformacionGrupo2(IGrupoSS grupoSS, IAgregarContactos agregarContactoSS,List<Object[]> rowData) {
-//        initComponents();
-//        this.grupoSS=new GrupoSS();
-////      this.agregarContactoSS=new AgregarContactos();
-//        mostrarContactoSS = new MostrarContactoSS();
-////        this.enviarSolicitudSS = enviarSolicitudSS;
-//         this.rowData = rowData; 
-//               llenarTablaContactos(rowData);
-//    }
+    public FrmInformacionGrupo2(IGrupoSS grupoSS, IAgregarContactoSS AgregarContactoSS,List<Object[]> rowData) {
+        initComponents();
+        this.grupoSS=new GrupoSS();
+      this.AgregarContactoSS=new AgregarContactoSS();
+        mostrarContactoSS = new MostrarContactoSS();
+        this.enviarSolicitudSS = enviarSolicitudSS;
+         this.rowData = rowData; 
+               llenarTablaContactos(rowData);
+    }
 private void llenarTablaContactos(List<Object[]> rowData) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -70,12 +73,19 @@ private void llenarTablaContactos(List<Object[]> rowData) {
         Total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Regresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Continuar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -84,13 +94,13 @@ private void llenarTablaContactos(List<Object[]> rowData) {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Alias"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -99,20 +109,45 @@ private void llenarTablaContactos(List<Object[]> rowData) {
 
         jLabel2.setText("Total");
 
+        jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(153, 0, 0));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Informacion Grupo");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(50, 50, 50))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(50, 50, 50))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,21 +158,23 @@ private void llenarTablaContactos(List<Object[]> rowData) {
                     .addComponent(Total, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                     .addComponent(Motivo))
                 .addGap(109, 109, 109))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Motivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel1)
+                    .addComponent(Motivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -151,60 +188,58 @@ private void llenarTablaContactos(List<Object[]> rowData) {
 String motivo = Motivo.getText();
     String totalStr = Total.getText();
     
-    // Validar que se hayan ingresado valores para el motivo y el total
     if (motivo.isEmpty() || totalStr.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Por favor ingresa un motivo y un total.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     
     try {
-        // Convertir el total a un número decimal
         double total = Double.parseDouble(totalStr);
         
-        // Crear un grupo con el motivo y el total
         GrupoDTO grupoDTO = new GrupoDTO();
         grupoDTO.setMotivo(motivo);
-        grupoDTO.setSaldo(total); // Establecer el saldo como el monto total
+        grupoDTO.setSaldo(total); 
         
-        // Llamar al método para crear el grupo y obtener su ID
         ObjectId grupoId = grupoSS.crearGrupo(grupoDTO);
         
-        // Verificar si se creó el grupo correctamente
         if (grupoId != null) {
-            // Recorrer los datos de la tabla y enviar las solicitudes de invitación a los contactos presentes en la tabla
             for (Object[] row : rowData) {
-                // Verificar que rowData tenga al menos dos elementos antes de intentar acceder al índice 1
                 if (row.length >= 2) {
                     String userId = (String) row[1]; // Obtener el ID del usuario de la tabla
                     String alias = (String) row[0]; // Obtener el alias del contacto
                     
-                    // Crear y enviar la solicitud de invitación para este contacto
                     SolicitudInvitacion solicitud = new SolicitudInvitacion(grupoId, "Mensaje de invitación para " + alias, total,""); // Establecer el monto en la solicitud
-//                    boolean enviado = enviarSolicitudSS.enviarSolicitud(solicitud);
+                    boolean enviado = enviarSolicitudSS.enviarSolicitud(solicitud);
                     
-                    // Si la solicitud se envió correctamente, puedes realizar alguna acción (por ejemplo, mostrar un mensaje)
-//                    if (enviado) {
-//                        System.out.println("Solicitud de invitación enviada a " + alias);
-//                    }
+                    if (enviado) {
+                        System.out.println("Solicitud de invitación enviada a " + alias);
+                    }
                 } else {
-                    // Indicar que rowData no tiene suficientes elementos
                     System.err.println("rowData no tiene suficientes elementos.");
                 }
             }
             
-            // Mostrar un mensaje de éxito
             JOptionPane.showMessageDialog(this, "Grupo creado y solicitudes de invitación enviadas correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Error al crear el grupo. Por favor intenta de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } catch (NumberFormatException e) {
-        // Manejar la excepción si el usuario ingresa un valor no válido para el total
         JOptionPane.showMessageDialog(this, "El total ingresado no es válido. Por favor ingresa un número decimal.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+   FrmCrearGrupo menuPrincipal = new FrmCrearGrupo(personaDTO);
+
+    menuPrincipal.setVisible(true);
+
+    this.setVisible(false);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +254,8 @@ String motivo = Motivo.getText();
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

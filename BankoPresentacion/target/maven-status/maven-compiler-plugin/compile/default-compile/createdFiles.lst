@@ -96,6 +96,7 @@ Interfaces\FrmPerfil$1.class
 Interfaces\TransferenciaForm.class
 Interfaces\AgregarContactoInf$6.class
 Interfaces\FrmAgregarMiContacto$3.class
+Interfaces\FrmInformacionGrupo2$2.class
 Interfaces\FrmMisContactos$4.class
 Interfaces\FrmEditaMiContacto$3.class
 Interfaces\InicioSesionForm$5.class

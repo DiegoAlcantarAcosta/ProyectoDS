@@ -22,6 +22,6 @@ public interface IObjetoNegocioGrupo {
     GrupoDTO obtenerGrupoPorId(String id);
 
     
-    Boolean agregarContacto(ContactoDTO contactoDTO, String idGrupo); // Agregar este método
+    Boolean agregarContacto(ContactoDTO contactoDTO, String idGrupo); 
 
 }

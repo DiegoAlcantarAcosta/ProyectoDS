@@ -155,5 +155,15 @@
             <artifactId>MiembroGrupo</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AgregarContactosSS</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>EnviarSolicitudSS2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
